@@ -40,7 +40,7 @@
       "class_prefix": "MonoRanks_",
       "constant_prefix": "MONORANKS_",
       "packages": [],
-      "target_directory": "vendor-prefixed",
+      "target_directory": "packages",
       "update_call_sites": true
     }
   }

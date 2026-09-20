@@ -15,11 +15,11 @@
 defined( 'ABSPATH' ) || exit;
 
 // Classes live under src/ (PSR-4, namespace MonoRanks) and load through Composer's autoloader. Third-party libraries,
-// when there are any, are prefixed by WP Scoper (veronalabs/wp-scoper) into vendor-prefixed/ under MonoRanks\Deps so they
+// when there are any, are prefixed by WP Scoper (veronalabs/wp-scoper) into packages/ under MonoRanks\Deps so they
 // cannot collide with other plugins' copies.
 require_once __DIR__ . '/vendor/autoload.php';
-if ( file_exists( __DIR__ . '/vendor-prefixed/autoload.php' ) ) {
-	require_once __DIR__ . '/vendor-prefixed/autoload.php';
+if ( file_exists( __DIR__ . '/packages/autoload.php' ) ) {
+	require_once __DIR__ . '/packages/autoload.php';
 }
 
 define( 'MONORANKS_CONNECTOR_VERSION', '1.0.0' );

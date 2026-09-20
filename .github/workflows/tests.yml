@@ -25,7 +25,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-      - run: find . -name '*.php' -not -path './node_modules/*' -not -path './vendor/*' -not -path './vendor-prefixed/*' -print0 | xargs -0 -n1 php -l
+      - run: find . -name '*.php' -not -path './node_modules/*' -not -path './vendor/*' -not -path './packages/*' -print0 | xargs -0 -n1 php -l
 
   unit:
     name: Unit tests
