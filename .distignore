@@ -15,6 +15,4 @@ composer.lock
 scoper.inc.php
 CHANGELOG.md
 build
-composer-deps.json
-composer-deps.lock
 phpunit.xml.dist

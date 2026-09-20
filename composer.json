@@ -16,7 +16,7 @@
     "optimize-autoloader": true,
     "sort-packages": true,
     "allow-plugins": {
-      "wpify/scoper": true
+      "veronalabs/wp-scoper": true
     }
   },
   "scripts": {
@@ -24,9 +24,9 @@
     "build": "composer install --no-dev --optimize-autoloader --classmap-authoritative"
   },
   "require-dev": {
-    "wpify/scoper": "^4.0",
-    "phpunit/phpunit": "^9.6",
     "brain/monkey": "^2.6",
+    "phpunit/phpunit": "^9.6",
+    "veronalabs/wp-scoper": "^1.4",
     "yoast/phpunit-polyfills": "^2.0"
   },
   "autoload-dev": {
@@ -35,15 +35,13 @@
     }
   },
   "extra": {
-    "wpify-scoper": {
-      "prefix": "MonoRanksDeps",
-      "folder": "deps",
-      "globals": [
-        "wordpress"
-      ],
-      "composerjson": "composer-deps.json",
-      "composerlock": "composer-deps.lock",
-      "autorun": true
+    "wp-scoper": {
+      "namespace_prefix": "MonoRanks\\Deps",
+      "class_prefix": "MonoRanks_",
+      "constant_prefix": "MONORANKS_",
+      "packages": [],
+      "target_directory": "vendor-prefixed",
+      "update_call_sites": true
     }
   }
 }

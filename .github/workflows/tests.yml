@@ -1,15 +1,20 @@
-# One pipeline. Every push and pull request: PHP syntax on the versions the plugin supports, unit tests, the
-# WordPress.org plugin checker on a slug-named build folder, a version consistency check, and Chromium tests against a
-# real WordPress (wp-env). A tag v<version> runs the same jobs and, only when all of them passed, deploys that version
-# to the WordPress.org directory (secrets SVN_USERNAME / SVN_PASSWORD) and attaches the zip to the GitHub release.
-name: ci
+name: Tests
+
+# The only definition of the suite. Runs on every pull request, and deploy.yml calls it on a published release so a
+# deploy cannot start until the same suite is green on the release commit. No push trigger: a pull request is already
+# tested against the merge result, and a release runs the suite again.
 on:
-  push:
-    branches: [main]
-    tags: ['v*']
   pull_request:
+    branches: [main]
+  workflow_call:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
+    name: PHP syntax ${{ matrix.php }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,9 +25,10 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-      - name: PHP syntax
-        run: find . -name '*.php' -not -path './node_modules/*' -not -path './vendor/*' -not -path './deps/*' -print0 | xargs -0 -n1 php -l
+      - run: find . -name '*.php' -not -path './node_modules/*' -not -path './vendor/*' -not -path './vendor-prefixed/*' -print0 | xargs -0 -n1 php -l
+
   unit:
+    name: Unit tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +38,9 @@ jobs:
           coverage: none
       - run: composer install --no-interaction --prefer-dist
       - run: vendor/bin/phpunit
+
   plugin-check:
+    name: WordPress.org plugin check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,18 +48,20 @@ jobs:
         with:
           php-version: '8.2'
           coverage: none
+      - run: composer install --no-interaction --prefer-dist
       - run: composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
       - name: Plugin files only, in a folder named after the slug
         run: mkdir -p build && rsync -a --exclude-from=.distignore ./ build/monoranks/
       - uses: wordpress/plugin-check-action@v1
         with:
           build-dir: build/monoranks
+
   version:
+    name: Version consistency
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Header, constant, readme and changelog agree on the version
-        run: |
+      - run: |
           H=$(grep -oE 'Version:\s+[0-9.]+' monoranks.php | awk '{print $2}')
           C=$(grep -oE "MONORANKS_CONNECTOR_VERSION', '[0-9.]+'" monoranks.php | grep -oE '[0-9.]+' | tail -1)
           R=$(grep -oE 'Stable tag: [0-9.]+' readme.txt | awk '{print $3}')
@@ -59,7 +69,9 @@ jobs:
           test "$H" = "$C" -a "$H" = "$R"
           grep -q "^## \[$H\]" CHANGELOG.md || { echo "CHANGELOG.md has no entry for $H"; exit 1; }
           grep -q "^= $H =" readme.txt || { echo "readme.txt changelog has no entry for $H"; exit 1; }
+
   browser:
+    name: Chromium on WordPress
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -67,6 +79,7 @@ jobs:
         with:
           php-version: '8.2'
           coverage: none
+      - run: composer install --no-interaction --prefer-dist
       - run: composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
       - uses: actions/setup-node@v4
         with:
@@ -84,31 +97,3 @@ jobs:
           name: playwright
           path: test-results
           retention-days: 7
-  deploy:
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: [lint, unit, plugin-check, version, browser]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - name: Tag matches the plugin version
-        run: |
-          V=$(grep -oE 'Version:\s+[0-9.]+' monoranks.php | awk '{print $2}')
-          test "v$V" = "${GITHUB_REF_NAME}" || { echo "tag ${GITHUB_REF_NAME} but plugin is $V"; exit 1; }
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          coverage: none
-      - run: composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
-      - uses: 10up/action-wordpress-plugin-deploy@stable
-        env:
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SLUG: monoranks
-          ASSETS_DIR: .wordpress-org
-      - name: Attach the zip to the GitHub release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: ${{ github.workspace }}/${{ github.event.repository.name }}.zip
-          generate_release_notes: true
