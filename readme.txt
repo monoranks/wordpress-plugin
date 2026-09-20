@@ -82,7 +82,7 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 
 == Screenshots ==
 
-1. Settings → MonoRanks: connection state, what was sent, and the change log.
+1. Settings → MonoRanks: connection state, connect with a key, what was sent, and the change log (also in Persian).
 2. The website's Integrations screen in MonoRanks with the connector card.
 3. An action in MonoRanks with the change ready to approve.
 
