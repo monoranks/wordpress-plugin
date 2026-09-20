@@ -1,0 +1,101 @@
+=== MonoRanks ===
+Contributors: monoranks
+Tags: seo, audit, search console, redirects, meta description
+Requires at least: 6.0
+Tested up to: 6.9
+Requires PHP: 7.4
+Stable tag: 0.8.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Connects your site to MonoRanks, an SEO audit service, and applies the fixes you approve there.
+
+== Description ==
+
+MonoRanks audits your website, finds SEO problems and suggests fixes. This plugin is the link between your site and your MonoRanks account.
+
+= This plugin relies on an external service =
+
+The plugin talks to MonoRanks (https://monoranks.com). Nothing is sent until you connect the site: either by approving MonoRanks in WordPress from your MonoRanks account, or by pasting a connector key under Settings → MonoRanks.
+
+How it connects:
+
+* To send data, the plugin uses a connector key that belongs to this website only. The key can send this website's content, change alerts and plugin status; it cannot read anything from MonoRanks. You can revoke it in MonoRanks or disconnect under Settings → MonoRanks.
+* To apply fixes, MonoRanks uses the "MonoRanks" Application Password you approve in WordPress. Revoke it in Users → Profile to stop all writes.
+
+What is sent to MonoRanks, over HTTPS:
+
+* Published content metadata: post type, URL, title, a 40-word excerpt, author display name and avatar URL, categories, tags, publish and modified dates, SEO title, meta description, canonical URL, noindex flag, and image URLs with their alt text. Sent in batches when MonoRanks asks, when you connect, and once a day.
+* When you publish, update or unpublish a post: its ID, URL and the metadata above, so MonoRanks can recheck that page.
+* Plugin status: site name and address, plugin and WordPress version, active SEO plugin, number of published items per type.
+
+Never sent: drafts, private or password-protected posts, comments, user emails or passwords, plugin or theme settings.
+
+What MonoRanks can change, only after you approve each change in MonoRanks: SEO title, meta description, canonical URL, noindex, image alt text, redirects, one opening paragraph at the top of a post (shown to you as a before/after diff first; it never rewrites your existing text and can be removed again with Undo), per-crawler AI access lines in robots.txt, and an llms.txt file. It cannot edit themes, settings or users. When you approve MonoRanks, it may turn this plugin on if it is installed but inactive. Every change is listed under Settings → MonoRanks and can be undone from MonoRanks for 30 days.
+
+Works with Yoast SEO, Rank Math and All in One SEO. Without an SEO plugin, the connector prints the approved title, description, canonical and noindex itself.
+
+* Terms of service: https://monoranks.com/terms
+* Privacy policy: https://monoranks.com/privacy
+
+= Disconnect =
+
+Settings → MonoRanks → Disconnect stops sending. Revoking the "MonoRanks" Application Password in Users → Profile stops writes. Deactivating the plugin stops both.
+
+== Installation ==
+
+1. Install and activate the plugin.
+2. In your MonoRanks account, open the website → Integrations → WordPress → Connect to WordPress, and approve MonoRanks when WordPress asks. The plugin turns itself on and sends the first batch of content metadata.
+3. Alternatively, copy the connector key from MonoRanks and paste it under Settings → MonoRanks in WordPress.
+
+To stop everything: Settings → MonoRanks → Disconnect (and revoke the "MonoRanks" application password under Users → Profile).
+
+== Frequently Asked Questions ==
+
+= Does the plugin change my site on its own? =
+
+No. It only applies changes you approved one by one in MonoRanks, and lists every change under Settings → MonoRanks, where each can be undone from MonoRanks for 30 days.
+
+= What if I do not use Yoast, Rank Math or All in One SEO? =
+
+The connector prints the approved title, description, canonical and noindex tags itself. Nothing else about your theme is touched.
+
+= Does it slow my site down? =
+
+No. Content metadata is sent in the background from WP-Cron (or when MonoRanks asks); visitors never wait for it. Redirects approved in MonoRanks are stored as one option and checked early in the request.
+
+= What is sent, exactly? =
+
+See the "This plugin relies on an external service" section above. Never: drafts, private posts, comments, user emails or passwords, plugin or theme settings.
+
+= How do I remove all data? =
+
+Deleting the plugin removes its settings and scheduled tasks. Deleting the website in MonoRanks removes what was sent there.
+
+== Screenshots ==
+
+1. Settings → MonoRanks: connection state, what was sent, and the change log.
+2. The website's Integrations screen in MonoRanks with the connector card.
+3. An action in MonoRanks with the change ready to approve.
+
+== Changelog ==
+
+= 0.8.0 =
+* AI crawler rules (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) added to the virtual robots.txt, and an llms.txt served at /llms.txt, both only after you approve them in MonoRanks; undo removes them.
+
+= 0.7.0 =
+* Opening paragraph: with your approval, MonoRanks can add one short answer or summary paragraph at the top of a post, marked so Undo removes exactly that paragraph. Nothing else in the body is touched.
+
+= 0.6.0 =
+* Ready for the WordPress.org directory: uninstall cleanup, installation and FAQ sections, tested with WordPress 6.9.
+
+= 0.5.1 =
+* Settings page folds the manual key form while connected.
+
+= 0.5.0 =
+* Data is sent with a connector key for this website; fixes are still written with the Application Password.
+* Connect with a key by hand, Send content now, and a daily content sync.
+* Change alerts carry the changed item.
+
+= 0.4.0 =
+* First beta: pairing, content metadata, change notifications, approved SEO field writes, redirects.
