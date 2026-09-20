@@ -1,8 +1,10 @@
 <?php
+namespace MonoRanks;
+
 defined( 'ABSPATH' ) || exit;
 
 /** Published content metadata only: no drafts, no private posts, no user emails, no body text. */
-class MonoRanks_Content {
+class Content {
 
 	public static function post_types() {
 		$types = get_post_types( array( 'public' => true ), 'names' );
@@ -10,7 +12,7 @@ class MonoRanks_Content {
 		return array_values( $types );
 	}
 
-	public static function item( WP_Post $post ) {
+	public static function item( \WP_Post $post ) {
 		$author = get_userdata( (int) $post->post_author );
 		$cats   = array();
 		$tags   = array();
@@ -52,10 +54,10 @@ class MonoRanks_Content {
 			'tags'            => $tags,
 			'published_at'    => get_post_time( 'c', true, $post ),
 			'modified_at'     => get_post_modified_time( 'c', true, $post ),
-			'seo_title'       => MonoRanks_Seo_Fields::get( $post->ID, 'seo_title' ),
-			'seo_description' => MonoRanks_Seo_Fields::get( $post->ID, 'seo_description' ),
-			'canonical'       => MonoRanks_Seo_Fields::get( $post->ID, 'canonical' ),
-			'noindex'         => '1' === MonoRanks_Seo_Fields::get( $post->ID, 'noindex' ),
+			'seo_title'       => SeoFields::get( $post->ID, 'seo_title' ),
+			'seo_description' => SeoFields::get( $post->ID, 'seo_description' ),
+			'canonical'       => SeoFields::get( $post->ID, 'canonical' ),
+			'noindex'         => '1' === SeoFields::get( $post->ID, 'noindex' ),
 			'images'          => $images,
 		);
 	}
@@ -74,7 +76,7 @@ class MonoRanks_Content {
 		if ( $modified_after ) {
 			$args['date_query'] = array( array( 'column' => 'post_modified_gmt', 'after' => $modified_after ) );
 		}
-		$query = new WP_Query( $args );
+		$query = new \WP_Query( $args );
 		return array(
 			'items' => array_map( array( __CLASS__, 'item' ), $query->posts ),
 			'total' => (int) $query->found_posts,

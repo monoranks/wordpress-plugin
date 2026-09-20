@@ -1,8 +1,10 @@
 <?php
+namespace MonoRanks;
+
 defined( 'ABSPATH' ) || exit;
 
 /** Redirects written by MonoRanks (for example collapsing a redirect chain). Stored in one option, applied before WordPress routes. */
-class MonoRanks_Redirects {
+class Redirects {
 
 	public static function all() {
 		$r = get_option( 'monoranks_redirects', array() );

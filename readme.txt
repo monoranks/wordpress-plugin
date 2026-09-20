@@ -4,7 +4,7 @@ Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.9.0
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,25 +88,5 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 
 == Changelog ==
 
-= 0.9.0 =
-* Renamed to MonoRanks (slug `monoranks`). Terms and privacy links point at monoranks.com. Ready for the WordPress.org review: plugin-check clean, tested with WordPress 7.1.
-
-= 0.8.0 =
-* AI crawler rules (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) added to the virtual robots.txt, and an llms.txt served at /llms.txt, both only after you approve them in MonoRanks; undo removes them.
-
-= 0.7.0 =
-* Opening paragraph: with your approval, MonoRanks can add one short answer or summary paragraph at the top of a post, marked so Undo removes exactly that paragraph. Nothing else in the body is touched.
-
-= 0.6.0 =
-* Ready for the WordPress.org directory: uninstall cleanup, installation and FAQ sections, tested with WordPress 6.9.
-
-= 0.5.1 =
-* Settings page folds the manual key form while connected.
-
-= 0.5.0 =
-* Data is sent with a connector key for this website; fixes are still written with the Application Password.
-* Connect with a key by hand, Send content now, and a daily content sync.
-* Change alerts carry the changed item.
-
-= 0.4.0 =
-* First beta: pairing, content metadata, change notifications, approved SEO field writes, redirects.
+= 1.0.0 =
+* Initial release.

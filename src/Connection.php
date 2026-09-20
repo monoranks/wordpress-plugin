@@ -1,4 +1,6 @@
 <?php
+namespace MonoRanks;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -6,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
  * api_base, key (the website's connector key), site_id, via (pairing | manual), key_state (ok | revoked), paired_at, paired_by,
  * last_sent_at, last_error.
  */
-class MonoRanks_Connection {
+class Connection {
 
 	public static function get() {
 		$c = get_option( 'monoranks_connection', array() );

@@ -1,11 +1,13 @@
 <?php
+namespace MonoRanks;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Tells MonoRanks which published posts changed, with their current metadata, so it can recheck them within minutes
  * (TI-WP-002). Sent with the connector key at the end of the request; nothing is sent before the site is connected.
  */
-class MonoRanks_Notifier {
+class Notifier {
 
 	private static $queue = array();
 
@@ -22,10 +24,10 @@ class MonoRanks_Notifier {
 	}
 
 	private static function queue( $post, $event ) {
-		if ( MonoRanks_Writer::$applying || wp_is_post_revision( $post ) || wp_is_post_autosave( $post ) ) {
+		if ( Writer::$applying || wp_is_post_revision( $post ) || wp_is_post_autosave( $post ) ) {
 			return;
 		}
-		if ( ! in_array( $post->post_type, MonoRanks_Content::post_types(), true ) ) {
+		if ( ! in_array( $post->post_type, Content::post_types(), true ) ) {
 			return;
 		}
 		// A later event for the same post in this request wins, except that unpublishing is kept.
@@ -36,14 +38,14 @@ class MonoRanks_Notifier {
 	}
 
 	public static function flush() {
-		if ( ! self::$queue || ! MonoRanks_Connection::has_key() ) {
+		if ( ! self::$queue || ! Connection::has_key() ) {
 			return;
 		}
 		$changes = array();
 		foreach ( self::$queue as $change ) {
 			$post = get_post( $change['post_id'] );
 			if ( 'unpublished' !== $change['event'] && $post && 'publish' === $post->post_status && ! post_password_required( $post ) ) {
-				$change['item'] = MonoRanks_Content::item( $post );
+				$change['item'] = Content::item( $post );
 			} else {
 				$change['event'] = 'unpublished';
 			}
@@ -54,6 +56,6 @@ class MonoRanks_Notifier {
 		if ( function_exists( 'fastcgi_finish_request' ) ) {
 			fastcgi_finish_request();
 		}
-		MonoRanks_Api::post( '/changes', array( 'changes' => $changes ), 5 );
+		Api::post( '/changes', array( 'changes' => $changes ), 5 );
 	}
 }

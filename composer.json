@@ -1,0 +1,27 @@
+{
+  "name": "monoranks/wordpress-plugin",
+  "description": "MonoRanks for WordPress: SEO, AEO and GEO audits with the fixes you approve written into WordPress.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://monoranks.com/product/wordpress/",
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "MonoRanks\\": "src/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "classmap-authoritative": true,
+    "platform": {
+      "php": "7.4"
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "build": "composer install --no-dev --optimize-autoloader --classmap-authoritative",
+    "scope": "php-scoper add-prefix --output-dir=build/scoped --force"
+  }
+}

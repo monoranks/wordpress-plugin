@@ -1,11 +1,13 @@
 <?php
+namespace MonoRanks;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Reads and writes SEO fields in whichever SEO plugin is active (Yoast SEO, Rank Math, All in One SEO).
  * Without one, the connector stores its own values and prints them in the page head.
  */
-class MonoRanks_Seo_Fields {
+class SeoFields {
 
 	const OWN_TITLE       = '_monoranks_seo_title';
 	const OWN_DESCRIPTION = '_monoranks_seo_description';

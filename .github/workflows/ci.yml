@@ -1,5 +1,5 @@
-# Every push and pull request: PHP syntax on the versions the plugin supports, then the WordPress.org plugin checker
-# (the same rules the directory review runs). A pull request cannot merge red.
+# Every push and pull request: PHP syntax on the versions the plugin supports, the WordPress.org plugin checker on a
+# build folder named after the slug, a version consistency check, and Chromium tests against a real WordPress (wp-env).
 name: ci
 on:
   push:
@@ -18,16 +18,21 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
       - name: PHP syntax
-        run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l
+        run: find . -name '*.php' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l
   plugin-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - run: composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
+      - name: Plugin files only, in a folder named after the slug
+        run: mkdir -p build && rsync -a --exclude-from=.distignore ./ build/monoranks/
       - uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: '.'
-          exclude-directories: '.github,.wordpress-org'
-          exclude-files: 'README.md'
+          build-dir: build/monoranks
   version:
     runs-on: ubuntu-latest
     steps:
@@ -39,3 +44,26 @@ jobs:
           R=$(grep -oE 'Stable tag: [0-9.]+' readme.txt | awk '{print $3}')
           echo "header $H constant $C readme $R"
           test "$H" = "$C" -a "$H" = "$R"
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - run: composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - name: Start WordPress with the plugin
+        run: npx wp-env start
+      - run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright
+          path: test-results
+          retention-days: 7

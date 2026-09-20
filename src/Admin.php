@@ -1,8 +1,10 @@
 <?php
+namespace MonoRanks;
+
 defined( 'ABSPATH' ) || exit;
 
 /** Settings → MonoRanks: connection status, connect with a key by hand, send content now, disconnect, change log. */
-class MonoRanks_Admin {
+class Admin {
 
 	public static function register() {
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
@@ -32,12 +34,12 @@ class MonoRanks_Admin {
 	}
 
 	public static function render() {
-		$conn = MonoRanks_Connection::get();
+		$conn = Connection::get();
 		$log  = array_reverse( (array) get_option( 'monoranks_change_log', array() ) );
 		$post = esc_url( admin_url( 'admin-post.php' ) );
 		echo '<div class="wrap"><h1>MonoRanks</h1>';
 		self::notice();
-		if ( MonoRanks_Connection::has_key() ) {
+		if ( Connection::has_key() ) {
 			$revoked = isset( $conn['key_state'] ) && 'revoked' === $conn['key_state'];
 			echo '<table class="form-table" role="presentation"><tbody>';
 			echo '<tr><th>' . esc_html__( 'Sending to MonoRanks', 'monoranks' ) . '</th><td>' . ( $revoked ? '<strong style="color:#b32d2e">' . esc_html__( 'Key revoked', 'monoranks' ) . '</strong> · ' . esc_html__( 'connect again from MonoRanks or paste a new key below', 'monoranks' ) : '<strong style="color:#008a20">' . esc_html__( 'Connected', 'monoranks' ) . '</strong>' ) . '</td></tr>';
@@ -58,7 +60,7 @@ class MonoRanks_Admin {
 		} else {
 			echo '<p>' . esc_html__( 'Not connected. The easiest way: in MonoRanks, open your website → Integrations → Connect WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.', 'monoranks' ) . '</p>';
 		}
-		$revoked_or_new = ! MonoRanks_Connection::has_key() || ( isset( $conn['key_state'] ) && 'revoked' === $conn['key_state'] );
+		$revoked_or_new = ! Connection::has_key() || ( isset( $conn['key_state'] ) && 'revoked' === $conn['key_state'] );
 		// Connected and working: keep the manual key form out of the way.
 		echo $revoked_or_new ? '' : '<details style="margin-top:24px"><summary style="cursor:pointer;font-weight:600">' . esc_html__( 'Use a different key', 'monoranks' ) . '</summary>';
 		echo '<h2>' . esc_html__( 'Connect with a key', 'monoranks' ) . '</h2>';
@@ -95,8 +97,8 @@ class MonoRanks_Admin {
 	public static function connect_key() {
 		self::guard( 'monoranks_connect_key' ); // Capability and nonce checked here.
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- verified in guard() above.
-		$key  = MonoRanks_Connection::valid_key( isset( $_POST['key'] ) ? sanitize_text_field( wp_unslash( $_POST['key'] ) ) : '' );
-		$base = MonoRanks_Connection::valid_base( isset( $_POST['api_base'] ) ? sanitize_text_field( wp_unslash( $_POST['api_base'] ) ) : '' );
+		$key  = Connection::valid_key( isset( $_POST['key'] ) ? sanitize_text_field( wp_unslash( $_POST['key'] ) ) : '' );
+		$base = Connection::valid_base( isset( $_POST['api_base'] ) ? sanitize_text_field( wp_unslash( $_POST['api_base'] ) ) : '' );
 		// phpcs:enable
 		if ( ! $key ) {
 			self::back( 'bad_key' );
@@ -104,31 +106,31 @@ class MonoRanks_Admin {
 		if ( ! $base ) {
 			self::back( 'bad_address' );
 		}
-		$previous = MonoRanks_Connection::get();
-		MonoRanks_Connection::update( array( 'api_base' => $base, 'key' => $key, 'via' => 'manual', 'key_state' => 'ok', 'paired_at' => gmdate( 'c' ), 'paired_by' => wp_get_current_user()->user_login ) );
-		$res = MonoRanks_Api::send_status();
+		$previous = Connection::get();
+		Connection::update( array( 'api_base' => $base, 'key' => $key, 'via' => 'manual', 'key_state' => 'ok', 'paired_at' => gmdate( 'c' ), 'paired_by' => wp_get_current_user()->user_login ) );
+		$res = Api::send_status();
 		if ( 200 !== $res['code'] ) {
-			$previous ? update_option( 'monoranks_connection', $previous, false ) : MonoRanks_Connection::clear();
+			$previous ? update_option( 'monoranks_connection', $previous, false ) : Connection::clear();
 			self::back( 401 === $res['code'] ? 'rejected' : ( 403 === $res['code'] ? 'other_site' : 'unreachable' ) );
 		}
 		if ( isset( $res['body']['site_id'] ) ) {
-			MonoRanks_Connection::update( array( 'site_id' => sanitize_text_field( (string) $res['body']['site_id'] ) ) );
+			Connection::update( array( 'site_id' => sanitize_text_field( (string) $res['body']['site_id'] ) ) );
 		}
-		MonoRanks_Sync::start();
+		Sync::start();
 		self::back( 'connected' );
 	}
 
 	public static function send_now() {
 		self::guard( 'monoranks_send_now' );
-		MonoRanks_Api::send_status();
-		MonoRanks_Sync::start();
+		Api::send_status();
+		Sync::start();
 		self::back( 'sent' );
 	}
 
 	public static function disconnect() {
 		self::guard( 'monoranks_disconnect' );
-		MonoRanks_Sync::unschedule();
-		MonoRanks_Connection::clear();
+		Sync::unschedule();
+		Connection::clear();
 		wp_safe_redirect( admin_url( 'options-general.php?page=monoranks' ) );
 		exit;
 	}

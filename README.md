@@ -11,9 +11,10 @@ Full description, what is sent and the FAQ: `readme.txt` (the WordPress.org list
 
 ## Development
 
-This repository mirrors `packages/wp-plugin/monoranks` of the MonoRanks monorepo, which is the source of truth; changes land here through `pnpm --filter @monoranks/wp-plugin publish:github`. Pull requests here are welcome and are applied upstream.
+This repository is the plugin's home. The MonoRanks monorepo includes it as a git submodule (`packages/wp-plugin/monoranks`) for its own end-to-end tests and the in-app download.
 
-- `ci.yml`: PHP syntax on 7.4, 8.1 and 8.3, the WordPress.org plugin checker, and a version consistency check.
+- `ci.yml`: PHP syntax on 7.4, 8.1 and 8.3, the WordPress.org plugin checker, a version consistency check, and Chromium tests (Playwright) against a real WordPress started with wp-env: settings page, key validation, REST permissions, nothing published before an approval.
+- Locally: `npm install`, `npx wp-env start` (Docker), `npx playwright test`. The site runs at http://localhost:8889 (admin / password).
 - `deploy.yml`: pushing a tag `v<version>` publishes that version to WordPress.org (SVN credentials in the repository secrets) and attaches the zip to the GitHub release.
 - `.wordpress-org/`: banner, icon and screenshots for the directory listing.
 

@@ -1,4 +1,6 @@
 <?php
+namespace MonoRanks;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -8,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * text is never rewritten. Never plugins, themes, settings or users.
  * Each change carries the value MonoRanks saw; if the site changed since, the change is refused.
  */
-class MonoRanks_Writer {
+class Writer {
 
 	const FIELDS = array( 'seo_title', 'seo_description', 'canonical', 'noindex', 'alt', 'redirect', 'content', 'ai_bots', 'llms_txt' );
 	const CONTENT_MARK_START = '<!-- monoranks:opening -->';
@@ -38,11 +40,11 @@ class MonoRanks_Writer {
 		}
 		// Site-wide AI access (0.8.0): the AI crawler rules and llms.txt live in options, not on a post.
 		if ( 'ai_bots' === $field || 'llms_txt' === $field ) {
-			$previous = 'ai_bots' === $field ? MonoRanks_Ai_Access::get_bots() : MonoRanks_Ai_Access::get_llms();
+			$previous = 'ai_bots' === $field ? AiAccess::get_bots() : AiAccess::get_llms();
 			if ( isset( $c['expected'] ) && null !== $c['expected'] && (string) $c['expected'] !== $previous ) {
 				return array( 'id' => $id, 'ok' => false, 'error' => 'changed_since_preview', 'current' => $previous );
 			}
-			$ok = 'ai_bots' === $field ? MonoRanks_Ai_Access::set_bots( $value ) : MonoRanks_Ai_Access::set_llms( $value );
+			$ok = 'ai_bots' === $field ? AiAccess::set_bots( $value ) : AiAccess::set_llms( $value );
 			if ( ! $ok ) {
 				return array( 'id' => $id, 'ok' => false, 'error' => 'invalid_value' );
 			}
@@ -57,11 +59,11 @@ class MonoRanks_Writer {
 			if ( '' !== $value && ! self::same_site( $value ) ) {
 				return array( 'id' => $id, 'ok' => false, 'error' => 'redirect_off_site' );
 			}
-			$previous = MonoRanks_Redirects::get( $from );
+			$previous = Redirects::get( $from );
 			if ( isset( $c['expected'] ) && (string) $c['expected'] !== $previous ) {
 				return array( 'id' => $id, 'ok' => false, 'error' => 'changed_since_preview', 'current' => $previous );
 			}
-			MonoRanks_Redirects::set( $from, $value );
+			Redirects::set( $from, $value );
 			self::log( $actor, $field, $from, $previous, $value );
 			return array( 'id' => $id, 'ok' => true, 'previous' => $previous );
 		}
@@ -89,7 +91,7 @@ class MonoRanks_Writer {
 		if ( 'content' === $field ) {
 			return self::content( $post, $c, $id, $actor );
 		}
-		$previous = (string) MonoRanks_Seo_Fields::get( $post_id, $field );
+		$previous = (string) SeoFields::get( $post_id, $field );
 		if ( isset( $c['expected'] ) && null !== $c['expected'] && (string) $c['expected'] !== $previous ) {
 			return array( 'id' => $id, 'ok' => false, 'error' => 'changed_since_preview', 'current' => $previous );
 		}
@@ -97,7 +99,7 @@ class MonoRanks_Writer {
 			return array( 'id' => $id, 'ok' => false, 'error' => 'canonical_off_site' );
 		}
 		$clean = 'canonical' === $field ? esc_url_raw( $value ) : ( 'noindex' === $field ? ( '1' === $value ? '1' : '0' ) : sanitize_text_field( $value ) );
-		MonoRanks_Seo_Fields::set( $post_id, $field, $clean );
+		SeoFields::set( $post_id, $field, $clean );
 		clean_post_cache( $post_id );
 		self::log( $actor, $field, 'post:' . $post_id, $previous, $clean );
 		return array( 'id' => $id, 'ok' => true, 'previous' => $previous, 'post_id' => $post_id );

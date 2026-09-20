@@ -1,18 +1,20 @@
 <?php
+namespace MonoRanks;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Full content sync pushed to MonoRanks in batches of 50 items. It runs inline for up to 20 seconds when MonoRanks asks for it
  * or when a key is pasted, then continues through WP-Cron; it also runs once a day.
  */
-class MonoRanks_Sync {
+class Sync {
 
 	const STEP_HOOK  = 'monoranks_sync_step';
 	const DAILY_HOOK = 'monoranks_daily_sync';
 	const PER_PAGE   = 50;
 
 	public static function start() {
-		if ( ! MonoRanks_Connection::has_key() ) {
+		if ( ! Connection::has_key() ) {
 			return array( 'run_id' => '', 'sent_pages' => 0, 'pages' => 0, 'done' => false, 'error' => 'not_connected' );
 		}
 		update_option( 'monoranks_sync', array( 'run_id' => str_replace( '-', '', wp_generate_uuid4() ), 'page' => 1, 'pages' => null, 'attempt' => 0 ), false );
@@ -28,10 +30,10 @@ class MonoRanks_Sync {
 		$until = microtime( true ) + (int) $budget;
 		$sent  = 0;
 		do {
-			$page  = MonoRanks_Content::page( (int) $state['page'], self::PER_PAGE );
+			$page  = Content::page( (int) $state['page'], self::PER_PAGE );
 			$pages = max( 1, (int) $page['pages'] );
 			$final = (int) $state['page'] >= $pages;
-			$res   = MonoRanks_Api::post( '/content', array( 'run_id' => $state['run_id'], 'page' => (int) $state['page'], 'pages' => $pages, 'total' => (int) $page['total'], 'items' => $page['items'], 'final' => $final ), 30 );
+			$res   = Api::post( '/content', array( 'run_id' => $state['run_id'], 'page' => (int) $state['page'], 'pages' => $pages, 'total' => (int) $page['total'], 'items' => $page['items'], 'final' => $final ), 30 );
 			if ( 401 === $res['code'] ) {
 				delete_option( 'monoranks_sync' );
 				return array( 'run_id' => $state['run_id'], 'sent_pages' => $sent, 'pages' => $pages, 'done' => false, 'error' => 'key_revoked' );
@@ -61,8 +63,8 @@ class MonoRanks_Sync {
 	}
 
 	public static function daily() {
-		if ( MonoRanks_Connection::has_key() ) {
-			MonoRanks_Api::send_status();
+		if ( Connection::has_key() ) {
+			Api::send_status();
 			self::start();
 		}
 	}

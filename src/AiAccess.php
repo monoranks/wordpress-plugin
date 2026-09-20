@@ -1,4 +1,6 @@
 <?php
+namespace MonoRanks;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -7,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  * and can be undone from there. Sites with a physical robots.txt file are not touched (WordPress never serves the
  * virtual one then); MonoRanks shows that case.
  */
-class MonoRanks_Ai_Access {
+class AiAccess {
 
 	const OPTION_BOTS = 'monoranks_ai_bots';
 	const OPTION_LLMS = 'monoranks_llms_txt';

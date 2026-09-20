@@ -1,0 +1,14 @@
+{
+  "name": "monoranks-wordpress-plugin-tests",
+  "private": true,
+  "description": "Browser tests for the MonoRanks WordPress plugin (not part of the plugin itself).",
+  "scripts": {
+    "wp:start": "wp-env start",
+    "wp:stop": "wp-env stop",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@wordpress/env": "^10.30.0"
+  }
+}
