@@ -60,6 +60,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Start WordPress with the plugin
         run: npx wp-env start
+      - name: Pretty permalinks (the REST routes live under /wp-json/)
+        run: npx wp-env run cli wp rewrite structure '/%postname%/' --hard
       - run: npx playwright test
       - uses: actions/upload-artifact@v4
         if: failure()
