@@ -1,8 +1,10 @@
 <?php
 /**
  * Plugin Name:       MonoRanks
- * Description:       Connects this site to MonoRanks: sends published content metadata for SEO reports and applies the SEO fixes you approve in MonoRanks (titles, descriptions, image alt text, canonical, noindex, redirects).
- * Version:           0.8.0
+ * Description:       Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo.
+ * Plugin URI:        https://monoranks.com/product/wordpress/
+ * Author URI:        https://monoranks.com
+ * Version:           0.9.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            MonoRanks
@@ -12,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'MONORANKS_CONNECTOR_VERSION', '0.8.0' );
+define( 'MONORANKS_CONNECTOR_VERSION', '0.9.0' );
 define( 'MONORANKS_CONNECTOR_FILE', __FILE__ );
 // MonoRanks address used when a key is pasted by hand. The download build sets it; wp-config.php may override it.
 if ( ! defined( 'MONORANKS_API_BASE' ) ) {

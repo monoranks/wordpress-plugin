@@ -5,8 +5,8 @@
  */
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
-foreach ( array( 'monoranks', 'monoranks_connection', 'monoranks_sync', 'monoranks_redirects', 'monoranks_change_log', 'monoranks_ai_bots', 'monoranks_llms_txt' ) as $option ) {
-	delete_option( $option );
+foreach ( array( 'monoranks', 'monoranks_connection', 'monoranks_sync', 'monoranks_redirects', 'monoranks_change_log', 'monoranks_ai_bots', 'monoranks_llms_txt' ) as $monoranks_option ) {
+	delete_option( $monoranks_option );
 }
 wp_clear_scheduled_hook( 'monoranks_daily_sync' );
 wp_clear_scheduled_hook( 'monoranks_sync_step' );

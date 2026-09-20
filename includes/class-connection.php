@@ -43,7 +43,7 @@ class MonoRanks_Connection {
 
 	public static function valid_key( $key ) {
 		$key = trim( (string) $key );
-		return preg_match( '/^ti_site_[A-Za-z0-9_-]{20,80}$/', $key ) ? $key : '';
+		return preg_match( '/^mr_site_[A-Za-z0-9_-]{20,80}$/', $key ) ? $key : '';
 	}
 
 	public static function local() {

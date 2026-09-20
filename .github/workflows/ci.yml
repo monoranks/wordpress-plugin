@@ -1,0 +1,41 @@
+# Every push and pull request: PHP syntax on the versions the plugin supports, then the WordPress.org plugin checker
+# (the same rules the directory review runs). A pull request cannot merge red.
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.4', '8.1', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: PHP syntax
+        run: find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l
+  plugin-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wordpress/plugin-check-action@v1
+        with:
+          build-dir: '.'
+          exclude-directories: '.github,.wordpress-org'
+          exclude-files: 'README.md'
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Header, constant and readme agree on the version
+        run: |
+          H=$(grep -oE 'Version:\s+[0-9.]+' monoranks.php | awk '{print $2}')
+          C=$(grep -oE "MONORANKS_CONNECTOR_VERSION', '[0-9.]+'" monoranks.php | grep -oE '[0-9.]+' | tail -1)
+          R=$(grep -oE 'Stable tag: [0-9.]+' readme.txt | awk '{print $3}')
+          echo "header $H constant $C readme $R"
+          test "$H" = "$C" -a "$H" = "$R"

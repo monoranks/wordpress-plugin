@@ -66,7 +66,7 @@ class MonoRanks_Admin {
 		echo '<form method="post" action="' . $post . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above
 		wp_nonce_field( 'monoranks_connect_key' );
 		echo '<input type="hidden" name="action" value="monoranks_connect_key"><table class="form-table" role="presentation"><tbody>';
-		echo '<tr><th><label for="monoranks-key">' . esc_html__( 'Connector key', 'monoranks' ) . '</label></th><td><input id="monoranks-key" name="key" type="password" class="regular-text" autocomplete="off" placeholder="ti_site_…" required></td></tr>';
+		echo '<tr><th><label for="monoranks-key">' . esc_html__( 'Connector key', 'monoranks' ) . '</label></th><td><input id="monoranks-key" name="key" type="password" class="regular-text" autocomplete="off" placeholder="mr_site_…" required></td></tr>';
 		echo '<tr><th><label for="monoranks-address">' . esc_html__( 'MonoRanks address', 'monoranks' ) . '</label></th><td><input id="monoranks-address" name="api_base" type="url" class="regular-text" value="' . esc_attr( ! empty( $conn['api_base'] ) ? $conn['api_base'] : MONORANKS_API_BASE ) . '"></td></tr>';
 		echo '</tbody></table><p><button class="button">' . esc_html__( 'Connect', 'monoranks' ) . '</button></p></form>';
 		echo $revoked_or_new ? '' : '</details>';
@@ -93,9 +93,11 @@ class MonoRanks_Admin {
 	}
 
 	public static function connect_key() {
-		self::guard( 'monoranks_connect_key' );
+		self::guard( 'monoranks_connect_key' ); // Capability and nonce checked here.
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- verified in guard() above.
 		$key  = MonoRanks_Connection::valid_key( isset( $_POST['key'] ) ? sanitize_text_field( wp_unslash( $_POST['key'] ) ) : '' );
 		$base = MonoRanks_Connection::valid_base( isset( $_POST['api_base'] ) ? sanitize_text_field( wp_unslash( $_POST['api_base'] ) ) : '' );
+		// phpcs:enable
 		if ( ! $key ) {
 			self::back( 'bad_key' );
 		}

@@ -1,18 +1,26 @@
 === MonoRanks ===
 Contributors: monoranks
-Tags: seo, audit, search console, redirects, meta description
+Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.8.0
+Stable tag: 0.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Connects your site to MonoRanks, an SEO audit service, and applies the fixes you approve there.
+Connects your site to MonoRanks (SEO, AEO and GEO audits) and applies the fixes you approve there, with undo.
 
 == Description ==
 
-MonoRanks audits your website, finds SEO problems and suggests fixes. This plugin is the link between your site and your MonoRanks account.
+MonoRanks audits every page of your website each week, finds what keeps it off page one or out of AI answers (SEO, AEO and GEO checks, page speed), ranks the fixes by what they are worth, and explains each one in plain words. This plugin is the link between your site and your MonoRanks account: it sends published content metadata so audits and rechecks stay current, and it writes the fixes you approve in MonoRanks into WordPress, each one with Undo.
+
+What you get with the plugin connected:
+
+* One-click fixes for titles, meta descriptions, headings, image alt text, canonical URLs, noindex and redirects, written into the same fields Yoast SEO, Rank Math and All in One SEO read.
+* An answer-first opening paragraph for pages that bury their answer, shown as a before/after diff first.
+* AI crawler rules (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) in robots.txt and an llms.txt file, published only after you approve them.
+* A recheck of the affected pages the same day a post changes, so the audit never goes stale.
+* A change log under Settings → MonoRanks with Undo for every write.
 
 = This plugin relies on an external service =
 
@@ -35,8 +43,8 @@ What MonoRanks can change, only after you approve each change in MonoRanks: SEO 
 
 Works with Yoast SEO, Rank Math and All in One SEO. Without an SEO plugin, the connector prints the approved title, description, canonical and noindex itself.
 
-* Terms of service: https://monoranks.com/terms
-* Privacy policy: https://monoranks.com/privacy
+* Terms of service: https://monoranks.com/legal/terms/
+* Privacy policy: https://monoranks.com/legal/privacy/
 
 = Disconnect =
 
@@ -79,6 +87,9 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 3. An action in MonoRanks with the change ready to approve.
 
 == Changelog ==
+
+= 0.9.0 =
+* Renamed to MonoRanks (slug `monoranks`). Terms and privacy links point at monoranks.com. Ready for the WordPress.org review: plugin-check clean, tested with WordPress 7.1.
 
 = 0.8.0 =
 * AI crawler rules (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) added to the virtual robots.txt, and an llms.txt served at /llms.txt, both only after you approve them in MonoRanks; undo removes them.
