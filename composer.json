@@ -14,14 +14,36 @@
   },
   "config": {
     "optimize-autoloader": true,
-    "classmap-authoritative": true,
-    "platform": {
-      "php": "7.4"
-    },
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "wpify/scoper": true
+    }
   },
   "scripts": {
-    "build": "composer install --no-dev --optimize-autoloader --classmap-authoritative",
-    "scope": "php-scoper add-prefix --output-dir=build/scoped --force"
+    "test": "phpunit",
+    "build": "composer install --no-dev --optimize-autoloader --classmap-authoritative"
+  },
+  "require-dev": {
+    "wpify/scoper": "^4.0",
+    "phpunit/phpunit": "^9.6",
+    "brain/monkey": "^2.6",
+    "yoast/phpunit-polyfills": "^2.0"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MonoRanks\\Tests\\": "tests/unit/"
+    }
+  },
+  "extra": {
+    "wpify-scoper": {
+      "prefix": "MonoRanksDeps",
+      "folder": "deps",
+      "globals": [
+        "wordpress"
+      ],
+      "composerjson": "composer-deps.json",
+      "composerlock": "composer-deps.lock",
+      "autorun": true
+    }
   }
 }

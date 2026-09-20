@@ -14,8 +14,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// Classes live under src/ (PSR-4, namespace MonoRanks) and load through Composer's autoloader.
+// Classes live under src/ (PSR-4, namespace MonoRanks) and load through Composer's autoloader; third-party libraries,
+// when there are any, are prefixed by WPify Scoper into deps/ so they cannot collide with other plugins' copies.
 require_once __DIR__ . '/vendor/autoload.php';
+if ( file_exists( __DIR__ . '/deps/scoper-autoload.php' ) ) {
+	require_once __DIR__ . '/deps/scoper-autoload.php';
+}
 
 define( 'MONORANKS_CONNECTOR_VERSION', '1.0.0' );
 define( 'MONORANKS_CONNECTOR_FILE', __FILE__ );

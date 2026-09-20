@@ -4,3 +4,5 @@ playwright-report
 vendor
 build
 composer.lock
+deps
+.phpunit.result.cache

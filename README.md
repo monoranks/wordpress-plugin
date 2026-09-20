@@ -13,9 +13,9 @@ Full description, what is sent and the FAQ: `readme.txt` (the WordPress.org list
 
 This repository is the plugin's home. The MonoRanks monorepo includes it as a git submodule (`packages/wp-plugin/monoranks`) for its own end-to-end tests and the in-app download.
 
-- `ci.yml`: PHP syntax on 7.4, 8.1 and 8.3, the WordPress.org plugin checker, a version consistency check, and Chromium tests (Playwright) against a real WordPress started with wp-env: settings page, key validation, REST permissions, nothing published before an approval.
+- `ci.yml`, one pipeline: PHP syntax on 7.4, 8.1 and 8.3; unit tests (PHPUnit + Brain Monkey, no WordPress needed: `composer install && vendor/bin/phpunit`); the WordPress.org plugin checker; a version consistency check (header, constant, readme, changelog); Chromium tests (Playwright) against a real WordPress started with wp-env. A tag `v<version>` runs all of that first and deploys to WordPress.org only when every job passed.
+- Classes: `src/` (namespace `MonoRanks`, Composer PSR-4). Third-party libraries go into `composer-deps.json`; WPify Scoper prefixes them into `deps/` on `composer install`, so nothing collides with other plugins.
 - Locally: `npm install`, `npx wp-env start` (Docker), `npx playwright test`. The site runs at http://localhost:8889 (admin / password).
-- `deploy.yml`: pushing a tag `v<version>` publishes that version to WordPress.org (SVN credentials in the repository secrets) and attaches the zip to the GitHub release.
 - `.wordpress-org/`: banner, icon and screenshots for the directory listing.
 
 License: GPL-2.0-or-later.
