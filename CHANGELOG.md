@@ -11,3 +11,4 @@ Initial release.
 - Applies the fixes approved in MonoRanks: SEO title, meta description, canonical, noindex, image alt text, redirects, an answer-first opening paragraph, AI crawler rules in robots.txt and an llms.txt file, each with Undo.
 - Works next to Yoast SEO, Rank Math and All in One SEO; prints the approved tags itself when no SEO plugin is active.
 - Settings → MonoRanks: connection state, what was sent, change log, disconnect.
+
