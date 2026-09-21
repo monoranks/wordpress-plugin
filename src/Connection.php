@@ -45,7 +45,8 @@ class Connection {
 
 	public static function valid_key( $key ) {
 		$key = trim( (string) $key );
-		return preg_match( '/^mr_site_[A-Za-z0-9_-]{20,80}$/', $key ) ? $key : '';
+		// A website key (mr_site_…) or a workspace key ticked for this one website (mr_ws_…, MonoRanks → Settings → API and MCP).
+		return preg_match( '/^mr_(site|ws)_[A-Za-z0-9_-]{20,80}$/', $key ) ? $key : '';
 	}
 
 	public static function local() {

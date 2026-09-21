@@ -25,7 +25,9 @@ class ConnectionTest extends TestCase {
 
 	public function test_valid_key_rejects_other_shapes() {
 		$this->assertSame( '', Connection::valid_key( 'not-a-key' ) );
-		$this->assertSame( '', Connection::valid_key( 'mr_ws_' . str_repeat( 'a', 32 ) ) );
+		$this->assertSame( '', Connection::valid_key( 'mr_or_' . str_repeat( 'a', 32 ) ) );
+		$this->assertSame( 'mr_ws_' . str_repeat( 'b', 32 ), Connection::valid_key( 'mr_ws_' . str_repeat( 'b', 32 ) ) );
+		$this->assertSame( '', Connection::valid_key( 'mr_oa_' . str_repeat( 'b', 32 ) ) );
 		$this->assertSame( '', Connection::valid_key( 'mr_site_short' ) );
 		$this->assertSame( '', Connection::valid_key( 'mr_site_' . str_repeat( 'a', 81 ) ) );
 		$this->assertSame( '', Connection::valid_key( 'mr_site_' . str_repeat( 'a', 20 ) . '<script>' ) );
