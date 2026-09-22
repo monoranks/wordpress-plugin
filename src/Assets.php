@@ -24,7 +24,8 @@ class Assets {
 			wp_enqueue_style( 'monoranks-column', plugins_url( 'build/column.css', MONORANKS_CONNECTOR_FILE ), array(), self::version( $dir . '/build/column.css' ) );
 			return;
 		}
-		if ( ! in_array( $hook, array( 'toplevel_page_' . Admin::MENU, 'monoranks_page_' . Admin::SETTINGS ), true ) ) {
+		$screen = Admin::screen_for_hook( $hook );
+		if ( '' === $screen ) {
 			return;
 		}
 		$js  = $dir . '/build/main.js';
@@ -35,7 +36,7 @@ class Assets {
 		wp_enqueue_style( self::HANDLE, plugins_url( 'build/main.css', MONORANKS_CONNECTOR_FILE ), array(), self::version( $css ) );
 		wp_enqueue_script( self::HANDLE, plugins_url( 'build/main.js', MONORANKS_CONNECTOR_FILE ), array( 'wp-i18n', 'wp-api-fetch' ), self::version( $js ), true );
 		wp_set_script_translations( self::HANDLE, 'monoranks', $dir . '/languages' );
-		wp_add_inline_script( self::HANDLE, 'window.monoranksAdmin = ' . wp_json_encode( self::settings( 'monoranks_page_' . Admin::SETTINGS === $hook ? 'settings' : 'overview' ) ) . ';', 'before' );
+		wp_add_inline_script( self::HANDLE, 'window.monoranksAdmin = ' . wp_json_encode( self::settings( $screen ) ) . ';', 'before' );
 	}
 
 	/** Cache-busts on the built file's own mtime, so a rebuild gets a new URL without a version bump. */

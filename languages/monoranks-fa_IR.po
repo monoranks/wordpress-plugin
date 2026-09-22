@@ -2,14 +2,15 @@ msgid ""
 msgstr "Project-Id-Version: MonoRanks ۱.۰.۰\nLanguage: fa_IR\nMIME-Version: ۱.۰\nContent-Type: text/plain; charset=UTF-۸\nContent-Transfer-Encoding: ۸bit\nPlural-Forms: nplurals=۲; plural=(n > ۱);\nX-Generator: monoranks\n"
 
 #. Plugin Name of the plugin
-#. Author of the plugin
 #: monoranks.php
+#: src/Admin.php:37
+#: src/Column.php:34
 msgid "MonoRanks"
 msgstr "مونورنکس"
 
 #. Plugin URI of the plugin
 #: monoranks.php
-msgid "https://monoranks.com/product/wordpress/"
+msgid "https://monoranks.com/product/wordpress/?utm_source=wordpress-plugin&utm_medium=plugins-list&utm_campaign=plugin-meta"
 msgstr ""
 
 #. Description of the plugin
@@ -17,9 +18,14 @@ msgstr ""
 msgid "Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo."
 msgstr "این سایت را به مونورنکس (ممیزی SEO، AEO و GEO) متصل می‌کند: فرادادهٔ محتوای منتشرشده را می‌فرستد و اصلاح‌هایی را که آنجا تأیید می‌کنید، با امکان بازگردانی، اعمال می‌کند."
 
+#. Author of the plugin
+#: monoranks.php
+msgid "VeronaLabs"
+msgstr ""
+
 #. Author URI of the plugin
 #: monoranks.php
-msgid "https://monoranks.com"
+msgid "https://veronalabs.com/?utm_source=wordpress-plugin&utm_medium=plugins-list&utm_campaign=plugin-meta&utm_content=monoranks"
 msgstr ""
 
 #: resources/views/app.php:13
@@ -27,110 +33,106 @@ msgstr ""
 msgid "The MonoRanks admin app is not built. Run npm install and npm run build in the plugin folder."
 msgstr "برنامهٔ مدیریت مونورنکس ساخته نشده است. در پوشهٔ افزونه npm install و سپس npm run build را اجرا کنید."
 
-#: resources/views/column-cell.php:16
+#: resources/views/column-cell.php:18
 #: tmp/monoranks/resources/views/column-cell.php:13
 #: tmp/i18n/screens/Overview.js:142
 msgid "Connect MonoRanks"
 msgstr "اتصال مونورنکس"
 
-#: resources/views/column-cell.php:21
+#: resources/views/column-cell.php:22
 msgid "Drafts are not sent to MonoRanks. This page gets its scores after the first audit that follows publishing."
 msgstr "پیش‌نویس‌ها به مونورنکس فرستاده نمی‌شوند. این صفحه پس از نخستین ممیزیِ بعد از انتشار امتیاز می‌گیرد."
 
-#: resources/views/column-cell.php:24
-#: resources/views/column-cell.php:28
-#: resources/views/column-cell.php:39
-#: resources/views/column-cell.php:43
+#: resources/views/column-cell.php:25
+#: resources/views/column-cell.php:35
 #: tmp/monoranks/resources/views/column-cell.php:17
 #: tmp/monoranks/resources/views/column-cell.php:21
 #: tmp/i18n/screens/Overview.js:89
 msgid "Health"
 msgstr "سلامت"
 
-#: resources/views/column-cell.php:24
-#: resources/views/column-cell.php:29
-#: resources/views/column-cell.php:39
-#: resources/views/column-cell.php:44
+#: resources/views/column-cell.php:25
+#: resources/views/column-cell.php:35
 #: tmp/monoranks/resources/views/column-cell.php:17
 #: tmp/monoranks/resources/views/column-cell.php:21
 #: tmp/i18n/screens/Overview.js:89
 msgid "AEO"
 msgstr "AEO"
 
-#: resources/views/column-cell.php:32
+#: resources/views/column-cell.php:28
 #: tmp/i18n/screens/Settings.js:58
 msgid "Status"
 msgstr "وضعیت"
 
-#: resources/views/column-cell.php:32
+#: resources/views/column-cell.php:28
 #: src/Column.php:68
 #: tmp/monoranks/src/Column.php:63
 msgid "Not audited yet"
 msgstr "هنوز ممیزی نشده"
 
-#: resources/views/column-cell.php:33
-#: resources/views/column-cell.php:60
+#: resources/views/column-cell.php:29
+#: resources/views/column-cell.php:51
 #: tmp/i18n/screens/Settings.js:61
 msgid "Next audit"
 msgstr "ممیزی بعدی"
 
-#: resources/views/column-cell.php:34
+#: resources/views/column-cell.php:30
 msgid "Published"
 msgstr "انتشار"
 
-#: resources/views/column-cell.php:36
+#: resources/views/column-cell.php:32
 msgid "Scores arrive after the next audit"
 msgstr "امتیازها پس از ممیزی بعدی می‌آیند"
 
-#: resources/views/column-cell.php:36
+#: resources/views/column-cell.php:32
 #: tmp/i18n/screens/Overview.js:144
 #: tmp/i18n/screens/Settings.js:71
 #: tmp/i18n/shell/Shell.js:37
 msgid "Open MonoRanks"
 msgstr "باز کردن مونورنکس"
 
-#: resources/views/column-cell.php:47
+#: resources/views/column-cell.php:38
 #: tmp/i18n/screens/Overview.js:75
 msgid "Fixes"
 msgstr "اصلاح‌ها"
 
 #. translators: %s: number
-#: resources/views/column-cell.php:49
+#: resources/views/column-cell.php:40
 msgid "%s ready to apply"
 msgid_plural "%s ready to apply"
 msgstr[0] "%s آمادهٔ اعمال"
 msgstr[1] "%s آمادهٔ اعمال"
 
-#: resources/views/column-cell.php:51
+#: resources/views/column-cell.php:42
 msgid "Nothing waiting"
 msgstr "چیزی در انتظار نیست"
 
-#: resources/views/column-cell.php:53
+#: resources/views/column-cell.php:44
 msgid "Issues"
 msgstr "مشکل‌ها"
 
 #. translators: %s: number
-#: resources/views/column-cell.php:55
+#: resources/views/column-cell.php:46
 msgid "%s open"
 msgid_plural "%s open"
 msgstr[0] "%s باز"
 msgstr[1] "%s باز"
 
-#: resources/views/column-cell.php:57
+#: resources/views/column-cell.php:48
 #: src/Column.php:109
 #: tmp/monoranks/src/Column.php:90
 msgid "No open issues"
 msgstr "بدون مشکل باز"
 
-#: resources/views/column-cell.php:59
+#: resources/views/column-cell.php:50
 msgid "Audited"
 msgstr "ممیزی"
 
-#: resources/views/column-cell.php:63
+#: resources/views/column-cell.php:54
 msgid "Apply fixes"
 msgstr "اعمال اصلاح‌ها"
 
-#: resources/views/column-cell.php:64
+#: resources/views/column-cell.php:55
 msgid "Open in MonoRanks"
 msgstr "باز کردن در مونورنکس"
 

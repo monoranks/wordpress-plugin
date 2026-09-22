@@ -2,12 +2,12 @@
 /**
  * Plugin Name:       MonoRanks
  * Description:       Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo.
- * Plugin URI:        https://monoranks.com/product/wordpress/
- * Author URI:        https://monoranks.com
+ * Plugin URI:        https://monoranks.com/product/wordpress/?utm_source=wordpress-plugin&utm_medium=plugins-list&utm_campaign=plugin-meta
+ * Author URI:        https://veronalabs.com/?utm_source=wordpress-plugin&utm_medium=plugins-list&utm_campaign=plugin-meta&utm_content=monoranks
  * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
- * Author:            MonoRanks
+ * Author:            VeronaLabs
  * License:           GPL-2.0-or-later
  * Text Domain:       monoranks
  * Domain Path:       /languages

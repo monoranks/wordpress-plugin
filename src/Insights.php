@@ -61,7 +61,7 @@ class Insights {
 			return;
 		}
 		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- screen check only
-		$ours = 'edit.php' === $pagenow || ( 'admin.php' === $pagenow && in_array( $page, array( 'monoranks', 'monoranks-settings' ), true ) );
+		$ours = 'edit.php' === $pagenow || ( 'admin.php' === $pagenow && in_array( $page, array( Admin::MENU, Admin::SETTINGS ), true ) );
 		if ( ! $ours || ! self::is_stale( self::state() ) || wp_next_scheduled( self::REFRESH_HOOK ) ) {
 			return;
 		}

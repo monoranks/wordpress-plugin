@@ -31,7 +31,7 @@ class Column {
 	/** The last column. */
 	public static function columns( $columns ) {
 		$columns              = (array) $columns;
-		$columns[ self::KEY ] = 'MonoRanks';
+		$columns[ self::KEY ] = __( 'MonoRanks', 'monoranks' );
 		return $columns;
 	}
 

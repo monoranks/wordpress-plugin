@@ -13,10 +13,19 @@ class Admin {
 	const MENU     = 'monoranks';
 	const SETTINGS = 'monoranks-settings';
 
+	/**
+	 * The screen hooks WordPress gave the two pages, kept because they are not guessable: a submenu's hook is built from
+	 * the parent's menu title, which is translated, so "monoranks_page_…" is only right in English.
+	 *
+	 * @var array<string,string>
+	 */
+	private static $hooks = array();
+
 	public static function register() {
 		add_filter( 'load_textdomain_mofile', array( __CLASS__, 'bundled_mofile' ), 10, 2 );
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'legacy_url' ) );
+		add_filter( 'admin_body_class', array( __CLASS__, 'body_class' ) );
 		add_filter( 'admin_footer_text', array( __CLASS__, 'footer_text' ), 100 );
 		add_filter( 'update_footer', array( __CLASS__, 'footer_text' ), 100 );
 	}
@@ -34,9 +43,24 @@ class Admin {
 	}
 
 	public static function menu() {
-		add_menu_page( 'MonoRanks', 'MonoRanks', 'manage_options', self::MENU, array( __CLASS__, 'mount' ), self::menu_icon(), 58 );
+		self::$hooks['overview'] = (string) add_menu_page( __( 'MonoRanks', 'monoranks' ), __( 'MonoRanks', 'monoranks' ), 'manage_options', self::MENU, array( __CLASS__, 'mount' ), self::menu_icon(), 58 );
 		add_submenu_page( self::MENU, __( 'Overview', 'monoranks' ), __( 'Overview', 'monoranks' ), 'manage_options', self::MENU, array( __CLASS__, 'mount' ) );
-		add_submenu_page( self::MENU, __( 'MonoRanks settings', 'monoranks' ), __( 'Settings', 'monoranks' ), 'manage_options', self::SETTINGS, array( __CLASS__, 'mount' ) );
+		self::$hooks['settings'] = (string) add_submenu_page( self::MENU, __( 'MonoRanks settings', 'monoranks' ), __( 'Settings', 'monoranks' ), 'manage_options', self::SETTINGS, array( __CLASS__, 'mount' ) );
+	}
+
+	/** The screen hook of one of the plugin's pages, or '' before admin_menu has run. */
+	public static function hook( $page ) {
+		return isset( self::$hooks[ $page ] ) ? self::$hooks[ $page ] : '';
+	}
+
+	/** overview | settings for one of the plugin's screen hooks, or '' for anything else. */
+	public static function screen_for_hook( $hook ) {
+		foreach ( self::$hooks as $page => $known ) {
+			if ( $known && $known === $hook ) {
+				return $page;
+			}
+		}
+		return '';
 	}
 
 	/** Where the app renders. Without a build (a checkout that skipped `npm run build`) it says what to run. */
@@ -55,10 +79,15 @@ class Admin {
 		return file_exists( $path ) ? (string) file_get_contents( $path ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- plugin's own file
 	}
 
+	/** The plugin's screens carry one class of their own, so the stylesheet does not depend on a translated hook name. */
+	public static function body_class( $classes ) {
+		return self::is_own_screen() ? $classes . ' monoranks-screen' : $classes;
+	}
+
 	/** True on the plugin's own screens (Overview, Settings). */
 	public static function is_own_screen() {
 		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		return $screen && in_array( $screen->id, array( 'toplevel_page_' . self::MENU, 'monoranks_page_' . self::SETTINGS ), true );
+		return $screen && '' !== self::screen_for_hook( $screen->id );
 	}
 
 	/** The plugin's screens carry their own footer, so WordPress's "Thank you for creating with WordPress" line steps aside. */

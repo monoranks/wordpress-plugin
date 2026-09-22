@@ -28,28 +28,25 @@ td.column-monoranks { vertical-align: middle; }
 .mr-score.md .mr-ring > span { font-size: 13px; }
 
 /* The card that appears above the rings on hover or keyboard focus: anchored to the column's end edge so it never runs
-   off the table, fades in and rises 4px. */
+   off the table, fades in and rises 4px, and stays while the pointer travels to it (an invisible bridge under it and a
+   short delay before it hides). */
 td.column-monoranks { position: relative; }
 .monoranks-cell .row { outline: none; }
 .monoranks-cell .row:focus-visible { box-shadow: 0 0 0 2px #2a6fdb; border-radius: 6px; }
-.monoranks-cell .mr-tip { position: absolute; inset-inline-end: 8px; bottom: calc(100% - 6px); z-index: 30; width: 264px; background: #fff; border: 1px solid #e3e7ec; border-radius: 10px; box-shadow: 0 8px 24px rgba(20, 24, 31, .12), 0 1px 2px rgba(20, 24, 31, .06); padding: 12px 14px; color: var(--ink); text-align: start; font-size: 12px; line-height: 1.45; opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity .14s ease, transform .14s ease; }
-.monoranks-cell .mr-tip::after { content: ""; position: absolute; inset-inline-end: 28px; bottom: -6px; width: 10px; height: 10px; background: #fff; border-inline-end: 1px solid #e3e7ec; border-bottom: 1px solid #e3e7ec; transform: rotate(45deg); }
-.monoranks-cell:hover .mr-tip, .monoranks-cell:focus-within .mr-tip { opacity: 1; transform: none; pointer-events: auto; }
-.monoranks-cell .mr-tip .t { font-weight: 600; font-size: 13px; margin-bottom: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.monoranks-cell .mr-tip .rings { display: flex; gap: 16px; margin-bottom: 10px; }
-.monoranks-cell .mr-tip .rk { display: inline-flex; align-items: center; gap: 8px; }
-.monoranks-cell .mr-tip .k { display: flex; flex-direction: column; gap: 1px; }
-.monoranks-cell .mr-tip .k b { font-size: 12px; font-weight: 600; color: var(--ink); }
-.monoranks-cell .mr-tip .k span { font-size: 11px; color: var(--muted); }
+.monoranks-cell .mr-tip { position: absolute; inset-inline-end: 8px; bottom: calc(100% - 10px); z-index: 30; width: 232px; background: #fff; border: 1px solid #e3e7ec; border-radius: 10px; box-shadow: 0 8px 24px rgba(20, 24, 31, .12), 0 1px 2px rgba(20, 24, 31, .06); padding: 12px 14px; color: var(--ink); text-align: start; font-size: 12px; line-height: 1.45; opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity .14s ease .2s, transform .14s ease .2s; }
+.monoranks-cell .mr-tip::before { content: ""; position: absolute; inset-inline: 0; top: 100%; height: 44px; }
+.monoranks-cell:hover .mr-tip, .monoranks-cell:focus-within .mr-tip { opacity: 1; transform: none; pointer-events: auto; transition-delay: 0s; }
 .monoranks-cell .mr-tip .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
-.monoranks-cell .mr-tip .kv div:nth-child(odd) { color: var(--muted); }
+.monoranks-cell .mr-tip .kv div:nth-child(odd) { color: var(--muted); white-space: nowrap; }
 .monoranks-cell .mr-tip .kv .good { color: #0a7a0a; }
 .monoranks-cell .mr-tip .kv .critical { color: var(--critical); font-weight: 500; }
-.monoranks-cell .mr-tip .foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e6e9ee; }
-.monoranks-cell .mr-tip .foot a { color: #1d5bbf; text-decoration: none; font-weight: 500; }
+.monoranks-cell .mr-tip .foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e6e9ee; }
+.monoranks-cell .mr-tip .foot a { color: #1d5bbf; text-decoration: none; font-weight: 500; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
 .monoranks-cell .mr-tip .foot a:hover { text-decoration: underline; }
+.monoranks-cell .mr-tip .arrow { display: inline-block; }
+[dir="rtl"] .monoranks-cell .mr-tip .arrow { transform: scaleX(-1); }
 .monoranks-cell .mr-tip .empty { color: #4c5563; }
 /* The first rows have no room above them: their card opens below the rings instead. */
-tr:nth-child(-n+2) .monoranks-cell .mr-tip { bottom: auto; top: calc(100% - 6px); transform: translateY(-4px); }
-tr:nth-child(-n+2) .monoranks-cell .mr-tip::after { bottom: auto; top: -6px; border: 0; border-inline-start: 1px solid #e3e7ec; border-top: 1px solid #e3e7ec; }
+tr:nth-child(-n+2) .monoranks-cell .mr-tip { bottom: auto; top: calc(100% - 10px); transform: translateY(-4px); }
+tr:nth-child(-n+2) .monoranks-cell .mr-tip::before { top: auto; bottom: 100%; }
 @media (prefers-reduced-motion: reduce) { .monoranks-cell .mr-tip { transition: none; } }
