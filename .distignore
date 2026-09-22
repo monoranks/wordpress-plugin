@@ -6,6 +6,7 @@
 .distignore
 .wordpress-org
 .wp-env.json
+.wp-env.override.json
 .phpunit.result.cache
 README.md
 CHANGELOG.md

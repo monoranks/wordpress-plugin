@@ -89,8 +89,7 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 1. MonoRanks → Overview: site health and AEO scores, search clicks, pages needing attention, fixes ready to apply, recent changes with Undo (also in Persian).
 2. The MonoRanks column in Posts: each page's health and AEO score rings; hovering opens a card with fixes waiting, open issues, audit dates and links. Sortable, with a "Needs attention" view (also in Persian).
 3. MonoRanks → Settings: connection state, connector key, last sync, what is sent, recent changes (also in Persian).
-4. The website's Integrations screen in MonoRanks with the connector card.
-5. An action in MonoRanks with the change ready to approve.
+4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
 
