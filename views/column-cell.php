@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<div class="monoranks-cell" data-theme="<?php echo esc_attr( \MonoRanks\Admin::theme() ); ?>">
+<div class="monoranks-cell">
 <?php if ( 'unconnected' === $state ) : ?>
 	<span class="xs"><a href="<?php echo esc_url( $settings_url ); ?>"><?php esc_html_e( 'Connect MonoRanks', 'monoranks' ); ?></a></span>
 <?php elseif ( 'draft' === $state ) : ?>

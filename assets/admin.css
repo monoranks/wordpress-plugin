@@ -9,14 +9,14 @@
 	--grid: #e6e9ee; --line: #cbd2db; --border: #e3e7ec; --accent: #2a6fdb; --accentInk: #1d5bbf; --accentSoft: #e8f0fc;
 	--good: #0ca30c; --goodInk: #0a7a0a; --warn: #e6a100; --critical: #d03b3b; --grayTrack: #e6e9ee; --primaryBtn: #14181f; --primaryBtnInk: #ffffff;
 }
-.monoranks[data-theme="dark"], .monoranks-cell[data-theme="dark"] {
+.monoranks[data-theme="dark"] {
 	--page: #0f1115; --surface: #171a20; --surface2: #1e2229; --surface3: #262b33; --ink: #f3f4f6; --ink2: #b8bec8; --muted: #7d8590;
 	--grid: #262b33; --line: #3a404a; --border: #262b33; --accent: #3987e5; --accentInk: #86b6ef; --accentSoft: #1a2a44;
 	--good: #0ca30c; --goodInk: #3ccf3c; --warn: #fab219; --critical: #e05656; --grayTrack: #2c313a; --primaryBtn: #f3f4f6; --primaryBtnInk: #14181f;
 	color-scheme: dark;
 }
 @media (prefers-color-scheme: dark) {
-	.monoranks:not([data-theme="light"]), .monoranks-cell:not([data-theme="light"]) {
+	.monoranks:not([data-theme="light"]) {
 		--page: #0f1115; --surface: #171a20; --surface2: #1e2229; --surface3: #262b33; --ink: #f3f4f6; --ink2: #b8bec8; --muted: #7d8590;
 		--grid: #262b33; --line: #3a404a; --border: #262b33; --accent: #3987e5; --accentInk: #86b6ef; --accentSoft: #1a2a44;
 		--good: #0ca30c; --goodInk: #3ccf3c; --warn: #fab219; --critical: #e05656; --grayTrack: #2c313a; --primaryBtn: #f3f4f6; --primaryBtnInk: #14181f;
@@ -125,9 +125,9 @@
 /* WordPress notices keep their classes (tests read .notice-error) and take the card look. */
 .monoranks .notice, .monoranks div.notice { margin: 0; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-inline-start: 3px solid var(--accent); border-radius: 8px; box-shadow: none; color: var(--ink); }
 .monoranks .notice p { margin: 0; padding: 0; font-size: 13px; }
-.monoranks .notice-success { border-inline-start-color: var(--good); }
-.monoranks .notice-error { border-inline-start-color: var(--critical); }
-.monoranks .notice-warning { border-inline-start-color: var(--warn); }
+.monoranks div.notice-success { border-inline-start-color: var(--good); }
+.monoranks div.notice-error { border-inline-start-color: var(--critical); }
+.monoranks div.notice-warning { border-inline-start-color: var(--warn); }
 
 /* Score ring: the app's ScoreBox. >= 80 good, >= 60 warn, else critical; no score = dashed ring and a dash. */
 .mr-score { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); vertical-align: middle; }
@@ -144,7 +144,7 @@
 .mr-score.critical { color: var(--critical); }
 .mr-score.none { color: var(--line); }
 
-/* Posts and Pages list column. */
+/* Posts and Pages list column: the list table is WordPress's own light surface, so the cell always uses the light palette. */
 .fixed .column-monoranks { width: 200px; }
 .monoranks-cell { display: flex; flex-direction: column; gap: 5px; color: var(--ink); }
 .monoranks-cell .row { display: flex; align-items: center; gap: 12px; }
