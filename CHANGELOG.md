@@ -18,4 +18,5 @@ First release on WordPress.org.
 - The plugin's screens sit in their own frame: a dark brand band with the MonoRanks logo, the section links and a way into MonoRanks, a light title area, and a service footer with a link to what is sent, help, and the VeronaLabs credit. The menu icon is the MonoRanks mark.
 - Admin screens use the MonoRanks design tokens (colours, radii, spacing; light and dark palettes; right-to-left admins mirror, with that script's digits). PHP templates live under `resources/views/`, the app's sources under `resources/admin/`, and `npm run build` writes `build/`.
 - The MonoRanks address is fixed (`MONORANKS_API_BASE`, overridable in `wp-config.php`); the address field only shows on local and development sites. The old Settings → MonoRanks link redirects to the new screen.
-- Translations: `languages/monoranks.pot` and a Persian translation.
+- A danger zone in Settings, shown when the site is not connected: erases everything the plugin stored (connection, cached audit results, every page's scores, redirects, AI access files, change log). Pages keep what was written.
+- Translations: `languages/monoranks.pot` and a Persian translation, loaded through WordPress's textdomain registry so a language pack always wins.
