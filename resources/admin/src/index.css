@@ -94,6 +94,8 @@ body.monoranks-screen #wpwrap { min-height: 0; }
    carries the page's own colour until the app has measured it. */
 body.monoranks-screen #wpwrap, body.monoranks-screen #wpcontent, body.monoranks-screen #wpbody, body.monoranks-screen #wpbody-content { background: var(--page); }
 body.monoranks-screen #wpbody-content { display: flex; flex-direction: column; min-height: max(calc(100vh - var(--wp-admin--admin-bar--height, 32px)), var(--mr-fill, 0px)); }
+/* WordPress wraps the screen in a .wrap div; it passes the height on so the frame inside it can take the rest. */
+body.monoranks-screen #wpbody-content > .wrap { display: flex; flex-direction: column; flex: 1 0 auto; margin: 0; padding: 0; min-height: 0; }
 /* WordPress's own notices are moved into the page (shell/Notices.tsx) and take the app's look there. One that has not
    been moved yet stays hidden for the moment rather than flashing above the band. */
 body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .error, #message) { display: none; }
