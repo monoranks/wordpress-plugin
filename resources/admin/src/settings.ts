@@ -5,6 +5,7 @@ export type AdminSettings = {
   version: string;
   host: string;
   urls: { overview: string; settings: string; app: string; profile: string; docs: string };
+  titles: { overview: string; settings: string };
   showAddress: boolean;
   apiBase: string;
   logos: { wordmark: string; mark: string; veronalabs: string };

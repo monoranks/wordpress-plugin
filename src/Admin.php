@@ -140,6 +140,11 @@ class Admin {
 		return $code ? self::notice_for( $code ) : null;
 	}
 
+	/** A link that leaves the admin, tagged so MonoRanks can tell plugin traffic apart. */
+	public static function out( $url, $content, $campaign = 'plugin-admin' ) {
+		return $url ? add_query_arg( array( 'utm_source' => 'wordpress-plugin', 'utm_medium' => 'admin', 'utm_campaign' => $campaign, 'utm_content' => $content ), $url ) : '';
+	}
+
 	/** The address field is only for development sites pointing the plugin at a local MonoRanks. */
 	public static function shows_address_field() {
 		return function_exists( 'wp_get_environment_type' ) && in_array( wp_get_environment_type(), array( 'local', 'development' ), true );

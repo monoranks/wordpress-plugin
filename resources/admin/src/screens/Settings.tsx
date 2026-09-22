@@ -10,9 +10,11 @@ import { Card, CardHeader, CardTitle, CardBody } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge, Dot } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { out } from '@/lib/links';
+import type { Screen } from '@/lib/screen';
 
 /** MonoRanks → Settings: connection state, the connector key, last sync, what is sent, recent changes, disconnect. */
-export function Settings() {
+export function Settings({ go }: { go: (next: Screen) => void }) {
   const s = adminSettings();
   const [data, setData] = useState<SettingsData | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -44,7 +46,7 @@ export function Settings() {
   const revoked = !!data?.revoked;
 
   return (
-    <Shell section="settings" title={__('Settings', 'monoranks')} description={__('Connection, what is sent, and every change written into this site.', 'monoranks')}>
+    <Shell section="settings" go={go} title={__('Settings', 'monoranks')} description={__('Connection, what is sent, and every change written into this site.', 'monoranks')}>
       <NoticeBox notice={notice} />
       {error && <NoticeBox notice={{ type: 'error', text: error }} />}
       {!data && !error && <Card className="h-[260px] animate-pulse bg-surface2" />}
@@ -76,7 +78,7 @@ export function Settings() {
                 </>
               ) : (
                 <>
-                  <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect from MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={data.app_url} target="_blank" rel="noopener">{__('Open MonoRanks', 'monoranks')}</a></Button></div></Step>
+                  <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect from MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(data.app_url, 'connect-step', 'settings')} target="_blank" rel="noopener">{__('Open MonoRanks', 'monoranks')}</a></Button></div></Step>
                   <Step n={2} later><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Use this when your host blocks Application Passwords. In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website.', 'monoranks')}</span><KeyForm data={data} busy={busy} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} /></Step>
                 </>
               )}

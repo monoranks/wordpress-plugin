@@ -73,7 +73,7 @@ class Column {
 			'aeo'          => $score['aeo'],
 			'line'         => self::cell_line( $score ),
 			'fixes_ready'  => (int) $score['fixes_ready'],
-			'page_url'     => $score['page_url'],
+			'page_url'     => Admin::out( $score['page_url'], 'posts-column', 'posts-list' ),
 			'overview_url' => Admin::overview_url(),
 		);
 	}

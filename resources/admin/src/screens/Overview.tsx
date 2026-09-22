@@ -6,6 +6,8 @@ import { Shell, NoticeBox, KV, Empty } from '@/shell/Shell';
 import { Ring, Delta, Sparkline } from '@/shell/Ring';
 import { ChangeLog } from '@/shell/ChangeLog';
 import { Card, CardHeader, CardTitle, CardBody } from '@/components/ui/card';
+import { out } from '@/lib/links';
+import type { Screen } from '@/lib/screen';
 import { Button } from '@/components/ui/button';
 import { Badge, Dot } from '@/components/ui/badge';
 
@@ -22,7 +24,7 @@ function relativePath(url: string) {
 }
 
 /** MonoRanks → Overview: site scores, search clicks, pages needing attention, fixes ready to apply, recent changes. */
-export function Overview() {
+export function Overview({ go }: { go: (next: Screen) => void }) {
   const s = adminSettings();
   const [data, setData] = useState<OverviewData | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -61,11 +63,11 @@ export function Overview() {
   ) : null;
 
   return (
-    <Shell section="overview" title={__('Overview', 'monoranks')} description={description} actions={actions}>
+    <Shell section="overview" go={go} title={__('Overview', 'monoranks')} description={description} actions={actions}>
       <NoticeBox notice={notice} />
       {error && <NoticeBox notice={{ type: 'error', text: error }} />}
       {!data && !error && <Skeleton />}
-      {data && (!data.connected || data.revoked) && <ConnectSteps revoked={data.revoked} />}
+      {data && (!data.connected || data.revoked) && <ConnectSteps revoked={data.revoked} go={go} />}
       {data && data.connected && !data.revoked && !o && <Waiting data={data} />}
       {data && o && (
         <>
@@ -98,7 +100,7 @@ export function Overview() {
 
           <div className="grid grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-start gap-5 max-[960px]:grid-cols-1">
             <Card>
-              <CardHeader><CardTitle>{__('Pages needing attention', 'monoranks')}</CardTitle><Button variant="ghost" size="sm" asChild><a href={data.app_url} target="_blank" rel="noopener">{__('All pages in MonoRanks', 'monoranks')}</a></Button></CardHeader>
+              <CardHeader><CardTitle>{__('Pages needing attention', 'monoranks')}</CardTitle><Button variant="ghost" size="sm" asChild><a href={out(data.app_url, 'all-pages')} target="_blank" rel="noopener">{__('All pages in MonoRanks', 'monoranks')}</a></Button></CardHeader>
               {o.attention.length ? (
                 <div className="overflow-x-auto rounded-b-xl pt-2">
                   <table className="w-full border-collapse">
@@ -110,7 +112,7 @@ export function Overview() {
                           <td className={td}><Ring score={row.health} /></td>
                           <td className={td}><Ring score={row.aeo} /></td>
                           <td className={`${td} text-[12px]`}>{row.issue}</td>
-                          <td className={`${td} text-end`}>{row.page_url && <Button size="sm" asChild><a href={row.page_url} target="_blank" rel="noopener">{__('Fix in MonoRanks', 'monoranks')}</a></Button>}</td>
+                          <td className={`${td} text-end`}>{row.page_url && <Button size="sm" asChild><a href={out(row.page_url, 'fix-page')} target="_blank" rel="noopener">{__('Fix in MonoRanks', 'monoranks')}</a></Button>}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -138,7 +140,7 @@ export function Overview() {
                       )}
                     </div>
                     {fix.field === 'content' && fix.page_url ? (
-                      <Button size="sm" asChild><a href={fix.page_url} target="_blank" rel="noopener">{__('Review', 'monoranks')}</a></Button>
+                      <Button size="sm" asChild><a href={out(fix.page_url, 'review-fix')} target="_blank" rel="noopener">{__('Review', 'monoranks')}</a></Button>
                     ) : (
                       <Button size="sm" disabled={busy !== null} aria-busy={busy === fix.id} onClick={() => run(fix.id, () => api.apply(fix.id))}>{__('Apply', 'monoranks')}</Button>
                     )}
@@ -150,7 +152,7 @@ export function Overview() {
           </div>
 
           <Card>
-            <CardHeader><CardTitle>{__('Recent changes', 'monoranks')}</CardTitle><Button variant="ghost" size="sm" asChild><a href={s.urls.settings}>{__('All changes', 'monoranks')}</a></Button></CardHeader>
+            <CardHeader><CardTitle>{__('Recent changes', 'monoranks')}</CardTitle><Button variant="ghost" size="sm" asChild><a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }}>{__('All changes', 'monoranks')}</a></Button></CardHeader>
             <div className="pt-2"><ChangeLog rows={data.log} busy={undoing} onUndo={(i) => { setUndoing(i); run('undo', () => api.undo(i, 'overview')); }} /></div>
           </Card>
         </>
@@ -163,14 +165,14 @@ function Skeleton() {
   return <div className="grid grid-cols-4 gap-[14px] max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">{[0, 1, 2, 3].map((i) => <Card key={i} className="h-[150px] animate-pulse bg-surface2" />)}</div>;
 }
 
-export function ConnectSteps({ revoked }: { revoked: boolean }) {
+export function ConnectSteps({ revoked, go }: { revoked: boolean; go: (next: Screen) => void }) {
   const s = adminSettings();
   return (
     <Card>
       <CardHeader><CardTitle>{revoked ? __('Connect MonoRanks again', 'monoranks') : __('Connect MonoRanks', 'monoranks')}</CardTitle><Badge variant="pill"><Dot tone={revoked ? 'critical' : 'muted'} />{revoked ? __('Key revoked', 'monoranks') : __('Not connected', 'monoranks')}</Badge></CardHeader>
       <CardBody className="flex flex-col gap-4">
-        <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect from MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={s.urls.app} target="_blank" rel="noopener">{__('Open MonoRanks', 'monoranks')}</a></Button></div></Step>
-        <Step n={2} later><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Use this when your host blocks Application Passwords.', 'monoranks')}</span><div><Button size="sm" asChild><a href={s.urls.settings}>{__('Open settings', 'monoranks')}</a></Button></div></Step>
+        <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect from MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(s.urls.app, 'connect-step')} target="_blank" rel="noopener">{__('Open MonoRanks', 'monoranks')}</a></Button></div></Step>
+        <Step n={2} later><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Use this when your host blocks Application Passwords.', 'monoranks')}</span><div><Button size="sm" asChild><a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }}>{__('Open settings', 'monoranks')}</a></Button></div></Step>
         <Step n={3} later><b className="text-[13px] font-semibold text-ink">{__('See scores here and in your Posts list', 'monoranks')}</b><span className="text-[12px] text-ink2">{__("After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list.", 'monoranks')}</span></Step>
       </CardBody>
     </Card>
@@ -196,7 +198,7 @@ function Waiting({ data }: { data: OverviewData }) {
           [__('Content', 'monoranks'), data.last_sent ? sprintf(__('%1$s published items sent %2$s', 'monoranks'), String(data.items), data.last_sent) : __('Not sent yet. Use "Sync content now" above.', 'monoranks')],
           [__('Audit results', 'monoranks'), <>{results}{data.fetched && <span className="text-mute"> · {sprintf(__('checked %s', 'monoranks'), data.fetched)}</span>}</>],
         ]} />
-        <div><Button size="sm" asChild><a href={data.app_url} target="_blank" rel="noopener">{__('Open the audit in MonoRanks', 'monoranks')}</a></Button></div>
+        <div><Button size="sm" asChild><a href={out(data.app_url, 'open-audit')} target="_blank" rel="noopener">{__('Open the audit in MonoRanks', 'monoranks')}</a></Button></div>
       </CardBody>
     </Card>
   );
