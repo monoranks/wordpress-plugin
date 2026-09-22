@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-09-22T10:23:55+00:00",
+    "translation-revision-date": "2026-09-22T10:49:13+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -46,6 +46,15 @@
             "%s this week": [
                 "%s این هفته"
             ],
+            "Status": [
+                "وضعیت"
+            ],
+            "Next audit": [
+                "ممیزی بعدی"
+            ],
+            "Open MonoRanks": [
+                "باز کردن مونورنکس"
+            ],
             "Settings": [
                 "تنظیمات"
             ],
@@ -67,9 +76,6 @@
             "In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.": [
                 "در مونورنکس وب‌سایت خود را باز کنید ← یکپارچه‌سازی‌ها ← وردپرس ← اتصال به وردپرس، و وقتی وردپرس پرسید به مونورنکس اجازه دهید. پیش از اتصال چیزی فرستاده نمی‌شود."
             ],
-            "Open MonoRanks": [
-                "باز کردن مونورنکس"
-            ],
             "Or paste a connector key": [
                 "یا کلید اتصال را وارد کنید"
             ],
@@ -84,9 +90,6 @@
             ],
             "Connection": [
                 "اتصال"
-            ],
-            "Status": [
-                "وضعیت"
             ],
             "MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below.": [
                 "مونورنکس دیگر این کلید را نمی‌پذیرد. دوباره از مونورنکس متصل شوید یا کلید تازه‌ای در پایین وارد کنید."
@@ -106,9 +109,6 @@
             "%s published item": [
                 "%s مورد منتشرشده",
                 "%s مورد منتشرشده"
-            ],
-            "Next audit": [
-                "ممیزی بعدی"
             ],
             "Fixes written with": [
                 "اصلاح‌ها نوشته می‌شوند با"
@@ -200,6 +200,9 @@
             "AEO": [
                 "AEO"
             ],
+            "Fixes": [
+                "اصلاح‌ها"
+            ],
             "Overview": [
                 "نمای کلی"
             ],
@@ -251,9 +254,6 @@
             ],
             "Connect Google Search Console in MonoRanks to see clicks here.": [
                 "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
-            ],
-            "Fixes": [
-                "اصلاح‌ها"
             ],
             "%s ready": [
                 "%s آماده"

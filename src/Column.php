@@ -53,26 +53,45 @@ class Column {
 		if ( ! Connection::has_key() ) {
 			return array( 'state' => 'unconnected', 'settings_url' => Admin::settings_url() );
 		}
+		$title = $post ? get_the_title( $post ) : '';
 		if ( ! $post || 'publish' !== $post->post_status ) {
-			return array( 'state' => 'draft' );
+			return array( 'state' => 'draft', 'title' => $title );
 		}
-		$score = Insights::post_score( $post_id );
+		$overview = Insights::overview();
+		$next     = $overview && ! empty( $overview['next_audit_at'] ) ? (int) strtotime( $overview['next_audit_at'] ) : 0;
+		/* translators: %s: relative time such as "5 days" */
+		$next_in = $next > time() ? Admin::digits( sprintf( __( 'in %s', 'monoranks' ), human_time_diff( time(), $next ) ) ) : '';
+		$conn    = Connection::get();
+		$app     = $overview && ! empty( $overview['site_url'] ) ? $overview['site_url'] : $conn['api_base'];
+		$score   = Insights::post_score( $post_id );
 		if ( ! $score || ( null === $score['health'] && null === $score['aeo'] ) ) {
-			$overview = Insights::overview();
-			$next     = $overview && ! empty( $overview['next_audit_at'] ) ? (int) strtotime( $overview['next_audit_at'] ) : 0;
-			$hint     = __( 'Not audited yet', 'monoranks' );
-			if ( $next > time() ) {
-				/* translators: %s: relative time such as "5 days" */
-				$hint .= ' · ' . sprintf( __( 'next audit in %s', 'monoranks' ), human_time_diff( time(), $next ) );
+			$hint = __( 'Not audited yet', 'monoranks' );
+			if ( $next_in ) {
+				/* translators: %s: relative time such as "in 5 days" */
+				$hint .= ' · ' . sprintf( __( 'next audit %s', 'monoranks' ), $next_in );
 			}
-			return array( 'state' => 'none', 'hint' => Admin::digits( $hint ) );
+			return array(
+				'state'     => 'none',
+				'title'     => $title,
+				'hint'      => $hint,
+				'next_in'   => $next_in,
+				/* translators: %s: relative time such as "2 days" */
+				'published' => Admin::digits( sprintf( __( '%s ago', 'monoranks' ), human_time_diff( get_post_time( 'U', true, $post ), time() ) ) ),
+				'app_url'   => Admin::out( $app, 'posts-column-unscored', 'posts-list' ),
+			);
 		}
+		$audited = $score['audited_at'] ? strtotime( $score['audited_at'] ) : 0;
 		return array(
 			'state'        => 'scored',
+			'title'        => $title,
 			'health'       => $score['health'],
 			'aeo'          => $score['aeo'],
 			'line'         => self::cell_line( $score ),
 			'fixes_ready'  => (int) $score['fixes_ready'],
+			'open_issues'  => (int) $score['open_issues'],
+			/* translators: %s: relative time such as "2 days" */
+			'audited'      => $audited ? Admin::digits( sprintf( __( '%s ago', 'monoranks' ), human_time_diff( $audited, time() ) ) ) : '',
+			'next_in'      => $next_in,
 			'page_url'     => Admin::out( $score['page_url'], 'posts-column', 'posts-list' ),
 			'overview_url' => Admin::overview_url(),
 		);

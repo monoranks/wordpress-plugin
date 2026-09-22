@@ -105,9 +105,22 @@ class Admin {
 		return ob_get_clean();
 	}
 
-	/** A score ring for the Posts column (the app's ScoreBox): 'sm' 30px. */
+	/** A score ring for the Posts column (the app's ScoreBox): 'sm' 30px in the cell, 'md' 40px in its tooltip. */
 	public static function ring( $score, $size = 'sm', $label = '' ) {
-		return self::view( 'partials/score-ring', array( 'score' => $score, 'size' => 'lg' === $size ? 'lg' : 'sm', 'label' => $label, 'tone' => Insights::tone( $score ) ) );
+		return self::view( 'partials/score-ring', array( 'score' => $score, 'size' => in_array( $size, array( 'md', 'lg' ), true ) ? $size : 'sm', 'label' => $label, 'tone' => Insights::tone( $score ) ) );
+	}
+
+	/** One word for a score, next to the ring in the column's tooltip. */
+	public static function tone_word( $score ) {
+		switch ( Insights::tone( $score ) ) {
+			case 'good':
+				return __( 'good', 'monoranks' );
+			case 'warn':
+				return __( 'needs work', 'monoranks' );
+			case 'critical':
+				return __( 'low', 'monoranks' );
+		}
+		return __( 'not scored', 'monoranks' );
 	}
 
 	/**

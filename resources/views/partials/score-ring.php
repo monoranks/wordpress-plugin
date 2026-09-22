@@ -1,14 +1,14 @@
 <?php
 /**
- * A score ring. $score (0–100 or null), $size (sm | lg), $label, $tone (good | warn | critical | none).
+ * A score ring. $score (0–100 or null), $size (sm | md | lg), $label, $tone (good | warn | critical | none).
  *
  * @package MonoRanks
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$monoranks_px = 'lg' === $size ? 64 : 30;
-$monoranks_sw = 'lg' === $size ? 5 : 3;
+$monoranks_px = 'lg' === $size ? 64 : ( 'md' === $size ? 40 : 30 );
+$monoranks_sw = 'lg' === $size ? 5 : ( 'md' === $size ? 4 : 3 );
 $monoranks_r  = ( $monoranks_px - $monoranks_sw ) / 2;
 $monoranks_c  = 2 * M_PI * $monoranks_r;
 $monoranks_mid = $monoranks_px / 2;
