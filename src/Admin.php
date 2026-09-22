@@ -22,7 +22,7 @@ class Admin {
 	private static $hooks = array();
 
 	public static function register() {
-		add_filter( 'load_textdomain_mofile', array( __CLASS__, 'bundled_mofile' ), 10, 2 );
+		add_action( 'init', array( __CLASS__, 'textdomain' ), 0 );
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'legacy_url' ) );
 		add_filter( 'admin_body_class', array( __CLASS__, 'body_class' ) );
@@ -31,26 +31,21 @@ class Admin {
 	}
 
 	/**
-	 * WordPress loads this plugin's translations on its own (from wp-content/languages/plugins, where language packs from
-	 * translate.wordpress.org land). Until a language pack exists, the copy bundled under languages/ stands in.
+	 * Where this plugin's own translations live. WordPress loads a language pack from wp-content/languages/plugins by
+	 * itself; telling the registry about languages/ as well means the bundled catalogues work before a pack exists,
+	 * without load_plugin_textdomain (which WordPress.org discourages and Plugin Check flags).
 	 */
-	public static function bundled_mofile( $mofile, $domain ) {
-		if ( 'monoranks' !== $domain || file_exists( $mofile ) ) {
-			return $mofile;
+	public static function textdomain() {
+		global $wp_textdomain_registry;
+		if ( $wp_textdomain_registry instanceof \WP_Textdomain_Registry ) {
+			$wp_textdomain_registry->set_custom_path( 'monoranks', dirname( MONORANKS_CONNECTOR_FILE ) . '/languages' );
 		}
-		$bundled = dirname( MONORANKS_CONNECTOR_FILE ) . '/languages/' . basename( $mofile );
-		return file_exists( $bundled ) ? $bundled : $mofile;
 	}
 
 	public static function menu() {
 		self::$hooks['overview'] = (string) add_menu_page( __( 'MonoRanks', 'monoranks' ), __( 'MonoRanks', 'monoranks' ), 'manage_options', self::MENU, array( __CLASS__, 'mount' ), self::menu_icon(), 58 );
 		add_submenu_page( self::MENU, __( 'Overview', 'monoranks' ), __( 'Overview', 'monoranks' ), 'manage_options', self::MENU, array( __CLASS__, 'mount' ) );
 		self::$hooks['settings'] = (string) add_submenu_page( self::MENU, __( 'MonoRanks settings', 'monoranks' ), __( 'Settings', 'monoranks' ), 'manage_options', self::SETTINGS, array( __CLASS__, 'mount' ) );
-	}
-
-	/** The screen hook of one of the plugin's pages, or '' before admin_menu has run. */
-	public static function hook( $page ) {
-		return isset( self::$hooks[ $page ] ) ? self::$hooks[ $page ] : '';
 	}
 
 	/** overview | settings for one of the plugin's screen hooks, or '' for anything else. */
@@ -139,19 +134,6 @@ class Admin {
 		return self::view( 'partials/score-ring', array( 'score' => $score, 'size' => in_array( $size, array( 'md', 'lg' ), true ) ? $size : 'sm', 'label' => $label, 'tone' => Insights::tone( $score ) ) );
 	}
 
-	/** One word for a score, next to the ring in the column's tooltip. */
-	public static function tone_word( $score ) {
-		switch ( Insights::tone( $score ) ) {
-			case 'good':
-				return __( 'good', 'monoranks' );
-			case 'warn':
-				return __( 'needs work', 'monoranks' );
-			case 'critical':
-				return __( 'low', 'monoranks' );
-		}
-		return __( 'not scored', 'monoranks' );
-	}
-
 	/**
 	 * Digits in the admin's own script: Persian for fa_*, Arabic-Indic for ar_*, Latin elsewhere. WordPress formats
 	 * numbers and dates with Latin digits; the screens pass everything they print through here.
@@ -193,6 +175,8 @@ class Admin {
 			'sent'         => array( 'success', __( 'Content sent to MonoRanks.', 'monoranks' ) ),
 			'disconnected' => array( 'success', __( 'Disconnected. Nothing is sent to MonoRanks any more.', 'monoranks' ) ),
 			'applied'      => array( 'success', __( 'Applied. The change is listed under Recent changes and can be undone.', 'monoranks' ) ),
+			'applied_some' => array( 'warning', __( 'Some fixes were applied; the rest were refused because those pages changed since MonoRanks reviewed them. Recent changes lists what was written.', 'monoranks' ) ),
+			'log_moved'    => array( 'error', __( 'That change has moved in the log since this screen loaded. Reload and try Undo again.', 'monoranks' ) ),
 			'undone'       => array( 'success', __( 'Undone. The previous value is back.', 'monoranks' ) ),
 			'apply_failed' => array( 'error', __( 'MonoRanks could not apply that change: the page changed since it was reviewed. Open it in MonoRanks to review again.', 'monoranks' ) ),
 			'bad_key'      => array( 'error', __( 'That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP.', 'monoranks' ) ),

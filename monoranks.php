@@ -50,12 +50,5 @@ add_action( \MonoRanks\Sync::DAILY_HOOK, array( 'MonoRanks\\Sync', 'daily' ) );
 \MonoRanks\Insights::register();
 
 register_deactivation_hook( __FILE__, array( 'MonoRanks\\Sync', 'unschedule' ) );
-register_uninstall_hook( __FILE__, 'monoranks_connector_uninstall' );
-function monoranks_connector_uninstall() {
-	\MonoRanks\Sync::unschedule();
-	\MonoRanks\Insights::clear();
-	delete_option( 'monoranks_connection' );
-	delete_option( 'monoranks_sync' );
-	delete_option( 'monoranks_redirects' );
-	delete_option( 'monoranks_change_log' );
-}
+// Deleting the plugin runs uninstall.php, which is the only cleanup path (WordPress ignores register_uninstall_hook when
+// that file exists), so everything the plugin stores is listed there.

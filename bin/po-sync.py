@@ -37,19 +37,22 @@ def q(s):
 
 template = parse(pot)
 for po_path in sorted((root / 'languages').glob('monoranks-*.po')):
-    old = {e['msgid']: e for e in parse(po_path.read_text())}
-    header = old.get('', {'msgstr': ''})
+    # Keyed by context and id together, so a string that exists in two contexts keeps both translations.
+    old = {(e.get('msgctxt', ''), e['msgid']): e for e in parse(po_path.read_text())}
+    header = old.get(('', ''), {'msgstr': ''})
     out = ['msgid ""', 'msgstr ' + q(header['msgstr']), '']
     missing = []
     for e in template:
         if e['msgid'] == '':
             continue
-        prev = old.get(e['msgid'], {})
+        prev = old.get((e.get('msgctxt', ''), e['msgid']), {})
         for c in e.get('comments', []):
-            if c.startswith('#.'):
+            if c.startswith('#.') or c.startswith('#,'):
                 out.append(c)
         for r in e['refs']:
             out.append('#: ' + r)
+        if e.get('msgctxt'):
+            out.append('msgctxt ' + q(e['msgctxt']))
         out.append('msgid ' + q(e['msgid']))
         if 'msgid_plural' in e:
             out.append('msgid_plural ' + q(e['msgid_plural']))

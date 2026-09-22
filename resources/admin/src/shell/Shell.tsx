@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { __ } from '@wordpress/i18n';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
-import { adminSettings } from '@/settings';
+import { adminSettings, type Notice } from '@/settings';
 import { cn } from '@/lib/utils';
 import { out } from '@/lib/links';
 import type { Screen } from '@/lib/screen';
@@ -79,9 +79,9 @@ function Footer({ section, go }: { section: Screen; go: (next: Screen) => void }
 }
 
 /** A WordPress notice (the classes the browser tests read), restyled. */
-export function NoticeBox({ notice }: { notice: { type: 'success' | 'error'; text: string } | null }) {
+export function NoticeBox({ notice }: { notice: Notice | null }) {
   if (!notice) return null;
-  return <div className={cn('notice', notice.type === 'error' ? 'notice-error' : 'notice-success')} role="status"><p>{notice.text}</p></div>;
+  return <div className={cn('notice', `notice-${notice.type}`)} role="status"><p>{notice.text}</p></div>;
 }
 
 /** Label / value pairs, 150px label column. */

@@ -13,7 +13,7 @@ export type AdminSettings = {
   notice: Notice | null;
 };
 
-export type Notice = { type: 'success' | 'error'; text: string };
+export type Notice = { type: 'success' | 'error' | 'warning'; text: string };
 
 declare global {
   interface Window { monoranksAdmin?: AdminSettings }

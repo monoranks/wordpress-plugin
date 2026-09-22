@@ -6,7 +6,7 @@ const NS = '/monoranks/v1/admin';
 
 export type Score = number | null;
 
-export type LogRow = { index: number; when: string; actor: string; field: string; fieldLabel: string; where: string; previous: string; value: string };
+export type LogRow = { index: number; at: string; when: string; actor: string; field: string; fieldLabel: string; where: string; previous: string; value: string };
 
 export type OverviewData = {
   connected: boolean;
@@ -39,7 +39,7 @@ export const api = {
   overview: () => apiFetch<OverviewData>({ path: `${NS}/overview` }),
   settings: () => apiFetch<SettingsData>({ path: `${NS}/settings` }),
   apply: (fix: string) => apiFetch<ActionResult<OverviewData>>({ path: `${NS}/apply`, method: 'POST', data: { fix } }),
-  undo: (entry: number, screen: 'overview' | 'settings') => apiFetch<ActionResult<OverviewData | SettingsData>>({ path: `${NS}/undo`, method: 'POST', data: { entry, screen } }),
+  undo: (row: LogRow, screen: 'overview' | 'settings') => apiFetch<ActionResult<OverviewData | SettingsData>>({ path: `${NS}/undo`, method: 'POST', data: { entry: row.index, at: row.at, screen } }),
   sync: (screen: 'overview' | 'settings') => apiFetch<ActionResult<OverviewData | SettingsData>>({ path: `${NS}/sync`, method: 'POST', data: { screen } }),
   connect: (key: string, api_base?: string) => apiFetch<ActionResult<SettingsData>>({ path: `${NS}/connect`, method: 'POST', data: { key, api_base } }),
   disconnect: () => apiFetch<ActionResult<SettingsData>>({ path: `${NS}/disconnect`, method: 'POST' }),

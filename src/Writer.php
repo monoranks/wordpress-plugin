@@ -139,7 +139,8 @@ class Writer {
 			return array( 'id' => $id, 'ok' => false, 'error' => 'update_failed' );
 		}
 		clean_post_cache( $post->ID );
-		self::log( $actor, 'content', 'post:' . $post->ID, $has, 'remove' === $op ? '' : $value );
+		// The stored paragraph is the sanitised one, so that is what the log (and therefore Undo's expected value) carries.
+		self::log( $actor, 'content', 'post:' . $post->ID, $has, 'remove' === $op ? '' : trim( $clean ) );
 		return array( 'id' => $id, 'ok' => true, 'previous' => $has, 'post_id' => $post->ID );
 	}
 

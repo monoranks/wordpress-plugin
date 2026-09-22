@@ -69,6 +69,15 @@ class Insights {
 		spawn_cron();
 	}
 
+	/** Asks for a refresh in the background (WP-Cron), so a button press never waits on MonoRanks. */
+	public static function refresh_soon() {
+		if ( ! Connection::has_key() || wp_next_scheduled( self::REFRESH_HOOK ) ) {
+			return;
+		}
+		wp_schedule_single_event( time(), self::REFRESH_HOOK );
+		spawn_cron();
+	}
+
 	/** Pulls the overview and the changed pages from MonoRanks. Returns the new state. */
 	public static function refresh() {
 		if ( ! Connection::has_key() ) {
@@ -99,11 +108,15 @@ class Insights {
 		return $state;
 	}
 
-	/** Pages changed since the last pull, in batches, written to post meta. */
+	/**
+	 * Pages changed since the last pull, in batches, written to post meta. The cursor only moves when the whole run
+	 * finished: a batch that fails midway would otherwise leave the pages it never fetched out of the next run too.
+	 */
 	private static function refresh_pages( array $state ) {
 		$since  = isset( $state['pages_synced_at'] ) ? (string) $state['pages_synced_at'] : '';
 		$cursor = '';
 		$newest = $since;
+		$done   = false;
 		for ( $i = 0; $i < self::PAGE_LIMIT; $i++ ) {
 			$path = '/pages' . ( $since || $cursor ? '?' . http_build_query( array_filter( array( 'since' => $since, 'cursor' => $cursor ) ) ) : '' );
 			$res  = Api::get( $path );
@@ -121,10 +134,11 @@ class Insights {
 			}
 			$cursor = isset( $res['body']['next'] ) && is_string( $res['body']['next'] ) ? $res['body']['next'] : '';
 			if ( '' === $cursor ) {
+				$done = true;
 				break;
 			}
 		}
-		if ( $newest ) {
+		if ( $done && $newest ) {
 			$state                    = self::state();
 			$state['pages_synced_at'] = $newest;
 			update_option( self::OPTION, $state, false );

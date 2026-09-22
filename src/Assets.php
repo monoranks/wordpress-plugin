@@ -71,20 +71,23 @@ class Assets {
 		);
 	}
 
-	/** The bundle is an ES module. */
+	/** The bundle is an ES module. Only the tag with the src: the inline settings and translations stay classic scripts. */
 	public static function module_tag( $tag, $handle ) {
 		if ( self::HANDLE !== $handle ) {
 			return $tag;
 		}
-		return str_replace( '<script ', '<script type="module" ', $tag );
+		return (string) preg_replace( '/<script(?=[^>]*\ssrc=)/', '<script type="module"', $tag, 1 );
 	}
 
-	/** One JSON catalogue per locale for the app (languages/monoranks-<locale>-admin.json), whatever the built file is named. */
+	/**
+	 * One JSON catalogue per locale for the app (languages/monoranks-<locale>-admin.json), whatever the built file is
+	 * named. A locale the plugin does not bundle keeps whatever WordPress found, so a language pack still applies.
+	 */
 	public static function translation_file( $file, $handle, $domain ) {
 		if ( self::HANDLE !== $handle || 'monoranks' !== $domain ) {
 			return $file;
 		}
 		$path = dirname( MONORANKS_CONNECTOR_FILE ) . '/languages/monoranks-' . determine_locale() . '-admin.json';
-		return file_exists( $path ) ? $path : false;
+		return file_exists( $path ) ? $path : $file;
 	}
 }

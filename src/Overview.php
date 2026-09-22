@@ -68,6 +68,7 @@ class Overview {
 			$ts     = isset( $row['at'] ) ? strtotime( $row['at'] ) : 0;
 			$rows[] = array(
 				'index'      => $i,
+				'at'         => isset( $row['at'] ) ? (string) $row['at'] : '',
 				'when'       => $ts ? Admin::digits( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $ts ) ) : '',
 				'actor'      => isset( $row['actor'] ) ? (string) $row['actor'] : '',
 				'field'      => $field,

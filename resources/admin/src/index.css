@@ -92,6 +92,7 @@ body.monoranks-screen #wpfooter { display: none; }
 #monoranks-admin .notice p { margin: 0; padding: 0; font-size: 13px; }
 #monoranks-admin div.notice-success { border-inline-start-color: var(--good); }
 #monoranks-admin div.notice-error { border-inline-start-color: var(--critical); }
+#monoranks-admin div.notice-warning { border-inline-start-color: var(--warn); }
 /* Score ring: the app's ScoreBox. */
 .mr-score { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); vertical-align: middle; }
 .mr-score .mr-ring { position: relative; display: inline-block; line-height: 0; }

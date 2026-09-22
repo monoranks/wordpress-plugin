@@ -35,11 +35,32 @@ class ColumnTest extends TestCase {
 		$this->assertSame( 'No open issues', Column::cell_line( array_merge( $base, array( 'audited_at' => '' ) ) ) );
 	}
 
-	public function test_sorting_keeps_unscored_posts_in_the_list() {
-		$args = Column::sort_args( 'desc' );
-		$this->assertSame( 'OR', $args['meta_query']['relation'] );
-		$this->assertSame( 'NOT EXISTS', $args['meta_query']['monoranks_none']['compare'] );
-		$this->assertSame( array( 'monoranks_none' => 'DESC' ), $args['orderby'] );
-		$this->assertSame( array( 'meta_key' => Insights::META_HEALTH, 'orderby' => 'meta_value_num', 'order' => 'ASC' ), Column::sort_args( 'asc', true ) );
+	public function test_sorting_joins_once_and_keeps_unscored_posts_at_the_end() {
+		global $wpdb;
+		$wpdb    = new FakeWpdb(); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- test double
+		$clauses = Column::sort_clauses( array( 'join' => '', 'orderby' => 'wp_posts.post_date DESC' ), new FakeQuery( 'DESC' ) );
+		$this->assertSame( 1, substr_count( $clauses['join'], 'LEFT JOIN' ) );
+		$this->assertStringContainsString( "monoranks_meta.meta_key = '_monoranks_health'", $clauses['join'] );
+		$this->assertSame( 'monoranks_meta.meta_value IS NULL ASC, CAST(monoranks_meta.meta_value AS SIGNED) DESC', $clauses['orderby'] );
+		$this->assertSame( array( 'join' => '', 'orderby' => 'x' ), Column::sort_clauses( array( 'join' => '', 'orderby' => 'x' ), new FakeQuery( '' ) ) );
+	}
+}
+
+/** Just enough of WP_Query and wpdb for the sort clauses. */
+class FakeQuery {
+	private $dir;
+	public function __construct( $dir ) {
+		$this->dir = $dir;
+	}
+	public function get( $key ) {
+		return 'monoranks_sort' === $key ? $this->dir : '';
+	}
+}
+
+class FakeWpdb {
+	public $posts    = 'wp_posts';
+	public $postmeta = 'wp_postmeta';
+	public function prepare( $sql, ...$args ) {
+		return str_replace( '%s', "'" . $args[0] . "'", $sql );
 	}
 }

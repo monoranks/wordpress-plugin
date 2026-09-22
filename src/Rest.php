@@ -42,7 +42,11 @@ class Rest {
 	}
 
 	public static function admin_undo( \WP_REST_Request $req ) {
-		return self::admin_result( Actions::undo( (int) $req->get_param( 'entry' ) ), self::screen( $req ) );
+		$entry = $req->get_param( 'entry' );
+		if ( null === $entry || '' === $entry ) {
+			return new \WP_Error( 'monoranks_no_entry', 'entry is required', array( 'status' => 400 ) );
+		}
+		return self::admin_result( Actions::undo( (int) $entry, sanitize_text_field( (string) $req->get_param( 'at' ) ) ), self::screen( $req ) );
 	}
 
 	public static function admin_sync( \WP_REST_Request $req ) {

@@ -33,8 +33,8 @@ td.column-monoranks { vertical-align: middle; }
 td.column-monoranks { position: relative; }
 .monoranks-cell .row { outline: none; }
 .monoranks-cell .row:focus-visible { box-shadow: 0 0 0 2px #2a6fdb; border-radius: 6px; }
-.monoranks-cell .mr-tip { position: absolute; inset-inline-end: 8px; bottom: calc(100% - 10px); z-index: 30; width: 232px; background: #fff; border: 1px solid #e3e7ec; border-radius: 10px; box-shadow: 0 8px 24px rgba(20, 24, 31, .12), 0 1px 2px rgba(20, 24, 31, .06); padding: 12px 14px; color: var(--ink); text-align: start; font-size: 12px; line-height: 1.45; opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity .14s ease .2s, transform .14s ease .2s; }
-.monoranks-cell .mr-tip::before { content: ""; position: absolute; inset-inline: 0; top: 100%; height: 44px; }
+.monoranks-cell .mr-tip { position: absolute; inset-inline-end: 8px; top: calc(100% - 10px); z-index: 30; width: 232px; background: #fff; border: 1px solid #e3e7ec; border-radius: 10px; box-shadow: 0 8px 24px rgba(20, 24, 31, .12), 0 1px 2px rgba(20, 24, 31, .06); padding: 12px 14px; color: var(--ink); text-align: start; font-size: 12px; line-height: 1.45; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .14s ease .2s, transform .14s ease .2s; }
+.monoranks-cell .mr-tip::before { content: ""; position: absolute; inset-inline: 0; bottom: 100%; height: 44px; }
 .monoranks-cell:hover .mr-tip, .monoranks-cell:focus-within .mr-tip { opacity: 1; transform: none; pointer-events: auto; transition-delay: 0s; }
 .monoranks-cell .mr-tip .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
 .monoranks-cell .mr-tip .kv div:nth-child(odd) { color: var(--muted); white-space: nowrap; }
@@ -46,7 +46,5 @@ td.column-monoranks { position: relative; }
 .monoranks-cell .mr-tip .arrow { display: inline-block; }
 [dir="rtl"] .monoranks-cell .mr-tip .arrow { transform: scaleX(-1); }
 .monoranks-cell .mr-tip .empty { color: #4c5563; }
-/* The first rows have no room above them: their card opens below the rings instead. */
-tr:nth-child(-n+2) .monoranks-cell .mr-tip { bottom: auto; top: calc(100% - 10px); transform: translateY(-4px); }
-tr:nth-child(-n+2) .monoranks-cell .mr-tip::before { top: auto; bottom: 100%; }
+/* The card always opens below the rings: a row near the top has nothing above it, and a long list scrolls anyway. */
 @media (prefers-reduced-motion: reduce) { .monoranks-cell .mr-tip { transition: none; } }

@@ -3,7 +3,7 @@ msgstr "Project-Id-Version: MonoRanks ۱.۰.۰\nLanguage: fa_IR\nMIME-Version: �
 
 #. Plugin Name of the plugin
 #: monoranks.php
-#: src/Admin.php:37
+#: src/Admin.php:46
 #: src/Column.php:34
 msgid "MonoRanks"
 msgstr "مونورنکس"
@@ -65,7 +65,7 @@ msgid "Status"
 msgstr "وضعیت"
 
 #: resources/views/column-cell.php:28
-#: src/Column.php:68
+#: src/Column.php:67
 #: tmp/monoranks/src/Column.php:63
 msgid "Not audited yet"
 msgstr "هنوز ممیزی نشده"
@@ -97,6 +97,7 @@ msgid "Fixes"
 msgstr "اصلاح‌ها"
 
 #. translators: %s: number
+#, php-format
 #: resources/views/column-cell.php:40
 msgid "%s ready to apply"
 msgid_plural "%s ready to apply"
@@ -112,6 +113,7 @@ msgid "Issues"
 msgstr "مشکل‌ها"
 
 #. translators: %s: number
+#, php-format
 #: resources/views/column-cell.php:46
 msgid "%s open"
 msgid_plural "%s open"
@@ -119,7 +121,7 @@ msgstr[0] "%s باز"
 msgstr[1] "%s باز"
 
 #: resources/views/column-cell.php:48
-#: src/Column.php:109
+#: src/Column.php:106
 #: tmp/monoranks/src/Column.php:90
 msgid "No open issues"
 msgstr "بدون مشکل باز"
@@ -144,14 +146,15 @@ msgid "Not scored yet"
 msgstr "هنوز امتیاز نگرفته"
 
 #. translators: %s: score out of 100
+#, php-format,js-format
 #: resources/views/partials/score-ring.php:16
 #: tmp/monoranks/resources/views/partials/score-ring.php:16
 #: tmp/i18n/shell/Ring.js:14
 msgid "%s of 100"
 msgstr "%s از ۱۰۰"
 
-#: src/Admin.php:38
-#: src/Assets.php:65
+#: src/Admin.php:47
+#: src/Assets.php:66
 #: tmp/monoranks/src/Admin.php:38
 #: tmp/monoranks/src/Assets.php:65
 #: tmp/i18n/screens/Overview.js:54
@@ -159,121 +162,119 @@ msgstr "%s از ۱۰۰"
 msgid "Overview"
 msgstr "نمای کلی"
 
-#: src/Admin.php:39
-#: src/Assets.php:65
+#: src/Admin.php:48
+#: src/Assets.php:66
 #: tmp/monoranks/src/Admin.php:39
 #: tmp/monoranks/src/Assets.php:65
 msgid "MonoRanks settings"
 msgstr "تنظیمات مونورنکس"
 
-#: src/Admin.php:39
+#: src/Admin.php:48
 #: tmp/monoranks/src/Admin.php:39
 #: tmp/i18n/screens/Settings.js:45
 #: tmp/i18n/shell/Shell.js:14
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: src/Admin.php:117
-msgid "good"
-msgstr "خوب"
-
-#: src/Admin.php:119
-msgid "needs work"
-msgstr "نیاز به کار"
-
-#: src/Admin.php:121
-msgid "low"
-msgstr "پایین"
-
-#: src/Admin.php:123
-msgid "not scored"
-msgstr "بدون امتیاز"
-
 #. translators: 1: relative time, 2: date
-#: src/Admin.php:154
+#, php-format
+#: src/Admin.php:165
 #: tmp/monoranks/src/Admin.php:141
 msgid "in %1$s (%2$s)"
 msgstr "%1$s دیگر (%2$s)"
 
 #. translators: 1: relative time, 2: date
-#: src/Admin.php:157
+#, php-format
+#: src/Admin.php:168
 #: tmp/monoranks/src/Admin.php:144
 msgid "%1$s ago (%2$s)"
 msgstr "%1$s پیش (%2$s)"
 
-#: src/Admin.php:163
+#: src/Admin.php:174
 #: tmp/monoranks/src/Admin.php:150
 msgid "Connected. Your published content is on its way to MonoRanks."
 msgstr "متصل شد. محتوای منتشرشدهٔ شما در راه مونورنکس است."
 
-#: src/Admin.php:164
+#: src/Admin.php:175
 #: tmp/monoranks/src/Admin.php:151
 msgid "Content sent to MonoRanks."
 msgstr "محتوا به مونورنکس فرستاده شد."
 
-#: src/Admin.php:165
+#: src/Admin.php:176
 #: tmp/monoranks/src/Admin.php:152
 msgid "Disconnected. Nothing is sent to MonoRanks any more."
 msgstr "اتصال قطع شد. دیگر چیزی به مونورنکس فرستاده نمی‌شود."
 
-#: src/Admin.php:166
+#: src/Admin.php:177
 #: tmp/monoranks/src/Admin.php:153
 msgid "Applied. The change is listed under Recent changes and can be undone."
 msgstr "اعمال شد. این تغییر در «تغییرات اخیر» آمده و قابل بازگردانی است."
 
-#: src/Admin.php:167
+#: src/Admin.php:178
+msgid "Some fixes were applied; the rest were refused because those pages changed since MonoRanks reviewed them. Recent changes lists what was written."
+msgstr "بخشی از اصلاح‌ها اعمال شد؛ بقیه رد شدند چون آن صفحه‌ها از زمان بررسی مونورنکس تغییر کرده‌اند. «تغییرات اخیر» آنچه نوشته شد را نشان می‌دهد."
+
+#: src/Admin.php:179
+msgid "That change has moved in the log since this screen loaded. Reload and try Undo again."
+msgstr "این تغییر از زمان باز شدن صفحه در فهرست جابه‌جا شده است. صفحه را تازه کنید و دوباره بازگردانی را بزنید."
+
+#: src/Admin.php:180
 #: tmp/monoranks/src/Admin.php:154
 msgid "Undone. The previous value is back."
 msgstr "بازگردانده شد. مقدار قبلی برگشت."
 
-#: src/Admin.php:168
+#: src/Admin.php:181
 #: tmp/monoranks/src/Admin.php:155
 msgid "MonoRanks could not apply that change: the page changed since it was reviewed. Open it in MonoRanks to review again."
 msgstr "مونورنکس نتوانست این تغییر را اعمال کند: صفحه از زمان بررسی تغییر کرده است. برای بررسی دوباره آن را در مونورنکس باز کنید."
 
-#: src/Admin.php:169
+#: src/Admin.php:182
 #: tmp/monoranks/src/Admin.php:156
 msgid "That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP."
 msgstr "این شبیه کلید اتصال مونورنکس نیست. آن را دوباره از مونورنکس ← تنظیمات ← API و MCP کپی کنید."
 
-#: src/Admin.php:170
+#: src/Admin.php:183
 #: tmp/monoranks/src/Admin.php:157
 msgid "The MonoRanks address must start with https://."
 msgstr "نشانی مونورنکس باید با https:// شروع شود."
 
-#: src/Admin.php:171
+#: src/Admin.php:184
 #: tmp/monoranks/src/Admin.php:158
 msgid "MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks."
 msgstr "مونورنکس این کلید را نپذیرفت. شاید باطل یا جایگزین شده باشد؛ در مونورنکس کلید تازه‌ای بسازید."
 
-#: src/Admin.php:172
+#: src/Admin.php:185
 #: tmp/monoranks/src/Admin.php:159
 msgid "This key belongs to a different website in MonoRanks. Create the key on the website with this address."
 msgstr "این کلید متعلق به وب‌سایت دیگری در مونورنکس است. کلید را روی وب‌سایتی با همین نشانی بسازید."
 
-#: src/Admin.php:173
+#: src/Admin.php:186
 #: tmp/monoranks/src/Admin.php:160
 msgid "MonoRanks could not be reached. Check the address and try again."
 msgstr "دسترسی به مونورنکس ممکن نشد. نشانی را بررسی کنید و دوباره تلاش کنید."
 
 #. translators: %s: relative time such as "5 days"
-#: src/Column.php:63
+#, php-format
+#: src/Column.php:62
 msgid "in %s"
 msgstr "%s دیگر"
 
 #. translators: %s: relative time such as "in 5 days"
-#: src/Column.php:71
+#, php-format
+#: src/Column.php:70
 msgid "next audit %s"
 msgstr "ممیزی بعدی %s"
 
 #. translators: %s: relative time such as "2 days"
-#: src/Column.php:79
-#: src/Column.php:93
+#, php-format
+#: src/Column.php:77
+#: src/Column.php:90
 msgid "%s ago"
 msgstr "%s پیش"
 
 #. translators: %s: number of fixes
-#: src/Column.php:104
+#, php-format
+#: src/Column.php:101
 #: tmp/monoranks/src/Column.php:85
 msgid "%s fix ready"
 msgid_plural "%s fixes ready"
@@ -281,7 +282,8 @@ msgstr[0] "%s اصلاح آماده"
 msgstr[1] "%s اصلاح آماده"
 
 #. translators: %s: number of issues
-#: src/Column.php:107
+#, php-format
+#: src/Column.php:104
 #: tmp/monoranks/src/Column.php:88
 msgid "%s open issue"
 msgid_plural "%s open issues"
@@ -289,12 +291,13 @@ msgstr[0] "%s مشکل باز"
 msgstr[1] "%s مشکل باز"
 
 #. translators: %s: relative time such as "2 days"
-#: src/Column.php:113
+#, php-format
+#: src/Column.php:110
 #: tmp/monoranks/src/Column.php:94
 msgid "audited %s ago"
 msgstr "ممیزی %s پیش"
 
-#: src/Column.php:166
+#: src/Column.php:150
 #: tmp/monoranks/src/Column.php:147
 msgid "Needs attention"
 msgstr "نیازمند توجه"
@@ -345,6 +348,7 @@ msgid "llms.txt"
 msgstr "llms.txt"
 
 #. translators: %d: attachment ID
+#, php-format
 #: src/Overview.php:64
 #: tmp/monoranks/src/Overview.php:64
 msgid "Image #%d"
@@ -357,6 +361,7 @@ msgid "Site"
 msgstr "سایت"
 
 #. translators: 1: user, 2: date
+#, php-format
 #: src/Settings.php:24
 #: tmp/monoranks/src/Settings.php:24
 msgid "set when %1$s connected MonoRanks on %2$s"
@@ -377,6 +382,7 @@ msgid "Scored after publishing"
 msgstr "پس از انتشار امتیاز می‌گیرد"
 
 #. translators: %s: relative time such as "5 days"
+#, php-format
 #: tmp/monoranks/src/Column.php:66
 msgid "next audit in %s"
 msgstr "ممیزی بعدی تا %s دیگر"
@@ -394,10 +400,12 @@ msgstr "مشکلی پیش آمد. دوباره تلاش کنید."
 msgid "Weekly SEO, AEO and GEO audit of"
 msgstr "ممیزی هفتگی SEO، AEO و GEO برای"
 
+#, js-format
 #: tmp/i18n/screens/Overview.js:52
 msgid "last audit %s"
 msgstr "آخرین ممیزی %s"
 
+#, js-format
 #: tmp/i18n/screens/Overview.js:52
 msgid "%1$s of %2$s published pages scored"
 msgstr "%1$s از %2$s صفحهٔ منتشرشده امتیاز گرفته"
@@ -418,6 +426,7 @@ msgstr "امتیاز سلامت"
 msgid "Technical, on-page, links, speed"
 msgstr "فنی، درون‌صفحه، پیوندها، سرعت"
 
+#, js-format
 #: tmp/i18n/screens/Overview.js:64
 msgid "Site average, %s page"
 msgid_plural "Site average, %s pages"
@@ -448,6 +457,7 @@ msgstr "از گوگل سرچ کنسول، از طریق مونورنکس"
 msgid "Connect Google Search Console in MonoRanks to see clicks here."
 msgstr "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
 
+#, js-format
 #: tmp/i18n/screens/Overview.js:75
 msgid "%s ready"
 msgstr "%s آماده"
@@ -611,6 +621,7 @@ msgstr "متصل"
 msgid "Content"
 msgstr "محتوا"
 
+#, js-format
 #: tmp/i18n/screens/Overview.js:163
 msgid "%1$s published items sent %2$s"
 msgstr "%1$s مورد منتشرشده %2$s فرستاده شد"
@@ -623,6 +634,7 @@ msgstr "هنوز فرستاده نشده. از «همگام‌سازی محتو�
 msgid "Audit results"
 msgstr "نتایج ممیزی"
 
+#, js-format
 #: tmp/i18n/screens/Overview.js:164
 msgid "checked %s"
 msgstr "بررسی‌شده %s"
@@ -660,10 +672,12 @@ msgstr "کلید اتصال"
 msgid "Last sync"
 msgstr "آخرین همگام‌سازی"
 
+#, js-format
 #: tmp/i18n/screens/Settings.js:60
 msgid "sending, batch %1$s of %2$s"
 msgstr "در حال ارسال، دستهٔ %1$s از %2$s"
 
+#, js-format
 #: tmp/i18n/screens/Settings.js:60
 msgid "%s published item"
 msgid_plural "%s published items"
@@ -690,10 +704,12 @@ msgstr "تا نوشتن متوقف شود"
 msgid "Works with"
 msgstr "سازگار با"
 
+#, js-format
 #: tmp/i18n/screens/Settings.js:63
 msgid "%s detected"
 msgstr "%s شناسایی شد"
 
+#, js-format
 #: tmp/i18n/screens/Settings.js:63
 msgid "titles and descriptions go into the fields %s reads"
 msgstr "عنوان‌ها و توضیح‌ها در فیلدهایی نوشته می‌شوند که %s می‌خواند"
@@ -814,6 +830,7 @@ msgstr "بعد"
 msgid "Undo"
 msgstr "بازگردانی"
 
+#, js-format
 #: tmp/i18n/shell/Ring.js:32
 msgid "%s this week"
 msgstr "%s این هفته"

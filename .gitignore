@@ -6,3 +6,4 @@ tmp
 composer.lock
 packages
 .phpunit.result.cache
+.wp-env.override.json

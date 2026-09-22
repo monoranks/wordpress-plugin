@@ -154,7 +154,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
 
           <Card>
             <CardHeader><CardTitle>{__('Recent changes', 'monoranks')}</CardTitle><Button variant="ghost" size="sm" asChild><a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }}>{__('All changes', 'monoranks')}</a></Button></CardHeader>
-            <div className="pt-2"><ChangeLog rows={data.log} busy={undoing} onUndo={(i) => { setUndoing(i); run('undo', () => api.undo(i, 'overview')); }} /></div>
+            <div className="pt-2"><ChangeLog rows={data.log} busy={undoing} onUndo={(row) => { setUndoing(row.index); run('undo', () => api.undo(row, 'overview')); }} /></div>
           </Card>
         </>
       )}

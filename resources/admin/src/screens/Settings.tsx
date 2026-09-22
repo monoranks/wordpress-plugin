@@ -114,7 +114,7 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
 
           <Card>
             <CardHeader><CardTitle>{__('Recent changes', 'monoranks')}</CardTitle><span className="text-[12px] text-mute">{__('Last 50 · undo for 30 days', 'monoranks')}</span></CardHeader>
-            <div className="pt-2"><ChangeLog rows={data.log} busy={undoing} onUndo={(i) => { setUndoing(i); run('undo', () => api.undo(i, 'settings')); }} /></div>
+            <div className="pt-2"><ChangeLog rows={data.log} busy={undoing} onUndo={(row) => { setUndoing(row.index); run('undo', () => api.undo(row, 'settings')); }} /></div>
           </Card>
         </>
       )}

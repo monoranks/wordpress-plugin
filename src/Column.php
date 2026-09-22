@@ -16,7 +16,7 @@ class Column {
 		add_action( 'admin_init', array( __CLASS__, 'hooks' ) );
 		add_action( 'pre_get_posts', array( __CLASS__, 'filter' ), 9 );
 		add_action( 'pre_get_posts', array( __CLASS__, 'query' ) );
-		add_filter( 'posts_orderby', array( __CLASS__, 'unscored_last' ), 10, 2 );
+		add_filter( 'posts_clauses', array( __CLASS__, 'sort_clauses' ), 10, 2 );
 	}
 
 	public static function hooks() {
@@ -53,9 +53,8 @@ class Column {
 		if ( ! Connection::has_key() ) {
 			return array( 'state' => 'unconnected', 'settings_url' => Admin::settings_url() );
 		}
-		$title = $post ? get_the_title( $post ) : '';
 		if ( ! $post || 'publish' !== $post->post_status ) {
-			return array( 'state' => 'draft', 'title' => $title );
+			return array( 'state' => 'draft' );
 		}
 		$overview = Insights::overview();
 		$next     = $overview && ! empty( $overview['next_audit_at'] ) ? (int) strtotime( $overview['next_audit_at'] ) : 0;
@@ -72,7 +71,6 @@ class Column {
 			}
 			return array(
 				'state'     => 'none',
-				'title'     => $title,
 				'hint'      => $hint,
 				'next_in'   => $next_in,
 				/* translators: %s: relative time such as "2 days" */
@@ -83,7 +81,6 @@ class Column {
 		$audited = $score['audited_at'] ? strtotime( $score['audited_at'] ) : 0;
 		return array(
 			'state'        => 'scored',
-			'title'        => $title,
 			'health'       => $score['health'],
 			'aeo'          => $score['aeo'],
 			'line'         => self::cell_line( $score ),
@@ -114,41 +111,28 @@ class Column {
 		return Admin::digits( $when ? $first . ' · ' . $when : $first );
 	}
 
-	/** Orders by health when the column header is clicked; unscored posts stay in the list, at the end. */
+	/** Orders by health when the column header is clicked. The sort itself is one join, added in sort_clauses(). */
 	public static function query( $query ) {
 		if ( ! is_admin() || ! $query->is_main_query() || self::KEY !== $query->get( 'orderby' ) ) {
 			return;
 		}
-		$attention = isset( $_GET['monoranks'] ) && 'attention' === $_GET['monoranks']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- list filter
-		foreach ( self::sort_args( $query->get( 'order' ), $attention ) as $k => $v ) {
-			$query->set( $k, $v );
-		}
-		$query->set( 'monoranks_sort', ! $attention );
+		$query->set( 'monoranks_sort', 'DESC' === strtoupper( (string) $query->get( 'order' ) ) ? 'DESC' : 'ASC' );
 	}
 
-	/** MySQL puts NULL first when sorting ascending; unscored posts belong at the end either way. */
-	public static function unscored_last( $orderby, $query ) {
-		if ( ! $query->get( 'monoranks_sort' ) || ! preg_match( '/(\w+)\.meta_value/', (string) $orderby, $m ) ) {
-			return $orderby;
+	/**
+	 * Sorting by the column: one LEFT JOIN limited to the health meta key, so every post stays in the list whether it
+	 * has been scored or not, each post joins at most one row, and unscored posts sit at the end in both directions
+	 * (MySQL would otherwise put NULL first when sorting ascending).
+	 */
+	public static function sort_clauses( $clauses, $query ) {
+		global $wpdb;
+		$dir = $query->get( 'monoranks_sort' );
+		if ( ! $dir ) {
+			return $clauses;
 		}
-		return $m[1] . '.meta_value IS NULL ASC, ' . $orderby;
-	}
-
-	/** Inside the "Needs attention" view every row has a score, so a plain numeric sort on the meta value does. */
-	public static function sort_args( $order, $attention = false ) {
-		$dir = 'DESC' === strtoupper( (string) $order ) ? 'DESC' : 'ASC';
-		if ( $attention ) {
-			return array( 'meta_key' => Insights::META_HEALTH, 'orderby' => 'meta_value_num', 'order' => $dir ); // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- admin list sort
-		}
-		return array(
-			'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- admin list sort
-				'relation'         => 'OR',
-				'monoranks_health' => array( 'key' => Insights::META_HEALTH, 'type' => 'NUMERIC' ),
-				'monoranks_none'   => array( 'key' => Insights::META_HEALTH, 'compare' => 'NOT EXISTS', 'type' => 'NUMERIC' ),
-			),
-			// The NOT EXISTS clause is the join limited to this key, so its value is the health or NULL; the other join is not.
-			'orderby'    => array( 'monoranks_none' => $dir ),
-		);
+		$clauses['join']   .= $wpdb->prepare( " LEFT JOIN {$wpdb->postmeta} AS monoranks_meta ON ( {$wpdb->posts}.ID = monoranks_meta.post_id AND monoranks_meta.meta_key = %s )", Insights::META_HEALTH );
+		$clauses['orderby'] = 'monoranks_meta.meta_value IS NULL ASC, CAST(monoranks_meta.meta_value AS SIGNED) ' . ( 'DESC' === $dir ? 'DESC' : 'ASC' );
+		return $clauses;
 	}
 
 	/** A "Needs attention" view next to All / Published, filtering to pages under 60 (?monoranks=attention). */

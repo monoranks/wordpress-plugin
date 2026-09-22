@@ -27,14 +27,14 @@ class Actions {
 			Connection::update( array( 'site_id' => sanitize_text_field( (string) $res['body']['site_id'] ) ) );
 		}
 		Sync::start();
-		Insights::refresh();
+		Insights::refresh_soon();
 		return 'connected';
 	}
 
 	public static function send_now() {
 		Api::send_status();
 		Sync::start();
-		Insights::refresh();
+		Insights::refresh_soon();
 		return 'sent';
 	}
 
@@ -45,12 +45,16 @@ class Actions {
 		return 'disconnected';
 	}
 
-	/** Apply one fix approved in MonoRanks (its id) or all of them ('all'), then tell MonoRanks what happened. */
+	/**
+	 * Apply one fix approved in MonoRanks (its id) or all of them ('all'), then tell MonoRanks what happened. A body edit
+	 * is never part of 'all': it is reviewed as a before/after in MonoRanks and applied one at a time from there.
+	 */
 	public static function apply( $which ) {
 		$overview = Insights::overview();
 		$changes  = array();
 		foreach ( $overview ? $overview['ready'] : array() as $fix ) {
-			if ( 'all' === $which || $fix['id'] === $which ) {
+			$mine = 'all' === $which ? 'content' !== $fix['field'] : $fix['id'] === $which;
+			if ( $mine ) {
 				$changes[] = self::change_from_ready( $fix );
 			}
 		}
@@ -66,7 +70,10 @@ class Actions {
 		}
 		Insights::forget_ready( $done );
 		Api::post( '/fixes', array( 'results' => $results ), 5 );
-		return count( $done ) === count( $changes ) ? 'applied' : 'apply_failed';
+		if ( count( $done ) === count( $changes ) ) {
+			return 'applied';
+		}
+		return $done ? 'applied_some' : 'apply_failed';
 	}
 
 	/** The change Writer::apply expects for one fix approved in MonoRanks. */
@@ -87,11 +94,17 @@ class Actions {
 		return $c;
 	}
 
-	/** Puts the previous value of one logged change back ($index in the stored log). */
-	public static function undo( $index ) {
+	/**
+	 * Puts the previous value of one logged change back. The row is addressed by its position in the stored log and by
+	 * the moment it was written, because the log is trimmed to its last 200 entries and positions shift under it.
+	 */
+	public static function undo( $index, $at = '' ) {
 		$log = (array) get_option( 'monoranks_change_log', array() );
 		if ( $index < 0 || ! isset( $log[ $index ] ) || ! is_array( $log[ $index ] ) ) {
 			return 'apply_failed';
+		}
+		if ( $at && ( ! isset( $log[ $index ]['at'] ) || $at !== $log[ $index ]['at'] ) ) {
+			return 'log_moved';
 		}
 		$change = Writer::reverse( $log[ $index ] );
 		$result = $change ? Writer::apply( array( $change ), 'Undo (' . wp_get_current_user()->user_login . ')' ) : array();
