@@ -9,18 +9,15 @@ defined( 'ABSPATH' ) || exit;
 
 use MonoRanks\Admin;
 ?>
-<div class="wrap monoranks" data-theme="<?php echo esc_attr( $theme ); ?>">
-	<div class="col">
-		<h1 class="h1">MonoRanks</h1>
-		<p class="sub"><?php esc_html_e( 'Connection, what is sent, and every change written into this site.', 'monoranks' ); ?></p>
-	</div>
-
+<div class="wrap monoranks mr-frame" data-theme="<?php echo esc_attr( $theme ); ?>">
+	<?php echo Admin::view( 'partials/shell-header', array( 'section' => 'settings', 'title' => __( 'Settings', 'monoranks' ), 'description' => esc_html__( 'Connection, what is sent, and every change written into this site.', 'monoranks' ), 'actions' => '', 'app_url' => $app_url ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?>
+	<div class="mr-measure mr-main">
 	<?php echo Admin::view( 'partials/notice', array( 'notice' => $notice ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?>
 
 	<?php if ( $connected ) : ?>
 	<div class="card">
 		<div class="cardhd">
-			<div class="row"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V8l5 5 5-5v10"/><path d="M17 9h3M17 13h3"/></svg></span><h2 class="h2"><?php esc_html_e( 'Connection', 'monoranks' ); ?></h2></div>
+			<div class="row"><span class="mark" aria-hidden="true"><?php echo Admin::asset( 'mark.svg' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the plugin's own SVG ?></span><h2 class="h2"><?php esc_html_e( 'Connection', 'monoranks' ); ?></h2></div>
 			<?php if ( $revoked ) : ?>
 				<span class="pill"><span class="dot critical"></span><?php esc_html_e( 'Key revoked', 'monoranks' ); ?></span>
 			<?php else : ?>
@@ -73,7 +70,7 @@ use MonoRanks\Admin;
 	<?php else : ?>
 	<div class="card">
 		<div class="cardhd">
-			<div class="row"><span class="mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V8l5 5 5-5v10"/><path d="M17 9h3M17 13h3"/></svg></span><h2 class="h2"><?php esc_html_e( 'Connection', 'monoranks' ); ?></h2></div>
+			<div class="row"><span class="mark" aria-hidden="true"><?php echo Admin::asset( 'mark.svg' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the plugin's own SVG ?></span><h2 class="h2"><?php esc_html_e( 'Connection', 'monoranks' ); ?></h2></div>
 			<span class="pill"><span class="dot"></span><?php esc_html_e( 'Not connected', 'monoranks' ); ?></span>
 		</div>
 		<div class="cardbd col">
@@ -133,4 +130,6 @@ use MonoRanks\Admin;
 			<?php echo Admin::view( 'partials/change-log', array( 'log' => $log, 'labels' => \MonoRanks\Overview::field_labels(), 'post_url' => $post_url, 'undo' => true ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?>
 		</div>
 	</div>
+	</div>
+	<?php echo Admin::view( 'partials/shell-footer', array( 'settings_url' => Admin::settings_url(), 'app_url' => $app_url ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?>
 </div>

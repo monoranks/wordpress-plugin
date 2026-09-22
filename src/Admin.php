@@ -17,6 +17,8 @@ class Admin {
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'legacy_url' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
+		add_filter( 'admin_footer_text', array( __CLASS__, 'footer_text' ), 100 );
+		add_filter( 'update_footer', array( __CLASS__, 'footer_text' ), 100 );
 		add_action( 'admin_post_monoranks_connect_key', array( __CLASS__, 'connect_key' ) );
 		add_action( 'admin_post_monoranks_send_now', array( __CLASS__, 'send_now' ) );
 		add_action( 'admin_post_monoranks_disconnect', array( __CLASS__, 'disconnect' ) );
@@ -34,10 +36,26 @@ class Admin {
 		add_submenu_page( self::MENU, __( 'MonoRanks settings', 'monoranks' ), __( 'Settings', 'monoranks' ), 'manage_options', self::SETTINGS, array( 'MonoRanks\\Settings', 'render' ) );
 	}
 
-	/** The MonoRanks mark, as a data URI so the menu shows it in the admin colour scheme. */
+	/** The MonoRanks mark (assets/mark.svg) as a data URI; WordPress repaints its fill in the admin colour scheme. */
 	private static function menu_icon() {
-		$svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#a7aaad" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19V7l6 6 6-6v12"/><path d="M18 9h3M18 13h3"/></svg>';
-		return 'data:image/svg+xml;base64,' . base64_encode( $svg ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- menu icon
+		return 'data:image/svg+xml;base64,' . base64_encode( self::asset( 'mark.svg' ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- menu icon
+	}
+
+	/** The contents of one of the plugin's own SVG files under assets/, for inlining (so currentColor applies). */
+	public static function asset( $file ) {
+		$path = dirname( MONORANKS_CONNECTOR_FILE ) . '/assets/' . $file;
+		return file_exists( $path ) ? (string) file_get_contents( $path ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- plugin's own file
+	}
+
+	/** True on the plugin's own screens (Overview, Settings). */
+	public static function is_own_screen() {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		return $screen && in_array( $screen->id, array( 'toplevel_page_' . self::MENU, 'monoranks_page_' . self::SETTINGS ), true );
+	}
+
+	/** The plugin's screens carry their own footer, so WordPress's "Thank you for creating with WordPress" line steps aside. */
+	public static function footer_text( $text ) {
+		return self::is_own_screen() ? '' : $text;
 	}
 
 	/** Settings → MonoRanks used to live under options-general.php; old links and the browser tests still open it. */

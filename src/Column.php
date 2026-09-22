@@ -28,19 +28,11 @@ class Column {
 		}
 	}
 
-	/** After Title. */
+	/** The last column. */
 	public static function columns( $columns ) {
-		$out = array();
-		foreach ( (array) $columns as $key => $label ) {
-			$out[ $key ] = $label;
-			if ( 'title' === $key ) {
-				$out[ self::KEY ] = 'MonoRanks';
-			}
-		}
-		if ( ! isset( $out[ self::KEY ] ) ) {
-			$out[ self::KEY ] = 'MonoRanks';
-		}
-		return $out;
+		$columns              = (array) $columns;
+		$columns[ self::KEY ] = 'MonoRanks';
+		return $columns;
 	}
 
 	public static function sortable( $columns ) {
@@ -67,7 +59,13 @@ class Column {
 		$score = Insights::post_score( $post_id );
 		if ( ! $score || ( null === $score['health'] && null === $score['aeo'] ) ) {
 			$overview = Insights::overview();
-			return array( 'state' => 'none', 'next_audit' => $overview && ! empty( $overview['next_audit_at'] ) ? $overview['next_audit_at'] : '' );
+			$next     = $overview && ! empty( $overview['next_audit_at'] ) ? (int) strtotime( $overview['next_audit_at'] ) : 0;
+			$hint     = __( 'Not audited yet', 'monoranks' );
+			if ( $next > time() ) {
+				/* translators: %s: relative time such as "5 days" */
+				$hint .= ' · ' . sprintf( __( 'next audit in %s', 'monoranks' ), human_time_diff( time(), $next ) );
+			}
+			return array( 'state' => 'none', 'hint' => $hint );
 		}
 		return array(
 			'state'        => 'scored',

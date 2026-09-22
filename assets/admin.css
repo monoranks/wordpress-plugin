@@ -24,8 +24,67 @@
 	}
 }
 
-.monoranks { display: flex; flex-direction: column; gap: 20px; max-width: 1180px; margin-top: 10px; color: var(--ink); font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
-.monoranks[data-theme="dark"] { background: var(--page); padding: 20px; border-radius: 14px; }
+.monoranks { color: var(--ink); font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+
+/* The frame: a dark brand band on top, the light title area, the work area, and the service footer; the plugin's screens
+   fill the admin content area edge to edge (WordPress's .wrap margins are taken back) and their content sits in one measure. */
+.monoranks.mr-frame { --band: #14181f; --bandInk: #f3f4f6; --bandMuted: #b8bec8; --bandEdge: #2c313a; --gutter: 40px; --measure: 1180px;
+	margin: 0; margin-inline: -20px 0; min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px)); display: flex; flex-direction: column; background: var(--page); }
+.monoranks[data-theme="dark"].mr-frame { --band: #0b0d11; --bandEdge: #262b33; }
+.monoranks .mr-measure { width: 100%; max-width: calc(var(--measure) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); box-sizing: border-box; }
+.monoranks .mr-band { background: var(--band); color: var(--bandInk); }
+.monoranks .mr-band a { color: var(--bandInk); }
+.monoranks .mr-band a:hover { color: #fff; text-decoration: none; }
+.monoranks .mr-band svg { display: block; }
+.monoranks .mr-masthead { min-height: 64px; display: flex; align-items: center; gap: 28px; }
+.monoranks .mr-brand { display: inline-flex; align-items: center; gap: 10px; color: var(--bandInk); }
+.monoranks .mr-brand svg { width: 138px; height: 28px; }
+.monoranks .mr-nav { display: flex; align-self: stretch; gap: 22px; }
+.monoranks .mr-nav a { display: inline-flex; align-items: center; color: var(--bandMuted); font-weight: 500; font-size: 13px; border-bottom: 2px solid transparent; padding-top: 2px; }
+.monoranks .mr-nav a[aria-current] { color: var(--bandInk); border-bottom-color: var(--accent); }
+.monoranks .mr-nav a:hover { color: #fff; }
+.monoranks .mr-tools { margin-inline-start: auto; display: flex; align-items: center; gap: 6px; }
+.monoranks .mr-tool { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 7px; color: var(--bandMuted); font-weight: 500; font-size: 12.5px; white-space: nowrap; }
+.monoranks .mr-tool:hover { background: var(--bandEdge); color: #fff; }
+.monoranks .mr-tool-app { color: var(--bandInk); border: 1px solid var(--bandEdge); }
+.monoranks .mr-heading { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px 24px; padding-block: 30px 6px; }
+.monoranks .mr-heading-copy { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.monoranks .mr-heading h1.h1 { font-size: 26px; letter-spacing: -0.02em; }
+.monoranks .mr-heading-desc { max-width: 72ch; }
+.monoranks .mr-heading-actions { padding-top: 4px; }
+.monoranks .mr-main { display: flex; flex-direction: column; gap: 20px; padding-block: 22px 40px; flex: 1 0 auto; }
+.monoranks .mr-footer { margin-top: auto; }
+.monoranks .mr-service { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; align-items: center; gap: 32px; padding-block: 26px 28px; }
+.monoranks .mr-service .mr-brand svg { width: 128px; height: 26px; }
+.monoranks .mr-version { font-size: 11px; font-weight: 500; color: var(--bandMuted); border: 1px solid var(--bandEdge); border-radius: 6px; padding: 2px 7px; }
+.monoranks .mr-service-resource { border-inline-start: 1px solid var(--bandEdge); padding-inline-start: 28px; min-width: 0; }
+.monoranks .mr-service-label { display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--bandMuted); }
+.monoranks .mr-service-resource a { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; }
+.monoranks .mr-service-resource a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.monoranks a.mr-service-help { display: block; padding: 12px 18px; border: 1px solid var(--bandEdge); border-radius: 9px; text-align: start; }
+.monoranks a.mr-service-help:hover { background: var(--bandEdge); }
+.monoranks .mr-service-help > span { display: block; color: var(--bandMuted); font-size: 11px; margin-bottom: 6px; }
+.monoranks .mr-service-help strong { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 13px; font-weight: 500; }
+.monoranks .mr-publisher { display: flex; justify-content: center; align-items: center; gap: 12px; padding-block: 16px 18px; border-top: 1px solid var(--bandEdge); color: var(--bandMuted); font-size: 11px; }
+.monoranks .mr-publisher a { display: inline-flex; align-items: center; min-height: 28px; color: var(--bandMuted); opacity: .75; }
+.monoranks .mr-publisher a:hover { opacity: 1; }
+.monoranks .mr-publisher svg { width: 112px; height: auto; }
+.monoranks .mr-frame :is(.mr-band, .mr-heading) svg:dir(rtl) { transform: scaleX(-1); }
+.monoranks .mr-brand svg:dir(rtl), .monoranks .mr-publisher svg:dir(rtl) { transform: none; }
+@media (max-width: 960px) {
+	.monoranks.mr-frame { --gutter: 24px; }
+	.monoranks .mr-service { grid-template-columns: minmax(0, 1fr) auto; gap: 20px; }
+	.monoranks .mr-service-resource { grid-column: 1; border: 0; padding: 0; }
+	.monoranks a.mr-service-help { grid-column: 2; grid-row: 1 / 3; }
+}
+@media (max-width: 782px) {
+	.monoranks.mr-frame { --gutter: 16px; margin-inline: -10px 0; }
+	.monoranks .mr-masthead { gap: 14px; }
+	.monoranks .mr-nav { gap: 14px; }
+	.monoranks .mr-tool-app { display: none; }
+	.monoranks .mr-service { grid-template-columns: minmax(0, 1fr); }
+	.monoranks a.mr-service-help, .monoranks .mr-service-resource { grid-column: auto; grid-row: auto; }
+}
 .monoranks *, .monoranks *::before, .monoranks *::after { box-sizing: border-box; }
 .monoranks a { color: var(--accentInk); text-decoration: none; }
 .monoranks a:hover { color: var(--ink); text-decoration: underline; }
@@ -52,6 +111,7 @@
 .monoranks .cardbd { padding: 16px 22px 22px; }
 .monoranks .cardbd.col { gap: 16px; }
 .monoranks .mark { width: 36px; height: 36px; border-radius: 9px; background: var(--surface2); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 36px; }
+.monoranks .mark svg { width: 20px; height: 20px; }
 
 .monoranks .btn, .monoranks a.btn, .monoranks button.btn { display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 12px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); font: inherit; font-weight: 500; font-size: 13px; line-height: 1; white-space: nowrap; cursor: pointer; text-decoration: none; box-shadow: none; margin: 0; transition: background-color .12s, border-color .12s, color .12s, opacity .12s; }
 .monoranks .btn:hover { background: var(--surface2); border-color: var(--line); color: var(--ink); text-decoration: none; }
@@ -145,9 +205,11 @@
 .mr-score.none { color: var(--line); }
 
 /* Posts and Pages list column: the list table is WordPress's own light surface, so the cell always uses the light palette. */
-.fixed .column-monoranks { width: 200px; }
+.fixed .column-monoranks { width: 168px; }
 .monoranks-cell { display: flex; flex-direction: column; gap: 5px; color: var(--ink); }
-.monoranks-cell .row { display: flex; align-items: center; gap: 12px; }
+.monoranks-cell .row { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; cursor: default; }
+.monoranks-cell a.row { cursor: pointer; }
+.monoranks-cell a.row:hover .mr-score .lbl { color: var(--accentInk); }
 .monoranks-cell .xs { font-size: 11px; color: var(--muted); }
 .monoranks-cell .xs a { text-decoration: none; }
 

@@ -11,32 +11,23 @@ use MonoRanks\Admin;
 
 $monoranks_o = $overview;
 ?>
-<div class="wrap monoranks" data-theme="<?php echo esc_attr( $theme ); ?>">
-	<div class="row wrap between head">
-		<div class="col">
-			<h1 class="h1">MonoRanks</h1>
-			<p class="sub">
-				<?php if ( $monoranks_o ) : ?>
-					<?php echo wp_kses_post( sprintf( /* translators: %s: site host */ __( 'Weekly SEO, AEO and GEO audit of %s', 'monoranks' ), '<span class="code">' . esc_html( $host ) . '</span>' ) ); ?>
-					<?php if ( $audited ) : ?> · <?php echo esc_html( sprintf( /* translators: %s: relative time */ __( 'last audit %s', 'monoranks' ), $audited ) ); ?><?php endif; ?>
-					<?php if ( $monoranks_o['pages_total'] ) : ?> · <?php echo esc_html( sprintf( /* translators: 1: scored, 2: total */ __( '%1$s of %2$s published pages scored', 'monoranks' ), number_format_i18n( $monoranks_o['pages_scored'] ), number_format_i18n( $monoranks_o['pages_total'] ) ) ); ?><?php endif; ?>
-				<?php else : ?>
-					<?php esc_html_e( 'Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress.', 'monoranks' ); ?>
-				<?php endif; ?>
-			</p>
-		</div>
-		<div class="row wrap">
-			<?php if ( $connected ) : ?>
-			<form method="post" action="<?php echo esc_url( $post_url ); ?>" class="inline">
-				<?php wp_nonce_field( 'monoranks_send_now' ); ?>
-				<input type="hidden" name="action" value="monoranks_send_now"><input type="hidden" name="back" value="overview">
-				<button class="btn" type="submit"><?php esc_html_e( 'Sync content now', 'monoranks' ); ?></button>
-			</form>
-			<?php endif; ?>
-			<a class="btn primary" href="<?php echo esc_url( $app_url ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Open in MonoRanks', 'monoranks' ); ?></a>
-		</div>
-	</div>
-
+<?php
+if ( $monoranks_o ) {
+	$monoranks_desc = sprintf( /* translators: %s: site host */ __( 'Weekly SEO, AEO and GEO audit of %s', 'monoranks' ), '<span class="code">' . esc_html( $host ) . '</span>' );
+	if ( $audited ) {
+		$monoranks_desc .= ' · ' . esc_html( sprintf( /* translators: %s: relative time */ __( 'last audit %s', 'monoranks' ), $audited ) );
+	}
+	if ( $monoranks_o['pages_total'] ) {
+		$monoranks_desc .= ' · ' . esc_html( sprintf( /* translators: 1: scored, 2: total */ __( '%1$s of %2$s published pages scored', 'monoranks' ), number_format_i18n( $monoranks_o['pages_scored'] ), number_format_i18n( $monoranks_o['pages_total'] ) ) );
+	}
+} else {
+	$monoranks_desc = esc_html__( 'Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress.', 'monoranks' );
+}
+$monoranks_actions = $connected ? Admin::view( 'partials/sync-button', array( 'post_url' => $post_url, 'back' => 'overview', 'label' => __( 'Sync content now', 'monoranks' ) ) ) : '';
+?>
+<div class="wrap monoranks mr-frame" data-theme="<?php echo esc_attr( $theme ); ?>">
+	<?php echo Admin::view( 'partials/shell-header', array( 'section' => 'overview', 'title' => __( 'Overview', 'monoranks' ), 'description' => $monoranks_desc, 'actions' => $monoranks_actions, 'app_url' => $app_url ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?>
+	<div class="mr-measure mr-main">
 	<?php echo Admin::view( 'partials/notice', array( 'notice' => $notice ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?>
 
 	<?php if ( ! $connected || $revoked ) : ?>
@@ -152,4 +143,6 @@ $monoranks_o = $overview;
 	</div>
 
 	<?php endif; ?>
+	</div>
+	<?php echo Admin::view( 'partials/shell-footer', array( 'settings_url' => $settings_url, 'app_url' => $app_url ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?>
 </div>

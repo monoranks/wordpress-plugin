@@ -468,3 +468,24 @@ msgstr "۵۰ مورد آخر · بازگردانی تا ۳۰ روز"
 
 msgid "Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo."
 msgstr "این سایت را به مونورنکس (ممیزی SEO، AEO و GEO) متصل می‌کند: فرادادهٔ محتوای منتشرشده را می‌فرستد و اصلاح‌هایی را که آنجا تأیید می‌کنید، با امکان بازگردانی، اعمال می‌کند."
+msgid "Your data"
+msgstr "داده‌های شما"
+
+msgid "What is sent and what can change"
+msgstr "چه چیزی فرستاده می‌شود و چه چیزی می‌تواند تغییر کند"
+
+msgid "Need a hand?"
+msgstr "کمک لازم دارید؟"
+
+msgid "Help and resources"
+msgstr "راهنما و منابع"
+
+msgid "A product by"
+msgstr "محصولی از"
+
+msgid "MonoRanks sections"
+msgstr "بخش‌های مونورنکس"
+
+msgid "Help"
+msgstr "راهنما"
+

@@ -21,9 +21,9 @@ class ColumnTest extends TestCase {
 		parent::tear_down();
 	}
 
-	public function test_the_column_sits_right_after_the_title() {
+	public function test_the_column_comes_last() {
 		$cols = Column::columns( array( 'cb' => '<input>', 'title' => 'Title', 'author' => 'Author', 'date' => 'Date' ) );
-		$this->assertSame( array( 'cb', 'title', 'monoranks', 'author', 'date' ), array_keys( $cols ) );
+		$this->assertSame( array( 'cb', 'title', 'author', 'date', 'monoranks' ), array_keys( $cols ) );
 	}
 
 	public function test_the_line_under_the_scores_prefers_fixes_over_issues() {
