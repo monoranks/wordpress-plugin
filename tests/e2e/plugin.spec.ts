@@ -15,11 +15,11 @@ test('settings page renders and rejects a malformed key', async ({ page }) => {
   await page.goto('/wp-admin/options-general.php?page=monoranks');
   await expect(page.getByRole('heading', { name: 'Settings', level: 1 })).toBeVisible();
   await expect(page.getByRole('img', { name: 'MonoRanks' }).first()).toBeVisible();
-  await expect(page.getByText('Not connected')).toBeVisible();
+  await expect(page.getByText('Not connected', { exact: true })).toBeVisible();
   await page.fill('#monoranks-key', 'not-a-key');
   await page.getByRole('button', { name: 'Connect' }).click();
   await expect(page.locator('.notice-error')).toContainText('does not look like a MonoRanks connector key');
-  await expect(page.getByText('Not connected')).toBeVisible();
+  await expect(page.getByText('Not connected', { exact: true })).toBeVisible();
 });
 
 test('overview and settings are one app: switching screens changes the URL without a page load', async ({ page }) => {
