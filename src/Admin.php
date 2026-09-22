@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * The MonoRanks admin menu (Overview, Settings). Both screens are the React app in resources/admin (built into
  * assets/build/, enqueued by Assets); PHP only prints the mount and the settings the app reads, and answers its REST
- * calls (Rest, Actions). The Posts and Pages column stays server-rendered (Column, views/).
+ * calls (Rest, Actions). The Posts and Pages column stays server-rendered (Column, resources/views/).
  */
 class Admin {
 
@@ -83,9 +83,9 @@ class Admin {
 		return 'dark' === $theme ? 'dark' : 'light';
 	}
 
-	/** Renders views/<name>.php with $data extracted into scope. Returns the HTML. */
+	/** Renders resources/views/<name>.php with $data extracted into scope. Returns the HTML. */
 	public static function view( $name, array $data = array() ) {
-		$file = dirname( MONORANKS_CONNECTOR_FILE ) . '/views/' . $name . '.php';
+		$file = dirname( MONORANKS_CONNECTOR_FILE ) . '/resources/views/' . $name . '.php';
 		if ( ! file_exists( $file ) ) {
 			return '';
 		}

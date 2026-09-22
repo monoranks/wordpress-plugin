@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { adminSettings } from '@/settings';
 
 export type Screen = 'overview' | 'settings';
@@ -15,10 +15,22 @@ function fromUrl(): Screen {
  */
 export function useScreen(): [Screen, (next: Screen) => void] {
   const [screen, setScreen] = useState<Screen>(fromUrl);
+  const goRef = useRef<(next: Screen) => void>(() => undefined);
   useEffect(() => {
     const onPop = () => setScreen(fromUrl());
     window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
+    // WordPress's own menu entries for the plugin (left sidebar) switch screens the same way instead of reloading.
+    const onMenuClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement).closest<HTMLAnchorElement>('#toplevel_page_monoranks a[href*="page=monoranks"]');
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      const page = new URL(a.href, window.location.href).searchParams.get('page');
+      const next: Screen | null = page === PAGES.settings ? 'settings' : page === PAGES.overview ? 'overview' : null;
+      if (!next) return;
+      e.preventDefault();
+      goRef.current(next);
+    };
+    document.addEventListener('click', onMenuClick);
+    return () => { window.removeEventListener('popstate', onPop); document.removeEventListener('click', onMenuClick); };
   }, []);
   useEffect(() => {
     highlightMenu(screen);
@@ -31,6 +43,7 @@ export function useScreen(): [Screen, (next: Screen) => void] {
     setScreen(next);
     window.scrollTo({ top: 0 });
   };
+  goRef.current = go;
   return [screen, go];
 }
 

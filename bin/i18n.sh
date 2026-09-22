@@ -6,7 +6,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 rm -rf build/i18n && mkdir -p build/i18n
 find resources/admin/src -name '*.tsx' -o -name '*.ts' | xargs npx esbuild --outdir=build/i18n --format=esm --jsx=preserve --log-level=warning
-wp i18n make-pot . languages/monoranks.pot --include=monoranks.php,uninstall.php,src,views,build/i18n \
+wp i18n make-pot . languages/monoranks.pot --include=monoranks.php,uninstall.php,src,resources/views,build/i18n \
   --headers='{"Report-Msgid-Bugs-To":"https://github.com/monoranks/wordpress-plugin/issues"}'
 python3 bin/po-sync.py
 for po in languages/monoranks-*.po; do
