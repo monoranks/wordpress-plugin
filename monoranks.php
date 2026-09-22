@@ -10,6 +10,7 @@
  * Author:            MonoRanks
  * License:           GPL-2.0-or-later
  * Text Domain:       monoranks
+ * Domain Path:       /languages
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -41,11 +42,13 @@ add_action( \MonoRanks\Sync::STEP_HOOK, array( 'MonoRanks\\Sync', 'run' ) );
 add_action( \MonoRanks\Sync::DAILY_HOOK, array( 'MonoRanks\\Sync', 'daily' ) );
 \MonoRanks\SeoFields::register_output();
 \MonoRanks\Admin::register();
+\MonoRanks\Insights::register();
 
 register_deactivation_hook( __FILE__, array( 'MonoRanks\\Sync', 'unschedule' ) );
 register_uninstall_hook( __FILE__, 'monoranks_connector_uninstall' );
 function monoranks_connector_uninstall() {
 	\MonoRanks\Sync::unschedule();
+	\MonoRanks\Insights::clear();
 	delete_option( 'monoranks_connection' );
 	delete_option( 'monoranks_sync' );
 	delete_option( 'monoranks_redirects' );

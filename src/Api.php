@@ -40,6 +40,31 @@ class Api {
 		return array( 'code' => $code, 'body' => is_array( $json ) ? $json : null, 'error' => $code >= 200 && $code < 300 ? null : ( is_array( $json ) && isset( $json['error'] ) ? (string) $json['error'] : 'http_' . $code ) );
 	}
 
+	/** GET with the same key; MonoRanks answers 404 not_supported on routes it does not have yet. @return array{code:int, body:array|null, error:string|null} */
+	public static function get( $path, $timeout = 15 ) {
+		$c = Connection::get();
+		if ( empty( $c['key'] ) || empty( $c['api_base'] ) ) {
+			return array( 'code' => 0, 'body' => null, 'error' => 'not_connected' );
+		}
+		$res = wp_remote_get(
+			$c['api_base'] . '/api/connector' . $path,
+			array(
+				'timeout'   => $timeout,
+				'headers'   => array( 'Accept' => 'application/json', 'Authorization' => 'Bearer ' . $c['key'], 'User-Agent' => 'MonoRanks Connector/' . MONORANKS_CONNECTOR_VERSION ),
+				'sslverify' => ! Connection::local(),
+			)
+		);
+		if ( is_wp_error( $res ) ) {
+			return array( 'code' => 0, 'body' => null, 'error' => $res->get_error_message() );
+		}
+		$code = (int) wp_remote_retrieve_response_code( $res );
+		$json = json_decode( (string) wp_remote_retrieve_body( $res ), true );
+		if ( 401 === $code ) {
+			Connection::update( array( 'key_state' => 'revoked', 'last_error' => 'MonoRanks did not accept the key' ) );
+		}
+		return array( 'code' => $code, 'body' => is_array( $json ) ? $json : null, 'error' => $code >= 200 && $code < 300 ? null : ( is_array( $json ) && isset( $json['error'] ) ? (string) $json['error'] : 'http_' . $code ) );
+	}
+
 	public static function send_status() {
 		return self::post( '/status', Rest::status_payload() );
 	}

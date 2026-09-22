@@ -5,9 +5,12 @@
  */
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
-foreach ( array( 'monoranks', 'monoranks_connection', 'monoranks_sync', 'monoranks_redirects', 'monoranks_change_log', 'monoranks_ai_bots', 'monoranks_llms_txt' ) as $monoranks_option ) {
+foreach ( array( 'monoranks', 'monoranks_connection', 'monoranks_sync', 'monoranks_redirects', 'monoranks_change_log', 'monoranks_ai_bots', 'monoranks_llms_txt', 'monoranks_insights' ) as $monoranks_option ) {
 	delete_option( $monoranks_option );
 }
 wp_clear_scheduled_hook( 'monoranks_daily_sync' );
 wp_clear_scheduled_hook( 'monoranks_sync_step' );
+wp_clear_scheduled_hook( 'monoranks_refresh' );
+delete_post_meta_by_key( '_monoranks_score' );
+delete_post_meta_by_key( '_monoranks_health' );
 delete_transient( 'monoranks_sync_lock' );

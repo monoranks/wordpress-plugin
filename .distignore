@@ -16,3 +16,4 @@ scoper.inc.php
 CHANGELOG.md
 build
 phpunit.xml.dist
+docs
