@@ -1,6 +1,7 @@
 /** What src/Assets.php prints before the bundle: where things are, which screen this is, the brand SVGs. */
 export type AdminSettings = {
   screen: 'overview' | 'settings';
+  locale: string;
   theme: 'light' | 'dark';
   version: string;
   host: string;

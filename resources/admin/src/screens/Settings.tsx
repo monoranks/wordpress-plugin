@@ -12,6 +12,7 @@ import { Badge, Dot } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { out } from '@/lib/links';
 import type { Screen } from '@/lib/screen';
+import { fmt } from '@/lib/format';
 
 /** MonoRanks → Settings: connection state, the connector key, last sync, what is sent, recent changes, disconnect. */
 export function Settings({ go }: { go: (next: Screen) => void }) {
@@ -63,7 +64,7 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
                   <KV rows={[
                     [__('Status', 'monoranks'), revoked ? __('MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below.', 'monoranks') : __('Sending published content to MonoRanks. Nothing else leaves this site.', 'monoranks')],
                     [__('Connector key', 'monoranks'), <span className="flex flex-wrap items-center gap-2"><code>{data.key_hint}</code><span className="text-mute">{data.key_via}</span></span>],
-                    [__('Last sync', 'monoranks'), <span className="flex flex-wrap items-center gap-2"><span className="tabular-nums">{data.last_sent}</span>{data.sending && <Badge>{sprintf(__('sending, batch %1$s of %2$s', 'monoranks'), String(data.sending.page), String(Math.max(1, data.sending.pages)))}</Badge>}{data.items > 0 && <Badge>{sprintf(_n('%s published item', '%s published items', data.items, 'monoranks'), String(data.items))}</Badge>}{data.last_error && <Badge variant="warn">{data.last_error}</Badge>}</span>],
+                    [__('Last sync', 'monoranks'), <span className="flex flex-wrap items-center gap-2"><span className="tabular-nums">{data.last_sent}</span>{data.sending && <Badge>{sprintf(__('sending, batch %1$s of %2$s', 'monoranks'), fmt(data.sending.page), fmt(Math.max(1, data.sending.pages)))}</Badge>}{data.items > 0 && <Badge>{sprintf(_n('%s published item', '%s published items', data.items, 'monoranks'), fmt(data.items))}</Badge>}{data.last_error && <Badge variant="warn">{data.last_error}</Badge>}</span>],
                     ...(data.next_audit ? [[__('Next audit', 'monoranks'), data.next_audit] as [string, React.ReactNode]] : []),
                     [__('Fixes written with', 'monoranks'), <>{__('The "MonoRanks" Application Password', 'monoranks')} · <a href={data.profile_url}>{__('revoke it in your profile', 'monoranks')}</a> {__('to stop writes', 'monoranks')}</>],
                     [__('Works with', 'monoranks'), data.seo_plugin

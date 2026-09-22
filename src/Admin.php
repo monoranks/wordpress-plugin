@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * The MonoRanks admin menu (Overview, Settings). Both screens are the React app in resources/admin (built into
- * assets/build/, enqueued by Assets); PHP only prints the mount and the settings the app reads, and answers its REST
+ * build/, enqueued by Assets); PHP only prints the mount and the settings the app reads, and answers its REST
  * calls (Rest, Actions). The Posts and Pages column stays server-rendered (Column, resources/views/).
  */
 class Admin {
@@ -33,17 +33,17 @@ class Admin {
 
 	/** Where the app renders. Without a build (a checkout that skipped `npm run build`) it says what to run. */
 	public static function mount() {
-		echo self::view( 'app', array( 'theme' => self::theme(), 'built' => file_exists( dirname( MONORANKS_CONNECTOR_FILE ) . '/assets/build/main.js' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the view escapes
+		echo self::view( 'app', array( 'theme' => self::theme(), 'built' => file_exists( dirname( MONORANKS_CONNECTOR_FILE ) . '/build/main.js' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the view escapes
 	}
 
-	/** The MonoRanks mark (assets/mark.svg) as a data URI; WordPress repaints its fill in the admin colour scheme. */
+	/** The MonoRanks mark (resources/assets/mark.svg) as a data URI; WordPress repaints its fill in the admin colour scheme. */
 	private static function menu_icon() {
 		return 'data:image/svg+xml;base64,' . base64_encode( self::asset( 'mark.svg' ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- menu icon
 	}
 
-	/** The contents of one of the plugin's own SVG files under assets/, for inlining (so currentColor applies). */
+	/** The contents of one of the plugin's own SVG files under resources/assets/, for inlining (so currentColor applies). */
 	public static function asset( $file ) {
-		$path = dirname( MONORANKS_CONNECTOR_FILE ) . '/assets/' . $file;
+		$path = dirname( MONORANKS_CONNECTOR_FILE ) . '/resources/assets/' . $file;
 		return file_exists( $path ) ? (string) file_get_contents( $path ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- plugin's own file
 	}
 
@@ -102,6 +102,25 @@ class Admin {
 		return self::view( 'partials/score-ring', array( 'score' => $score, 'size' => 'lg' === $size ? 'lg' : 'sm', 'label' => $label, 'tone' => Insights::tone( $score ) ) );
 	}
 
+	/**
+	 * Digits in the admin's own script: Persian for fa_*, Arabic-Indic for ar_*, Latin elsewhere. WordPress formats
+	 * numbers and dates with Latin digits; the screens pass everything they print through here.
+	 */
+	public static function digits( $text ) {
+		$locale = function_exists( 'determine_locale' ) ? determine_locale() : get_locale();
+		$sets   = array( 'fa' => '۰۱۲۳۴۵۶۷۸۹', 'ar' => '٠١٢٣٤٥٦٧٨٩' );
+		$lang   = substr( (string) $locale, 0, 2 );
+		if ( ! isset( $sets[ $lang ] ) ) {
+			return (string) $text;
+		}
+		return strtr( (string) $text, array_combine( str_split( '0123456789' ), preg_split( '//u', $sets[ $lang ], -1, PREG_SPLIT_NO_EMPTY ) ) );
+	}
+
+	/** A number for the screen: thousands separator from the locale, local digits. */
+	public static function n( $number ) {
+		return self::digits( number_format_i18n( $number ) );
+	}
+
 	/** "3 minutes ago (22 Sep 2026, 14:03)" from an ISO date, or the fallback. */
 	public static function ago( $iso, $fallback = '' ) {
 		$ts = $iso ? strtotime( (string) $iso ) : 0;
@@ -111,10 +130,10 @@ class Admin {
 		$when = wp_date( get_option( 'date_format' ) . ', ' . get_option( 'time_format' ), $ts );
 		if ( $ts > time() ) {
 			/* translators: 1: relative time, 2: date */
-			return sprintf( __( 'in %1$s (%2$s)', 'monoranks' ), human_time_diff( time(), $ts ), $when );
+			return self::digits( sprintf( __( 'in %1$s (%2$s)', 'monoranks' ), human_time_diff( time(), $ts ), $when ) );
 		}
 		/* translators: 1: relative time, 2: date */
-		return sprintf( __( '%1$s ago (%2$s)', 'monoranks' ), human_time_diff( $ts, time() ), $when );
+		return self::digits( sprintf( __( '%1$s ago (%2$s)', 'monoranks' ), human_time_diff( $ts, time() ), $when ) );
 	}
 
 	/** The notice for a result code (the app shows it after an action; the legacy URL carries one as ?monoranks=<code>). */

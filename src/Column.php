@@ -65,7 +65,7 @@ class Column {
 				/* translators: %s: relative time such as "5 days" */
 				$hint .= ' · ' . sprintf( __( 'next audit in %s', 'monoranks' ), human_time_diff( time(), $next ) );
 			}
-			return array( 'state' => 'none', 'hint' => $hint );
+			return array( 'state' => 'none', 'hint' => Admin::digits( $hint ) );
 		}
 		return array(
 			'state'        => 'scored',
@@ -82,17 +82,17 @@ class Column {
 	public static function cell_line( array $score ) {
 		if ( $score['fixes_ready'] > 0 ) {
 			/* translators: %s: number of fixes */
-			$first = sprintf( _n( '%s fix ready', '%s fixes ready', $score['fixes_ready'], 'monoranks' ), number_format_i18n( $score['fixes_ready'] ) );
+			$first = sprintf( _n( '%s fix ready', '%s fixes ready', $score['fixes_ready'], 'monoranks' ), Admin::n( $score['fixes_ready'] ) );
 		} elseif ( $score['open_issues'] > 0 ) {
 			/* translators: %s: number of issues */
-			$first = sprintf( _n( '%s open issue', '%s open issues', $score['open_issues'], 'monoranks' ), number_format_i18n( $score['open_issues'] ) );
+			$first = sprintf( _n( '%s open issue', '%s open issues', $score['open_issues'], 'monoranks' ), Admin::n( $score['open_issues'] ) );
 		} else {
 			$first = __( 'No open issues', 'monoranks' );
 		}
 		$ts = $score['audited_at'] ? strtotime( $score['audited_at'] ) : 0;
 		/* translators: %s: relative time such as "2 days" */
 		$when = $ts ? sprintf( __( 'audited %s ago', 'monoranks' ), human_time_diff( $ts, time() ) ) : '';
-		return $when ? $first . ' · ' . $when : $first;
+		return Admin::digits( $when ? $first . ' · ' . $when : $first );
 	}
 
 	/** Orders by health when the column header is clicked; unscored posts stay in the list, at the end. */

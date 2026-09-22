@@ -24,9 +24,23 @@ const buttonVariants = cva(
   },
 );
 
-function Button({ className, variant, size, asChild = false, ...props }: React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : 'button';
-  return <Comp data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props} />;
+/**
+ * A button that is working (aria-busy) shows the app's small spinner in front of its label and ignores clicks; the label
+ * stays, so the button keeps its width.
+ */
+function Button({ className, variant, size, asChild = false, children, ...props }: React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & { asChild?: boolean }) {
+  const busy = props['aria-busy'] === true || props['aria-busy'] === 'true';
+  const classes = cn(buttonVariants({ variant, size, className }), busy && 'pointer-events-none opacity-85');
+  if (asChild) {
+    // A link styled as a button: Slot needs exactly one child, so no spinner here.
+    return <Slot.Root data-slot="button" className={classes} {...props}>{children}</Slot.Root>;
+  }
+  return (
+    <button data-slot="button" className={classes} {...props}>
+      {busy && <span className="spin" aria-hidden="true" />}
+      {children}
+    </button>
+  );
 }
 
 export { Button, buttonVariants };

@@ -51,8 +51,8 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
-      - name: assets/build is committed and up to date (run npm run build and commit it)
-        run: git diff --exit-code --stat assets/build
+      - name: build/ is committed and up to date (run npm run build and commit it)
+        run: git diff --exit-code --stat build
 
   plugin-check:
     name: WordPress.org plugin check
@@ -66,10 +66,10 @@ jobs:
       - run: composer install --no-interaction --prefer-dist
       - run: composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
       - name: Plugin files only, in a folder named after the slug
-        run: mkdir -p build && rsync -a --exclude-from=.distignore ./ build/monoranks/
+        run: mkdir -p tmp && rsync -a --exclude-from=.distignore ./ tmp/monoranks/
       - uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: build/monoranks
+          build-dir: tmp/monoranks
 
   version:
     name: Version consistency

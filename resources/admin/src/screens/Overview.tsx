@@ -8,6 +8,7 @@ import { ChangeLog } from '@/shell/ChangeLog';
 import { Card, CardHeader, CardTitle, CardBody } from '@/components/ui/card';
 import { out } from '@/lib/links';
 import type { Screen } from '@/lib/screen';
+import { fmt } from '@/lib/format';
 import { Button } from '@/components/ui/button';
 import { Badge, Dot } from '@/components/ui/badge';
 
@@ -54,7 +55,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
   const o = data?.overview ?? null;
   const description = data
     ? o
-      ? <>{__('Weekly SEO, AEO and GEO audit of', 'monoranks')} <code>{data.host}</code>{data.audited && <> · {sprintf(__('last audit %s', 'monoranks'), data.audited)}</>}{o.pages_total > 0 && <> · {sprintf(__('%1$s of %2$s published pages scored', 'monoranks'), String(o.pages_scored), String(o.pages_total))}</>}</>
+      ? <>{__('Weekly SEO, AEO and GEO audit of', 'monoranks')} <code>{data.host}</code>{data.audited && <> · {sprintf(__('last audit %s', 'monoranks'), data.audited)}</>}{o.pages_total > 0 && <> · {sprintf(__('%1$s of %2$s published pages scored', 'monoranks'), fmt(o.pages_scored), fmt(o.pages_total))}</>}</>
       : __('Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress.', 'monoranks')
     : ' ';
 
@@ -74,7 +75,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
           <div className="grid grid-cols-4 gap-[14px] max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
             <Card className="flex flex-col gap-2.5 px-5 py-[18px]">
               <div className="flex items-center justify-between"><span className="text-[12px] font-medium text-ink2">{__('Health score', 'monoranks')}</span><Delta n={o.deltas.health} /></div>
-              <div className="flex items-center gap-[14px]"><Ring score={o.health} size="lg" /><div className="flex flex-col gap-0.5"><span className="text-[12px] text-ink2">{__('Technical, on-page, links, speed', 'monoranks')}</span><span className="text-[11px] text-mute">{sprintf(_n('Site average, %s page', 'Site average, %s pages', o.pages_scored, 'monoranks'), String(o.pages_scored))}</span></div></div>
+              <div className="flex items-center gap-[14px]"><Ring score={o.health} size="lg" /><div className="flex flex-col gap-0.5"><span className="text-[12px] text-ink2">{__('Technical, on-page, links, speed', 'monoranks')}</span><span className="text-[11px] text-mute">{sprintf(_n('Site average, %s page', 'Site average, %s pages', o.pages_scored, 'monoranks'), fmt(o.pages_scored))}</span></div></div>
             </Card>
             <Card className="flex flex-col gap-2.5 px-5 py-[18px]">
               <div className="flex items-center justify-between"><span className="text-[12px] font-medium text-ink2">{__('AEO score', 'monoranks')}</span><Delta n={o.deltas.aeo} /></div>
@@ -83,14 +84,14 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
             <Card className="flex flex-col gap-2.5 px-5 py-[18px]">
               <div className="flex items-center justify-between"><span className="text-[12px] font-medium text-ink2">{__('Search clicks, 28 days', 'monoranks')}</span>{o.traffic && <Delta n={o.traffic.delta_pct} unit="%" />}</div>
               {o.traffic ? (
-                <><div className="text-2xl font-semibold leading-none tabular-nums tracking-[-0.01em]">{o.traffic.clicks_28d.toLocaleString()}</div><Sparkline series={o.traffic.series} /><span className="text-[11px] text-mute">{__('From Google Search Console, through MonoRanks', 'monoranks')}</span></>
+                <><div className="text-2xl font-semibold leading-none tabular-nums tracking-[-0.01em]">{fmt(o.traffic.clicks_28d)}</div><Sparkline series={o.traffic.series} /><span className="text-[11px] text-mute">{__('From Google Search Console, through MonoRanks', 'monoranks')}</span></>
               ) : (
                 <><div className="text-2xl font-semibold text-mute">—</div><span className="text-[11px] text-mute">{__('Connect Google Search Console in MonoRanks to see clicks here.', 'monoranks')}</span></>
               )}
             </Card>
             <Card className="flex flex-col gap-2.5 px-5 py-[18px]">
-              <div className="flex items-center justify-between"><span className="text-[12px] font-medium text-ink2">{__('Fixes', 'monoranks')}</span>{o.fixes.ready > 0 && <Badge>{sprintf(__('%s ready', 'monoranks'), String(o.fixes.ready))}</Badge>}</div>
-              <div className="text-2xl font-semibold leading-none tabular-nums tracking-[-0.01em]">{o.fixes.applied_30d} <span className="text-[12px] font-normal text-ink2">{__('applied in 30 days', 'monoranks')}</span></div>
+              <div className="flex items-center justify-between"><span className="text-[12px] font-medium text-ink2">{__('Fixes', 'monoranks')}</span>{o.fixes.ready > 0 && <Badge>{sprintf(__('%s ready', 'monoranks'), fmt(o.fixes.ready))}</Badge>}</div>
+              <div className="text-2xl font-semibold leading-none tabular-nums tracking-[-0.01em]">{fmt(o.fixes.applied_30d)} <span className="text-[12px] font-normal text-ink2">{__('applied in 30 days', 'monoranks')}</span></div>
               <div className="flex flex-wrap gap-1.5">
                 <Badge variant="pill"><Dot tone={o.ai.bots_rules ? 'good' : 'muted'} />{o.ai.bots_rules ? __('AI crawler rules on', 'monoranks') : __('No AI crawler rules', 'monoranks')}</Badge>
                 <Badge variant="pill"><Dot tone={o.ai.llms_txt ? 'good' : 'muted'} />{o.ai.llms_txt ? __('llms.txt published', 'monoranks') : __('No llms.txt', 'monoranks')}</Badge>
@@ -123,7 +124,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
 
             <Card>
               <CardHeader>
-                <CardTitle>{__('Ready to apply', 'monoranks')}{o.ready.length > 0 && <Badge>{o.ready.length}</Badge>}</CardTitle>
+                <CardTitle>{__('Ready to apply', 'monoranks')}{o.ready.length > 0 && <Badge>{fmt(o.ready.length)}</Badge>}</CardTitle>
                 {o.ready.length > 1 && <Button variant="primary" size="sm" disabled={busy !== null} aria-busy={busy === 'all'} onClick={() => run('all', () => api.apply('all'))}>{__('Apply all', 'monoranks')}</Button>}
               </CardHeader>
               <CardBody className="flex flex-col pt-1.5">
@@ -195,7 +196,7 @@ function Waiting({ data }: { data: OverviewData }) {
       <CardHeader><CardTitle>{__('Waiting for the first audit', 'monoranks')}</CardTitle><Badge variant="pill"><Dot tone="good" />{__('Connected', 'monoranks')}</Badge></CardHeader>
       <CardBody className="flex flex-col gap-4">
         <KV rows={[
-          [__('Content', 'monoranks'), data.last_sent ? sprintf(__('%1$s published items sent %2$s', 'monoranks'), String(data.items), data.last_sent) : __('Not sent yet. Use "Sync content now" above.', 'monoranks')],
+          [__('Content', 'monoranks'), data.last_sent ? sprintf(__('%1$s published items sent %2$s', 'monoranks'), fmt(data.items), data.last_sent) : __('Not sent yet. Use "Sync content now" above.', 'monoranks')],
           [__('Audit results', 'monoranks'), <>{results}{data.fetched && <span className="text-mute"> · {sprintf(__('checked %s', 'monoranks'), data.fetched)}</span>}</>],
         ]} />
         <div><Button size="sm" asChild><a href={out(data.app_url, 'open-audit')} target="_blank" rel="noopener">{__('Open the audit in MonoRanks', 'monoranks')}</a></Button></div>

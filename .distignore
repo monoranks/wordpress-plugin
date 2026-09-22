@@ -1,5 +1,5 @@
 # Repository and tooling files that never ship in the plugin zip (rsync --exclude-from). Everything else does:
-# monoranks.php, uninstall.php, readme.txt, src/, resources/views/, assets/ (column.css, the SVGs, build/), languages/, vendor/ (autoloader only, composer --no-dev).
+# monoranks.php, uninstall.php, readme.txt, src/, resources/views/, resources/assets/, build/, languages/, vendor/ (autoloader only, composer --no-dev).
 .git
 .github
 .gitignore
@@ -25,4 +25,4 @@ tests
 node_modules
 test-results
 playwright-report
-/build
+tmp

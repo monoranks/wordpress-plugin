@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-09-22T10:05:43+00:00",
+    "translation-revision-date": "2026-09-22T10:23:55+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -8,7 +8,7 @@
             "": {
                 "domain": "messages",
                 "lang": "fa_IR",
-                "plural-forms": "nplurals=2; plural=(n > 1);"
+                "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "No changes yet": [
                 "هنوز تغییری نیست"
@@ -41,40 +41,13 @@
                 "هنوز امتیاز نگرفته"
             ],
             "%s of 100": [
-                "%s از 100"
+                "%s از ۱۰۰"
             ],
             "%s this week": [
                 "%s این هفته"
             ],
-            "Overview": [
-                "نمای کلی"
-            ],
             "Settings": [
                 "تنظیمات"
-            ],
-            "Open MonoRanks": [
-                "باز کردن مونورنکس"
-            ],
-            "MonoRanks sections": [
-                "بخش‌های مونورنکس"
-            ],
-            "Help": [
-                "راهنما"
-            ],
-            "Your data": [
-                "داده‌های شما"
-            ],
-            "What is sent and what can change": [
-                "چه چیزی فرستاده می‌شود و چه چیزی می‌تواند تغییر کند"
-            ],
-            "Need a hand?": [
-                "کمک لازم دارید؟"
-            ],
-            "Help and resources": [
-                "راهنما و منابع"
-            ],
-            "A product by": [
-                "محصولی از"
             ],
             "Something went wrong. Try again.": [
                 "مشکلی پیش آمد. دوباره تلاش کنید."
@@ -93,6 +66,9 @@
             ],
             "In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.": [
                 "در مونورنکس وب‌سایت خود را باز کنید ← یکپارچه‌سازی‌ها ← وردپرس ← اتصال به وردپرس، و وقتی وردپرس پرسید به مونورنکس اجازه دهید. پیش از اتصال چیزی فرستاده نمی‌شود."
+            ],
+            "Open MonoRanks": [
+                "باز کردن مونورنکس"
             ],
             "Or paste a connector key": [
                 "یا کلید اتصال را وارد کنید"
@@ -186,7 +162,7 @@
                 "فرستاده می‌شود"
             ],
             "Published titles, a 40-word excerpt, dates, authors, categories, tags, SEO fields, image alt text and plugin status.": [
-                "عنوان‌های منتشرشده، چکیدهٔ 40 کلمه‌ای، تاریخ‌ها، نویسندگان، دسته‌ها، برچسب‌ها، فیلدهای سئو، متن جایگزین تصاویر و وضعیت افزونه."
+                "عنوان‌های منتشرشده، چکیدهٔ ۴۰ کلمه‌ای، تاریخ‌ها، نویسندگان، دسته‌ها، برچسب‌ها، فیلدهای سئو، متن جایگزین تصاویر و وضعیت افزونه."
             ],
             "Read back": [
                 "خوانده می‌شود"
@@ -207,16 +183,13 @@
                 "عنوان سئو، توضیح متا، کانونیکال، noindex، متن جایگزین تصویر، تغییر مسیرها، یک پاراگراف آغازین، قوانین خزنده‌های هوش مصنوعی، llms.txt. فقط پس از آنکه هرکدام را تأیید کنید."
             ],
             "Last 50 · undo for 30 days": [
-                "50 مورد آخر · بازگردانی تا 30 روز"
+                "۵۰ مورد آخر · بازگردانی تا ۳۰ روز"
             ],
             "MonoRanks address (development sites only)": [
                 "نشانی مونورنکس (فقط سایت‌های توسعه)"
             ],
             "Connect": [
                 "اتصال"
-            ],
-            "Site": [
-                "سایت"
             ],
             "Connect MonoRanks": [
                 "اتصال مونورنکس"
@@ -226,6 +199,12 @@
             ],
             "AEO": [
                 "AEO"
+            ],
+            "Overview": [
+                "نمای کلی"
+            ],
+            "Site": [
+                "سایت"
             ],
             "Could not load the overview.": [
                 "بارگذاری نمای کلی ممکن نشد."
@@ -265,7 +244,7 @@
                 "پاسخ‌های هوش مصنوعی چقدر می‌توانند از صفحه‌های شما استفاده کنند"
             ],
             "Search clicks, 28 days": [
-                "کلیک‌های جستجو، 28 روز"
+                "کلیک‌های جستجو، ۲۸ روز"
             ],
             "From Google Search Console, through MonoRanks": [
                 "از گوگل سرچ کنسول، از طریق مونورنکس"
@@ -280,7 +259,7 @@
                 "%s آماده"
             ],
             "applied in 30 days": [
-                "اعمال‌شده در 30 روز"
+                "اعمال‌شده در ۳۰ روز"
             ],
             "AI crawler rules on": [
                 "قوانین خزنده‌های هوش مصنوعی فعال"
@@ -313,7 +292,7 @@
                 "چیزی نیازمند توجه نیست"
             ],
             "Every scored page is above 60. The next audit may change that.": [
-                "همهٔ صفحه‌های امتیازگرفته بالای 60 هستند. ممیزی بعدی ممکن است این را تغییر دهد."
+                "همهٔ صفحه‌های امتیازگرفته بالای ۶۰ هستند. ممیزی بعدی ممکن است این را تغییر دهد."
             ],
             "Ready to apply": [
                 "آمادهٔ اعمال"
@@ -337,7 +316,7 @@
                 "اعمال"
             ],
             "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days.": [
-                "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا 30 روز قابل بازگردانی است."
+                "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
             ],
             "All changes": [
                 "همهٔ تغییرات"
@@ -386,6 +365,27 @@
             ],
             "Open the audit in MonoRanks": [
                 "باز کردن ممیزی در مونورنکس"
+            ],
+            "MonoRanks sections": [
+                "بخش‌های مونورنکس"
+            ],
+            "Help": [
+                "راهنما"
+            ],
+            "Your data": [
+                "داده‌های شما"
+            ],
+            "What is sent and what can change": [
+                "چه چیزی فرستاده می‌شود و چه چیزی می‌تواند تغییر کند"
+            ],
+            "Need a hand?": [
+                "کمک لازم دارید؟"
+            ],
+            "Help and resources": [
+                "راهنما و منابع"
+            ],
+            "A product by": [
+                "محصولی از"
             ]
         }
     }

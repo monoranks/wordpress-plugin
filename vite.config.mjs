@@ -4,7 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'node:path';
 
 /**
- * The admin app is built into assets/build/ and enqueued by src/Assets.php on the plugin's own screens.
+ * The admin app is built into build/ (main.js, main.css) next to the Posts column's stylesheet (column.css, from
+ * resources/assets/) and enqueued by src/Assets.php. build/ is committed so a checkout without Node still works.
  *
  * `@wordpress/i18n` and `@wordpress/api-fetch` are never bundled: WordPress ships both, and wp_set_script_translations()
  * loads the catalogue into WordPress's own wp.i18n, so a bundled copy would read an empty catalogue. The shim below turns
@@ -42,21 +43,23 @@ export default defineConfig({
   publicDir: false,
   base: './',
   build: {
-    outDir: resolve(import.meta.dirname, 'assets/build'),
+    outDir: resolve(import.meta.dirname, 'build'),
     emptyOutDir: true,
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     modulePreload: false,
     rollupOptions: {
-      input: resolve(import.meta.dirname, 'resources/admin/src/main.tsx'),
+      input: {
+        main: resolve(import.meta.dirname, 'resources/admin/src/main.tsx'),
+        column: resolve(import.meta.dirname, 'resources/assets/column.css'),
+      },
       output: {
         format: 'es',
         // One entry, no code splitting, committed to the repository so the plugin works wherever it is checked out
         // (the app's Docker tests mount this folder, the in-app zip and the WordPress.org deploy copy it). Cache busting
         // is the ?ver query WordPress adds from the file's mtime (src/Assets.php).
-        entryFileNames: 'main.js',
+        entryFileNames: '[name].js',
         chunkFileNames: 'chunk-[hash].js',
-        inlineDynamicImports: true,
-        assetFileNames: (asset) => (/\.css$/.test(asset.names[0] ?? '') ? 'main.css' : 'assets/[name]-[hash][extname]'),
+        assetFileNames: (asset) => (/\.css$/.test(asset.names[0] ?? '') ? '[name].css' : 'static/[name]-[hash][extname]'),
       },
       onwarn(warning, warn) {
         if (warning.code === 'MISSING_EXPORT') throw new Error(warning.message);

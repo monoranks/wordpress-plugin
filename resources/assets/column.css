@@ -1,6 +1,6 @@
 /*
- * The MonoRanks column in Posts, Pages and other list tables: two score rings per row (the app's ScoreBox). The plugin's
- * own screens are the admin app (resources/admin, built into assets/build/) and carry their own stylesheet.
+ * The MonoRanks column in Posts, Pages and other list tables: two score rings per row (the app's ScoreBox). Built by
+ * Vite into build/column.css. The plugin's own screens are the admin app (resources/admin) with its own stylesheet.
  * The list table is WordPress's light surface, so the cell always uses the light palette.
  */
 .monoranks-cell { --ink: #14181f; --muted: #8a929e; --line: #cbd2db; --good: #0ca30c; --warn: #e6a100; --critical: #d03b3b; --grayTrack: #e6e9ee; }

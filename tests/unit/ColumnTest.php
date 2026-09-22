@@ -15,6 +15,7 @@ class ColumnTest extends TestCase {
 		Functions\when( '_n' )->alias( static function ( $one, $many, $n ) { return 1 === $n ? $one : $many; } );
 		Functions\when( 'number_format_i18n' )->alias( static function ( $n ) { return (string) $n; } );
 		Functions\when( 'human_time_diff' )->justReturn( '2 days' );
+		Functions\when( 'determine_locale' )->justReturn( 'en_US' );
 	}
 	protected function tear_down() {
 		Monkey\tearDown();

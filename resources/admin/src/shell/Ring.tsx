@@ -1,6 +1,7 @@
 import { __, sprintf } from '@wordpress/i18n';
 import { cn } from '@/lib/utils';
 import type { Score } from '@/lib/api';
+import { fmt, fmtSigned } from '@/lib/format';
 
 /** good | warn | critical | none, the app's scoreColor thresholds (80 / 60). */
 export function tone(score: Score) {
@@ -15,7 +16,7 @@ export function Ring({ score, size = 'sm', label }: { score: Score; size?: 'sm' 
   const r = (px - sw) / 2;
   const c = 2 * Math.PI * r;
   const mid = px / 2;
-  const title = score === null ? __('Not scored yet', 'monoranks') : sprintf(__('%s of 100', 'monoranks'), String(score));
+  const title = score === null ? __('Not scored yet', 'monoranks') : sprintf(__('%s of 100', 'monoranks'), fmt(score));
   return (
     <span className={cn('mr-score', size, tone(score))} title={(label ? `${label}: ` : '') + title}>
       <span className="mr-ring">
@@ -29,7 +30,7 @@ export function Ring({ score, size = 'sm', label }: { score: Score; size?: 'sm' 
             </>
           )}
         </svg>
-        <span>{score === null ? '—' : score}</span>
+        <span>{score === null ? '—' : fmt(score)}</span>
       </span>
       {label && <span className="lbl">{label}</span>}
     </span>
@@ -40,7 +41,7 @@ export function Ring({ score, size = 'sm', label }: { score: Score; size?: 'sm' 
 export function Delta({ n, unit = '' }: { n: number | null | undefined; unit?: string }) {
   if (n === null || n === undefined) return null;
   const dir = n > 0 ? 'text-good-ink' : n < 0 ? 'text-critical' : 'text-mute';
-  const txt = (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(n) + unit;
+  const txt = fmtSigned(n, unit);
   return <span className={cn('text-[12px] font-medium', dir)}>{sprintf(__('%s this week', 'monoranks'), '⁨' + txt + '⁩')}</span>;
 }
 

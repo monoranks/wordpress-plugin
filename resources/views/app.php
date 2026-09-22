@@ -1,6 +1,6 @@
 <?php
 /**
- * Where the admin app renders. $theme (light | dark), $built (whether assets/build/main.js exists).
+ * Where the admin app renders. $theme (light | dark), $built (whether build/main.js exists).
  *
  * @package MonoRanks
  */

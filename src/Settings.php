@@ -21,7 +21,7 @@ class Settings {
 			'key_hint'     => $connected ? substr( $conn['key'], 0, 12 ) . '…' : '',
 			'key_via'      => $connected && 'pairing' === ( isset( $conn['via'] ) ? $conn['via'] : '' )
 				/* translators: 1: user, 2: date */
-				? sprintf( __( 'set when %1$s connected MonoRanks on %2$s', 'monoranks' ), $conn['paired_by'], wp_date( get_option( 'date_format' ), strtotime( $conn['paired_at'] ) ) )
+				? Admin::digits( sprintf( __( 'set when %1$s connected MonoRanks on %2$s', 'monoranks' ), $conn['paired_by'], wp_date( get_option( 'date_format' ), strtotime( $conn['paired_at'] ) ) ) )
 				: __( 'pasted by hand', 'monoranks' ),
 			'api_base'     => $connected ? $conn['api_base'] : MONORANKS_API_BASE,
 			'last_sent'    => Admin::ago( isset( $conn['last_sent_at'] ) ? $conn['last_sent_at'] : '', __( 'Never', 'monoranks' ) ),
