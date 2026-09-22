@@ -2,7 +2,7 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
-## [1.0.0] — unreleased
+## [1.1.0] — unreleased
 
 Initial release.
 

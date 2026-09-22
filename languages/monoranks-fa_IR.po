@@ -4,7 +4,7 @@ msgstr "Project-Id-Version: MonoRanks ۱.۰.۰\nLanguage: fa_IR\nMIME-Version: �
 #. Plugin Name of the plugin
 #: monoranks.php
 #: src/Admin.php:46
-#: src/Column.php:34
+#: src/Column.php:35
 #: tmp/monoranks/src/Admin.php:46
 #: tmp/monoranks/src/Column.php:34
 msgid "MonoRanks"
@@ -69,7 +69,7 @@ msgid "Status"
 msgstr "وضعیت"
 
 #: resources/views/column-cell.php:28
-#: src/Column.php:67
+#: src/Column.php:68
 #: tmp/monoranks/resources/views/column-cell.php:28
 #: tmp/monoranks/src/Column.php:67
 msgid "Not audited yet"
@@ -136,7 +136,7 @@ msgstr[0] "%s باز"
 msgstr[1] "%s باز"
 
 #: resources/views/column-cell.php:48
-#: src/Column.php:106
+#: src/Column.php:107
 #: tmp/monoranks/resources/views/column-cell.php:48
 #: tmp/monoranks/src/Column.php:106
 msgid "No open issues"
@@ -197,105 +197,106 @@ msgstr "تنظیمات"
 
 #. translators: 1: relative time, 2: date
 #, php-format
-#: src/Admin.php:165
+#: src/Admin.php:168
 #: tmp/monoranks/src/Admin.php:165
 msgid "in %1$s (%2$s)"
 msgstr "%1$s دیگر (%2$s)"
 
 #. translators: 1: relative time, 2: date
 #, php-format
-#: src/Admin.php:168
+#: src/Admin.php:171
 #: tmp/monoranks/src/Admin.php:168
 msgid "%1$s ago (%2$s)"
 msgstr "%1$s پیش (%2$s)"
 
-#: src/Admin.php:174
+#: src/Admin.php:177
 #: tmp/monoranks/src/Admin.php:174
 msgid "Connected. Your published content is on its way to MonoRanks."
 msgstr "متصل شد. محتوای منتشرشدهٔ شما در راه مونورنکس است."
 
-#: src/Admin.php:175
+#: src/Admin.php:178
 #: tmp/monoranks/src/Admin.php:175
 msgid "Content sent to MonoRanks."
 msgstr "محتوا به مونورنکس فرستاده شد."
 
-#: src/Admin.php:176
+#: src/Admin.php:179
 #: tmp/monoranks/src/Admin.php:176
 msgid "Disconnected. Nothing is sent to MonoRanks any more."
 msgstr "اتصال قطع شد. دیگر چیزی به مونورنکس فرستاده نمی‌شود."
 
-#: src/Admin.php:177
+#: src/Admin.php:180
+#: tmp/monoranks/src/Admin.php:177
 msgid "Everything MonoRanks stored in WordPress is gone: the connection, the scores, the redirects and the change log."
 msgstr "هر چه مونورنکس در وردپرس ذخیره کرده بود پاک شد: اتصال، امتیازها، تغییر مسیرها و فهرست تغییرات."
 
-#: src/Admin.php:178
-#: tmp/monoranks/src/Admin.php:177
+#: src/Admin.php:181
+#: tmp/monoranks/src/Admin.php:178
 msgid "Applied. The change is listed under Recent changes and can be undone."
 msgstr "اعمال شد. این تغییر در «تغییرات اخیر» آمده و قابل بازگردانی است."
 
-#: src/Admin.php:179
-#: tmp/monoranks/src/Admin.php:178
+#: src/Admin.php:182
+#: tmp/monoranks/src/Admin.php:179
 msgid "Some fixes were applied; the rest were refused because those pages changed since MonoRanks reviewed them. Recent changes lists what was written."
 msgstr "بخشی از اصلاح‌ها اعمال شد؛ بقیه رد شدند چون آن صفحه‌ها از زمان بررسی مونورنکس تغییر کرده‌اند. «تغییرات اخیر» آنچه نوشته شد را نشان می‌دهد."
 
-#: src/Admin.php:180
-#: tmp/monoranks/src/Admin.php:179
+#: src/Admin.php:183
+#: tmp/monoranks/src/Admin.php:180
 msgid "That change has moved in the log since this screen loaded. Reload and try Undo again."
 msgstr "این تغییر از زمان باز شدن صفحه در فهرست جابه‌جا شده است. صفحه را تازه کنید و دوباره بازگردانی را بزنید."
 
-#: src/Admin.php:181
-#: tmp/monoranks/src/Admin.php:180
+#: src/Admin.php:184
+#: tmp/monoranks/src/Admin.php:181
 msgid "Undone. The previous value is back."
 msgstr "بازگردانده شد. مقدار قبلی برگشت."
 
-#: src/Admin.php:182
-#: tmp/monoranks/src/Admin.php:181
+#: src/Admin.php:185
+#: tmp/monoranks/src/Admin.php:182
 msgid "MonoRanks could not apply that change: the page changed since it was reviewed. Open it in MonoRanks to review again."
 msgstr "مونورنکس نتوانست این تغییر را اعمال کند: صفحه از زمان بررسی تغییر کرده است. برای بررسی دوباره آن را در مونورنکس باز کنید."
 
-#: src/Admin.php:183
-#: tmp/monoranks/src/Admin.php:182
+#: src/Admin.php:186
+#: tmp/monoranks/src/Admin.php:183
 msgid "That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP."
 msgstr "این شبیه کلید اتصال مونورنکس نیست. آن را دوباره از مونورنکس ← تنظیمات ← API و MCP کپی کنید."
 
-#: src/Admin.php:184
-#: tmp/monoranks/src/Admin.php:183
+#: src/Admin.php:187
+#: tmp/monoranks/src/Admin.php:184
 msgid "The MonoRanks address must start with https://."
 msgstr "نشانی مونورنکس باید با https:// شروع شود."
 
-#: src/Admin.php:185
-#: tmp/monoranks/src/Admin.php:184
+#: src/Admin.php:188
+#: tmp/monoranks/src/Admin.php:185
 msgid "MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks."
 msgstr "مونورنکس این کلید را نپذیرفت. شاید باطل یا جایگزین شده باشد؛ در مونورنکس کلید تازه‌ای بسازید."
 
-#: src/Admin.php:186
-#: tmp/monoranks/src/Admin.php:185
+#: src/Admin.php:189
+#: tmp/monoranks/src/Admin.php:186
 msgid "This key belongs to a different website in MonoRanks. Create the key on the website with this address."
 msgstr "این کلید متعلق به وب‌سایت دیگری در مونورنکس است. کلید را روی وب‌سایتی با همین نشانی بسازید."
 
-#: src/Admin.php:187
-#: tmp/monoranks/src/Admin.php:186
+#: src/Admin.php:190
+#: tmp/monoranks/src/Admin.php:187
 msgid "MonoRanks could not be reached. Check the address and try again."
 msgstr "دسترسی به مونورنکس ممکن نشد. نشانی را بررسی کنید و دوباره تلاش کنید."
 
 #. translators: %s: relative time such as "5 days"
 #, php-format
-#: src/Column.php:62
+#: src/Column.php:63
 #: tmp/monoranks/src/Column.php:62
 msgid "in %s"
 msgstr "%s دیگر"
 
 #. translators: %s: relative time such as "in 5 days"
 #, php-format
-#: src/Column.php:70
+#: src/Column.php:71
 #: tmp/monoranks/src/Column.php:70
 msgid "next audit %s"
 msgstr "ممیزی بعدی %s"
 
 #. translators: %s: relative time such as "2 days"
 #, php-format
-#: src/Column.php:77
-#: src/Column.php:90
+#: src/Column.php:78
+#: src/Column.php:91
 #: tmp/monoranks/src/Column.php:77
 #: tmp/monoranks/src/Column.php:90
 msgid "%s ago"
@@ -303,7 +304,7 @@ msgstr "%s پیش"
 
 #. translators: %s: number of fixes
 #, php-format
-#: src/Column.php:101
+#: src/Column.php:102
 #: tmp/monoranks/src/Column.php:101
 msgid "%s fix ready"
 msgid_plural "%s fixes ready"
@@ -312,7 +313,7 @@ msgstr[1] "%s اصلاح آماده"
 
 #. translators: %s: number of issues
 #, php-format
-#: src/Column.php:104
+#: src/Column.php:105
 #: tmp/monoranks/src/Column.php:104
 msgid "%s open issue"
 msgid_plural "%s open issues"
@@ -321,12 +322,12 @@ msgstr[1] "%s مشکل باز"
 
 #. translators: %s: relative time such as "2 days"
 #, php-format
-#: src/Column.php:110
+#: src/Column.php:111
 #: tmp/monoranks/src/Column.php:110
 msgid "audited %s ago"
 msgstr "ممیزی %s پیش"
 
-#: src/Column.php:150
+#: src/Column.php:151
 #: tmp/monoranks/src/Column.php:150
 msgid "Needs attention"
 msgstr "نیازمند توجه"
@@ -392,17 +393,17 @@ msgstr "سایت"
 #. translators: 1: user, 2: date
 #, php-format
 #: src/Settings.php:35
-#: tmp/monoranks/src/Settings.php:24
+#: tmp/monoranks/src/Settings.php:35
 msgid "set when %1$s connected MonoRanks on %2$s"
 msgstr "هنگام اتصال %1$s به مونورنکس در %2$s تنظیم شد"
 
 #: src/Settings.php:36
-#: tmp/monoranks/src/Settings.php:25
+#: tmp/monoranks/src/Settings.php:36
 msgid "pasted by hand"
 msgstr "دستی وارد شده"
 
 #: src/Settings.php:38
-#: tmp/monoranks/src/Settings.php:27
+#: tmp/monoranks/src/Settings.php:38
 msgid "Never"
 msgstr "هرگز"
 
@@ -757,7 +758,7 @@ msgstr "قطع اتصال ارسال را متوقف می‌کند. اصلاح�
 msgid "Use this when your host blocks Application Passwords. In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website."
 msgstr "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید. در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت."
 
-#: tmp/i18n/screens/Settings.js:81
+#: tmp/i18n/screens/Settings.js:80
 msgid "Use a different key"
 msgstr "استفاده از کلید دیگر"
 
@@ -837,39 +838,39 @@ msgstr "نشانی مونورنکس (فقط سایت‌های توسعه)"
 msgid "Connect"
 msgstr "اتصال"
 
-#: tmp/i18n/shell/ChangeLog.js:7
+#: tmp/i18n/shell/ChangeLog.js:8
 msgid "No changes yet"
 msgstr "هنوز تغییری نیست"
 
-#: tmp/i18n/shell/ChangeLog.js:7
+#: tmp/i18n/shell/ChangeLog.js:8
 msgid "Fixes you approve in MonoRanks show up here, each with Undo."
 msgstr "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا دیده می‌شوند، هرکدام با گزینهٔ بازگردانی."
 
-#: tmp/i18n/shell/ChangeLog.js:15
+#: tmp/i18n/shell/ChangeLog.js:16
 msgid "When"
 msgstr "زمان"
 
-#: tmp/i18n/shell/ChangeLog.js:15
+#: tmp/i18n/shell/ChangeLog.js:16
 msgid "Who"
 msgstr "چه کسی"
 
-#: tmp/i18n/shell/ChangeLog.js:15
+#: tmp/i18n/shell/ChangeLog.js:16
 msgid "Field"
 msgstr "فیلد"
 
-#: tmp/i18n/shell/ChangeLog.js:15
+#: tmp/i18n/shell/ChangeLog.js:16
 msgid "Where"
 msgstr "کجا"
 
-#: tmp/i18n/shell/ChangeLog.js:15
+#: tmp/i18n/shell/ChangeLog.js:16
 msgid "Before"
 msgstr "قبل"
 
-#: tmp/i18n/shell/ChangeLog.js:15
+#: tmp/i18n/shell/ChangeLog.js:16
 msgid "After"
 msgstr "بعد"
 
-#: tmp/i18n/shell/ChangeLog.js:24
+#: tmp/i18n/shell/ChangeLog.js:25
 msgid "Undo"
 msgstr "بازگردانی"
 

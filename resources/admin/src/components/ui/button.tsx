@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default: 'border-border bg-surface text-ink hover:bg-surface2 hover:border-line',
         primary: 'border-primary bg-primary text-primary-foreground hover:opacity-85',
         accent: 'border-brand bg-brand text-white hover:opacity-85',
-        ghost: 'border-transparent bg-transparent text-ink2 hover:bg-surface2 hover:text-ink',
+        ghost: 'border-transparent bg-transparent text-ink2 hover:bg-surface3 hover:text-ink',
         danger: 'border-critical/50 bg-surface text-critical hover:border-critical hover:bg-critical hover:text-white',
         dangerSolid: 'border-critical bg-critical text-white hover:opacity-85',
       },

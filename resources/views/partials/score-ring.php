@@ -1,6 +1,6 @@
 <?php
 /**
- * A score ring. $score (0–100 or null), $size (sm | md | lg), $label, $tone (good | warn | critical | none).
+ * A score ring. $score (0–100 or null), $size (sm | md | lg), $label, $place (side | under), $tone.
  *
  * @package MonoRanks
  */
@@ -15,7 +15,7 @@ $monoranks_mid = $monoranks_px / 2;
 /* translators: %s: score out of 100 */
 $monoranks_title = null === $score ? __( 'Not scored yet', 'monoranks' ) : \MonoRanks\Admin::digits( sprintf( __( '%s of 100', 'monoranks' ), number_format_i18n( $score ) ) );
 ?>
-<span class="mr-score <?php echo esc_attr( $size . ' ' . $tone ); ?>" title="<?php echo esc_attr( ( $label ? $label . ': ' : '' ) . $monoranks_title ); ?>">
+<span class="mr-score <?php echo esc_attr( $size . ' ' . $tone . ' ' . ( isset( $place ) ? $place : 'side' ) ); ?>" title="<?php echo esc_attr( ( $label ? $label . ': ' : '' ) . $monoranks_title ); ?>">
 	<span class="mr-ring">
 		<svg width="<?php echo (int) $monoranks_px; ?>" height="<?php echo (int) $monoranks_px; ?>" viewBox="0 0 <?php echo (int) $monoranks_px; ?> <?php echo (int) $monoranks_px; ?>" aria-hidden="true">
 			<?php if ( null === $score ) : ?>
