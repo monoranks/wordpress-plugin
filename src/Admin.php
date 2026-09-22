@@ -14,15 +14,23 @@ class Admin {
 	const SETTINGS = 'monoranks-settings';
 
 	public static function register() {
-		add_action( 'init', array( __CLASS__, 'textdomain' ) );
+		add_filter( 'load_textdomain_mofile', array( __CLASS__, 'bundled_mofile' ), 10, 2 );
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'legacy_url' ) );
 		add_filter( 'admin_footer_text', array( __CLASS__, 'footer_text' ), 100 );
 		add_filter( 'update_footer', array( __CLASS__, 'footer_text' ), 100 );
 	}
 
-	public static function textdomain() {
-		load_plugin_textdomain( 'monoranks', false, dirname( plugin_basename( MONORANKS_CONNECTOR_FILE ) ) . '/languages' );
+	/**
+	 * WordPress loads this plugin's translations on its own (from wp-content/languages/plugins, where language packs from
+	 * translate.wordpress.org land). Until a language pack exists, the copy bundled under languages/ stands in.
+	 */
+	public static function bundled_mofile( $mofile, $domain ) {
+		if ( 'monoranks' !== $domain || file_exists( $mofile ) ) {
+			return $mofile;
+		}
+		$bundled = dirname( MONORANKS_CONNECTOR_FILE ) . '/languages/' . basename( $mofile );
+		return file_exists( $bundled ) ? $bundled : $mofile;
 	}
 
 	public static function menu() {
