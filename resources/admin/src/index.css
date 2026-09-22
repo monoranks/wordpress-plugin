@@ -89,6 +89,9 @@ body.monoranks-screen #wpfooter { display: none; }
    content area is a column: whatever WordPress prints above the frame (its update notices) keeps its height, and the
    frame takes the rest. */
 body.monoranks-screen #wpwrap { min-height: 0; }
+/* On a site with a long admin menu the menu is taller than the page, and WordPress leaves that extra height grey below
+   the frame. Painting the content area with the footer's colour makes the band continue instead of a strip appearing. */
+body.monoranks-screen #wpwrap, body.monoranks-screen #wpcontent, body.monoranks-screen #wpbody, body.monoranks-screen #wpbody-content { background: var(--band); }
 body.monoranks-screen #wpbody-content { display: flex; flex-direction: column; min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px)); }
 /* WordPress's own notices are moved into the page (shell/Notices.tsx) and take the app's look there. One that has not
    been moved yet stays hidden for the moment rather than flashing above the band. */
