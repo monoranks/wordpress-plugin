@@ -95,8 +95,10 @@
 .monoranks table.tbl tbody tr:hover td { background: var(--surface2); }
 .monoranks table.tbl th.r, .monoranks table.tbl td.r { text-align: end; }
 .monoranks table.tbl td .cell { max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.monoranks table.tbl td .code { max-width: 320px; }
+.monoranks table.tbl td .code { max-width: 220px; }
 .monoranks table.tbl td.nowrap { white-space: nowrap; }
+.monoranks .two table.tbl th, .monoranks .two table.tbl td { padding-left: 10px; padding-right: 10px; }
+.monoranks .two table.tbl td .code { max-width: 180px; }
 
 .monoranks .tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
 .monoranks .tile { padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }

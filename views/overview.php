@@ -88,7 +88,7 @@ $monoranks_o = $overview;
 							<td><div class="col" style="gap:2px"><b><?php echo esc_html( $monoranks_row['title'] ? $monoranks_row['title'] : $monoranks_row['url'] ); ?></b><?php if ( $monoranks_row['url'] ) : ?><span class="code xs"><?php echo esc_html( wp_make_link_relative( $monoranks_row['url'] ) ); ?></span><?php endif; ?></div></td>
 							<td><?php echo Admin::ring( $monoranks_row['health'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></td>
 							<td><?php echo Admin::ring( $monoranks_row['aeo'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></td>
-							<td class="sm nowrap"><?php echo esc_html( $monoranks_row['issue'] ); ?></td>
+							<td class="sm"><?php echo esc_html( $monoranks_row['issue'] ); ?></td>
 							<td class="r"><?php if ( $monoranks_row['page_url'] ) : ?><a class="btn sm" href="<?php echo esc_url( $monoranks_row['page_url'] ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Fix in MonoRanks', 'monoranks' ); ?></a><?php endif; ?></td>
 						</tr>
 					<?php endforeach; ?>

@@ -1,0 +1,470 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MonoRanks 1.0.0\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: monoranks\n"
+
+msgid "MonoRanks"
+msgstr "مونورنکس"
+
+msgid "Overview"
+msgstr "نمای کلی"
+
+msgid "MonoRanks settings"
+msgstr "تنظیمات مونورنکس"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "in %1$s (%2$s)"
+msgstr "%1$s دیگر (%2$s)"
+
+msgid "%1$s ago (%2$s)"
+msgstr "%1$s پیش (%2$s)"
+
+msgid "Connected. Your published content is on its way to MonoRanks."
+msgstr "متصل شد. محتوای منتشرشدهٔ شما در راه مونورنکس است."
+
+msgid "Content sent to MonoRanks."
+msgstr "محتوا به مونورنکس فرستاده شد."
+
+msgid "Applied. The change is listed under Recent changes and can be undone."
+msgstr "اعمال شد. این تغییر در «تغییرات اخیر» آمده و قابل بازگردانی است."
+
+msgid "Undone. The previous value is back."
+msgstr "بازگردانده شد. مقدار قبلی برگشت."
+
+msgid "MonoRanks could not apply that change: the page changed since it was reviewed. Open it in MonoRanks to review again."
+msgstr "مونورنکس نتوانست این تغییر را اعمال کند: صفحه از زمان بررسی تغییر کرده است. برای بررسی دوباره آن را در مونورنکس باز کنید."
+
+msgid "That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP."
+msgstr "این شبیه کلید اتصال مونورنکس نیست. آن را دوباره از مونورنکس ← تنظیمات ← API و MCP کپی کنید."
+
+msgid "The MonoRanks address must start with https://."
+msgstr "نشانی مونورنکس باید با https:// شروع شود."
+
+msgid "MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks."
+msgstr "مونورنکس این کلید را نپذیرفت. شاید باطل یا جایگزین شده باشد؛ در مونورنکس کلید تازه‌ای بسازید."
+
+msgid "This key belongs to a different website in MonoRanks. Create the key on the website with this address."
+msgstr "این کلید متعلق به وب‌سایت دیگری در مونورنکس است. کلید را روی وب‌سایتی با همین نشانی بسازید."
+
+msgid "MonoRanks could not be reached. Check the address and try again."
+msgstr "دسترسی به مونورنکس ممکن نشد. نشانی را بررسی کنید و دوباره تلاش کنید."
+
+msgid "Not allowed"
+msgstr "مجاز نیست"
+
+msgid "%s fix ready"
+msgid_plural "%s fixes ready"
+msgstr[0] "%s اصلاح آماده"
+msgstr[1] "%s اصلاح آماده"
+
+msgid "%s open issue"
+msgid_plural "%s open issues"
+msgstr[0] "%s مشکل باز"
+msgstr[1] "%s مشکل باز"
+
+msgid "No open issues"
+msgstr "بدون مشکل باز"
+
+msgid "audited %s ago"
+msgstr "ممیزی %s پیش"
+
+msgid "Needs attention"
+msgstr "نیازمند توجه"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Meta description"
+msgstr "توضیح متا"
+
+msgid "Canonical"
+msgstr "کانونیکال"
+
+msgid "Noindex"
+msgstr "Noindex"
+
+msgid "Image alt"
+msgstr "متن جایگزین تصویر"
+
+msgid "Redirect"
+msgstr "تغییر مسیر"
+
+msgid "Opening paragraph"
+msgstr "پاراگراف آغازین"
+
+msgid "robots.txt"
+msgstr "robots.txt"
+
+msgid "llms.txt"
+msgstr "llms.txt"
+
+msgid "set when %1$s connected MonoRanks on %2$s"
+msgstr "هنگام اتصال %1$s به مونورنکس در %2$s تنظیم شد"
+
+msgid "pasted by hand"
+msgstr "دستی وارد شده"
+
+msgid "Never"
+msgstr "هرگز"
+
+msgid "Connect MonoRanks"
+msgstr "اتصال مونورنکس"
+
+msgid "Scored after publishing"
+msgstr "پس از انتشار امتیاز می‌گیرد"
+
+msgid "Health"
+msgstr "سلامت"
+
+msgid "AEO"
+msgstr "AEO"
+
+msgid "Not audited yet"
+msgstr "هنوز ممیزی نشده"
+
+msgid "next audit in %s"
+msgstr "ممیزی بعدی تا %s دیگر"
+
+msgid "Connect MonoRanks again"
+msgstr "مونورنکس را دوباره متصل کنید"
+
+msgid "Key revoked"
+msgstr "کلید باطل شده"
+
+msgid "Not connected"
+msgstr "متصل نیست"
+
+msgid "Connect from MonoRanks"
+msgstr "اتصال از مونورنکس"
+
+msgid "In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect."
+msgstr "در مونورنکس وب‌سایت خود را باز کنید ← یکپارچه‌سازی‌ها ← وردپرس ← اتصال به وردپرس، و وقتی وردپرس پرسید به مونورنکس اجازه دهید. پیش از اتصال چیزی فرستاده نمی‌شود."
+
+msgid "Open MonoRanks"
+msgstr "باز کردن مونورنکس"
+
+msgid "Or paste a connector key"
+msgstr "یا کلید اتصال را وارد کنید"
+
+msgid "Use this when your host blocks Application Passwords."
+msgstr "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید."
+
+msgid "Open settings"
+msgstr "باز کردن تنظیمات"
+
+msgid "See scores here and in your Posts list"
+msgstr "امتیازها را اینجا و در فهرست نوشته‌ها ببینید"
+
+msgid "After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list."
+msgstr "پس از نخستین ممیزی، این صفحه امتیاز سلامت و AEO سایت، صفحه‌های نیازمند توجه و اصلاح‌های تأییدشدهٔ شما را نشان می‌دهد؛ هر نوشته و برگه هم امتیازش را در فهرست می‌گیرد."
+
+msgid "Waiting for the first audit"
+msgstr "در انتظار نخستین ممیزی"
+
+msgid "Connected"
+msgstr "متصل"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid "%1$s published items sent %2$s"
+msgstr "%1$s مورد منتشرشده %2$s فرستاده شد"
+
+msgid "Not sent yet. Use \"Sync content now\" above."
+msgstr "هنوز فرستاده نشده. از «همگام‌سازی محتوا» در بالا استفاده کنید."
+
+msgid "Audit results"
+msgstr "نتایج ممیزی"
+
+msgid "This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow."
+msgstr "این مونورنکس هنوز نتایج ممیزی را با افزونه به اشتراک نمی‌گذارد. فعلاً امتیازها در مونورنکس می‌مانند؛ افزونه فردا دوباره می‌پرسد."
+
+msgid "MonoRanks could not be reached for the audit results. The plugin tries again within the hour."
+msgstr "برای دریافت نتایج ممیزی دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر دوباره تلاش می‌کند."
+
+msgid "MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit."
+msgstr "مونورنکس هنوز به این سایت امتیاز نداده است. امتیازها پس از نخستین ممیزی هفتگی اینجا و در فهرست نوشته‌ها دیده می‌شوند."
+
+msgid "checked %s"
+msgstr "بررسی‌شده %s"
+
+msgid "Open the audit in MonoRanks"
+msgstr "باز کردن ممیزی در مونورنکس"
+
+msgid "Weekly SEO, AEO and GEO audit of %s"
+msgstr "ممیزی هفتگی SEO، AEO و GEO برای %s"
+
+msgid "last audit %s"
+msgstr "آخرین ممیزی %s"
+
+msgid "%1$s of %2$s published pages scored"
+msgstr "%1$s از %2$s صفحهٔ منتشرشده امتیاز گرفته"
+
+msgid "Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress."
+msgstr "ممیزی هفتگی SEO، AEO و GEO، با اصلاح‌هایی که تأیید می‌کنید و در وردپرس نوشته می‌شوند."
+
+msgid "Sync content now"
+msgstr "همگام‌سازی محتوا"
+
+msgid "Open in MonoRanks"
+msgstr "باز کردن در مونورنکس"
+
+msgid "Health score"
+msgstr "امتیاز سلامت"
+
+msgid "Technical, on-page, links, speed"
+msgstr "فنی، درون‌صفحه، پیوندها، سرعت"
+
+msgid "Site average, %s page"
+msgid_plural "Site average, %s pages"
+msgstr[0] "میانگین سایت، %s صفحه"
+msgstr[1] "میانگین سایت، %s صفحه"
+
+msgid "AEO score"
+msgstr "امتیاز AEO"
+
+msgid "Answer-first, structure, entities"
+msgstr "پاسخ‌محوری، ساختار، موجودیت‌ها"
+
+msgid "How well AI answers can use your pages"
+msgstr "پاسخ‌های هوش مصنوعی چقدر می‌توانند از صفحه‌های شما استفاده کنند"
+
+msgid "Search clicks, 28 days"
+msgstr "کلیک‌های جستجو، ۲۸ روز"
+
+msgid "From Google Search Console, through MonoRanks"
+msgstr "از گوگل سرچ کنسول، از طریق مونورنکس"
+
+msgid "Connect Google Search Console in MonoRanks to see clicks here."
+msgstr "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
+
+msgid "Fixes"
+msgstr "اصلاح‌ها"
+
+msgid "%s ready"
+msgstr "%s آماده"
+
+msgid "applied in 30 days"
+msgstr "اعمال‌شده در ۳۰ روز"
+
+msgid "AI crawler rules on"
+msgstr "قوانین خزنده‌های هوش مصنوعی فعال"
+
+msgid "No AI crawler rules"
+msgstr "بدون قوانین خزندهٔ هوش مصنوعی"
+
+msgid "llms.txt published"
+msgstr "llms.txt منتشر شده"
+
+msgid "No llms.txt"
+msgstr "بدون llms.txt"
+
+msgid "Pages needing attention"
+msgstr "صفحه‌های نیازمند توجه"
+
+msgid "All pages in MonoRanks"
+msgstr "همهٔ صفحه‌ها در مونورنکس"
+
+msgid "Page"
+msgstr "صفحه"
+
+msgid "Biggest issue"
+msgstr "بزرگ‌ترین مشکل"
+
+msgid "Fix in MonoRanks"
+msgstr "اصلاح در مونورنکس"
+
+msgid "Nothing needs attention"
+msgstr "چیزی نیازمند توجه نیست"
+
+msgid "Every scored page is above 60. The next audit may change that."
+msgstr "همهٔ صفحه‌های امتیازگرفته بالای ۶۰ هستند. ممیزی بعدی ممکن است این را تغییر دهد."
+
+msgid "Ready to apply"
+msgstr "آمادهٔ اعمال"
+
+msgid "Apply all"
+msgstr "اعمال همه"
+
+msgid "No fixes waiting"
+msgstr "اصلاحی در انتظار نیست"
+
+msgid "Fixes you approve in MonoRanks appear here, ready to write into WordPress."
+msgstr "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا می‌آیند، آماده برای نوشتن در وردپرس."
+
+msgid "Site"
+msgstr "سایت"
+
+msgid "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first."
+msgstr "یک پاراگراف پاسخ‌محور به بالای نوشته اضافه می‌کند. ابتدا قبل/بعد را در مونورنکس بررسی کنید."
+
+msgid "Review"
+msgstr "بررسی"
+
+msgid "Apply"
+msgstr "اعمال"
+
+msgid "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days."
+msgstr "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
+
+msgid "Recent changes"
+msgstr "تغییرات اخیر"
+
+msgid "All changes"
+msgstr "همهٔ تغییرات"
+
+msgid "No changes yet"
+msgstr "هنوز تغییری نیست"
+
+msgid "Fixes you approve in MonoRanks show up here, each with Undo."
+msgstr "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا دیده می‌شوند، هرکدام با گزینهٔ بازگردانی."
+
+msgid "When"
+msgstr "زمان"
+
+msgid "Who"
+msgstr "چه کسی"
+
+msgid "Field"
+msgstr "فیلد"
+
+msgid "Where"
+msgstr "کجا"
+
+msgid "Before"
+msgstr "قبل"
+
+msgid "After"
+msgstr "بعد"
+
+msgid "Image #%d"
+msgstr "تصویر #%d"
+
+msgid "Undo"
+msgstr "بازگردانی"
+
+msgid "%s this week"
+msgstr "%s این هفته"
+
+msgid "Connector key"
+msgstr "کلید اتصال"
+
+msgid "MonoRanks address (development sites only)"
+msgstr "نشانی مونورنکس (فقط سایت‌های توسعه)"
+
+msgid "Connect"
+msgstr "اتصال"
+
+msgid "Not scored yet"
+msgstr "هنوز امتیاز نگرفته"
+
+msgid "%s of 100"
+msgstr "%s از ۱۰۰"
+
+msgid "Connection, what is sent, and every change written into this site."
+msgstr "اتصال، آنچه فرستاده می‌شود، و هر تغییری که در این سایت نوشته شده است."
+
+msgid "Connection"
+msgstr "اتصال"
+
+msgid "Status"
+msgstr "وضعیت"
+
+msgid "MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below."
+msgstr "مونورنکس دیگر این کلید را نمی‌پذیرد. دوباره از مونورنکس متصل شوید یا کلید تازه‌ای در پایین وارد کنید."
+
+msgid "Sending published content to MonoRanks. Nothing else leaves this site."
+msgstr "محتوای منتشرشده به مونورنکس فرستاده می‌شود. چیز دیگری از این سایت خارج نمی‌شود."
+
+msgid "Last sync"
+msgstr "آخرین همگام‌سازی"
+
+msgid "sending, batch %1$s of %2$s"
+msgstr "در حال ارسال، دستهٔ %1$s از %2$s"
+
+msgid "%s published item"
+msgid_plural "%s published items"
+msgstr[0] "%s مورد منتشرشده"
+msgstr[1] "%s مورد منتشرشده"
+
+msgid "Next audit"
+msgstr "ممیزی بعدی"
+
+msgid "Fixes written with"
+msgstr "اصلاح‌ها نوشته می‌شوند با"
+
+msgid "The \"MonoRanks\" Application Password · <a href=\"%s\">revoke it in your profile</a> to stop writes"
+msgstr "گذرواژهٔ برنامهٔ «MonoRanks» · برای توقف نوشتن <a href=\"%s\">آن را در نمایهٔ خود باطل کنید</a>"
+
+msgid "Works with"
+msgstr "سازگار با"
+
+msgid "%s detected"
+msgstr "%s شناسایی شد"
+
+msgid "titles and descriptions go into the fields %s reads"
+msgstr "عنوان‌ها و توضیح‌ها در فیلدهایی نوشته می‌شوند که %s می‌خواند"
+
+msgid "No SEO plugin"
+msgstr "بدون افزونهٔ سئو"
+
+msgid "MonoRanks prints the approved title, description, canonical and noindex tags itself"
+msgstr "مونورنکس خودش تگ‌های تأییدشدهٔ عنوان، توضیح، کانونیکال و noindex را چاپ می‌کند"
+
+msgid "Send content now"
+msgstr "ارسال محتوا"
+
+msgid "Disconnect"
+msgstr "قطع اتصال"
+
+msgid "Disconnect stops sending. Fixes already applied stay."
+msgstr "قطع اتصال ارسال را متوقف می‌کند. اصلاح‌های اعمال‌شده می‌مانند."
+
+msgid "Use this when your host blocks Application Passwords. In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website."
+msgstr "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید. در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت."
+
+msgid "Use a different key"
+msgstr "استفاده از کلید دیگر"
+
+msgid "In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website. Paste it here. With a key alone MonoRanks receives your content; to apply fixes, also use Connect to WordPress in MonoRanks."
+msgstr "در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت. آن را اینجا وارد کنید. با کلید به‌تنهایی مونورنکس محتوای شما را دریافت می‌کند؛ برای اعمال اصلاح‌ها، «اتصال به وردپرس» را هم در مونورنکس انجام دهید."
+
+msgid "What is sent"
+msgstr "چه چیزی فرستاده می‌شود"
+
+msgid "Sent"
+msgstr "فرستاده می‌شود"
+
+msgid "Published titles, a 40-word excerpt, dates, authors, categories, tags, SEO fields, image alt text and plugin status."
+msgstr "عنوان‌های منتشرشده، چکیدهٔ ۴۰ کلمه‌ای، تاریخ‌ها، نویسندگان، دسته‌ها، برچسب‌ها، فیلدهای سئو، متن جایگزین تصاویر و وضعیت افزونه."
+
+msgid "Read back"
+msgstr "خوانده می‌شود"
+
+msgid "This website's audit results: scores, issues and the fixes you approved, shown here and in the Posts list."
+msgstr "نتایج ممیزی این وب‌سایت: امتیازها، مشکل‌ها و اصلاح‌هایی که تأیید کرده‌اید، که اینجا و در فهرست نوشته‌ها نشان داده می‌شوند."
+
+msgid "Never sent"
+msgstr "هرگز فرستاده نمی‌شود"
+
+msgid "Drafts, private posts, comments, emails, passwords, plugin or theme settings."
+msgstr "پیش‌نویس‌ها، نوشته‌های خصوصی، دیدگاه‌ها، ایمیل‌ها، گذرواژه‌ها، تنظیمات افزونه یا پوسته."
+
+msgid "Can change"
+msgstr "می‌تواند تغییر دهد"
+
+msgid "SEO title, meta description, canonical, noindex, image alt text, redirects, one opening paragraph, AI crawler rules, llms.txt. Only after you approve each one."
+msgstr "عنوان سئو، توضیح متا، کانونیکال، noindex، متن جایگزین تصویر، تغییر مسیرها، یک پاراگراف آغازین، قوانین خزنده‌های هوش مصنوعی، llms.txt. فقط پس از آنکه هرکدام را تأیید کنید."
+
+msgid "Last 50 · undo for 30 days"
+msgstr "۵۰ مورد آخر · بازگردانی تا ۳۰ روز"
+
+msgid "Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo."
+msgstr "این سایت را به مونورنکس (ممیزی SEO، AEO و GEO) متصل می‌کند: فرادادهٔ محتوای منتشرشده را می‌فرستد و اصلاح‌هایی را که آنجا تأیید می‌کنید، با امکان بازگردانی، اعمال می‌کند."
