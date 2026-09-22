@@ -2,9 +2,9 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
-## [1.1.0] — unreleased
+## [0.1.0] — unreleased
 
-First release on WordPress.org.
+Beta. The version stays below 1.0.0 until the plugin is published on WordPress.org.
 
 - Connects a WordPress site to MonoRanks with a connector key or by approving MonoRanks in WordPress (Application Password).
 - Sends published content metadata (never drafts, comments or credentials) on connect, on every publish, update or unpublish, and once a day.
