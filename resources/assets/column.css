@@ -30,10 +30,11 @@ td.column-monoranks { vertical-align: middle; }
 .mr-score.md .mr-ring { width: 40px; height: 40px; }
 .mr-score.md .mr-ring > span { font-size: 13px; }
 
-/* The card that appears above the rings on hover or keyboard focus: anchored to the column's end edge so it never runs
-   off the table, fades in and rises 4px, and stays while the pointer travels to it (an invisible bridge under it and a
-   short delay before it hides). It hangs from the cell's end edge, which is the table's edge for the last column, so it opens inwards and never widens the table. */
-td.column-monoranks { position: relative; }
+/* The card appears under the rings on hover or keyboard focus, fades in, and stays while the pointer travels to it (an
+   invisible bridge above it and a short delay before it hides). It hangs from the RINGS, not from the table cell: another
+   plugin's columns can make a row hundreds of pixels tall, and a card anchored to the cell would open far below the
+   scores it belongs to. Its end edge lines up with theirs, so it opens inwards and never widens the table. */
+.monoranks-cell { position: relative; width: max-content; max-width: 100%; }
 .monoranks-cell .row { outline: none; }
 .monoranks-cell .row:focus-visible { box-shadow: 0 0 0 2px #2a6fdb; border-radius: 6px; }
 .monoranks-cell .mr-tip { position: absolute; inset-inline-end: 0; top: calc(100% - 10px); z-index: 30; width: 232px; background: #fff; border: 1px solid #e3e7ec; border-radius: 10px; box-shadow: 0 8px 24px rgba(20, 24, 31, .12), 0 1px 2px rgba(20, 24, 31, .06); padding: 12px 14px; color: var(--ink); text-align: start; font-size: 12px; line-height: 1.45; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .14s ease .2s, transform .14s ease .2s; }
