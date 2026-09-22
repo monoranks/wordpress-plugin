@@ -16,19 +16,21 @@ MonoRanks audits every page of your website each week, finds what keeps it off p
 
 What you get with the plugin connected:
 
+* A MonoRanks screen in your WordPress admin: the site's health and AEO scores and how they moved this week, search clicks, the pages that need attention most, the fixes you approved ready to apply with one click, and every change written so far with Undo.
+* A MonoRanks column in Posts and Pages with each page's health and AEO scores, the fixes waiting for it and a "Needs attention" view, sortable by score.
 * One-click fixes for titles, meta descriptions, headings, image alt text, canonical URLs, noindex and redirects, written into the same fields Yoast SEO, Rank Math and All in One SEO read.
 * An answer-first opening paragraph for pages that bury their answer, shown as a before/after diff first.
 * AI crawler rules (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) in robots.txt and an llms.txt file, published only after you approve them.
 * A recheck of the affected pages the same day a post changes, so the audit never goes stale.
-* A change log under Settings → MonoRanks with Undo for every write.
+* A change log under MonoRanks → Settings with Undo for every write.
 
 = This plugin relies on an external service =
 
-The plugin talks to MonoRanks (https://monoranks.com). Nothing is sent until you connect the site: either by approving MonoRanks in WordPress from your MonoRanks account, or by pasting a connector key under Settings → MonoRanks.
+The plugin talks to MonoRanks (https://monoranks.com). Nothing is sent until you connect the site: either by approving MonoRanks in WordPress from your MonoRanks account, or by pasting a connector key under MonoRanks → Settings.
 
 How it connects:
 
-* To send data, the plugin uses a connector key that belongs to this website only. The key can send this website's content, change alerts and plugin status; it cannot read anything from MonoRanks. You can revoke it in MonoRanks or disconnect under Settings → MonoRanks.
+* To send data, the plugin uses a connector key that belongs to this website only. The key can send this website's content, change alerts and plugin status, and read back this website's audit results (scores, issues, the fixes you approved) for the MonoRanks screens in WordPress; it cannot read any other website or account data. You can revoke it in MonoRanks or disconnect under MonoRanks → Settings.
 * To apply fixes, MonoRanks uses the "MonoRanks" Application Password you approve in WordPress. Revoke it in Users → Profile to stop all writes.
 
 What is sent to MonoRanks, over HTTPS:
@@ -39,7 +41,9 @@ What is sent to MonoRanks, over HTTPS:
 
 Never sent: drafts, private or password-protected posts, comments, user emails or passwords, plugin or theme settings.
 
-What MonoRanks can change, only after you approve each change in MonoRanks: SEO title, meta description, canonical URL, noindex, image alt text, redirects, one opening paragraph at the top of a post (shown to you as a before/after diff first; it never rewrites your existing text and can be removed again with Undo), per-crawler AI access lines in robots.txt, and an llms.txt file. It cannot edit themes, settings or users. When you approve MonoRanks, it may turn this plugin on if it is installed but inactive. Every change is listed under Settings → MonoRanks and can be undone from MonoRanks for 30 days.
+Read from MonoRanks, with the same key, and cached in WordPress: this website's audit results (site and per-page scores, open issues, the fixes you approved, search clicks from Google Search Console if you connected it in MonoRanks). Nothing is read on the public site; only admins see it.
+
+What MonoRanks can change, only after you approve each change in MonoRanks: SEO title, meta description, canonical URL, noindex, image alt text, redirects, one opening paragraph at the top of a post (shown to you as a before/after diff first; it never rewrites your existing text and can be removed again with Undo), per-crawler AI access lines in robots.txt, and an llms.txt file. It cannot edit themes, settings or users. When you approve MonoRanks, it may turn this plugin on if it is installed but inactive. Every change is listed under MonoRanks → Settings and can be undone there or from MonoRanks for 30 days.
 
 Works with Yoast SEO, Rank Math and All in One SEO. Without an SEO plugin, the connector prints the approved title, description, canonical and noindex itself.
 
@@ -48,21 +52,21 @@ Works with Yoast SEO, Rank Math and All in One SEO. Without an SEO plugin, the c
 
 = Disconnect =
 
-Settings → MonoRanks → Disconnect stops sending. Revoking the "MonoRanks" Application Password in Users → Profile stops writes. Deactivating the plugin stops both.
+MonoRanks → Settings → Disconnect stops sending. Revoking the "MonoRanks" Application Password in Users → Profile stops writes. Deactivating the plugin stops both.
 
 == Installation ==
 
 1. Install and activate the plugin.
 2. In your MonoRanks account, open the website → Integrations → WordPress → Connect to WordPress, and approve MonoRanks when WordPress asks. The plugin turns itself on and sends the first batch of content metadata.
-3. Alternatively, copy the connector key from MonoRanks and paste it under Settings → MonoRanks in WordPress.
+3. Alternatively, copy the connector key from MonoRanks and paste it under MonoRanks → Settings in WordPress.
 
-To stop everything: Settings → MonoRanks → Disconnect (and revoke the "MonoRanks" application password under Users → Profile).
+To stop everything: MonoRanks → Settings → Disconnect (and revoke the "MonoRanks" application password under Users → Profile).
 
 == Frequently Asked Questions ==
 
 = Does the plugin change my site on its own? =
 
-No. It only applies changes you approved one by one in MonoRanks, and lists every change under Settings → MonoRanks, where each can be undone from MonoRanks for 30 days.
+No. It only applies changes you approved one by one in MonoRanks, and lists every change under MonoRanks → Settings, where each can be undone for 30 days.
 
 = What if I do not use Yoast, Rank Math or All in One SEO? =
 
@@ -82,11 +86,13 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 
 == Screenshots ==
 
-1. Settings → MonoRanks: connection state, connect with a key, what was sent, and the change log (also in Persian).
-2. The website's Integrations screen in MonoRanks with the connector card.
-3. An action in MonoRanks with the change ready to approve.
+1. MonoRanks → Overview: site health and AEO scores, search clicks, pages needing attention, fixes ready to apply, recent changes with Undo (also in Persian).
+2. The MonoRanks column in Posts: each page's health and AEO scores, fixes waiting, sortable, with a "Needs attention" view (also in Persian).
+3. MonoRanks → Settings: connection state, connector key, last sync, what is sent, recent changes (also in Persian).
+4. The website's Integrations screen in MonoRanks with the connector card.
+5. An action in MonoRanks with the change ready to approve.
 
 == Changelog ==
 
 = 1.0.0 =
-* Initial release.
+* Initial release: MonoRanks menu with an Overview (scores, search clicks, pages needing attention, fixes ready to apply, changes with Undo) and Settings; a MonoRanks column with health and AEO scores in Posts and Pages; content sync and one-click fixes with undo; Persian translation.
