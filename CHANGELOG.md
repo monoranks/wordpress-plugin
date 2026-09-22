@@ -4,7 +4,7 @@ All notable changes to the MonoRanks WordPress plugin. The format follows [Keep 
 
 ## [1.1.0] — unreleased
 
-Initial release.
+First release on WordPress.org.
 
 - Connects a WordPress site to MonoRanks with a connector key or by approving MonoRanks in WordPress (Application Password).
 - Sends published content metadata (never drafts, comments or credentials) on connect, on every publish, update or unpublish, and once a day.
@@ -16,6 +16,6 @@ Initial release.
 - Overview and Settings are one app: switching between them (top band, footer, "All changes", "Open settings") changes the URL and the admin menu's highlight without a page load; back and forward work. Every link that leaves the admin carries UTM tags (utm_source=wordpress-plugin).
 - The Overview and Settings screens are a React app (Vite, Tailwind 4, shadcn-style components, the stack shared with WConvert): actions such as Apply, Undo, Sync and Connect happen in place through `monoranks/v1/admin/*` REST routes, with no page reload.
 - The plugin's screens sit in their own frame: a dark brand band with the MonoRanks logo, the section links and a way into MonoRanks, a light title area, and a service footer with a link to what is sent, help, and the VeronaLabs credit. The menu icon is the MonoRanks mark.
-- Admin screens use the MonoRanks design tokens (colours, radii, spacing; light and dark palettes; right-to-left admins mirror). Templates live under `views/`.
+- Admin screens use the MonoRanks design tokens (colours, radii, spacing; light and dark palettes; right-to-left admins mirror, with that script's digits). PHP templates live under `resources/views/`, the app's sources under `resources/admin/`, and `npm run build` writes `build/`.
 - The MonoRanks address is fixed (`MONORANKS_API_BASE`, overridable in `wp-config.php`); the address field only shows on local and development sites. The old Settings → MonoRanks link redirects to the new screen.
 - Translations: `languages/monoranks.pot` and a Persian translation.
