@@ -17,7 +17,7 @@ MonoRanks audits every page of your website each week, finds what keeps it off p
 What you get with the plugin connected:
 
 * A MonoRanks screen in your WordPress admin: the site's health and AEO scores and how they moved this week, search clicks, the pages that need attention most, the fixes you approved ready to apply with one click, and every change written so far with Undo.
-* A MonoRanks column in Posts and Pages with each page's health and AEO scores, the fixes waiting for it and a "Needs attention" view, sortable by score.
+* A MonoRanks column in Posts and Pages with each page's health and AEO scores; hover a row for the fixes waiting, open issues and audit dates. Sortable by score, with a "Needs attention" view.
 * One-click fixes for titles, meta descriptions, headings, image alt text, canonical URLs, noindex and redirects, written into the same fields Yoast SEO, Rank Math and All in One SEO read.
 * An answer-first opening paragraph for pages that bury their answer, shown as a before/after diff first.
 * AI crawler rules (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) in robots.txt and an llms.txt file, published only after you approve them.
@@ -87,7 +87,7 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 == Screenshots ==
 
 1. MonoRanks → Overview: site health and AEO scores, search clicks, pages needing attention, fixes ready to apply, recent changes with Undo (also in Persian).
-2. The MonoRanks column in Posts: each page's health and AEO scores, fixes waiting, sortable, with a "Needs attention" view (also in Persian).
+2. The MonoRanks column in Posts: each page's health and AEO score rings; hovering opens a card with fixes waiting, open issues, audit dates and links. Sortable, with a "Needs attention" view (also in Persian).
 3. MonoRanks → Settings: connection state, connector key, last sync, what is sent, recent changes (also in Persian).
 4. The website's Integrations screen in MonoRanks with the connector card.
 5. An action in MonoRanks with the change ready to approve.

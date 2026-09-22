@@ -22,6 +22,27 @@ test('settings page renders and rejects a malformed key', async ({ page }) => {
   await expect(page.getByText('Not connected')).toBeVisible();
 });
 
+test('overview and settings are one app: switching screens changes the URL without a page load', async ({ page }) => {
+  await page.goto('/wp-admin/admin.php?page=monoranks');
+  await expect(page.getByRole('heading', { name: 'Overview', level: 1 })).toBeVisible();
+  await expect(page.getByText('Connect MonoRanks', { exact: true })).toBeVisible();
+  await page.evaluate(() => { (window as unknown as { __monoranks_loaded: number }).__monoranks_loaded = 1; });
+  await page.getByRole('navigation', { name: 'MonoRanks sections' }).getByRole('link', { name: 'Settings' }).click();
+  await expect(page.getByRole('heading', { name: 'Settings', level: 1 })).toBeVisible();
+  await expect(page).toHaveURL(/page=monoranks-settings/);
+  expect(await page.evaluate(() => (window as unknown as { __monoranks_loaded?: number }).__monoranks_loaded)).toBe(1);
+  await expect(page.locator('#toplevel_page_monoranks .wp-submenu a.current')).toHaveAttribute('href', /monoranks-settings/);
+  await page.goBack();
+  await expect(page.getByRole('heading', { name: 'Overview', level: 1 })).toBeVisible();
+});
+
+test('the posts list has a MonoRanks column with a hover card', async ({ page }) => {
+  await page.goto('/wp-admin/edit.php');
+  await expect(page.locator('th#monoranks')).toContainText('MonoRanks');
+  // Not connected: the cell offers the connection instead of scores.
+  await expect(page.locator('td.column-monoranks').first()).toContainText('Connect MonoRanks');
+});
+
 test('REST: ping is public, everything else needs an authenticated admin', async ({ page, request }) => {
   const ping = await request.get('/wp-json/monoranks/v1/ping');
   expect(ping.ok()).toBeTruthy();
