@@ -126,11 +126,11 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
                 {confirmDelete ? (
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="text-[12px] font-medium text-critical">{__('This cannot be undone. Delete everything?', 'monoranks')}</span>
-                    <Button variant="primary" className="border-critical bg-critical hover:opacity-85" disabled={busy !== null} aria-busy={busy === 'delete'} onClick={() => { setConfirmDelete(false); run('delete', () => api.deleteEverything()); }}>{__('Yes, delete all data', 'monoranks')}</Button>
+                    <Button variant="dangerSolid" disabled={busy !== null} aria-busy={busy === 'delete'} onClick={() => { setConfirmDelete(false); run('delete', () => api.deleteEverything()); }}>{__('Yes, delete all data', 'monoranks')}</Button>
                     <Button variant="ghost" disabled={busy !== null} onClick={() => setConfirmDelete(false)}>{__('Cancel', 'monoranks')}</Button>
                   </div>
                 ) : (
-                  <div><Button className="border-critical text-critical hover:bg-critical/5" onClick={() => setConfirmDelete(true)}>{__('Delete all MonoRanks data', 'monoranks')}</Button></div>
+                  <div><Button variant="danger" onClick={() => setConfirmDelete(true)}>{__('Delete all MonoRanks data', 'monoranks')}</Button></div>
                 )}
               </CardBody>
             </Card>

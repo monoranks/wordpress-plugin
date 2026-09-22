@@ -13,6 +13,8 @@ const buttonVariants = cva(
         primary: 'border-primary bg-primary text-primary-foreground hover:opacity-85',
         accent: 'border-brand bg-brand text-white hover:opacity-85',
         ghost: 'border-transparent bg-transparent text-ink2 hover:bg-surface2 hover:text-ink',
+        danger: 'border-critical/50 bg-surface text-critical hover:border-critical hover:bg-critical hover:text-white',
+        dangerSolid: 'border-critical bg-critical text-white hover:opacity-85',
       },
       size: {
         default: 'h-[34px] px-3',
