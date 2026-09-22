@@ -17,13 +17,13 @@ use MonoRanks\Admin;
 <?php elseif ( 'draft' === $state ) : ?>
 	<span class="row" tabindex="0"><span class="xs">&mdash;</span></span>
 	<div class="mr-tip" role="tooltip">
-		<div class="t"><bdi><?php echo esc_html( $title ); ?></bdi></div>
+		<div class="t" dir="auto"><?php echo esc_html( $title ); ?></div>
 		<div class="empty"><?php esc_html_e( 'Drafts are not sent to MonoRanks. This page gets its scores after the first audit that follows publishing.', 'monoranks' ); ?></div>
 	</div>
 <?php elseif ( 'none' === $state ) : ?>
 	<span class="row" tabindex="0" aria-label="<?php echo esc_attr( $hint ); ?>"><?php echo Admin::ring( null, 'sm', __( 'Health', 'monoranks' ) ) . Admin::ring( null, 'sm', __( 'AEO', 'monoranks' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></span>
 	<div class="mr-tip" role="tooltip">
-		<div class="t"><bdi><?php echo esc_html( $title ); ?></bdi></div>
+		<div class="t" dir="auto"><?php echo esc_html( $title ); ?></div>
 		<div class="rings">
 			<span class="rk"><?php echo Admin::ring( null, 'md' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?><span class="k"><b><?php esc_html_e( 'Health', 'monoranks' ); ?></b><span><?php echo esc_html( Admin::tone_word( null ) ); ?></span></span></span>
 			<span class="rk"><?php echo Admin::ring( null, 'md' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?><span class="k"><b><?php esc_html_e( 'AEO', 'monoranks' ); ?></b><span><?php echo esc_html( Admin::tone_word( null ) ); ?></span></span></span>
@@ -38,7 +38,7 @@ use MonoRanks\Admin;
 <?php else : ?>
 	<span class="row" tabindex="0" aria-label="<?php echo esc_attr( $line ); ?>"><?php echo Admin::ring( $health, 'sm', __( 'Health', 'monoranks' ) ) . Admin::ring( $aeo, 'sm', __( 'AEO', 'monoranks' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></span>
 	<div class="mr-tip" role="tooltip">
-		<div class="t"><bdi><?php echo esc_html( $title ); ?></bdi></div>
+		<div class="t" dir="auto"><?php echo esc_html( $title ); ?></div>
 		<div class="rings">
 			<span class="rk"><?php echo Admin::ring( $health, 'md' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?><span class="k"><b><?php esc_html_e( 'Health', 'monoranks' ); ?></b><span><?php echo esc_html( Admin::tone_word( $health ) ); ?></span></span></span>
 			<span class="rk"><?php echo Admin::ring( $aeo, 'md' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?><span class="k"><b><?php esc_html_e( 'AEO', 'monoranks' ); ?></b><span><?php echo esc_html( Admin::tone_word( $aeo ) ); ?></span></span></span>
