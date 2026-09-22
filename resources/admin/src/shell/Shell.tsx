@@ -47,6 +47,8 @@ export function Shell({ section, go, title, description, actions, children }: { 
         </div>
         {actions && <div className="flex flex-wrap items-center gap-2 pt-1">{actions}</div>}
       </div>
+      {/* WordPress moves its own notices to just before this marker, so they land under the title instead of above the band. */}
+      <div className="wp-header-end" />
       <main className={cn(measure, 'flex flex-[1_0_auto] flex-col gap-5 pb-10 pt-[22px]')}>{children}</main>
       <Footer section={section} go={go} />
     </>

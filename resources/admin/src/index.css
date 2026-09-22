@@ -9,7 +9,7 @@
 
 @source "./";
 
-#monoranks-admin, .mr-scope {
+#monoranks-admin, .mr-scope, body.monoranks-screen {
   --page: #f5f6f8; --surface: #ffffff; --surface2: #f1f3f6; --surface3: #e9ecf1; --ink: #14181f; --ink2: #4c5563; --muted: #8a929e;
   --grid: #e6e9ee; --line: #cbd2db; --border: #e3e7ec; --accent: #2a6fdb; --accentInk: #1d5bbf; --accentSoft: #e8f0fc;
   --good: #0ca30c; --goodInk: #0a7a0a; --warn: #e6a100; --critical: #d03b3b; --grayTrack: #e6e9ee; --primaryBtn: #14181f; --primaryBtnInk: #ffffff;
@@ -79,10 +79,34 @@
 body.monoranks-screen #wpbody-content { padding-bottom: 0; }
 body.monoranks-screen #wpfooter { display: none; }
 /* The frame fills the admin's content area, so its own footer is the last band on the page with no grey strip under it.
-   WordPress's #wpwrap is taller than the viewport by the toolbar's height, which is where the strip came from. */
+   WordPress's #wpwrap is taller than the viewport by the toolbar's height, which is where the strip came from. The
+   content area is a column: whatever WordPress prints above the frame (its update notices) keeps its height, and the
+   frame takes the rest. */
 body.monoranks-screen #wpwrap { min-height: 0; }
-#monoranks-admin { margin: 0; margin-inline: -20px 0; min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px)); display: flex; flex-direction: column; background: var(--page); color: var(--ink); font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
-@media (max-width: 782px) { #monoranks-admin { margin-inline: -10px 0; } }
+body.monoranks-screen #wpbody-content { display: flex; flex-direction: column; min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px)); }
+/* WordPress's own notices on these screens take the app's look and sit inside the page's gutter. */
+body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .error, #message) {
+	margin: 16px 20px 0; padding: 12px 16px; border: 1px solid var(--border); border-inline-start-width: 1px; border-radius: 12px;
+	background: var(--surface); color: var(--ink); box-shadow: none; font-size: 13px; line-height: 1.45;
+}
+body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .error, #message) + :is(.notice, .update-nag, .updated, .error, #message) { margin-top: 10px; }
+/* WordPress moves a notice into the page, just before .wp-header-end; there it lines up with the page's own content. */
+#monoranks-admin > :is(.notice, .updated, .error, #message) {
+	width: 100%; max-width: 1180px; margin: 0 auto 4px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px;
+	background: var(--surface); color: var(--ink); box-shadow: none; font-size: 13px; line-height: 1.45;
+}
+#monoranks-admin > div.notice-success { background: color-mix(in srgb, var(--good) 6%, var(--surface)); border-color: color-mix(in srgb, var(--good) 28%, var(--border)); }
+#monoranks-admin > div.notice-error { background: color-mix(in srgb, var(--critical) 6%, var(--surface)); border-color: color-mix(in srgb, var(--critical) 28%, var(--border)); }
+#monoranks-admin > div.notice-warning { background: color-mix(in srgb, var(--warn) 8%, var(--surface)); border-color: color-mix(in srgb, var(--warn) 30%, var(--border)); }
+@media (max-width: 1340px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 80px); } }
+@media (max-width: 960px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 48px); } }
+@media (max-width: 782px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 32px); } }
+body.monoranks-screen #wpbody-content > .update-nag { display: block; }
+#monoranks-admin { margin: 0; margin-inline: -20px 0; flex: 1 0 auto; display: flex; flex-direction: column; background: var(--page); color: var(--ink); font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+@media (max-width: 782px) {
+	#monoranks-admin { margin-inline: -10px 0; }
+	body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .error, #message) { margin-inline: 10px; }
+}
 #monoranks-admin a { color: var(--accentInk); text-decoration: none; }
 #monoranks-admin a:hover { color: var(--ink); text-decoration: none; }
 #monoranks-admin code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; background: var(--surface2); color: var(--ink); border-radius: 4px; padding: 1px 5px; direction: ltr; unicode-bidi: isolate; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; vertical-align: middle; white-space: nowrap; }
