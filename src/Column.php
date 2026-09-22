@@ -21,7 +21,8 @@ class Column {
 
 	public static function hooks() {
 		foreach ( Content::post_types() as $type ) {
-			add_filter( 'manage_' . $type . '_posts_columns', array( __CLASS__, 'columns' ) );
+			// Late, so the column stays last even when another plugin (Yoast, Rank Math) adds its own columns after ours.
+			add_filter( 'manage_' . $type . '_posts_columns', array( __CLASS__, 'columns' ), 99 );
 			add_action( 'manage_' . $type . '_posts_custom_column', array( __CLASS__, 'cell' ), 10, 2 );
 			add_filter( 'manage_edit-' . $type . '_sortable_columns', array( __CLASS__, 'sortable' ) );
 			add_filter( 'views_edit-' . $type, array( __CLASS__, 'views' ) );

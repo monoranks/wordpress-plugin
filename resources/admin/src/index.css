@@ -90,12 +90,13 @@ body.monoranks-screen #wpwrap { min-height: 0; }
 #monoranks-admin h1, #monoranks-admin h2, #monoranks-admin h3, #monoranks-admin p { margin: 0; padding: 0; color: inherit; }
 #monoranks-admin :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; box-shadow: none; }
 #monoranks-admin input[type="password"], #monoranks-admin input[type="url"] { box-shadow: none; margin: 0; min-height: 0; line-height: normal; }
-/* WordPress notices keep their classes (the browser tests read .notice-error) and take the card look. */
-#monoranks-admin .notice { margin: 0; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-inline-start: 3px solid var(--accent); border-radius: 8px; box-shadow: none; color: var(--ink); }
+/* WordPress notices keep their classes (the browser tests read .notice-error) and take the app's card look: one surface,
+   one border and a tinted background for the tone, instead of WordPress's bar with a coloured edge. */
+#monoranks-admin .notice { margin: 0; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: none; color: var(--ink); }
 #monoranks-admin .notice p { margin: 0; padding: 0; font-size: 13px; }
-#monoranks-admin div.notice-success { border-inline-start-color: var(--good); }
-#monoranks-admin div.notice-error { border-inline-start-color: var(--critical); }
-#monoranks-admin div.notice-warning { border-inline-start-color: var(--warn); }
+#monoranks-admin div.notice-success { background: color-mix(in srgb, var(--good) 6%, var(--surface)); border-color: color-mix(in srgb, var(--good) 28%, var(--border)); }
+#monoranks-admin div.notice-error { background: color-mix(in srgb, var(--critical) 6%, var(--surface)); border-color: color-mix(in srgb, var(--critical) 28%, var(--border)); }
+#monoranks-admin div.notice-warning { background: color-mix(in srgb, var(--warn) 8%, var(--surface)); border-color: color-mix(in srgb, var(--warn) 30%, var(--border)); }
 /* Score ring: the app's ScoreBox. */
 .mr-score { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); vertical-align: middle; }
 .mr-score .mr-ring { position: relative; display: inline-block; line-height: 0; }

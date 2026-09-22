@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { __ } from '@wordpress/i18n';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, CheckCircle2, AlertCircle, AlertTriangle } from 'lucide-react';
 import { adminSettings, type Notice } from '@/settings';
 import { cn } from '@/lib/utils';
 import { out } from '@/lib/links';
@@ -78,10 +78,17 @@ function Footer({ section, go }: { section: Screen; go: (next: Screen) => void }
   );
 }
 
-/** A WordPress notice (the classes the browser tests read), restyled. */
+/** The result of an action. Keeps WordPress's notice classes (the browser tests read them) with the app's card look. */
 export function NoticeBox({ notice }: { notice: Notice | null }) {
   if (!notice) return null;
-  return <div className={cn('notice', `notice-${notice.type}`)} role="status"><p>{notice.text}</p></div>;
+  const tone = { success: 'text-good-ink', error: 'text-critical', warning: 'text-warn' }[notice.type];
+  const Icon = { success: CheckCircle2, error: AlertCircle, warning: AlertTriangle }[notice.type];
+  return (
+    <div className={cn('notice', `notice-${notice.type}`, 'flex items-start gap-2.5')} role="status">
+      <Icon size={16} className={cn('mt-[1px] shrink-0', tone)} aria-hidden="true" />
+      <p className="text-ink">{notice.text}</p>
+    </div>
+  );
 }
 
 /** Label / value pairs, 150px label column. */

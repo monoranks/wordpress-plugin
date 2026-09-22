@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { Undo2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Empty } from '@/shell/Shell';
@@ -27,7 +28,7 @@ export function ChangeLog({ rows, onUndo, busy }: { rows: LogRow[]; onUndo: (row
               <td className={td}><div className={cell} dir="auto" title={r.where}>{r.where}</div></td>
               <td className={`${td} text-mute`}><div className={cell} dir="auto" title={r.previous}>{r.previous || '—'}</div></td>
               <td className={td}><div className={cell} dir="auto" title={r.value}>{r.value || '—'}</div></td>
-              <td className={`${td} text-end`}><Button variant="ghost" size="sm" disabled={busy !== null} aria-busy={busy === r.index} onClick={() => onUndo(r)}>{__('Undo', 'monoranks')}</Button></td>
+              <td className={`${td} text-end`}><Button variant="ghost" size="sm" disabled={busy !== null} aria-busy={busy === r.index} onClick={() => onUndo(r)}>{busy !== r.index && <Undo2 size={13} className="mr-flip" />}{__('Undo', 'monoranks')}</Button></td>
             </tr>
           ))}
         </tbody>

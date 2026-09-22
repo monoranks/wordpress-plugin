@@ -4,10 +4,10 @@
  * The list table is WordPress's light surface, so the cell always uses the light palette.
  */
 .monoranks-cell { --ink: #14181f; --muted: #8a929e; --line: #cbd2db; --good: #0ca30c; --warn: #e6a100; --critical: #d03b3b; --grayTrack: #e6e9ee; }
-.fixed .column-monoranks { width: 168px; }
+.fixed .column-monoranks { width: 150px; }
 td.column-monoranks { vertical-align: middle; }
 .monoranks-cell { display: flex; flex-direction: column; gap: 5px; color: var(--ink); }
-.monoranks-cell .row { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; cursor: default; }
+.monoranks-cell .row { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; text-decoration: none; cursor: default; }
 .monoranks-cell a.row { cursor: pointer; }
 .monoranks-cell a.row, .monoranks-cell a.row:hover, .monoranks-cell a.row:focus { text-decoration: none; box-shadow: none; }
 .monoranks-cell .xs { font-size: 11px; color: var(--muted); }
@@ -29,11 +29,11 @@ td.column-monoranks { vertical-align: middle; }
 
 /* The card that appears above the rings on hover or keyboard focus: anchored to the column's end edge so it never runs
    off the table, fades in and rises 4px, and stays while the pointer travels to it (an invisible bridge under it and a
-   short delay before it hides). */
+   short delay before it hides). It hangs from the cell's own start edge, so it sits under the rings it belongs to. */
 td.column-monoranks { position: relative; }
 .monoranks-cell .row { outline: none; }
 .monoranks-cell .row:focus-visible { box-shadow: 0 0 0 2px #2a6fdb; border-radius: 6px; }
-.monoranks-cell .mr-tip { position: absolute; inset-inline-end: 8px; top: calc(100% - 10px); z-index: 30; width: 232px; background: #fff; border: 1px solid #e3e7ec; border-radius: 10px; box-shadow: 0 8px 24px rgba(20, 24, 31, .12), 0 1px 2px rgba(20, 24, 31, .06); padding: 12px 14px; color: var(--ink); text-align: start; font-size: 12px; line-height: 1.45; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .14s ease .2s, transform .14s ease .2s; }
+.monoranks-cell .mr-tip { position: absolute; inset-inline-start: 0; top: calc(100% - 10px); z-index: 30; width: 232px; background: #fff; border: 1px solid #e3e7ec; border-radius: 10px; box-shadow: 0 8px 24px rgba(20, 24, 31, .12), 0 1px 2px rgba(20, 24, 31, .06); padding: 12px 14px; color: var(--ink); text-align: start; font-size: 12px; line-height: 1.45; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .14s ease .2s, transform .14s ease .2s; }
 .monoranks-cell .mr-tip::before { content: ""; position: absolute; inset-inline: 0; bottom: 100%; height: 44px; }
 .monoranks-cell:hover .mr-tip, .monoranks-cell:focus-within .mr-tip { opacity: 1; transform: none; pointer-events: auto; transition-delay: 0s; }
 .monoranks-cell .mr-tip .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }

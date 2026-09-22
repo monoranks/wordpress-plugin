@@ -89,15 +89,15 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
 
           {connected && (
             <Card>
-              <CardBody className="pt-[18px]">
-                <details open={keyOpen} onToggle={(e) => setKeyOpen(e.currentTarget.open)} className="group">
-                  <summary className="inline-flex cursor-pointer list-none items-center gap-2 font-medium text-ink2 [&::-webkit-details-marker]:hidden"><ChevronRight size={14} className="mr-flip transition-transform group-open:rotate-90" />{__('Use a different key', 'monoranks')}</summary>
-                  <div className="flex flex-col gap-[14px] pt-[14px]">
+              <details open={keyOpen} onToggle={(e) => setKeyOpen(e.currentTarget.open)} className="group">
+                <summary className="flex cursor-pointer list-none items-center gap-2 px-[22px] py-4 font-medium text-ink2 hover:text-ink [&::-webkit-details-marker]:hidden"><ChevronRight size={14} className="mr-flip transition-transform group-open:rotate-90" />{__('Use a different key', 'monoranks')}</summary>
+                <div className="border-t border-grid px-[22px] pb-[22px] pt-4">
+                  <div className="flex flex-col gap-[14px]">
                     <div className="rounded-lg bg-surface2 px-[14px] py-3 text-[12px] text-ink2">{__('In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website. Paste it here. With a key alone MonoRanks receives your content; to apply fixes, also use Connect to WordPress in MonoRanks.', 'monoranks')}</div>
                     <KeyForm data={data} busy={busy} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} />
                   </div>
-                </details>
-              </CardBody>
+                </div>
+              </details>
             </Card>
           )}
 
