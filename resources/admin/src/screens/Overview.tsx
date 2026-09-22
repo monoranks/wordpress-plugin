@@ -130,14 +130,19 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
               <CardBody className="flex flex-col pt-1.5">
                 {o.ready.length === 0 && <Empty title={__('No fixes waiting', 'monoranks')} text={__('Fixes you approve in MonoRanks appear here, ready to write into WordPress.', 'monoranks')} />}
                 {o.ready.map((fix) => (
-                  <div key={fix.id} className="flex items-center gap-3 border-b border-grid py-3 last-of-type:border-b-0">
-                    <Badge>{data.labels[fix.field] ?? fix.field}</Badge>
-                    <div className="grid min-w-0 flex-1 gap-[3px]">
-                      <span className="text-[12px]"><b className="font-semibold"><bdi>{fix.title || (fix.field === 'redirect' ? fix.from : __('Site', 'monoranks'))}</bdi></b></span>
+                  <div key={fix.id} className="flex items-start gap-3 border-b border-grid py-3 last-of-type:border-b-0">
+                    <div className="grid min-w-0 flex-1 gap-1">
+                      <div className="flex min-w-0 flex-wrap items-center gap-2">
+                        <Badge>{data.labels[fix.field] ?? fix.field}</Badge>
+                        <b className="min-w-0 truncate text-[12px] font-semibold"><bdi>{fix.title || (fix.field === 'redirect' ? fix.from : __('Site', 'monoranks'))}</bdi></b>
+                      </div>
                       {fix.field === 'content' ? (
                         <span className="text-[12px] text-mute">{__('Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first.', 'monoranks')}</span>
                       ) : (
-                        <>{fix.before && <s className="text-[12px] text-mute"><bdi>{excerpt(fix.before, 140)}</bdi></s>}<span className="text-[12px]"><bdi>{excerpt(fix.after, 160)}</bdi></span></>
+                        <>
+                          {fix.before && <s className="truncate text-[12px] text-mute"><bdi>{excerpt(fix.before, 90)}</bdi></s>}
+                          <span className="text-[12px]"><bdi>{excerpt(fix.after, 120)}</bdi></span>
+                        </>
                       )}
                     </div>
                     {fix.field === 'content' && fix.page_url ? (
