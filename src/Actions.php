@@ -46,6 +46,22 @@ class Actions {
 	}
 
 	/**
+	 * Erases everything the plugin stored in WordPress: the connection, the cached audit results and per-page scores,
+	 * the redirects and AI access files it was asked to write, and the change log. Pages themselves are left as they
+	 * are — a fix that was written stays written; use Undo for those first.
+	 */
+	public static function delete_everything() {
+		Sync::unschedule();
+		Connection::clear();
+		Insights::clear();
+		foreach ( array( 'monoranks', 'monoranks_redirects', 'monoranks_change_log', 'monoranks_ai_bots', 'monoranks_llms_txt' ) as $option ) {
+			delete_option( $option );
+		}
+		delete_transient( 'monoranks_sync_lock' );
+		return 'deleted';
+	}
+
+	/**
 	 * Apply one fix approved in MonoRanks (its id) or all of them ('all'), then tell MonoRanks what happened. A body edit
 	 * is never part of 'all': it is reviewed as a before/after in MonoRanks and applied one at a time from there.
 	 */

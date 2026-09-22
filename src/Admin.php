@@ -174,6 +174,7 @@ class Admin {
 			'connected'    => array( 'success', __( 'Connected. Your published content is on its way to MonoRanks.', 'monoranks' ) ),
 			'sent'         => array( 'success', __( 'Content sent to MonoRanks.', 'monoranks' ) ),
 			'disconnected' => array( 'success', __( 'Disconnected. Nothing is sent to MonoRanks any more.', 'monoranks' ) ),
+			'deleted'      => array( 'success', __( 'Everything MonoRanks stored in WordPress is gone: the connection, the scores, the redirects and the change log.', 'monoranks' ) ),
 			'applied'      => array( 'success', __( 'Applied. The change is listed under Recent changes and can be undone.', 'monoranks' ) ),
 			'applied_some' => array( 'warning', __( 'Some fixes were applied; the rest were refused because those pages changed since MonoRanks reviewed them. Recent changes lists what was written.', 'monoranks' ) ),
 			'log_moved'    => array( 'error', __( 'That change has moved in the log since this screen loaded. Reload and try Undo again.', 'monoranks' ) ),

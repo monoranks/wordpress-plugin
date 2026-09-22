@@ -22,7 +22,7 @@ class Rest {
 		// The admin app's own routes (cookie + nonce through wp.apiFetch): what the screens read, and what their buttons do.
 		register_rest_route( self::NS, '/admin/overview', array( 'methods' => 'GET', 'callback' => array( 'MonoRanks\\Overview', 'data' ), 'permission_callback' => $admin ) );
 		register_rest_route( self::NS, '/admin/settings', array( 'methods' => 'GET', 'callback' => array( 'MonoRanks\\Settings', 'data' ), 'permission_callback' => $admin ) );
-		foreach ( array( 'apply', 'undo', 'sync', 'connect', 'disconnect' ) as $action ) {
+		foreach ( array( 'apply', 'undo', 'sync', 'connect', 'disconnect', 'delete' ) as $action ) {
 			register_rest_route( self::NS, '/admin/' . $action, array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'admin_' . $action ), 'permission_callback' => $admin ) );
 		}
 	}
@@ -59,6 +59,10 @@ class Rest {
 
 	public static function admin_disconnect() {
 		return self::admin_result( Actions::disconnect(), 'settings' );
+	}
+
+	public static function admin_delete() {
+		return self::admin_result( Actions::delete_everything(), 'settings' );
 	}
 
 	public static function can_manage() {

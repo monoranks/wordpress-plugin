@@ -78,6 +78,9 @@
 /* The mount takes the admin content area edge to edge: WordPress's .wrap margins and footer reservation are taken back. */
 body.monoranks-screen #wpbody-content { padding-bottom: 0; }
 body.monoranks-screen #wpfooter { display: none; }
+/* The frame fills the admin's content area, so its own footer is the last band on the page with no grey strip under it.
+   WordPress's #wpwrap is taller than the viewport by the toolbar's height, which is where the strip came from. */
+body.monoranks-screen #wpwrap { min-height: 0; }
 #monoranks-admin { margin: 0; margin-inline: -20px 0; min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px)); display: flex; flex-direction: column; background: var(--page); color: var(--ink); font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
 @media (max-width: 782px) { #monoranks-admin { margin-inline: -10px 0; } }
 #monoranks-admin a { color: var(--accentInk); text-decoration: none; }

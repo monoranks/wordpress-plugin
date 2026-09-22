@@ -43,6 +43,13 @@ test('the posts list has a MonoRanks column with a hover card', async ({ page })
   await expect(page.locator('td.column-monoranks').first()).toContainText('Connect MonoRanks');
 });
 
+test('a site that is not connected can erase everything the plugin stored', async ({ page }) => {
+  await page.goto('/wp-admin/admin.php?page=monoranks-settings');
+  await expect(page.getByRole('heading', { name: 'Settings', level: 1 })).toBeVisible();
+  // Nothing stored yet, so there is nothing to erase and no danger zone.
+  await expect(page.getByText('Danger zone')).toHaveCount(0);
+});
+
 test('REST: ping is public, everything else needs an authenticated admin', async ({ page, request }) => {
   const ping = await request.get('/wp-json/monoranks/v1/ping');
   expect(ping.ok()).toBeTruthy();

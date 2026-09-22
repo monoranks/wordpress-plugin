@@ -27,7 +27,7 @@ export type OverviewData = {
 };
 
 export type SettingsData = {
-  connected: boolean; revoked: boolean; state: 'connected' | 'revoked' | 'none';
+  connected: boolean; revoked: boolean; state: 'connected' | 'revoked' | 'none'; has_data: boolean;
   key_hint: string; key_via: string; api_base: string; last_sent: string; last_error: string;
   sending: null | { page: number; pages: number }; items: number; next_audit: string; seo_plugin: string;
   profile_url: string; show_address: boolean; app_url: string; log: LogRow[]; labels: Record<string, string>;
@@ -43,6 +43,7 @@ export const api = {
   sync: (screen: 'overview' | 'settings') => apiFetch<ActionResult<OverviewData | SettingsData>>({ path: `${NS}/sync`, method: 'POST', data: { screen } }),
   connect: (key: string, api_base?: string) => apiFetch<ActionResult<SettingsData>>({ path: `${NS}/connect`, method: 'POST', data: { key, api_base } }),
   disconnect: () => apiFetch<ActionResult<SettingsData>>({ path: `${NS}/disconnect`, method: 'POST' }),
+  deleteEverything: () => apiFetch<ActionResult<SettingsData>>({ path: `${NS}/delete`, method: 'POST' }),
 };
 
 /** apiFetch rejects with the REST error body; show its message, or a plain one. */

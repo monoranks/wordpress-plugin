@@ -23,6 +23,7 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
   const [busy, setBusy] = useState<string | null>(null);
   const [undoing, setUndoing] = useState<number | null>(null);
   const [keyOpen, setKeyOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     api.settings().then((d) => { setData(d); setKeyOpen(d.revoked); }).catch((e) => setError(errorText(e, __('Could not load the settings.', 'monoranks'))));
@@ -116,6 +117,24 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
             <CardHeader><CardTitle>{__('Recent changes', 'monoranks')}</CardTitle><span className="text-[12px] text-mute">{__('Last 50 · undo for 30 days', 'monoranks')}</span></CardHeader>
             <div className="pt-2"><ChangeLog rows={data.log} busy={undoing} onUndo={(row) => { setUndoing(row.index); run('undo', () => api.undo(row, 'settings')); }} /></div>
           </Card>
+
+          {!connected && data.has_data && (
+            <Card className="border-critical/40">
+              <CardHeader><CardTitle className="text-critical">{__('Danger zone', 'monoranks')}</CardTitle></CardHeader>
+              <CardBody className="flex flex-col gap-3">
+                <p className="text-[12px] text-ink2 max-w-[80ch]">{__('This site is not connected to MonoRanks. You can erase everything the plugin stored here: the connection, the scores on your posts and pages, the redirects and AI access files it was asked to write, and the change log. Pages themselves are not touched — a fix that was written stays written, so undo those first if you want them back.', 'monoranks')}</p>
+                {confirmDelete ? (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[12px] font-medium text-critical">{__('This cannot be undone. Delete everything?', 'monoranks')}</span>
+                    <Button variant="primary" className="border-critical bg-critical hover:opacity-85" disabled={busy !== null} aria-busy={busy === 'delete'} onClick={() => { setConfirmDelete(false); run('delete', () => api.deleteEverything()); }}>{__('Yes, delete all data', 'monoranks')}</Button>
+                    <Button variant="ghost" disabled={busy !== null} onClick={() => setConfirmDelete(false)}>{__('Cancel', 'monoranks')}</Button>
+                  </div>
+                ) : (
+                  <div><Button className="border-critical text-critical hover:bg-critical/5" onClick={() => setConfirmDelete(true)}>{__('Delete all MonoRanks data', 'monoranks')}</Button></div>
+                )}
+              </CardBody>
+            </Card>
+          )}
         </>
       )}
     </Shell>

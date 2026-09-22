@@ -6,6 +6,16 @@ defined( 'ABSPATH' ) || exit;
 /** What MonoRanks → Settings shows: connection state, the connector key, last sync, what is sent, recent changes. Answered as JSON. */
 class Settings {
 
+	/** Whether the plugin has anything of its own left in this WordPress (what the danger zone would erase). */
+	public static function has_data() {
+		foreach ( array( 'monoranks_connection', 'monoranks_insights', 'monoranks_change_log', 'monoranks_redirects', 'monoranks_ai_bots', 'monoranks_llms_txt' ) as $option ) {
+			if ( false !== get_option( $option, false ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static function data() {
 		$conn      = Connection::get();
 		$connected = Connection::has_key();
@@ -17,6 +27,7 @@ class Settings {
 		return array(
 			'connected'    => $connected,
 			'revoked'      => $revoked,
+			'has_data'     => self::has_data(),
 			'state'        => $revoked ? 'revoked' : ( $connected ? 'connected' : 'none' ),
 			'key_hint'     => $connected ? substr( $conn['key'], 0, 12 ) . '…' : '',
 			'key_via'      => $connected && 'pairing' === ( isset( $conn['via'] ) ? $conn['via'] : '' )
