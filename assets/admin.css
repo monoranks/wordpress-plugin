@@ -26,6 +26,10 @@
 
 .monoranks { color: var(--ink); font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
 
+/* WordPress leaves room under the content for its own footer line; the plugin's frame carries its footer itself. */
+body.toplevel_page_monoranks #wpbody-content, body.monoranks_page_monoranks-settings #wpbody-content { padding-bottom: 0; }
+body.toplevel_page_monoranks #wpfooter, body.monoranks_page_monoranks-settings #wpfooter { display: none; }
+
 /* The frame: a dark brand band on top, the light title area, the work area, and the service footer; the plugin's screens
    fill the admin content area edge to edge (WordPress's .wrap margins are taken back) and their content sits in one measure. */
 .monoranks.mr-frame { --band: #14181f; --bandInk: #f3f4f6; --bandMuted: #b8bec8; --bandEdge: #2c313a; --gutter: 40px; --measure: 1180px;
@@ -206,10 +210,11 @@
 
 /* Posts and Pages list column: the list table is WordPress's own light surface, so the cell always uses the light palette. */
 .fixed .column-monoranks { width: 168px; }
+td.column-monoranks { vertical-align: middle; }
 .monoranks-cell { display: flex; flex-direction: column; gap: 5px; color: var(--ink); }
 .monoranks-cell .row { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; cursor: default; }
 .monoranks-cell a.row { cursor: pointer; }
-.monoranks-cell a.row:hover .mr-score .lbl { color: var(--accentInk); }
+.monoranks-cell a.row, .monoranks-cell a.row:hover, .monoranks-cell a.row:focus { text-decoration: none; box-shadow: none; }
 .monoranks-cell .xs { font-size: 11px; color: var(--muted); }
 .monoranks-cell .xs a { text-decoration: none; }
 
