@@ -14,6 +14,9 @@
   --grid: #e6e9ee; --line: #cbd2db; --border: #e3e7ec; --accent: #2a6fdb; --accentInk: #1d5bbf; --accentSoft: #e8f0fc;
   --good: #0ca30c; --goodInk: #0a7a0a; --warn: #e6a100; --critical: #d03b3b; --grayTrack: #e6e9ee; --primaryBtn: #14181f; --primaryBtnInk: #ffffff;
   --band: #14181f; --bandInk: #f3f4f6; --bandMuted: #b8bec8; --bandEdge: #2c313a;
+  --tintGood: rgba(12, 163, 12, .07); --tintGoodEdge: rgba(12, 163, 12, .35);
+  --tintWarn: rgba(230, 161, 0, .10); --tintWarnEdge: rgba(230, 161, 0, .40);
+  --tintBad: rgba(208, 59, 59, .07); --tintBadEdge: rgba(208, 59, 59, .35);
   /* shadcn's names, MonoRanks's values, so vendored components drop in unchanged. */
   --background: var(--page); --foreground: var(--ink); --card: var(--surface); --card-foreground: var(--ink);
   --popover: var(--surface); --popover-foreground: var(--ink); --primary: var(--primaryBtn); --primary-foreground: var(--primaryBtnInk);
@@ -26,6 +29,9 @@
   --grid: #262b33; --line: #3a404a; --border: #262b33; --accent: #3987e5; --accentInk: #86b6ef; --accentSoft: #1a2a44;
   --good: #0ca30c; --goodInk: #3ccf3c; --warn: #fab219; --critical: #e05656; --grayTrack: #2c313a; --primaryBtn: #f3f4f6; --primaryBtnInk: #14181f;
   --band: #0b0d11; --bandEdge: #262b33;
+  --tintGood: rgba(60, 207, 60, .12); --tintGoodEdge: rgba(60, 207, 60, .38);
+  --tintWarn: rgba(250, 178, 25, .14); --tintWarnEdge: rgba(250, 178, 25, .42);
+  --tintBad: rgba(224, 86, 86, .12); --tintBadEdge: rgba(224, 86, 86, .38);
   color-scheme: dark;
 }
 
@@ -84,20 +90,21 @@ body.monoranks-screen #wpfooter { display: none; }
    frame takes the rest. */
 body.monoranks-screen #wpwrap { min-height: 0; }
 body.monoranks-screen #wpbody-content { display: flex; flex-direction: column; min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px)); }
-/* WordPress's own notices on these screens take the app's look and sit inside the page's gutter. */
-body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .error, #message) {
-	margin: 16px 20px 0; padding: 12px 16px; border: 1px solid var(--border); border-inline-start-width: 1px; border-radius: 12px;
-	background: var(--surface); color: var(--ink); box-shadow: none; font-size: 13px; line-height: 1.45;
+/* WordPress's own notices are moved into the page (shell/Notices.tsx) and take the app's look there. One that has not
+   been moved yet stays hidden for the moment rather than flashing above the band. */
+body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .error, #message) { display: none; }
+/* Notices that landed in the page: WordPress's relocation puts some before .wp-header-end, the rest are collected in
+   the slot under it. Both read as the app's cards. */
+#monoranks-admin :is(.notice, .update-nag, .updated, .error, #message) {
+	width: 100%; margin: 0; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px;
+	background: var(--surface); color: var(--ink); box-shadow: none; font-size: 13px; line-height: 1.45; display: block;
 }
-body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .error, #message) + :is(.notice, .update-nag, .updated, .error, #message) { margin-top: 10px; }
-/* WordPress moves a notice into the page, just before .wp-header-end; there it lines up with the page's own content. */
-#monoranks-admin > :is(.notice, .updated, .error, #message) {
-	width: 100%; max-width: 1180px; margin: 0 auto 4px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px;
-	background: var(--surface); color: var(--ink); box-shadow: none; font-size: 13px; line-height: 1.45;
-}
-#monoranks-admin > div.notice-success { background: color-mix(in srgb, var(--good) 6%, var(--surface)); border-color: color-mix(in srgb, var(--good) 28%, var(--border)); }
-#monoranks-admin > div.notice-error { background: color-mix(in srgb, var(--critical) 6%, var(--surface)); border-color: color-mix(in srgb, var(--critical) 28%, var(--border)); }
-#monoranks-admin > div.notice-warning { background: color-mix(in srgb, var(--warn) 8%, var(--surface)); border-color: color-mix(in srgb, var(--warn) 30%, var(--border)); }
+#monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: 1180px; margin: 0 auto 4px; }
+/* The tone is a translucent tint over the card's own surface, so it reads the same in both themes. The tint is forced:
+   WordPress's own admin stylesheets, loaded after this one, set a background on .notice and would win otherwise. */
+#monoranks-admin div.notice-success { background-image: linear-gradient(var(--tintGood), var(--tintGood)) !important; border-color: var(--tintGoodEdge) !important; }
+#monoranks-admin div.notice-error { background-image: linear-gradient(var(--tintBad), var(--tintBad)) !important; border-color: var(--tintBadEdge) !important; }
+#monoranks-admin div.notice-warning, #monoranks-admin div.update-nag { background-image: linear-gradient(var(--tintWarn), var(--tintWarn)) !important; border-color: var(--tintWarnEdge) !important; }
 @media (max-width: 1340px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 80px); } }
 @media (max-width: 960px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 48px); } }
 @media (max-width: 782px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 32px); } }
@@ -114,13 +121,7 @@ body.monoranks-screen #wpbody-content > .update-nag { display: block; }
 #monoranks-admin h1, #monoranks-admin h2, #monoranks-admin h3, #monoranks-admin p { margin: 0; padding: 0; color: inherit; }
 #monoranks-admin :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; box-shadow: none; }
 #monoranks-admin input[type="password"], #monoranks-admin input[type="url"] { box-shadow: none; margin: 0; min-height: 0; line-height: normal; }
-/* WordPress notices keep their classes (the browser tests read .notice-error) and take the app's card look: one surface,
-   one border and a tinted background for the tone, instead of WordPress's bar with a coloured edge. */
-#monoranks-admin .notice { margin: 0; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: none; color: var(--ink); }
 #monoranks-admin .notice p { margin: 0; padding: 0; font-size: 13px; }
-#monoranks-admin div.notice-success { background: color-mix(in srgb, var(--good) 6%, var(--surface)); border-color: color-mix(in srgb, var(--good) 28%, var(--border)); }
-#monoranks-admin div.notice-error { background: color-mix(in srgb, var(--critical) 6%, var(--surface)); border-color: color-mix(in srgb, var(--critical) 28%, var(--border)); }
-#monoranks-admin div.notice-warning { background: color-mix(in srgb, var(--warn) 8%, var(--surface)); border-color: color-mix(in srgb, var(--warn) 30%, var(--border)); }
 /* Score ring: the app's ScoreBox. */
 .mr-score { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); vertical-align: middle; }
 .mr-score .mr-ring { position: relative; display: inline-block; line-height: 0; }

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { __ } from '@wordpress/i18n';
 import { ArrowUpRight, ArrowRight, CheckCircle2, AlertCircle, AlertTriangle } from 'lucide-react';
 import { adminSettings, type Notice } from '@/settings';
+import { Notices } from '@/shell/Notices';
 import { cn } from '@/lib/utils';
 import { out } from '@/lib/links';
 import type { Screen } from '@/lib/screen';
@@ -47,8 +48,9 @@ export function Shell({ section, go, title, description, actions, children }: { 
         </div>
         {actions && <div className="flex flex-wrap items-center gap-2 pt-1">{actions}</div>}
       </div>
-      {/* WordPress moves its own notices to just before this marker, so they land under the title instead of above the band. */}
+      {/* WordPress moves its own notices to just before this marker; anything it leaves behind is collected below. */}
       <div className="wp-header-end" />
+      <Notices className={cn(measure, 'flex flex-col gap-2.5 pt-3')} />
       <main className={cn(measure, 'flex flex-[1_0_auto] flex-col gap-5 pb-10 pt-[22px]')}>{children}</main>
       <Footer section={section} go={go} />
     </>
