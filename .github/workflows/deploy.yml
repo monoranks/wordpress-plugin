@@ -1,7 +1,8 @@
 name: Deploy
 
 # Publishing a GitHub release (tag v<version>) runs the full test suite on that commit and, only when it is green,
-# pushes the version to the WordPress.org directory over SVN and attaches the zip to the release.
+# pushes the version to the WordPress.org directory over SVN and attaches the zip to the release. Before the plugin is
+# listed there, the SVN step is skipped and the release still carries a zip to submit by hand.
 # Secrets: SVN_USERNAME and SVN_PASSWORD (the wordpress.org account that owns the plugin).
 on:
   release:
@@ -34,7 +35,27 @@ jobs:
           coverage: none
       - run: composer install --no-interaction --prefer-dist
       - run: composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: The admin app in the zip is built from this commit
+        run: npm run build && git diff --exit-code --stat build
+      # Until WordPress.org has approved the plugin there is no SVN repository to push to, so the deploy step waits for
+      # the credentials; the zip is built and attached to the release either way.
+      - name: Is WordPress.org set up for this plugin yet?
+        id: wporg
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+        run: echo "ready=${SVN_USERNAME:+yes}" >> "$GITHUB_OUTPUT"
+      - name: Build the zip when WordPress.org is not set up yet
+        if: steps.wporg.outputs.ready != 'yes'
+        run: |
+          mkdir -p tmp && rsync -a --exclude-from=.distignore ./ "tmp/${{ github.event.repository.name }}/"
+          (cd tmp && zip -rq "../${{ github.event.repository.name }}.zip" "${{ github.event.repository.name }}")
       - uses: 10up/action-wordpress-plugin-deploy@stable
+        if: steps.wporg.outputs.ready == 'yes'
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
