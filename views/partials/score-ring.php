@@ -16,7 +16,7 @@ $monoranks_mid = $monoranks_px / 2;
 $monoranks_title = null === $score ? __( 'Not scored yet', 'monoranks' ) : sprintf( __( '%s of 100', 'monoranks' ), number_format_i18n( $score ) );
 ?>
 <span class="mr-score <?php echo esc_attr( $size . ' ' . $tone ); ?>" title="<?php echo esc_attr( ( $label ? $label . ': ' : '' ) . $monoranks_title ); ?>">
-	<span class="ring">
+	<span class="mr-ring">
 		<svg width="<?php echo (int) $monoranks_px; ?>" height="<?php echo (int) $monoranks_px; ?>" viewBox="0 0 <?php echo (int) $monoranks_px; ?> <?php echo (int) $monoranks_px; ?>" aria-hidden="true">
 			<?php if ( null === $score ) : ?>
 				<circle cx="<?php echo esc_attr( $monoranks_mid ); ?>" cy="<?php echo esc_attr( $monoranks_mid ); ?>" r="<?php echo esc_attr( $monoranks_r ); ?>" fill="none" stroke="currentColor" stroke-width="<?php echo (int) $monoranks_sw; ?>" stroke-dasharray="3 4"/>

@@ -1,0 +1,26 @@
+/*
+ * The MonoRanks column in Posts, Pages and other list tables: two score rings per row (the app's ScoreBox). The plugin's
+ * own screens are the admin app (resources/admin, built into assets/build/) and carry their own stylesheet.
+ * The list table is WordPress's light surface, so the cell always uses the light palette.
+ */
+.monoranks-cell { --ink: #14181f; --muted: #8a929e; --line: #cbd2db; --good: #0ca30c; --warn: #e6a100; --critical: #d03b3b; --grayTrack: #e6e9ee; }
+.fixed .column-monoranks { width: 168px; }
+td.column-monoranks { vertical-align: middle; }
+.monoranks-cell { display: flex; flex-direction: column; gap: 5px; color: var(--ink); }
+.monoranks-cell .row { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; cursor: default; }
+.monoranks-cell a.row { cursor: pointer; }
+.monoranks-cell a.row, .monoranks-cell a.row:hover, .monoranks-cell a.row:focus { text-decoration: none; box-shadow: none; }
+.monoranks-cell .xs { font-size: 11px; color: var(--muted); }
+.monoranks-cell .xs a { text-decoration: none; }
+
+.mr-score { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); vertical-align: middle; }
+.mr-score .mr-ring { position: relative; display: inline-block; line-height: 0; }
+.mr-score .mr-ring > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1; color: var(--ink); }
+.mr-score.none .mr-ring > span { color: var(--muted); }
+.mr-score.sm .mr-ring { width: 30px; height: 30px; }
+.mr-score.sm .mr-ring > span { font-size: 11px; }
+.mr-score .lbl { font-size: 11px; color: var(--muted); font-weight: 500; }
+.mr-score.good { color: var(--good); }
+.mr-score.warn { color: var(--warn); }
+.mr-score.critical { color: var(--critical); }
+.mr-score.none { color: var(--line); }

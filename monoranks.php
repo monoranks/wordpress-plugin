@@ -42,6 +42,7 @@ add_action( \MonoRanks\Sync::STEP_HOOK, array( 'MonoRanks\\Sync', 'run' ) );
 add_action( \MonoRanks\Sync::DAILY_HOOK, array( 'MonoRanks\\Sync', 'daily' ) );
 \MonoRanks\SeoFields::register_output();
 \MonoRanks\Admin::register();
+\MonoRanks\Assets::register();
 \MonoRanks\Column::register();
 \MonoRanks\Insights::register();
 

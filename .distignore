@@ -17,3 +17,10 @@ CHANGELOG.md
 build
 phpunit.xml.dist
 docs
+resources
+vite.config.mjs
+tsconfig.json
+components.json
+bin
+build
+.phpunit.result.cache

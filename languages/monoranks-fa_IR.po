@@ -1,491 +1,708 @@
 msgid ""
-msgstr ""
-"Project-Id-Version: MonoRanks 1.0.0\n"
-"Language: fa_IR\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: monoranks\n"
+msgstr "Project-Id-Version: MonoRanks 1.0.0\nLanguage: fa_IR\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n > 1);\nX-Generator: monoranks\n"
 
+#. Plugin Name of the plugin
+#. Author of the plugin
+#: monoranks.php
 msgid "MonoRanks"
 msgstr "مونورنکس"
 
+#. Plugin URI of the plugin
+#: monoranks.php
+msgid "https://monoranks.com/product/wordpress/"
+msgstr ""
+
+#. Description of the plugin
+#: monoranks.php
+msgid "Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo."
+msgstr "این سایت را به مونورنکس (ممیزی SEO، AEO و GEO) متصل می‌کند: فرادادهٔ محتوای منتشرشده را می‌فرستد و اصلاح‌هایی را که آنجا تأیید می‌کنید، با امکان بازگردانی، اعمال می‌کند."
+
+#. Author URI of the plugin
+#: monoranks.php
+msgid "https://monoranks.com"
+msgstr ""
+
+#: src/Admin.php:30
+#: build/i18n/screens/Overview.js:51
+#: build/i18n/shell/Shell.js:12
 msgid "Overview"
 msgstr "نمای کلی"
 
+#: src/Admin.php:31
 msgid "MonoRanks settings"
 msgstr "تنظیمات مونورنکس"
 
+#: src/Admin.php:31
+#: build/i18n/screens/Settings.js:39
+#: build/i18n/shell/Shell.js:13
 msgid "Settings"
 msgstr "تنظیمات"
 
+#. translators: 1: relative time, 2: date
+#: src/Admin.php:114
 msgid "in %1$s (%2$s)"
 msgstr "%1$s دیگر (%2$s)"
 
+#. translators: 1: relative time, 2: date
+#: src/Admin.php:117
 msgid "%1$s ago (%2$s)"
 msgstr "%1$s پیش (%2$s)"
 
+#: src/Admin.php:123
 msgid "Connected. Your published content is on its way to MonoRanks."
 msgstr "متصل شد. محتوای منتشرشدهٔ شما در راه مونورنکس است."
 
+#: src/Admin.php:124
 msgid "Content sent to MonoRanks."
 msgstr "محتوا به مونورنکس فرستاده شد."
 
+#: src/Admin.php:125
+msgid "Disconnected. Nothing is sent to MonoRanks any more."
+msgstr "اتصال قطع شد. دیگر چیزی به مونورنکس فرستاده نمی‌شود."
+
+#: src/Admin.php:126
 msgid "Applied. The change is listed under Recent changes and can be undone."
 msgstr "اعمال شد. این تغییر در «تغییرات اخیر» آمده و قابل بازگردانی است."
 
+#: src/Admin.php:127
 msgid "Undone. The previous value is back."
 msgstr "بازگردانده شد. مقدار قبلی برگشت."
 
+#: src/Admin.php:128
 msgid "MonoRanks could not apply that change: the page changed since it was reviewed. Open it in MonoRanks to review again."
 msgstr "مونورنکس نتوانست این تغییر را اعمال کند: صفحه از زمان بررسی تغییر کرده است. برای بررسی دوباره آن را در مونورنکس باز کنید."
 
+#: src/Admin.php:129
 msgid "That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP."
 msgstr "این شبیه کلید اتصال مونورنکس نیست. آن را دوباره از مونورنکس ← تنظیمات ← API و MCP کپی کنید."
 
+#: src/Admin.php:130
 msgid "The MonoRanks address must start with https://."
 msgstr "نشانی مونورنکس باید با https:// شروع شود."
 
+#: src/Admin.php:131
 msgid "MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks."
 msgstr "مونورنکس این کلید را نپذیرفت. شاید باطل یا جایگزین شده باشد؛ در مونورنکس کلید تازه‌ای بسازید."
 
+#: src/Admin.php:132
 msgid "This key belongs to a different website in MonoRanks. Create the key on the website with this address."
 msgstr "این کلید متعلق به وب‌سایت دیگری در مونورنکس است. کلید را روی وب‌سایتی با همین نشانی بسازید."
 
+#: src/Admin.php:133
 msgid "MonoRanks could not be reached. Check the address and try again."
 msgstr "دسترسی به مونورنکس ممکن نشد. نشانی را بررسی کنید و دوباره تلاش کنید."
 
-msgid "Not allowed"
-msgstr "مجاز نیست"
+#: src/Column.php:63
+msgid "Not audited yet"
+msgstr "هنوز ممیزی نشده"
 
+#. translators: %s: relative time such as "5 days"
+#: src/Column.php:66
+msgid "next audit in %s"
+msgstr "ممیزی بعدی تا %s دیگر"
+
+#. translators: %s: number of fixes
+#: src/Column.php:85
 msgid "%s fix ready"
 msgid_plural "%s fixes ready"
 msgstr[0] "%s اصلاح آماده"
 msgstr[1] "%s اصلاح آماده"
 
+#. translators: %s: number of issues
+#: src/Column.php:88
 msgid "%s open issue"
 msgid_plural "%s open issues"
 msgstr[0] "%s مشکل باز"
 msgstr[1] "%s مشکل باز"
 
+#: src/Column.php:90
 msgid "No open issues"
 msgstr "بدون مشکل باز"
 
+#. translators: %s: relative time such as "2 days"
+#: src/Column.php:94
 msgid "audited %s ago"
 msgstr "ممیزی %s پیش"
 
+#: src/Column.php:147
 msgid "Needs attention"
 msgstr "نیازمند توجه"
 
+#: src/Overview.php:37
 msgid "Title"
 msgstr "عنوان"
 
+#: src/Overview.php:38
 msgid "Meta description"
 msgstr "توضیح متا"
 
+#: src/Overview.php:39
 msgid "Canonical"
 msgstr "کانونیکال"
 
+#: src/Overview.php:40
 msgid "Noindex"
 msgstr "Noindex"
 
+#: src/Overview.php:41
 msgid "Image alt"
 msgstr "متن جایگزین تصویر"
 
+#: src/Overview.php:42
 msgid "Redirect"
 msgstr "تغییر مسیر"
 
+#: src/Overview.php:43
 msgid "Opening paragraph"
 msgstr "پاراگراف آغازین"
 
+#: src/Overview.php:44
 msgid "robots.txt"
 msgstr "robots.txt"
 
+#: src/Overview.php:45
 msgid "llms.txt"
 msgstr "llms.txt"
 
+#. translators: %d: attachment ID
+#: src/Overview.php:64
+msgid "Image #%d"
+msgstr "تصویر #%d"
+
+#: src/Overview.php:66
+#: build/i18n/screens/Overview.js:110
+msgid "Site"
+msgstr "سایت"
+
+#. translators: 1: user, 2: date
+#: src/Settings.php:24
 msgid "set when %1$s connected MonoRanks on %2$s"
 msgstr "هنگام اتصال %1$s به مونورنکس در %2$s تنظیم شد"
 
+#: src/Settings.php:25
 msgid "pasted by hand"
 msgstr "دستی وارد شده"
 
+#: src/Settings.php:27
 msgid "Never"
 msgstr "هرگز"
 
+#: views/app.php:13
+msgid "The MonoRanks admin app is not built. Run npm install and npm run build in the plugin folder."
+msgstr "برنامهٔ مدیریت مونورنکس ساخته نشده است. در پوشهٔ افزونه npm install و سپس npm run build را اجرا کنید."
+
+#: views/column-cell.php:13
+#: build/i18n/screens/Overview.js:136
 msgid "Connect MonoRanks"
 msgstr "اتصال مونورنکس"
 
+#: views/column-cell.php:15
 msgid "Scored after publishing"
 msgstr "پس از انتشار امتیاز می‌گیرد"
 
+#: views/column-cell.php:17
+#: views/column-cell.php:21
+#: build/i18n/screens/Overview.js:86
 msgid "Health"
 msgstr "سلامت"
 
+#: views/column-cell.php:17
+#: views/column-cell.php:21
+#: build/i18n/screens/Overview.js:86
 msgid "AEO"
 msgstr "AEO"
 
-msgid "Not audited yet"
-msgstr "هنوز ممیزی نشده"
+#. translators: %s: score out of 100
+#: views/partials/score-ring.php:16
+#: build/i18n/shell/Ring.js:13
+msgid "Not scored yet"
+msgstr "هنوز امتیاز نگرفته"
 
-msgid "next audit in %s"
-msgstr "ممیزی بعدی تا %s دیگر"
+#. translators: %s: score out of 100
+#: views/partials/score-ring.php:16
+#: build/i18n/shell/Ring.js:13
+msgid "%s of 100"
+msgstr "%s از ۱۰۰"
 
-msgid "Connect MonoRanks again"
-msgstr "مونورنکس را دوباره متصل کنید"
+#: build/i18n/screens/Overview.js:33
+msgid "Could not load the overview."
+msgstr "بارگذاری نمای کلی ممکن نشد."
 
-msgid "Key revoked"
-msgstr "کلید باطل شده"
+#: build/i18n/screens/Overview.js:42
+#: build/i18n/screens/Settings.js:31
+msgid "Something went wrong. Try again."
+msgstr "مشکلی پیش آمد. دوباره تلاش کنید."
 
-msgid "Not connected"
-msgstr "متصل نیست"
+#: build/i18n/screens/Overview.js:49
+msgid "Weekly SEO, AEO and GEO audit of"
+msgstr "ممیزی هفتگی SEO، AEO و GEO برای"
 
-msgid "Connect from MonoRanks"
-msgstr "اتصال از مونورنکس"
-
-msgid "In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect."
-msgstr "در مونورنکس وب‌سایت خود را باز کنید ← یکپارچه‌سازی‌ها ← وردپرس ← اتصال به وردپرس، و وقتی وردپرس پرسید به مونورنکس اجازه دهید. پیش از اتصال چیزی فرستاده نمی‌شود."
-
-msgid "Open MonoRanks"
-msgstr "باز کردن مونورنکس"
-
-msgid "Or paste a connector key"
-msgstr "یا کلید اتصال را وارد کنید"
-
-msgid "Use this when your host blocks Application Passwords."
-msgstr "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید."
-
-msgid "Open settings"
-msgstr "باز کردن تنظیمات"
-
-msgid "See scores here and in your Posts list"
-msgstr "امتیازها را اینجا و در فهرست نوشته‌ها ببینید"
-
-msgid "After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list."
-msgstr "پس از نخستین ممیزی، این صفحه امتیاز سلامت و AEO سایت، صفحه‌های نیازمند توجه و اصلاح‌های تأییدشدهٔ شما را نشان می‌دهد؛ هر نوشته و برگه هم امتیازش را در فهرست می‌گیرد."
-
-msgid "Waiting for the first audit"
-msgstr "در انتظار نخستین ممیزی"
-
-msgid "Connected"
-msgstr "متصل"
-
-msgid "Content"
-msgstr "محتوا"
-
-msgid "%1$s published items sent %2$s"
-msgstr "%1$s مورد منتشرشده %2$s فرستاده شد"
-
-msgid "Not sent yet. Use \"Sync content now\" above."
-msgstr "هنوز فرستاده نشده. از «همگام‌سازی محتوا» در بالا استفاده کنید."
-
-msgid "Audit results"
-msgstr "نتایج ممیزی"
-
-msgid "This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow."
-msgstr "این مونورنکس هنوز نتایج ممیزی را با افزونه به اشتراک نمی‌گذارد. فعلاً امتیازها در مونورنکس می‌مانند؛ افزونه فردا دوباره می‌پرسد."
-
-msgid "MonoRanks could not be reached for the audit results. The plugin tries again within the hour."
-msgstr "برای دریافت نتایج ممیزی دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر دوباره تلاش می‌کند."
-
-msgid "MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit."
-msgstr "مونورنکس هنوز به این سایت امتیاز نداده است. امتیازها پس از نخستین ممیزی هفتگی اینجا و در فهرست نوشته‌ها دیده می‌شوند."
-
-msgid "checked %s"
-msgstr "بررسی‌شده %s"
-
-msgid "Open the audit in MonoRanks"
-msgstr "باز کردن ممیزی در مونورنکس"
-
-msgid "Weekly SEO, AEO and GEO audit of %s"
-msgstr "ممیزی هفتگی SEO، AEO و GEO برای %s"
-
+#: build/i18n/screens/Overview.js:49
 msgid "last audit %s"
 msgstr "آخرین ممیزی %s"
 
+#: build/i18n/screens/Overview.js:49
 msgid "%1$s of %2$s published pages scored"
 msgstr "%1$s از %2$s صفحهٔ منتشرشده امتیاز گرفته"
 
+#: build/i18n/screens/Overview.js:49
 msgid "Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress."
 msgstr "ممیزی هفتگی SEO، AEO و GEO، با اصلاح‌هایی که تأیید می‌کنید و در وردپرس نوشته می‌شوند."
 
+#: build/i18n/screens/Overview.js:50
 msgid "Sync content now"
 msgstr "همگام‌سازی محتوا"
 
-msgid "Open in MonoRanks"
-msgstr "باز کردن در مونورنکس"
-
+#: build/i18n/screens/Overview.js:60
 msgid "Health score"
 msgstr "امتیاز سلامت"
 
+#: build/i18n/screens/Overview.js:61
 msgid "Technical, on-page, links, speed"
 msgstr "فنی، درون‌صفحه، پیوندها، سرعت"
 
+#: build/i18n/screens/Overview.js:61
 msgid "Site average, %s page"
 msgid_plural "Site average, %s pages"
 msgstr[0] "میانگین سایت، %s صفحه"
 msgstr[1] "میانگین سایت، %s صفحه"
 
+#: build/i18n/screens/Overview.js:64
 msgid "AEO score"
 msgstr "امتیاز AEO"
 
+#: build/i18n/screens/Overview.js:65
 msgid "Answer-first, structure, entities"
 msgstr "پاسخ‌محوری، ساختار، موجودیت‌ها"
 
+#: build/i18n/screens/Overview.js:65
 msgid "How well AI answers can use your pages"
 msgstr "پاسخ‌های هوش مصنوعی چقدر می‌توانند از صفحه‌های شما استفاده کنند"
 
+#: build/i18n/screens/Overview.js:68
 msgid "Search clicks, 28 days"
 msgstr "کلیک‌های جستجو، ۲۸ روز"
 
+#: build/i18n/screens/Overview.js:69
 msgid "From Google Search Console, through MonoRanks"
 msgstr "از گوگل سرچ کنسول، از طریق مونورنکس"
 
+#: build/i18n/screens/Overview.js:69
 msgid "Connect Google Search Console in MonoRanks to see clicks here."
 msgstr "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
 
+#: build/i18n/screens/Overview.js:72
 msgid "Fixes"
 msgstr "اصلاح‌ها"
 
+#: build/i18n/screens/Overview.js:72
 msgid "%s ready"
 msgstr "%s آماده"
 
+#: build/i18n/screens/Overview.js:73
 msgid "applied in 30 days"
 msgstr "اعمال‌شده در ۳۰ روز"
 
+#: build/i18n/screens/Overview.js:75
 msgid "AI crawler rules on"
 msgstr "قوانین خزنده‌های هوش مصنوعی فعال"
 
+#: build/i18n/screens/Overview.js:75
 msgid "No AI crawler rules"
 msgstr "بدون قوانین خزندهٔ هوش مصنوعی"
 
+#: build/i18n/screens/Overview.js:76
 msgid "llms.txt published"
 msgstr "llms.txt منتشر شده"
 
+#: build/i18n/screens/Overview.js:76
 msgid "No llms.txt"
 msgstr "بدون llms.txt"
 
+#: build/i18n/screens/Overview.js:83
 msgid "Pages needing attention"
 msgstr "صفحه‌های نیازمند توجه"
 
+#: build/i18n/screens/Overview.js:83
 msgid "All pages in MonoRanks"
 msgstr "همهٔ صفحه‌ها در مونورنکس"
 
+#: build/i18n/screens/Overview.js:86
 msgid "Page"
 msgstr "صفحه"
 
+#: build/i18n/screens/Overview.js:86
 msgid "Biggest issue"
 msgstr "بزرگ‌ترین مشکل"
 
+#: build/i18n/screens/Overview.js:93
 msgid "Fix in MonoRanks"
 msgstr "اصلاح در مونورنکس"
 
+#: build/i18n/screens/Overview.js:97
 msgid "Nothing needs attention"
 msgstr "چیزی نیازمند توجه نیست"
 
+#: build/i18n/screens/Overview.js:97
 msgid "Every scored page is above 60. The next audit may change that."
 msgstr "همهٔ صفحه‌های امتیازگرفته بالای ۶۰ هستند. ممیزی بعدی ممکن است این را تغییر دهد."
 
+#: build/i18n/screens/Overview.js:102
 msgid "Ready to apply"
 msgstr "آمادهٔ اعمال"
 
+#: build/i18n/screens/Overview.js:103
 msgid "Apply all"
 msgstr "اعمال همه"
 
+#: build/i18n/screens/Overview.js:106
 msgid "No fixes waiting"
 msgstr "اصلاحی در انتظار نیست"
 
+#: build/i18n/screens/Overview.js:106
 msgid "Fixes you approve in MonoRanks appear here, ready to write into WordPress."
 msgstr "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا می‌آیند، آماده برای نوشتن در وردپرس."
 
-msgid "Site"
-msgstr "سایت"
-
+#: build/i18n/screens/Overview.js:111
 msgid "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first."
 msgstr "یک پاراگراف پاسخ‌محور به بالای نوشته اضافه می‌کند. ابتدا قبل/بعد را در مونورنکس بررسی کنید."
 
+#: build/i18n/screens/Overview.js:113
 msgid "Review"
 msgstr "بررسی"
 
+#: build/i18n/screens/Overview.js:113
 msgid "Apply"
 msgstr "اعمال"
 
+#: build/i18n/screens/Overview.js:115
 msgid "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days."
 msgstr "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
 
+#: build/i18n/screens/Overview.js:121
+#: build/i18n/screens/Settings.js:96
 msgid "Recent changes"
 msgstr "تغییرات اخیر"
 
+#: build/i18n/screens/Overview.js:121
 msgid "All changes"
 msgstr "همهٔ تغییرات"
 
-msgid "No changes yet"
-msgstr "هنوز تغییری نیست"
+#: build/i18n/screens/Overview.js:136
+msgid "Connect MonoRanks again"
+msgstr "مونورنکس را دوباره متصل کنید"
 
-msgid "Fixes you approve in MonoRanks show up here, each with Undo."
-msgstr "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا دیده می‌شوند، هرکدام با گزینهٔ بازگردانی."
+#: build/i18n/screens/Overview.js:136
+#: build/i18n/screens/Settings.js:47
+msgid "Key revoked"
+msgstr "کلید باطل شده"
 
-msgid "When"
-msgstr "زمان"
+#: build/i18n/screens/Overview.js:136
+#: build/i18n/screens/Settings.js:47
+msgid "Not connected"
+msgstr "متصل نیست"
 
-msgid "Who"
-msgstr "چه کسی"
+#: build/i18n/screens/Overview.js:138
+#: build/i18n/screens/Settings.js:65
+msgid "Connect from MonoRanks"
+msgstr "اتصال از مونورنکس"
 
-msgid "Field"
-msgstr "فیلد"
+#: build/i18n/screens/Overview.js:138
+#: build/i18n/screens/Settings.js:65
+msgid "In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect."
+msgstr "در مونورنکس وب‌سایت خود را باز کنید ← یکپارچه‌سازی‌ها ← وردپرس ← اتصال به وردپرس، و وقتی وردپرس پرسید به مونورنکس اجازه دهید. پیش از اتصال چیزی فرستاده نمی‌شود."
 
-msgid "Where"
-msgstr "کجا"
+#: build/i18n/screens/Overview.js:138
+#: build/i18n/screens/Settings.js:65
+#: build/i18n/shell/Shell.js:29
+msgid "Open MonoRanks"
+msgstr "باز کردن مونورنکس"
 
-msgid "Before"
-msgstr "قبل"
+#: build/i18n/screens/Overview.js:139
+#: build/i18n/screens/Settings.js:66
+msgid "Or paste a connector key"
+msgstr "یا کلید اتصال را وارد کنید"
 
-msgid "After"
-msgstr "بعد"
+#: build/i18n/screens/Overview.js:139
+msgid "Use this when your host blocks Application Passwords."
+msgstr "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید."
 
-msgid "Image #%d"
-msgstr "تصویر #%d"
+#: build/i18n/screens/Overview.js:139
+msgid "Open settings"
+msgstr "باز کردن تنظیمات"
 
-msgid "Undo"
-msgstr "بازگردانی"
+#: build/i18n/screens/Overview.js:140
+msgid "See scores here and in your Posts list"
+msgstr "امتیازها را اینجا و در فهرست نوشته‌ها ببینید"
 
-msgid "%s this week"
-msgstr "%s این هفته"
+#: build/i18n/screens/Overview.js:140
+msgid "After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list."
+msgstr "پس از نخستین ممیزی، این صفحه امتیاز سلامت و AEO سایت، صفحه‌های نیازمند توجه و اصلاح‌های تأییدشدهٔ شما را نشان می‌دهد؛ هر نوشته و برگه هم امتیازش را در فهرست می‌گیرد."
 
-msgid "Connector key"
-msgstr "کلید اتصال"
+#: build/i18n/screens/Overview.js:149
+msgid "This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow."
+msgstr "این مونورنکس هنوز نتایج ممیزی را با افزونه به اشتراک نمی‌گذارد. فعلاً امتیازها در مونورنکس می‌مانند؛ افزونه فردا دوباره می‌پرسد."
 
-msgid "MonoRanks address (development sites only)"
-msgstr "نشانی مونورنکس (فقط سایت‌های توسعه)"
+#: build/i18n/screens/Overview.js:149
+msgid "MonoRanks could not be reached for the audit results. The plugin tries again within the hour."
+msgstr "برای دریافت نتایج ممیزی دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر دوباره تلاش می‌کند."
 
-msgid "Connect"
-msgstr "اتصال"
+#: build/i18n/screens/Overview.js:149
+msgid "MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit."
+msgstr "مونورنکس هنوز به این سایت امتیاز نداده است. امتیازها پس از نخستین ممیزی هفتگی اینجا و در فهرست نوشته‌ها دیده می‌شوند."
 
-msgid "Not scored yet"
-msgstr "هنوز امتیاز نگرفته"
+#: build/i18n/screens/Overview.js:151
+msgid "Waiting for the first audit"
+msgstr "در انتظار نخستین ممیزی"
 
-msgid "%s of 100"
-msgstr "%s از ۱۰۰"
+#: build/i18n/screens/Overview.js:151
+#: build/i18n/screens/Settings.js:47
+msgid "Connected"
+msgstr "متصل"
 
+#: build/i18n/screens/Overview.js:154
+msgid "Content"
+msgstr "محتوا"
+
+#: build/i18n/screens/Overview.js:154
+msgid "%1$s published items sent %2$s"
+msgstr "%1$s مورد منتشرشده %2$s فرستاده شد"
+
+#: build/i18n/screens/Overview.js:154
+msgid "Not sent yet. Use \"Sync content now\" above."
+msgstr "هنوز فرستاده نشده. از «همگام‌سازی محتوا» در بالا استفاده کنید."
+
+#: build/i18n/screens/Overview.js:155
+msgid "Audit results"
+msgstr "نتایج ممیزی"
+
+#: build/i18n/screens/Overview.js:155
+msgid "checked %s"
+msgstr "بررسی‌شده %s"
+
+#: build/i18n/screens/Overview.js:157
+msgid "Open the audit in MonoRanks"
+msgstr "باز کردن ممیزی در مونورنکس"
+
+#: build/i18n/screens/Settings.js:21
+msgid "Could not load the settings."
+msgstr "بارگذاری تنظیمات ممکن نشد."
+
+#: build/i18n/screens/Settings.js:39
 msgid "Connection, what is sent, and every change written into this site."
 msgstr "اتصال، آنچه فرستاده می‌شود، و هر تغییری که در این سایت نوشته شده است."
 
+#: build/i18n/screens/Settings.js:46
 msgid "Connection"
 msgstr "اتصال"
 
+#: build/i18n/screens/Settings.js:52
 msgid "Status"
 msgstr "وضعیت"
 
+#: build/i18n/screens/Settings.js:52
 msgid "MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below."
 msgstr "مونورنکس دیگر این کلید را نمی‌پذیرد. دوباره از مونورنکس متصل شوید یا کلید تازه‌ای در پایین وارد کنید."
 
+#: build/i18n/screens/Settings.js:52
 msgid "Sending published content to MonoRanks. Nothing else leaves this site."
 msgstr "محتوای منتشرشده به مونورنکس فرستاده می‌شود. چیز دیگری از این سایت خارج نمی‌شود."
 
+#: build/i18n/screens/Settings.js:53
+#: build/i18n/screens/Settings.js:113
+msgid "Connector key"
+msgstr "کلید اتصال"
+
+#: build/i18n/screens/Settings.js:54
 msgid "Last sync"
 msgstr "آخرین همگام‌سازی"
 
+#: build/i18n/screens/Settings.js:54
 msgid "sending, batch %1$s of %2$s"
 msgstr "در حال ارسال، دستهٔ %1$s از %2$s"
 
+#: build/i18n/screens/Settings.js:54
 msgid "%s published item"
 msgid_plural "%s published items"
 msgstr[0] "%s مورد منتشرشده"
 msgstr[1] "%s مورد منتشرشده"
 
+#: build/i18n/screens/Settings.js:55
 msgid "Next audit"
 msgstr "ممیزی بعدی"
 
+#: build/i18n/screens/Settings.js:56
 msgid "Fixes written with"
 msgstr "اصلاح‌ها نوشته می‌شوند با"
 
-msgid "The \"MonoRanks\" Application Password · <a href=\"%s\">revoke it in your profile</a> to stop writes"
-msgstr "گذرواژهٔ برنامهٔ «MonoRanks» · برای توقف نوشتن <a href=\"%s\">آن را در نمایهٔ خود باطل کنید</a>"
+#: build/i18n/screens/Settings.js:56
+msgid "The \"MonoRanks\" Application Password"
+msgstr "گذرواژهٔ برنامهٔ «MonoRanks»"
 
+#: build/i18n/screens/Settings.js:56
+msgid "revoke it in your profile"
+msgstr "آن را در نمایهٔ خود باطل کنید"
+
+#: build/i18n/screens/Settings.js:56
+msgid "to stop writes"
+msgstr "تا نوشتن متوقف شود"
+
+#: build/i18n/screens/Settings.js:57
 msgid "Works with"
 msgstr "سازگار با"
 
+#: build/i18n/screens/Settings.js:57
 msgid "%s detected"
 msgstr "%s شناسایی شد"
 
+#: build/i18n/screens/Settings.js:57
 msgid "titles and descriptions go into the fields %s reads"
 msgstr "عنوان‌ها و توضیح‌ها در فیلدهایی نوشته می‌شوند که %s می‌خواند"
 
+#: build/i18n/screens/Settings.js:57
 msgid "No SEO plugin"
 msgstr "بدون افزونهٔ سئو"
 
+#: build/i18n/screens/Settings.js:57
 msgid "MonoRanks prints the approved title, description, canonical and noindex tags itself"
 msgstr "مونورنکس خودش تگ‌های تأییدشدهٔ عنوان، توضیح، کانونیکال و noindex را چاپ می‌کند"
 
+#: build/i18n/screens/Settings.js:60
 msgid "Send content now"
 msgstr "ارسال محتوا"
 
+#: build/i18n/screens/Settings.js:61
 msgid "Disconnect"
 msgstr "قطع اتصال"
 
+#: build/i18n/screens/Settings.js:62
 msgid "Disconnect stops sending. Fixes already applied stay."
 msgstr "قطع اتصال ارسال را متوقف می‌کند. اصلاح‌های اعمال‌شده می‌مانند."
 
+#: build/i18n/screens/Settings.js:66
 msgid "Use this when your host blocks Application Passwords. In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website."
 msgstr "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید. در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت."
 
+#: build/i18n/screens/Settings.js:74
 msgid "Use a different key"
 msgstr "استفاده از کلید دیگر"
 
+#: build/i18n/screens/Settings.js:76
 msgid "In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website. Paste it here. With a key alone MonoRanks receives your content; to apply fixes, also use Connect to WordPress in MonoRanks."
 msgstr "در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت. آن را اینجا وارد کنید. با کلید به‌تنهایی مونورنکس محتوای شما را دریافت می‌کند؛ برای اعمال اصلاح‌ها، «اتصال به وردپرس» را هم در مونورنکس انجام دهید."
 
+#: build/i18n/screens/Settings.js:84
 msgid "What is sent"
 msgstr "چه چیزی فرستاده می‌شود"
 
+#: build/i18n/screens/Settings.js:87
 msgid "Sent"
 msgstr "فرستاده می‌شود"
 
+#: build/i18n/screens/Settings.js:87
 msgid "Published titles, a 40-word excerpt, dates, authors, categories, tags, SEO fields, image alt text and plugin status."
 msgstr "عنوان‌های منتشرشده، چکیدهٔ ۴۰ کلمه‌ای، تاریخ‌ها، نویسندگان، دسته‌ها، برچسب‌ها، فیلدهای سئو، متن جایگزین تصاویر و وضعیت افزونه."
 
+#: build/i18n/screens/Settings.js:88
 msgid "Read back"
 msgstr "خوانده می‌شود"
 
+#: build/i18n/screens/Settings.js:88
 msgid "This website's audit results: scores, issues and the fixes you approved, shown here and in the Posts list."
 msgstr "نتایج ممیزی این وب‌سایت: امتیازها، مشکل‌ها و اصلاح‌هایی که تأیید کرده‌اید، که اینجا و در فهرست نوشته‌ها نشان داده می‌شوند."
 
+#: build/i18n/screens/Settings.js:89
 msgid "Never sent"
 msgstr "هرگز فرستاده نمی‌شود"
 
+#: build/i18n/screens/Settings.js:89
 msgid "Drafts, private posts, comments, emails, passwords, plugin or theme settings."
 msgstr "پیش‌نویس‌ها، نوشته‌های خصوصی، دیدگاه‌ها، ایمیل‌ها، گذرواژه‌ها، تنظیمات افزونه یا پوسته."
 
+#: build/i18n/screens/Settings.js:90
 msgid "Can change"
 msgstr "می‌تواند تغییر دهد"
 
+#: build/i18n/screens/Settings.js:90
 msgid "SEO title, meta description, canonical, noindex, image alt text, redirects, one opening paragraph, AI crawler rules, llms.txt. Only after you approve each one."
 msgstr "عنوان سئو، توضیح متا، کانونیکال، noindex، متن جایگزین تصویر، تغییر مسیرها، یک پاراگراف آغازین، قوانین خزنده‌های هوش مصنوعی، llms.txt. فقط پس از آنکه هرکدام را تأیید کنید."
 
+#: build/i18n/screens/Settings.js:96
 msgid "Last 50 · undo for 30 days"
 msgstr "۵۰ مورد آخر · بازگردانی تا ۳۰ روز"
 
-msgid "Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo."
-msgstr "این سایت را به مونورنکس (ممیزی SEO، AEO و GEO) متصل می‌کند: فرادادهٔ محتوای منتشرشده را می‌فرستد و اصلاح‌هایی را که آنجا تأیید می‌کنید، با امکان بازگردانی، اعمال می‌کند."
-msgid "Your data"
-msgstr "داده‌های شما"
+#: build/i18n/screens/Settings.js:114
+msgid "MonoRanks address (development sites only)"
+msgstr "نشانی مونورنکس (فقط سایت‌های توسعه)"
 
-msgid "What is sent and what can change"
-msgstr "چه چیزی فرستاده می‌شود و چه چیزی می‌تواند تغییر کند"
+#: build/i18n/screens/Settings.js:115
+msgid "Connect"
+msgstr "اتصال"
 
-msgid "Need a hand?"
-msgstr "کمک لازم دارید؟"
+#: build/i18n/shell/ChangeLog.js:7
+msgid "No changes yet"
+msgstr "هنوز تغییری نیست"
 
-msgid "Help and resources"
-msgstr "راهنما و منابع"
+#: build/i18n/shell/ChangeLog.js:7
+msgid "Fixes you approve in MonoRanks show up here, each with Undo."
+msgstr "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا دیده می‌شوند، هرکدام با گزینهٔ بازگردانی."
 
-msgid "A product by"
-msgstr "محصولی از"
+#: build/i18n/shell/ChangeLog.js:14
+msgid "When"
+msgstr "زمان"
 
+#: build/i18n/shell/ChangeLog.js:14
+msgid "Who"
+msgstr "چه کسی"
+
+#: build/i18n/shell/ChangeLog.js:14
+msgid "Field"
+msgstr "فیلد"
+
+#: build/i18n/shell/ChangeLog.js:14
+msgid "Where"
+msgstr "کجا"
+
+#: build/i18n/shell/ChangeLog.js:14
+msgid "Before"
+msgstr "قبل"
+
+#: build/i18n/shell/ChangeLog.js:14
+msgid "After"
+msgstr "بعد"
+
+#: build/i18n/shell/ChangeLog.js:23
+msgid "Undo"
+msgstr "بازگردانی"
+
+#: build/i18n/shell/Ring.js:31
+msgid "%s this week"
+msgstr "%s این هفته"
+
+#: build/i18n/shell/Shell.js:19
 msgid "MonoRanks sections"
 msgstr "بخش‌های مونورنکس"
 
+#: build/i18n/shell/Shell.js:28
 msgid "Help"
 msgstr "راهنما"
 
+#: build/i18n/shell/Shell.js:50
+msgid "Your data"
+msgstr "داده‌های شما"
+
+#: build/i18n/shell/Shell.js:51
+msgid "What is sent and what can change"
+msgstr "چه چیزی فرستاده می‌شود و چه چیزی می‌تواند تغییر کند"
+
+#: build/i18n/shell/Shell.js:54
+msgid "Need a hand?"
+msgstr "کمک لازم دارید؟"
+
+#: build/i18n/shell/Shell.js:55
+msgid "Help and resources"
+msgstr "راهنما و منابع"
+
+#: build/i18n/shell/Shell.js:60
+msgid "A product by"
+msgstr "محصولی از"

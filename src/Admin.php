@@ -4,8 +4,9 @@ namespace MonoRanks;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * The MonoRanks admin menu (Overview, Settings), the stylesheet, the view loader and the form handlers behind the buttons.
- * Screens gather their data in Overview and Settings and hand it to a template under views/; no HTML lives in classes.
+ * The MonoRanks admin menu (Overview, Settings). Both screens are the React app in resources/admin (built into
+ * assets/build/, enqueued by Assets); PHP only prints the mount and the settings the app reads, and answers its REST
+ * calls (Rest, Actions). The Posts and Pages column stays server-rendered (Column, views/).
  */
 class Admin {
 
@@ -16,14 +17,8 @@ class Admin {
 		add_action( 'init', array( __CLASS__, 'textdomain' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'legacy_url' ) );
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'assets' ) );
 		add_filter( 'admin_footer_text', array( __CLASS__, 'footer_text' ), 100 );
 		add_filter( 'update_footer', array( __CLASS__, 'footer_text' ), 100 );
-		add_action( 'admin_post_monoranks_connect_key', array( __CLASS__, 'connect_key' ) );
-		add_action( 'admin_post_monoranks_send_now', array( __CLASS__, 'send_now' ) );
-		add_action( 'admin_post_monoranks_disconnect', array( __CLASS__, 'disconnect' ) );
-		add_action( 'admin_post_monoranks_apply', array( 'MonoRanks\\Overview', 'apply' ) );
-		add_action( 'admin_post_monoranks_undo', array( 'MonoRanks\\Overview', 'undo' ) );
 	}
 
 	public static function textdomain() {
@@ -31,9 +26,14 @@ class Admin {
 	}
 
 	public static function menu() {
-		add_menu_page( 'MonoRanks', 'MonoRanks', 'manage_options', self::MENU, array( 'MonoRanks\\Overview', 'render' ), self::menu_icon(), 58 );
-		add_submenu_page( self::MENU, __( 'Overview', 'monoranks' ), __( 'Overview', 'monoranks' ), 'manage_options', self::MENU, array( 'MonoRanks\\Overview', 'render' ) );
-		add_submenu_page( self::MENU, __( 'MonoRanks settings', 'monoranks' ), __( 'Settings', 'monoranks' ), 'manage_options', self::SETTINGS, array( 'MonoRanks\\Settings', 'render' ) );
+		add_menu_page( 'MonoRanks', 'MonoRanks', 'manage_options', self::MENU, array( __CLASS__, 'mount' ), self::menu_icon(), 58 );
+		add_submenu_page( self::MENU, __( 'Overview', 'monoranks' ), __( 'Overview', 'monoranks' ), 'manage_options', self::MENU, array( __CLASS__, 'mount' ) );
+		add_submenu_page( self::MENU, __( 'MonoRanks settings', 'monoranks' ), __( 'Settings', 'monoranks' ), 'manage_options', self::SETTINGS, array( __CLASS__, 'mount' ) );
+	}
+
+	/** Where the app renders. Without a build (a checkout that skipped `npm run build`) it says what to run. */
+	public static function mount() {
+		echo self::view( 'app', array( 'theme' => self::theme(), 'built' => file_exists( dirname( MONORANKS_CONNECTOR_FILE ) . '/assets/build/main.js' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the view escapes
 	}
 
 	/** The MonoRanks mark (assets/mark.svg) as a data URI; WordPress repaints its fill in the admin colour scheme. */
@@ -77,14 +77,6 @@ class Admin {
 		return admin_url( 'admin.php?page=' . self::MENU );
 	}
 
-	public static function assets( $hook ) {
-		$ours = in_array( $hook, array( 'toplevel_page_' . self::MENU, 'monoranks_page_' . self::SETTINGS, 'edit.php' ), true );
-		if ( ! $ours ) {
-			return;
-		}
-		wp_enqueue_style( 'monoranks-admin', plugins_url( 'assets/admin.css', MONORANKS_CONNECTOR_FILE ), array(), MONORANKS_CONNECTOR_VERSION );
-	}
-
 	/** light or dark. WordPress admin is light; a theme or plugin can switch the MonoRanks screens with the filter. */
 	public static function theme() {
 		$theme = apply_filters( 'monoranks_admin_theme', 'light' );
@@ -105,7 +97,7 @@ class Admin {
 		return ob_get_clean();
 	}
 
-	/** A score ring (the app's ScoreBox): 'sm' 30px in lists, 'lg' 64px on tiles. */
+	/** A score ring for the Posts column (the app's ScoreBox): 'sm' 30px. */
 	public static function ring( $score, $size = 'sm', $label = '' ) {
 		return self::view( 'partials/score-ring', array( 'score' => $score, 'size' => 'lg' === $size ? 'lg' : 'sm', 'label' => $label, 'tone' => Insights::tone( $score ) ) );
 	}
@@ -125,84 +117,31 @@ class Admin {
 		return sprintf( __( '%1$s ago (%2$s)', 'monoranks' ), human_time_diff( $ts, time() ), $when );
 	}
 
-	/** The notice for the ?monoranks=<code> query argument set by the handlers below. */
-	public static function notice() {
-		$msg = isset( $_GET['monoranks'] ) ? sanitize_key( wp_unslash( $_GET['monoranks'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only
+	/** The notice for a result code (the app shows it after an action; the legacy URL carries one as ?monoranks=<code>). */
+	public static function notice_for( $code ) {
 		$map = array(
-			'connected'   => array( 'success', __( 'Connected. Your published content is on its way to MonoRanks.', 'monoranks' ) ),
-			'sent'        => array( 'success', __( 'Content sent to MonoRanks.', 'monoranks' ) ),
-			'applied'     => array( 'success', __( 'Applied. The change is listed under Recent changes and can be undone.', 'monoranks' ) ),
-			'undone'      => array( 'success', __( 'Undone. The previous value is back.', 'monoranks' ) ),
+			'connected'    => array( 'success', __( 'Connected. Your published content is on its way to MonoRanks.', 'monoranks' ) ),
+			'sent'         => array( 'success', __( 'Content sent to MonoRanks.', 'monoranks' ) ),
+			'disconnected' => array( 'success', __( 'Disconnected. Nothing is sent to MonoRanks any more.', 'monoranks' ) ),
+			'applied'      => array( 'success', __( 'Applied. The change is listed under Recent changes and can be undone.', 'monoranks' ) ),
+			'undone'       => array( 'success', __( 'Undone. The previous value is back.', 'monoranks' ) ),
 			'apply_failed' => array( 'error', __( 'MonoRanks could not apply that change: the page changed since it was reviewed. Open it in MonoRanks to review again.', 'monoranks' ) ),
-			'bad_key'     => array( 'error', __( 'That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP.', 'monoranks' ) ),
-			'bad_address' => array( 'error', __( 'The MonoRanks address must start with https://.', 'monoranks' ) ),
-			'rejected'    => array( 'error', __( 'MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks.', 'monoranks' ) ),
-			'other_site'  => array( 'error', __( 'This key belongs to a different website in MonoRanks. Create the key on the website with this address.', 'monoranks' ) ),
-			'unreachable' => array( 'error', __( 'MonoRanks could not be reached. Check the address and try again.', 'monoranks' ) ),
+			'bad_key'      => array( 'error', __( 'That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP.', 'monoranks' ) ),
+			'bad_address'  => array( 'error', __( 'The MonoRanks address must start with https://.', 'monoranks' ) ),
+			'rejected'     => array( 'error', __( 'MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks.', 'monoranks' ) ),
+			'other_site'   => array( 'error', __( 'This key belongs to a different website in MonoRanks. Create the key on the website with this address.', 'monoranks' ) ),
+			'unreachable'  => array( 'error', __( 'MonoRanks could not be reached. Check the address and try again.', 'monoranks' ) ),
 		);
-		return isset( $map[ $msg ] ) ? array( 'type' => $map[ $msg ][0], 'text' => $map[ $msg ][1] ) : null;
+		return isset( $map[ $code ] ) ? array( 'type' => $map[ $code ][0], 'text' => $map[ $code ][1] ) : null;
+	}
+
+	public static function notice() {
+		$code = isset( $_GET['monoranks'] ) ? sanitize_key( wp_unslash( $_GET['monoranks'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only
+		return $code ? self::notice_for( $code ) : null;
 	}
 
 	/** The address field is only for development sites pointing the plugin at a local MonoRanks. */
 	public static function shows_address_field() {
 		return function_exists( 'wp_get_environment_type' ) && in_array( wp_get_environment_type(), array( 'local', 'development' ), true );
-	}
-
-	public static function back( $code, $to = 'settings' ) {
-		wp_safe_redirect( 'overview' === $to ? add_query_arg( 'monoranks', rawurlencode( $code ), self::overview_url() ) : self::settings_url( $code ) );
-		exit;
-	}
-
-	public static function guard( $nonce ) {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Not allowed', 'monoranks' ) );
-		}
-		check_admin_referer( $nonce );
-	}
-
-	public static function connect_key() {
-		self::guard( 'monoranks_connect_key' ); // Capability and nonce checked here.
-		// phpcs:disable WordPress.Security.NonceVerification.Missing -- verified in guard() above.
-		$key  = Connection::valid_key( isset( $_POST['key'] ) ? sanitize_text_field( wp_unslash( $_POST['key'] ) ) : '' );
-		$base = isset( $_POST['api_base'] ) && self::shows_address_field() ? sanitize_text_field( wp_unslash( $_POST['api_base'] ) ) : MONORANKS_API_BASE;
-		// phpcs:enable
-		$base = Connection::valid_base( $base );
-		if ( ! $key ) {
-			self::back( 'bad_key' );
-		}
-		if ( ! $base ) {
-			self::back( 'bad_address' );
-		}
-		$previous = Connection::get();
-		Connection::update( array( 'api_base' => $base, 'key' => $key, 'via' => 'manual', 'key_state' => 'ok', 'paired_at' => gmdate( 'c' ), 'paired_by' => wp_get_current_user()->user_login ) );
-		$res = Api::send_status();
-		if ( 200 !== $res['code'] ) {
-			$previous ? update_option( 'monoranks_connection', $previous, false ) : Connection::clear();
-			self::back( 401 === $res['code'] ? 'rejected' : ( 403 === $res['code'] ? 'other_site' : 'unreachable' ) );
-		}
-		if ( isset( $res['body']['site_id'] ) ) {
-			Connection::update( array( 'site_id' => sanitize_text_field( (string) $res['body']['site_id'] ) ) );
-		}
-		Sync::start();
-		Insights::refresh();
-		self::back( 'connected' );
-	}
-
-	public static function send_now() {
-		self::guard( 'monoranks_send_now' );
-		Api::send_status();
-		Sync::start();
-		Insights::refresh();
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified in guard() above.
-		self::back( 'sent', isset( $_POST['back'] ) && 'overview' === $_POST['back'] ? 'overview' : 'settings' );
-	}
-
-	public static function disconnect() {
-		self::guard( 'monoranks_disconnect' );
-		Sync::unschedule();
-		Connection::clear();
-		Insights::clear();
-		wp_safe_redirect( self::settings_url() );
-		exit;
 	}
 }

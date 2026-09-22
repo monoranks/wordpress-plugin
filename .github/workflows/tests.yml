@@ -39,6 +39,21 @@ jobs:
       - run: composer install --no-interaction --prefer-dist
       - run: vendor/bin/phpunit
 
+  app:
+    name: Admin app builds and matches the committed bundle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - name: assets/build is committed and up to date (run npm run build and commit it)
+        run: git diff --exit-code --stat assets/build
+
   plugin-check:
     name: WordPress.org plugin check
     runs-on: ubuntu-latest

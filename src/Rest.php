@@ -19,6 +19,42 @@ class Rest {
 		register_rest_route( self::NS, '/unpair', array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'unpair' ), 'permission_callback' => $admin ) );
 		register_rest_route( self::NS, '/sync', array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'sync' ), 'permission_callback' => $admin ) );
 		register_rest_route( self::NS, '/apply', array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'apply' ), 'permission_callback' => $admin ) );
+		// The admin app's own routes (cookie + nonce through wp.apiFetch): what the screens read, and what their buttons do.
+		register_rest_route( self::NS, '/admin/overview', array( 'methods' => 'GET', 'callback' => array( 'MonoRanks\\Overview', 'data' ), 'permission_callback' => $admin ) );
+		register_rest_route( self::NS, '/admin/settings', array( 'methods' => 'GET', 'callback' => array( 'MonoRanks\\Settings', 'data' ), 'permission_callback' => $admin ) );
+		foreach ( array( 'apply', 'undo', 'sync', 'connect', 'disconnect' ) as $action ) {
+			register_rest_route( self::NS, '/admin/' . $action, array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'admin_' . $action ), 'permission_callback' => $admin ) );
+		}
+	}
+
+	/** An action's outcome plus the refreshed screen data, so the app repaints without a second request. */
+	private static function admin_result( $code, $screen ) {
+		$notice = Admin::notice_for( $code );
+		return array( 'ok' => $notice && 'success' === $notice['type'], 'code' => $code, 'notice' => $notice, 'data' => 'settings' === $screen ? Settings::data() : Overview::data() );
+	}
+
+	private static function screen( \WP_REST_Request $req ) {
+		return 'settings' === $req->get_param( 'screen' ) ? 'settings' : 'overview';
+	}
+
+	public static function admin_apply( \WP_REST_Request $req ) {
+		return self::admin_result( Actions::apply( sanitize_text_field( (string) $req->get_param( 'fix' ) ) ), 'overview' );
+	}
+
+	public static function admin_undo( \WP_REST_Request $req ) {
+		return self::admin_result( Actions::undo( (int) $req->get_param( 'entry' ) ), self::screen( $req ) );
+	}
+
+	public static function admin_sync( \WP_REST_Request $req ) {
+		return self::admin_result( Actions::send_now(), self::screen( $req ) );
+	}
+
+	public static function admin_connect( \WP_REST_Request $req ) {
+		return self::admin_result( Actions::connect_key( sanitize_text_field( (string) $req->get_param( 'key' ) ), sanitize_text_field( (string) $req->get_param( 'api_base' ) ) ), 'settings' );
+	}
+
+	public static function admin_disconnect() {
+		return self::admin_result( Actions::disconnect(), 'settings' );
 	}
 
 	public static function can_manage() {

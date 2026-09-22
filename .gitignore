@@ -2,7 +2,7 @@ node_modules
 test-results
 playwright-report
 vendor
-build
+/build
 composer.lock
 packages
 .phpunit.result.cache

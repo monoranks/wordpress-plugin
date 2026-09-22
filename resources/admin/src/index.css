@@ -1,0 +1,111 @@
+/*
+ * The admin app's stylesheet. Tailwind 4 with the MonoRanks app's design tokens (apps/web/app/globals.css): same
+ * colours, radii and spacing, light and dark. Everything is scoped under #monoranks-admin, so WordPress's own admin
+ * keeps its styling and nothing here reaches another screen. Logical properties keep right-to-left admins mirrored.
+ */
+@import 'tailwindcss' important;
+
+@custom-variant dark (&:is([data-theme="dark"] *, [data-theme="dark"]));
+
+@source "./";
+
+#monoranks-admin, .mr-scope {
+  --page: #f5f6f8; --surface: #ffffff; --surface2: #f1f3f6; --surface3: #e9ecf1; --ink: #14181f; --ink2: #4c5563; --muted: #8a929e;
+  --grid: #e6e9ee; --line: #cbd2db; --border: #e3e7ec; --accent: #2a6fdb; --accentInk: #1d5bbf; --accentSoft: #e8f0fc;
+  --good: #0ca30c; --goodInk: #0a7a0a; --warn: #e6a100; --critical: #d03b3b; --grayTrack: #e6e9ee; --primaryBtn: #14181f; --primaryBtnInk: #ffffff;
+  --band: #14181f; --bandInk: #f3f4f6; --bandMuted: #b8bec8; --bandEdge: #2c313a;
+  /* shadcn's names, MonoRanks's values, so vendored components drop in unchanged. */
+  --background: var(--page); --foreground: var(--ink); --card: var(--surface); --card-foreground: var(--ink);
+  --popover: var(--surface); --popover-foreground: var(--ink); --primary: var(--primaryBtn); --primary-foreground: var(--primaryBtnInk);
+  --secondary: var(--surface2); --secondary-foreground: var(--ink); --muted-token: var(--surface2); --muted-foreground: var(--muted);
+  --accent-token: var(--surface2); --accent-foreground: var(--ink); --destructive: var(--critical); --input: var(--line); --ring: var(--accent);
+  --radius: 0.5rem;
+}
+#monoranks-admin[data-theme="dark"] {
+  --page: #0f1115; --surface: #171a20; --surface2: #1e2229; --surface3: #262b33; --ink: #f3f4f6; --ink2: #b8bec8; --muted: #7d8590;
+  --grid: #262b33; --line: #3a404a; --border: #262b33; --accent: #3987e5; --accentInk: #86b6ef; --accentSoft: #1a2a44;
+  --good: #0ca30c; --goodInk: #3ccf3c; --warn: #fab219; --critical: #e05656; --grayTrack: #2c313a; --primaryBtn: #f3f4f6; --primaryBtnInk: #14181f;
+  --band: #0b0d11; --bandEdge: #262b33;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted-token);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent-token);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  /* MonoRanks's own names. */
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-surface3: var(--surface3);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink2);
+  --color-mute: var(--muted);
+  --color-grid: var(--grid);
+  --color-line: var(--line);
+  --color-brand: var(--accent);
+  --color-brand-ink: var(--accentInk);
+  --color-brand-soft: var(--accentSoft);
+  --color-good: var(--good);
+  --color-good-ink: var(--goodInk);
+  --color-warn: var(--warn);
+  --color-critical: var(--critical);
+  --color-track: var(--grayTrack);
+  --color-band: var(--band);
+  --color-band-ink: var(--bandInk);
+  --color-band-muted: var(--bandMuted);
+  --color-band-edge: var(--bandEdge);
+  --radius-sm: 5px; --radius-md: 7px; --radius-lg: 8px; --radius-xl: 12px;
+  --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
+  --text-xs: 11px; --text-sm: 12px; --text-base: 13px; --text-lg: 15px; --text-xl: 22px; --text-2xl: 26px;
+}
+
+/* The mount takes the admin content area edge to edge: WordPress's .wrap margins and footer reservation are taken back. */
+body.toplevel_page_monoranks #wpbody-content, body.monoranks_page_monoranks-settings #wpbody-content { padding-bottom: 0; }
+body.toplevel_page_monoranks #wpfooter, body.monoranks_page_monoranks-settings #wpfooter { display: none; }
+#monoranks-admin { margin: 0; margin-inline: -20px 0; min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px)); display: flex; flex-direction: column; background: var(--page); color: var(--ink); font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+@media (max-width: 782px) { #monoranks-admin { margin-inline: -10px 0; } }
+#monoranks-admin a { color: var(--accentInk); text-decoration: none; }
+#monoranks-admin a:hover { color: var(--ink); text-decoration: none; }
+#monoranks-admin code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; background: var(--surface2); color: var(--ink); border-radius: 4px; padding: 1px 5px; direction: ltr; unicode-bidi: isolate; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; vertical-align: middle; white-space: nowrap; }
+#monoranks-admin bdi { unicode-bidi: isolate; }
+#monoranks-admin h1, #monoranks-admin h2, #monoranks-admin h3, #monoranks-admin p { margin: 0; padding: 0; color: inherit; }
+#monoranks-admin :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; box-shadow: none; }
+#monoranks-admin input[type="password"], #monoranks-admin input[type="url"] { box-shadow: none; margin: 0; min-height: 0; line-height: normal; }
+/* WordPress notices keep their classes (the browser tests read .notice-error) and take the card look. */
+#monoranks-admin .notice { margin: 0; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-inline-start: 3px solid var(--accent); border-radius: 8px; box-shadow: none; color: var(--ink); }
+#monoranks-admin .notice p { margin: 0; padding: 0; font-size: 13px; }
+#monoranks-admin div.notice-success { border-inline-start-color: var(--good); }
+#monoranks-admin div.notice-error { border-inline-start-color: var(--critical); }
+/* Score ring: the app's ScoreBox. */
+.mr-score { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); vertical-align: middle; }
+.mr-score .mr-ring { position: relative; display: inline-block; line-height: 0; }
+.mr-score .mr-ring > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1; color: var(--ink); }
+.mr-score.none .mr-ring > span { color: var(--muted); }
+.mr-score.sm .mr-ring { width: 30px; height: 30px; }
+.mr-score.sm .mr-ring > span { font-size: 11px; }
+.mr-score.lg .mr-ring { width: 64px; height: 64px; }
+.mr-score.lg .mr-ring > span { font-size: 20px; }
+.mr-score .lbl { font-size: 11px; color: var(--muted); font-weight: 500; }
+.mr-score.good { color: var(--good); }
+.mr-score.warn { color: var(--warn); }
+.mr-score.critical { color: var(--critical); }
+.mr-score.none { color: var(--line); }
+/* The dark bands mirror their arrows in RTL; logos never flip. */
+[dir="rtl"] #monoranks-admin .mr-flip { transform: scaleX(-1); }
+@media (prefers-reduced-motion: reduce) { #monoranks-admin * { transition: none !important; } }

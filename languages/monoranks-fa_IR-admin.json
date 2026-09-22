@@ -1,0 +1,392 @@
+{
+    "translation-revision-date": "2026-09-22T09:42:06+00:00",
+    "generator": "WP-CLI/2.12.0",
+    "source": "resources/admin",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "fa_IR",
+                "plural-forms": "nplurals=2; plural=(n > 1);"
+            },
+            "No changes yet": [
+                "هنوز تغییری نیست"
+            ],
+            "Fixes you approve in MonoRanks show up here, each with Undo.": [
+                "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا دیده می‌شوند، هرکدام با گزینهٔ بازگردانی."
+            ],
+            "When": [
+                "زمان"
+            ],
+            "Who": [
+                "چه کسی"
+            ],
+            "Field": [
+                "فیلد"
+            ],
+            "Where": [
+                "کجا"
+            ],
+            "Before": [
+                "قبل"
+            ],
+            "After": [
+                "بعد"
+            ],
+            "Undo": [
+                "بازگردانی"
+            ],
+            "Not scored yet": [
+                "هنوز امتیاز نگرفته"
+            ],
+            "%s of 100": [
+                "%s از ۱۰۰"
+            ],
+            "%s this week": [
+                "%s این هفته"
+            ],
+            "Overview": [
+                "نمای کلی"
+            ],
+            "Settings": [
+                "تنظیمات"
+            ],
+            "Open MonoRanks": [
+                "باز کردن مونورنکس"
+            ],
+            "MonoRanks sections": [
+                "بخش‌های مونورنکس"
+            ],
+            "Help": [
+                "راهنما"
+            ],
+            "Your data": [
+                "داده‌های شما"
+            ],
+            "What is sent and what can change": [
+                "چه چیزی فرستاده می‌شود و چه چیزی می‌تواند تغییر کند"
+            ],
+            "Need a hand?": [
+                "کمک لازم دارید؟"
+            ],
+            "Help and resources": [
+                "راهنما و منابع"
+            ],
+            "A product by": [
+                "محصولی از"
+            ],
+            "Something went wrong. Try again.": [
+                "مشکلی پیش آمد. دوباره تلاش کنید."
+            ],
+            "Recent changes": [
+                "تغییرات اخیر"
+            ],
+            "Key revoked": [
+                "کلید باطل شده"
+            ],
+            "Not connected": [
+                "متصل نیست"
+            ],
+            "Connect from MonoRanks": [
+                "اتصال از مونورنکس"
+            ],
+            "In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.": [
+                "در مونورنکس وب‌سایت خود را باز کنید ← یکپارچه‌سازی‌ها ← وردپرس ← اتصال به وردپرس، و وقتی وردپرس پرسید به مونورنکس اجازه دهید. پیش از اتصال چیزی فرستاده نمی‌شود."
+            ],
+            "Or paste a connector key": [
+                "یا کلید اتصال را وارد کنید"
+            ],
+            "Connected": [
+                "متصل"
+            ],
+            "Could not load the settings.": [
+                "بارگذاری تنظیمات ممکن نشد."
+            ],
+            "Connection, what is sent, and every change written into this site.": [
+                "اتصال، آنچه فرستاده می‌شود، و هر تغییری که در این سایت نوشته شده است."
+            ],
+            "Connection": [
+                "اتصال"
+            ],
+            "Status": [
+                "وضعیت"
+            ],
+            "MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below.": [
+                "مونورنکس دیگر این کلید را نمی‌پذیرد. دوباره از مونورنکس متصل شوید یا کلید تازه‌ای در پایین وارد کنید."
+            ],
+            "Sending published content to MonoRanks. Nothing else leaves this site.": [
+                "محتوای منتشرشده به مونورنکس فرستاده می‌شود. چیز دیگری از این سایت خارج نمی‌شود."
+            ],
+            "Connector key": [
+                "کلید اتصال"
+            ],
+            "Last sync": [
+                "آخرین همگام‌سازی"
+            ],
+            "sending, batch %1$s of %2$s": [
+                "در حال ارسال، دستهٔ %1$s از %2$s"
+            ],
+            "%s published item": [
+                "%s مورد منتشرشده",
+                "%s مورد منتشرشده"
+            ],
+            "Next audit": [
+                "ممیزی بعدی"
+            ],
+            "Fixes written with": [
+                "اصلاح‌ها نوشته می‌شوند با"
+            ],
+            "The \"MonoRanks\" Application Password": [
+                "گذرواژهٔ برنامهٔ «MonoRanks»"
+            ],
+            "revoke it in your profile": [
+                "آن را در نمایهٔ خود باطل کنید"
+            ],
+            "to stop writes": [
+                "تا نوشتن متوقف شود"
+            ],
+            "Works with": [
+                "سازگار با"
+            ],
+            "%s detected": [
+                "%s شناسایی شد"
+            ],
+            "titles and descriptions go into the fields %s reads": [
+                "عنوان‌ها و توضیح‌ها در فیلدهایی نوشته می‌شوند که %s می‌خواند"
+            ],
+            "No SEO plugin": [
+                "بدون افزونهٔ سئو"
+            ],
+            "MonoRanks prints the approved title, description, canonical and noindex tags itself": [
+                "مونورنکس خودش تگ‌های تأییدشدهٔ عنوان، توضیح، کانونیکال و noindex را چاپ می‌کند"
+            ],
+            "Send content now": [
+                "ارسال محتوا"
+            ],
+            "Disconnect": [
+                "قطع اتصال"
+            ],
+            "Disconnect stops sending. Fixes already applied stay.": [
+                "قطع اتصال ارسال را متوقف می‌کند. اصلاح‌های اعمال‌شده می‌مانند."
+            ],
+            "Use this when your host blocks Application Passwords. In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website.": [
+                "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید. در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت."
+            ],
+            "Use a different key": [
+                "استفاده از کلید دیگر"
+            ],
+            "In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website. Paste it here. With a key alone MonoRanks receives your content; to apply fixes, also use Connect to WordPress in MonoRanks.": [
+                "در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت. آن را اینجا وارد کنید. با کلید به‌تنهایی مونورنکس محتوای شما را دریافت می‌کند؛ برای اعمال اصلاح‌ها، «اتصال به وردپرس» را هم در مونورنکس انجام دهید."
+            ],
+            "What is sent": [
+                "چه چیزی فرستاده می‌شود"
+            ],
+            "Sent": [
+                "فرستاده می‌شود"
+            ],
+            "Published titles, a 40-word excerpt, dates, authors, categories, tags, SEO fields, image alt text and plugin status.": [
+                "عنوان‌های منتشرشده، چکیدهٔ ۴۰ کلمه‌ای، تاریخ‌ها، نویسندگان، دسته‌ها، برچسب‌ها، فیلدهای سئو، متن جایگزین تصاویر و وضعیت افزونه."
+            ],
+            "Read back": [
+                "خوانده می‌شود"
+            ],
+            "This website's audit results: scores, issues and the fixes you approved, shown here and in the Posts list.": [
+                "نتایج ممیزی این وب‌سایت: امتیازها، مشکل‌ها و اصلاح‌هایی که تأیید کرده‌اید، که اینجا و در فهرست نوشته‌ها نشان داده می‌شوند."
+            ],
+            "Never sent": [
+                "هرگز فرستاده نمی‌شود"
+            ],
+            "Drafts, private posts, comments, emails, passwords, plugin or theme settings.": [
+                "پیش‌نویس‌ها، نوشته‌های خصوصی، دیدگاه‌ها، ایمیل‌ها، گذرواژه‌ها، تنظیمات افزونه یا پوسته."
+            ],
+            "Can change": [
+                "می‌تواند تغییر دهد"
+            ],
+            "SEO title, meta description, canonical, noindex, image alt text, redirects, one opening paragraph, AI crawler rules, llms.txt. Only after you approve each one.": [
+                "عنوان سئو، توضیح متا، کانونیکال، noindex، متن جایگزین تصویر، تغییر مسیرها، یک پاراگراف آغازین، قوانین خزنده‌های هوش مصنوعی، llms.txt. فقط پس از آنکه هرکدام را تأیید کنید."
+            ],
+            "Last 50 · undo for 30 days": [
+                "۵۰ مورد آخر · بازگردانی تا ۳۰ روز"
+            ],
+            "MonoRanks address (development sites only)": [
+                "نشانی مونورنکس (فقط سایت‌های توسعه)"
+            ],
+            "Connect": [
+                "اتصال"
+            ],
+            "Site": [
+                "سایت"
+            ],
+            "Connect MonoRanks": [
+                "اتصال مونورنکس"
+            ],
+            "Health": [
+                "سلامت"
+            ],
+            "AEO": [
+                "AEO"
+            ],
+            "Could not load the overview.": [
+                "بارگذاری نمای کلی ممکن نشد."
+            ],
+            "Weekly SEO, AEO and GEO audit of": [
+                "ممیزی هفتگی SEO، AEO و GEO برای"
+            ],
+            "last audit %s": [
+                "آخرین ممیزی %s"
+            ],
+            "%1$s of %2$s published pages scored": [
+                "%1$s از %2$s صفحهٔ منتشرشده امتیاز گرفته"
+            ],
+            "Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress.": [
+                "ممیزی هفتگی SEO، AEO و GEO، با اصلاح‌هایی که تأیید می‌کنید و در وردپرس نوشته می‌شوند."
+            ],
+            "Sync content now": [
+                "همگام‌سازی محتوا"
+            ],
+            "Health score": [
+                "امتیاز سلامت"
+            ],
+            "Technical, on-page, links, speed": [
+                "فنی، درون‌صفحه، پیوندها، سرعت"
+            ],
+            "Site average, %s page": [
+                "میانگین سایت، %s صفحه",
+                "میانگین سایت، %s صفحه"
+            ],
+            "AEO score": [
+                "امتیاز AEO"
+            ],
+            "Answer-first, structure, entities": [
+                "پاسخ‌محوری، ساختار، موجودیت‌ها"
+            ],
+            "How well AI answers can use your pages": [
+                "پاسخ‌های هوش مصنوعی چقدر می‌توانند از صفحه‌های شما استفاده کنند"
+            ],
+            "Search clicks, 28 days": [
+                "کلیک‌های جستجو، ۲۸ روز"
+            ],
+            "From Google Search Console, through MonoRanks": [
+                "از گوگل سرچ کنسول، از طریق مونورنکس"
+            ],
+            "Connect Google Search Console in MonoRanks to see clicks here.": [
+                "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
+            ],
+            "Fixes": [
+                "اصلاح‌ها"
+            ],
+            "%s ready": [
+                "%s آماده"
+            ],
+            "applied in 30 days": [
+                "اعمال‌شده در ۳۰ روز"
+            ],
+            "AI crawler rules on": [
+                "قوانین خزنده‌های هوش مصنوعی فعال"
+            ],
+            "No AI crawler rules": [
+                "بدون قوانین خزندهٔ هوش مصنوعی"
+            ],
+            "llms.txt published": [
+                "llms.txt منتشر شده"
+            ],
+            "No llms.txt": [
+                "بدون llms.txt"
+            ],
+            "Pages needing attention": [
+                "صفحه‌های نیازمند توجه"
+            ],
+            "All pages in MonoRanks": [
+                "همهٔ صفحه‌ها در مونورنکس"
+            ],
+            "Page": [
+                "صفحه"
+            ],
+            "Biggest issue": [
+                "بزرگ‌ترین مشکل"
+            ],
+            "Fix in MonoRanks": [
+                "اصلاح در مونورنکس"
+            ],
+            "Nothing needs attention": [
+                "چیزی نیازمند توجه نیست"
+            ],
+            "Every scored page is above 60. The next audit may change that.": [
+                "همهٔ صفحه‌های امتیازگرفته بالای ۶۰ هستند. ممیزی بعدی ممکن است این را تغییر دهد."
+            ],
+            "Ready to apply": [
+                "آمادهٔ اعمال"
+            ],
+            "Apply all": [
+                "اعمال همه"
+            ],
+            "No fixes waiting": [
+                "اصلاحی در انتظار نیست"
+            ],
+            "Fixes you approve in MonoRanks appear here, ready to write into WordPress.": [
+                "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا می‌آیند، آماده برای نوشتن در وردپرس."
+            ],
+            "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first.": [
+                "یک پاراگراف پاسخ‌محور به بالای نوشته اضافه می‌کند. ابتدا قبل/بعد را در مونورنکس بررسی کنید."
+            ],
+            "Review": [
+                "بررسی"
+            ],
+            "Apply": [
+                "اعمال"
+            ],
+            "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days.": [
+                "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
+            ],
+            "All changes": [
+                "همهٔ تغییرات"
+            ],
+            "Connect MonoRanks again": [
+                "مونورنکس را دوباره متصل کنید"
+            ],
+            "Use this when your host blocks Application Passwords.": [
+                "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید."
+            ],
+            "Open settings": [
+                "باز کردن تنظیمات"
+            ],
+            "See scores here and in your Posts list": [
+                "امتیازها را اینجا و در فهرست نوشته‌ها ببینید"
+            ],
+            "After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list.": [
+                "پس از نخستین ممیزی، این صفحه امتیاز سلامت و AEO سایت، صفحه‌های نیازمند توجه و اصلاح‌های تأییدشدهٔ شما را نشان می‌دهد؛ هر نوشته و برگه هم امتیازش را در فهرست می‌گیرد."
+            ],
+            "This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow.": [
+                "این مونورنکس هنوز نتایج ممیزی را با افزونه به اشتراک نمی‌گذارد. فعلاً امتیازها در مونورنکس می‌مانند؛ افزونه فردا دوباره می‌پرسد."
+            ],
+            "MonoRanks could not be reached for the audit results. The plugin tries again within the hour.": [
+                "برای دریافت نتایج ممیزی دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر دوباره تلاش می‌کند."
+            ],
+            "MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit.": [
+                "مونورنکس هنوز به این سایت امتیاز نداده است. امتیازها پس از نخستین ممیزی هفتگی اینجا و در فهرست نوشته‌ها دیده می‌شوند."
+            ],
+            "Waiting for the first audit": [
+                "در انتظار نخستین ممیزی"
+            ],
+            "Content": [
+                "محتوا"
+            ],
+            "%1$s published items sent %2$s": [
+                "%1$s مورد منتشرشده %2$s فرستاده شد"
+            ],
+            "Not sent yet. Use \"Sync content now\" above.": [
+                "هنوز فرستاده نشده. از «همگام‌سازی محتوا» در بالا استفاده کنید."
+            ],
+            "Audit results": [
+                "نتایج ممیزی"
+            ],
+            "checked %s": [
+                "بررسی‌شده %s"
+            ],
+            "Open the audit in MonoRanks": [
+                "باز کردن ممیزی در مونورنکس"
+            ]
+        }
+    }
+}
