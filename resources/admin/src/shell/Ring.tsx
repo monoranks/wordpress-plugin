@@ -18,7 +18,7 @@ export function Ring({ score, size = 'sm', label }: { score: Score; size?: 'sm' 
   const mid = px / 2;
   const title = score === null ? __('Not scored yet', 'monoranks') : sprintf(__('%s of 100', 'monoranks'), fmt(score));
   return (
-    <span className={cn('mr-score', size, tone(score))} title={(label ? `${label}: ` : '') + title}>
+    <span className={cn('mr-score', `mr-${size}`, `mr-${tone(score)}`)} title={(label ? `${label}: ` : '') + title}>
       <span className="mr-ring">
         <svg width={px} height={px} viewBox={`0 0 ${px} ${px}`} aria-hidden="true">
           {score === null ? (
@@ -32,7 +32,7 @@ export function Ring({ score, size = 'sm', label }: { score: Score; size?: 'sm' 
         </svg>
         <span>{score === null ? '—' : fmt(score)}</span>
       </span>
-      {label && <span className="lbl">{label}</span>}
+      {label && <span className="mr-lbl">{label}</span>}
     </span>
   );
 }

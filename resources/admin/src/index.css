@@ -101,16 +101,16 @@ body.monoranks-screen #wpwrap { min-height: 0; }
 .mr-score { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); vertical-align: middle; }
 .mr-score .mr-ring { position: relative; display: inline-block; line-height: 0; }
 .mr-score .mr-ring > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1; color: var(--ink); }
-.mr-score.none .mr-ring > span { color: var(--muted); }
-.mr-score.sm .mr-ring { width: 30px; height: 30px; }
-.mr-score.sm .mr-ring > span { font-size: 11px; }
-.mr-score.lg .mr-ring { width: 64px; height: 64px; }
-.mr-score.lg .mr-ring > span { font-size: 20px; }
-.mr-score .lbl { font-size: 11px; color: var(--muted); font-weight: 500; }
-.mr-score.good { color: var(--good); }
-.mr-score.warn { color: var(--warn); }
-.mr-score.critical { color: var(--critical); }
-.mr-score.none { color: var(--line); }
+.mr-score.mr-none .mr-ring > span { color: var(--muted); }
+.mr-score.mr-sm .mr-ring { width: 30px; height: 30px; }
+.mr-score.mr-sm .mr-ring > span { font-size: 11px; }
+.mr-score.mr-lg .mr-ring { width: 64px; height: 64px; }
+.mr-score.mr-lg .mr-ring > span { font-size: 20px; }
+.mr-score .mr-lbl { font-size: 11px; color: var(--muted); font-weight: 500; }
+.mr-score.mr-good { color: var(--good); }
+.mr-score.mr-warn { color: var(--warn); }
+.mr-score.mr-critical { color: var(--critical); }
+.mr-score.mr-none { color: var(--line); }
 /* The app's spinner (globals.css .spin): a ring drawn with the text colour, one quarter open. */
 #monoranks-admin .spin { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid currentColor; border-right-color: transparent; animation: mr-spin .7s linear infinite; flex: 0 0 auto; }
 #monoranks-admin [data-size="sm"] .spin, #monoranks-admin .h-7 .spin { width: 10px; height: 10px; }

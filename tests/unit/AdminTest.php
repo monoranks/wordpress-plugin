@@ -30,9 +30,15 @@ class AdminTest extends TestCase {
 		$this->assertSame( '2026', Admin::digits( '2026' ) );
 	}
 
-	public function test_outbound_links_carry_utm_tags() {
+	public function test_outbound_links_carry_utm_tags_except_into_the_app() {
 		Functions\when( 'add_query_arg' )->alias( static function ( $args, $url ) { return $url . '?' . http_build_query( $args ); } );
-		$this->assertSame( 'https://app.monoranks.com/sites/x?utm_source=wordpress-plugin&utm_medium=admin&utm_campaign=posts-list&utm_content=posts-column', Admin::out( 'https://app.monoranks.com/sites/x', 'posts-column', 'posts-list' ) );
+		Functions\when( 'wp_parse_url' )->alias( static function ( $url, $component ) { return parse_url( $url, $component ); } );
+		Functions\when( 'get_option' )->justReturn( array( 'api_base' => 'https://app.monoranks.com', 'key' => 'mr_ws_' . str_repeat( 'a', 30 ) ) );
+		$this->assertSame(
+			'https://monoranks.com/docs/wordpress-plugin/?utm_source=wordpress-plugin&utm_medium=admin&utm_campaign=overview&utm_content=header-help',
+			Admin::out( 'https://monoranks.com/docs/wordpress-plugin/', 'header-help', 'overview' )
+		);
+		$this->assertSame( 'https://app.monoranks.com/sites/x', Admin::out( 'https://app.monoranks.com/sites/x', 'posts-column', 'posts-list' ), 'a link into the app keeps its plain address' );
 		$this->assertSame( '', Admin::out( '', 'x' ) );
 	}
 }

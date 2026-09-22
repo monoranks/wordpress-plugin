@@ -197,9 +197,24 @@ class Admin {
 		return $code ? self::notice_for( $code ) : null;
 	}
 
-	/** A link that leaves the admin, tagged so MonoRanks can tell plugin traffic apart. */
+	/**
+	 * A link that leaves the admin, tagged so the website and MonoRanks can tell plugin traffic apart. Links into the
+	 * MonoRanks app itself are left alone: the app already knows where the person came from, and the tags only clutter
+	 * the address bar of a page they are signed in to.
+	 */
 	public static function out( $url, $content, $campaign = 'plugin-admin' ) {
-		return $url ? add_query_arg( array( 'utm_source' => 'wordpress-plugin', 'utm_medium' => 'admin', 'utm_campaign' => $campaign, 'utm_content' => $content ), $url ) : '';
+		if ( ! $url || self::is_app_url( $url ) ) {
+			return (string) $url;
+		}
+		return add_query_arg( array( 'utm_source' => 'wordpress-plugin', 'utm_medium' => 'admin', 'utm_campaign' => $campaign, 'utm_content' => $content ), $url );
+	}
+
+	/** True for a link into the MonoRanks app this site is connected to (or the default address). */
+	public static function is_app_url( $url ) {
+		$conn = Connection::get();
+		$app  = ! empty( $conn['api_base'] ) ? $conn['api_base'] : MONORANKS_API_BASE;
+		$host = wp_parse_url( (string) $url, PHP_URL_HOST );
+		return $host && $host === wp_parse_url( $app, PHP_URL_HOST );
 	}
 
 	/** The address field is only for development sites pointing the plugin at a local MonoRanks. */

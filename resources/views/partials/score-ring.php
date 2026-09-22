@@ -15,7 +15,7 @@ $monoranks_mid = $monoranks_px / 2;
 /* translators: %s: score out of 100 */
 $monoranks_title = null === $score ? __( 'Not scored yet', 'monoranks' ) : \MonoRanks\Admin::digits( sprintf( __( '%s of 100', 'monoranks' ), number_format_i18n( $score ) ) );
 ?>
-<span class="mr-score <?php echo esc_attr( $size . ' ' . $tone . ' ' . ( isset( $place ) ? $place : 'side' ) ); ?>" title="<?php echo esc_attr( ( $label ? $label . ': ' : '' ) . $monoranks_title ); ?>">
+<span class="mr-score <?php echo esc_attr( 'mr-' . $size . ' mr-' . $tone . ' mr-' . ( isset( $place ) ? $place : 'side' ) ); ?>" title="<?php echo esc_attr( ( $label ? $label . ': ' : '' ) . $monoranks_title ); ?>">
 	<span class="mr-ring">
 		<svg width="<?php echo (int) $monoranks_px; ?>" height="<?php echo (int) $monoranks_px; ?>" viewBox="0 0 <?php echo (int) $monoranks_px; ?> <?php echo (int) $monoranks_px; ?>" aria-hidden="true">
 			<?php if ( null === $score ) : ?>
@@ -27,5 +27,5 @@ $monoranks_title = null === $score ? __( 'Not scored yet', 'monoranks' ) : \Mono
 		</svg>
 		<span><?php echo null === $score ? '&mdash;' : esc_html( \MonoRanks\Admin::n( $score ) ); ?></span>
 	</span>
-	<?php if ( $label ) : ?><span class="lbl"><?php echo esc_html( $label ); ?></span><?php endif; ?>
+	<?php if ( $label ) : ?><span class="mr-lbl"><?php echo esc_html( $label ); ?></span><?php endif; ?>
 </span>
