@@ -143,6 +143,29 @@ class Writer {
 		return array( 'id' => $id, 'ok' => true, 'previous' => $has, 'post_id' => $post->ID );
 	}
 
+	/** The change that puts a logged change's previous value back, or null when the row cannot be reversed. */
+	public static function reverse( array $row ) {
+		$field  = isset( $row['field'] ) ? (string) $row['field'] : '';
+		$target = isset( $row['target'] ) ? (string) $row['target'] : '';
+		if ( ! in_array( $field, self::FIELDS, true ) ) {
+			return null;
+		}
+		$c = array( 'id' => 'undo', 'field' => $field, 'value' => (string) $row['previous'], 'expected' => (string) $row['value'] );
+		if ( 'redirect' === $field ) {
+			$c['from'] = $target;
+		} elseif ( 'alt' === $field && 0 === strpos( $target, 'attachment:' ) ) {
+			$c['attachment_id'] = (int) substr( $target, 11 );
+		} elseif ( 0 === strpos( $target, 'post:' ) ) {
+			$c['post_id'] = (int) substr( $target, 5 );
+		} elseif ( 'site' !== $target ) {
+			return null;
+		}
+		if ( 'content' === $field ) {
+			$c['op'] = '' === trim( (string) $row['previous'] ) ? 'remove' : 'insert_top';
+		}
+		return $c;
+	}
+
 	private static function same_site( $url ) {
 		$host = wp_parse_url( home_url(), PHP_URL_HOST );
 		$to   = wp_parse_url( $url, PHP_URL_HOST );
