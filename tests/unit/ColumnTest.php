@@ -38,7 +38,7 @@ class ColumnTest extends TestCase {
 		$args = Column::sort_args( 'desc' );
 		$this->assertSame( 'OR', $args['meta_query']['relation'] );
 		$this->assertSame( 'NOT EXISTS', $args['meta_query']['monoranks_none']['compare'] );
-		$this->assertSame( array( 'monoranks_health' => 'DESC' ), $args['orderby'] );
+		$this->assertSame( array( 'monoranks_none' => 'DESC' ), $args['orderby'] );
 		$this->assertSame( array( 'meta_key' => Insights::META_HEALTH, 'orderby' => 'meta_value_num', 'order' => 'ASC' ), Column::sort_args( 'asc', true ) );
 	}
 }

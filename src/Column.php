@@ -16,6 +16,7 @@ class Column {
 		add_action( 'admin_init', array( __CLASS__, 'hooks' ) );
 		add_action( 'pre_get_posts', array( __CLASS__, 'filter' ), 9 );
 		add_action( 'pre_get_posts', array( __CLASS__, 'query' ) );
+		add_filter( 'posts_orderby', array( __CLASS__, 'unscored_last' ), 10, 2 );
 	}
 
 	public static function hooks() {
@@ -105,6 +106,15 @@ class Column {
 		foreach ( self::sort_args( $query->get( 'order' ), $attention ) as $k => $v ) {
 			$query->set( $k, $v );
 		}
+		$query->set( 'monoranks_sort', ! $attention );
+	}
+
+	/** MySQL puts NULL first when sorting ascending; unscored posts belong at the end either way. */
+	public static function unscored_last( $orderby, $query ) {
+		if ( ! $query->get( 'monoranks_sort' ) || ! preg_match( '/(\w+)\.meta_value/', (string) $orderby, $m ) ) {
+			return $orderby;
+		}
+		return $m[1] . '.meta_value IS NULL ASC, ' . $orderby;
 	}
 
 	/** Inside the "Needs attention" view every row has a score, so a plain numeric sort on the meta value does. */
@@ -117,9 +127,10 @@ class Column {
 			'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- admin list sort
 				'relation'         => 'OR',
 				'monoranks_health' => array( 'key' => Insights::META_HEALTH, 'type' => 'NUMERIC' ),
-				'monoranks_none'   => array( 'key' => Insights::META_HEALTH, 'compare' => 'NOT EXISTS' ),
+				'monoranks_none'   => array( 'key' => Insights::META_HEALTH, 'compare' => 'NOT EXISTS', 'type' => 'NUMERIC' ),
 			),
-			'orderby'    => array( 'monoranks_health' => $dir ),
+			// The NOT EXISTS clause is the join limited to this key, so its value is the health or NULL; the other join is not.
+			'orderby'    => array( 'monoranks_none' => $dir ),
 		);
 	}
 
