@@ -61,6 +61,10 @@ Per-page scores for the Posts and Pages column. `since` is the newest `audited_a
 
 `next` is an opaque cursor for the next batch (`null` when done); the plugin follows at most 25 batches per refresh.
 
+## `POST /api/connector/disconnect`
+
+Sent when someone disconnects the plugin in WordPress, so MonoRanks revokes this website's key and stops showing the site as connected. Body: `{ "reason": "disconnected in WordPress" }` (optional). The plugin does not wait for the answer: it disconnects either way.
+
 ## `POST /api/connector/fixes`
 
 After the plugin applied fixes from the Overview it tells MonoRanks what happened, so the change record moves on (applied, or refused because the page changed since the preview):

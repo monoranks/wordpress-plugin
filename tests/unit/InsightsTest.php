@@ -92,13 +92,14 @@ class InsightsTest extends TestCase {
 		$this->assertArrayNotHasKey( Insights::META_HEALTH, $this->meta[7] );
 	}
 
-	public function test_cache_is_stale_after_an_hour_or_a_day_when_unsupported() {
+	public function test_cache_is_stale_after_an_hour_including_when_unsupported() {
 		$now = 1000000;
 		$this->assertTrue( Insights::is_stale( array(), $now ) );
 		$this->assertFalse( Insights::is_stale( array( 'fetched_at' => gmdate( 'c', $now - 3000 ), 'status' => 'ok' ), $now ) );
 		$this->assertTrue( Insights::is_stale( array( 'fetched_at' => gmdate( 'c', $now - 3700 ), 'status' => 'ok' ), $now ) );
-		$this->assertFalse( Insights::is_stale( array( 'fetched_at' => gmdate( 'c', $now - 3700 ), 'status' => 'unsupported' ), $now ) );
-		$this->assertTrue( Insights::is_stale( array( 'fetched_at' => gmdate( 'c', $now - 90000 ), 'status' => 'unsupported' ), $now ) );
+		// A MonoRanks that could not answer yet is asked again the next hour, so an update to it is picked up the same day.
+		$this->assertFalse( Insights::is_stale( array( 'fetched_at' => gmdate( 'c', $now - 3000 ), 'status' => 'unsupported' ), $now ) );
+		$this->assertTrue( Insights::is_stale( array( 'fetched_at' => gmdate( 'c', $now - 3700 ), 'status' => 'unsupported' ), $now ) );
 	}
 
 	public function test_an_applied_fix_leaves_the_cached_overview() {

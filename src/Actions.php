@@ -39,6 +39,9 @@ class Actions {
 	}
 
 	public static function disconnect() {
+		// Tell MonoRanks first, so it revokes this website's key and stops showing the site as connected; a failure here
+		// must not keep the plugin connected, so the answer is not checked.
+		Api::post( '/disconnect', array( 'reason' => 'disconnected in WordPress' ), 8 );
 		Sync::unschedule();
 		Connection::clear();
 		Insights::clear();

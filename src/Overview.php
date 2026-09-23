@@ -14,7 +14,9 @@ class Overview {
 		$connected = Connection::has_key();
 		$overview  = $connected ? Insights::overview() : null;
 		$app       = $connected ? $conn['api_base'] : MONORANKS_API_BASE;
-		$site_url  = $overview && ! empty( $overview['site_url'] ) ? $overview['site_url'] : ( $overview && ! empty( $overview['site_id'] ) ? $app . '/sites/' . rawurlencode( $overview['site_id'] ) : $app );
+		// Link straight to this website in MonoRanks: from the overview when it is there, else from the id stored at pairing.
+		$site_id   = $overview && ! empty( $overview['site_id'] ) ? (string) $overview['site_id'] : ( ! empty( $conn['site_id'] ) ? (string) $conn['site_id'] : '' );
+		$site_url  = $overview && ! empty( $overview['site_url'] ) ? $overview['site_url'] : ( $site_id ? $app . '/sites/' . rawurlencode( $site_id ) . '/overview' : $app );
 		return array(
 			'connected'  => $connected,
 			'revoked'    => $connected && isset( $conn['key_state'] ) && 'revoked' === $conn['key_state'],

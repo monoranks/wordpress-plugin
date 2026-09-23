@@ -2,6 +2,12 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.5] — 2026-09-23
+
+- Disconnecting in WordPress now tells MonoRanks, so it revokes this website's key and stops showing the site as connected.
+- "Open MonoRanks" and "Open the audit" go to this website in MonoRanks, not to its home page, even before the first audit results arrive.
+- A MonoRanks that could not answer for audit results yet is asked again the next hour instead of the next day, and "Sync content now" asks straight away.
+
 ## [0.1.4] — 2026-09-23
 
 - The Plugin URI and Author URI headers point at plain addresses, without tracking parameters.

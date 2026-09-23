@@ -4,7 +4,7 @@
  * Description:       Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo.
  * Plugin URI:        https://monoranks.com/product/wordpress/
  * Author URI:        https://veronalabs.com/
- * Version:           0.1.4
+ * Version:           0.1.5
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            VeronaLabs

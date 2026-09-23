@@ -16,7 +16,7 @@ class Insights {
 	const META_HEALTH  = '_monoranks_health';
 	const REFRESH_HOOK = 'monoranks_refresh';
 	const FRESH_FOR    = HOUR_IN_SECONDS;
-	const RETRY_AFTER  = DAY_IN_SECONDS;
+	const RETRY_AFTER  = HOUR_IN_SECONDS;
 	const PAGE_LIMIT   = 25;
 
 	public static function register() {
@@ -46,7 +46,7 @@ class Insights {
 		return isset( $s['fetched_at'] ) ? (string) $s['fetched_at'] : '';
 	}
 
-	/** True when the cache is older than an hour (a day after MonoRanks said it does not support the routes yet). */
+	/** True when the cache is older than an hour (also after MonoRanks said it does not support the routes yet, so a MonoRanks update is picked up the same hour). */
 	public static function is_stale( array $state, $now = null ) {
 		$now  = null === $now ? time() : (int) $now;
 		$at   = isset( $state['fetched_at'] ) ? strtotime( (string) $state['fetched_at'] ) : 0;
@@ -73,6 +73,12 @@ class Insights {
 	public static function refresh_soon() {
 		if ( ! Connection::has_key() || wp_next_scheduled( self::REFRESH_HOOK ) ) {
 			return;
+		}
+		// Forget an earlier "this MonoRanks cannot answer yet" so the next pull really happens.
+		$state = self::state();
+		if ( isset( $state['status'] ) && 'unsupported' === $state['status'] ) {
+			$state['fetched_at'] = '';
+			update_option( self::OPTION, $state, false );
 		}
 		wp_schedule_single_event( time(), self::REFRESH_HOOK );
 		spawn_cron();
