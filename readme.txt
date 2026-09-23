@@ -1,10 +1,10 @@
 === MonoRanks ===
-Contributors: veronalabs, mostafa.s1990, kashani
+Contributors: veronalabs, mostafas1990, kashani
 Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.3
+Stable tag: 0.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,11 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.4 =
+* The Plugin URI and Author URI headers point at plain addresses, without tracking parameters.
+* The contributor list uses the right WordPress.org username.
+* The public ping route says in the code why it is public: MonoRanks calls it before the site is paired, it reads nothing, and every other route needs an administrator.
 
 = 0.1.3 =
 * On a site with many plugins the admin menu is taller than the page; the plugin's screens now stretch to the bottom of it, so the footer is the last thing on the page with nothing left over under it.

@@ -12,6 +12,9 @@ class Rest {
 	const NS = 'monoranks/v1';
 
 	public static function register() {
+		// Ping is deliberately public: MonoRanks calls it before the site is paired, when it has no credentials yet, to
+		// see whether the plugin is installed. It reads nothing and answers with the plugin's own version and whether
+		// pairing is possible on this site. Every route that touches the site's data needs an administrator below.
 		register_rest_route( self::NS, '/ping', array( 'methods' => 'GET', 'callback' => array( __CLASS__, 'ping' ), 'permission_callback' => '__return_true' ) );
 		$admin = array( __CLASS__, 'can_manage' );
 		register_rest_route( self::NS, '/status', array( 'methods' => 'GET', 'callback' => array( __CLASS__, 'status' ), 'permission_callback' => $admin ) );
