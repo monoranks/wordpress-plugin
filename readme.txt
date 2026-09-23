@@ -93,6 +93,11 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 
 == Changelog ==
 
+= 0.1.5 =
+* Disconnecting in WordPress tells MonoRanks, which revokes this website's key.
+* "Open MonoRanks" goes to this website, not the home page.
+* Audit results are asked for again within the hour after MonoRanks gains support for them.
+
 = 0.1.4 =
 * The Plugin URI and Author URI headers point at plain addresses, without tracking parameters.
 * The contributor list uses the right WordPress.org username.
