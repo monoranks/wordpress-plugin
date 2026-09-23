@@ -26,9 +26,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Release tag matches the plugin version
+        id: version
         run: |
           V=$(grep -oE 'Version:\s+[0-9.]+' monoranks.php | awk '{print $2}')
           test "v$V" = "${{ github.event.release.tag_name }}" || { echo "release ${{ github.event.release.tag_name }} but plugin is $V"; exit 1; }
+          echo "value=$V" >> "$GITHUB_OUTPUT"
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
@@ -49,11 +51,22 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
         run: echo "ready=${SVN_USERNAME:+yes}" >> "$GITHUB_OUTPUT"
-      - name: Build the zip when WordPress.org is not set up yet
-        if: steps.wporg.outputs.ready != 'yes'
+      # The zip is what people install by hand and what app.monoranks.com/downloads/monoranks.zip points at. WordPress
+      # names the installed folder after the folder inside the zip, so both the folder and the file are named for the
+      # plugin, never for this repository: a "wordpress-plugin" folder installs as a second, separate plugin.
+      - name: Build the installable zip
         run: |
-          mkdir -p tmp && rsync -a --exclude-from=.distignore ./ "tmp/${{ github.event.repository.name }}/"
-          (cd tmp && zip -rq "../${{ github.event.repository.name }}.zip" "${{ github.event.repository.name }}")
+          rm -rf tmp && mkdir -p tmp
+          # The plugin loads packages/autoload.php; there are no third-party runtime packages, so a PSR-4 loader for
+          # src/ is all it needs, and without it the shipped plugin finds none of its classes.
+          mkdir -p packages
+          [ -f packages/autoload.php ] || cp bin/autoload-template.php packages/autoload.php
+          rsync -a --exclude-from=.distignore ./ tmp/monoranks/
+          for f in monoranks.php packages/autoload.php build/main.js build/main.css readme.txt; do
+            test -s "tmp/monoranks/$f" || { echo "the zip would miss $f"; exit 1; }
+          done
+          (cd tmp && zip -rq "../monoranks-${{ steps.version.outputs.value }}.zip" monoranks)
+          unzip -l "monoranks-${{ steps.version.outputs.value }}.zip" | head -5
       - uses: 10up/action-wordpress-plugin-deploy@stable
         if: steps.wporg.outputs.ready == 'yes'
         env:
@@ -64,4 +77,4 @@ jobs:
       - name: Attach the zip to the GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ github.workspace }}/${{ github.event.repository.name }}.zip
+          files: ${{ github.workspace }}/monoranks-${{ steps.version.outputs.value }}.zip
