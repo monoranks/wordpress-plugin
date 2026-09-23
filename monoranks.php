@@ -26,7 +26,7 @@ if ( file_exists( __DIR__ . '/packages/autoload.php' ) ) {
 	return;
 }
 
-define( 'MONORANKS_CONNECTOR_VERSION', '0.1.4' );
+define( 'MONORANKS_CONNECTOR_VERSION', '0.1.5' );
 define( 'MONORANKS_CONNECTOR_FILE', __FILE__ );
 // MonoRanks address used when a key is pasted by hand. The download build sets it; wp-config.php may override it.
 if ( ! defined( 'MONORANKS_API_BASE' ) ) {
