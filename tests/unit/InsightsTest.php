@@ -152,4 +152,53 @@ class InsightsTest extends TestCase {
 		$this->assertSame( 8, $calls[0]['timeout'], 'the screen waits seconds, not the full connector timeout' );
 		$this->assertStringContainsString( '/api/connector/overview', $calls[0]['url'] );
 	}
+
+	/**
+	 * A big site does not fit in one request: the run that stops early must carry on where it left off, or the same
+	 * first batch is fetched for ever and every page after it stays without a score.
+	 */
+	public function test_a_page_run_that_stops_early_carries_on_next_time() {
+		$paths = array();
+		$this->options['monoranks_connection'] = array( 'key' => 'mr_site_test', 'api_base' => 'https://app.monoranks.com', 'key_state' => 'ok' );
+		$transients = array();
+		Functions\when( 'get_transient' )->alias( static function ( $k ) use ( &$transients ) { return isset( $transients[ $k ] ) ? $transients[ $k ] : false; } );
+		Functions\when( 'set_transient' )->alias( static function ( $k, $v ) use ( &$transients ) { $transients[ $k ] = $v; return true; } );
+		Functions\when( 'delete_transient' )->alias( static function ( $k ) use ( &$transients ) { unset( $transients[ $k ] ); return true; } );
+		Functions\when( 'wp_next_scheduled' )->justReturn( false );
+		Functions\when( 'wp_schedule_single_event' )->justReturn( true );
+		Functions\when( 'spawn_cron' )->justReturn( null );
+		Functions\when( 'is_wp_error' )->justReturn( false );
+		Functions\when( 'wp_json_encode' )->alias( static function ( $v ) { return json_encode( $v ); } );
+		Functions\when( 'wp_remote_retrieve_response_code' )->alias( static function ( $r ) { return $r['code']; } );
+		Functions\when( 'wp_remote_retrieve_body' )->alias( static function ( $r ) { return $r['body']; } );
+		// Three batches of one page each; the middle answer still carries a cursor, so a run with no time left stops there.
+		$batches = array(
+			'' => array( 'pages' => array( array( 'post_id' => 1, 'health' => 10, 'audited_at' => '2026-09-20T00:00:00Z' ) ), 'next' => 'cursor-2' ),
+			'cursor-2' => array( 'pages' => array( array( 'post_id' => 2, 'health' => 20, 'audited_at' => '2026-09-21T00:00:00Z' ) ), 'next' => 'cursor-3' ),
+			'cursor-3' => array( 'pages' => array( array( 'post_id' => 3, 'health' => 30, 'audited_at' => '2026-09-22T00:00:00Z' ) ), 'next' => null ),
+		);
+		Functions\when( 'wp_remote_get' )->alias( static function ( $url ) use ( &$paths, $batches ) {
+			$paths[] = $url;
+			usleep( 700000 ); // each answer costs time, so a run with a one second budget gets through two batches
+			$q = array();
+			parse_str( (string) parse_url( $url, PHP_URL_QUERY ), $q );
+			$body = false === strpos( $url, '/overview' ) ? $batches[ isset( $q['cursor'] ) ? $q['cursor'] : '' ] : array( 'site_id' => 'site_1', 'health' => 94, 'pages_scored' => 3 );
+			return array( 'code' => 200, 'body' => wp_json_encode( $body ) );
+		} );
+
+		// A first run with no time for the whole list: one batch lands and the place it got to is kept.
+		Insights::refresh( 8, 1 );
+		$state = $this->options[ Insights::OPTION ];
+		$this->assertSame( 20, $this->meta[2][ Insights::META_HEALTH ], 'the batch it did fetch is stored' );
+		$this->assertArrayNotHasKey( 3, $this->meta, 'it stopped before the last batch' );
+		$this->assertSame( 'cursor-3', $state['pages_cursor'] );
+		$this->assertArrayNotHasKey( 'pages_synced_at', $state, 'nothing is marked as fully stored yet' );
+
+		// The next run carries on from there and finishes.
+		Insights::refresh();
+		$state = $this->options[ Insights::OPTION ];
+		$this->assertSame( 30, $this->meta[3][ Insights::META_HEALTH ] );
+		$this->assertSame( '2026-09-22T00:00:00Z', $state['pages_synced_at'] );
+		$this->assertArrayNotHasKey( 'pages_cursor', $state );
+	}
 }

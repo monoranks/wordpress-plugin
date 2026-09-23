@@ -2,6 +2,10 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.7] — 2026-09-23
+
+- Scores for every post, not just the first few hundred. A pull that ran out of time started again from the beginning each time, so on a site with many posts everything after the first batch stayed without a score; it now carries on where it stopped and finishes in the background.
+
 ## [0.1.6] — 2026-09-23
 
 - Scores now appear as soon as you open the MonoRanks screen. They used to arrive only through WP-Cron, so on a site where WP-Cron is switched off, or where the host blocks the request that starts it, the screen said "Waiting for the first audit" even though MonoRanks had already audited the site.

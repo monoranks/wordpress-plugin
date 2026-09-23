@@ -142,17 +142,24 @@ class Insights {
 		update_option( self::OPTION, $state, false );
 		self::refresh_pages( $state, $timeout, $budget );
 		delete_transient( self::LOCK );
+		// A run that ran out of time carries on in the background in a minute, instead of waiting for the next hour.
+		$after = self::state();
+		if ( ! empty( $after['pages_cursor'] ) && ! wp_next_scheduled( self::REFRESH_HOOK ) ) {
+			wp_schedule_single_event( time() + 60, self::REFRESH_HOOK );
+			spawn_cron();
+		}
 		return $state;
 	}
 
 	/**
-	 * Pages changed since the last pull, in batches, written to post meta. The cursor only moves when the whole run
-	 * finished: a batch that fails midway would otherwise leave the pages it never fetched out of the next run too.
+	 * Pages changed since the last pull, in batches, written to post meta. A run that stops early (its time is up, or
+	 * MonoRanks did not answer) remembers where it got to, so the next one carries on from there instead of fetching the
+	 * same first batch for ever; only a run that reached the end moves the "everything up to here is stored" mark.
 	 */
 	private static function refresh_pages( array $state, $timeout = 15, $budget = 0 ) {
 		$since  = isset( $state['pages_synced_at'] ) ? (string) $state['pages_synced_at'] : '';
-		$cursor = '';
-		$newest = $since;
+		$cursor = isset( $state['pages_cursor'] ) ? (string) $state['pages_cursor'] : '';
+		$newest = isset( $state['pages_newest'] ) ? (string) $state['pages_newest'] : $since;
 		$done   = false;
 		$until  = $budget > 0 ? microtime( true ) + (int) $budget : 0;
 		for ( $i = 0; $i < self::PAGE_LIMIT; $i++ ) {
@@ -179,11 +186,17 @@ class Insights {
 				break;
 			}
 		}
-		if ( $done && $newest ) {
-			$state                    = self::state();
-			$state['pages_synced_at'] = $newest;
-			update_option( self::OPTION, $state, false );
+		$state = self::state();
+		if ( $done ) {
+			if ( $newest ) {
+				$state['pages_synced_at'] = $newest;
+			}
+			unset( $state['pages_cursor'], $state['pages_newest'] );
+		} else {
+			$state['pages_cursor'] = $cursor;
+			$state['pages_newest'] = $newest;
 		}
+		update_option( self::OPTION, $state, false );
 	}
 
 	/** 0–100 or null. */
