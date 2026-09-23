@@ -201,4 +201,29 @@ class InsightsTest extends TestCase {
 		$this->assertSame( '2026-09-22T00:00:00Z', $state['pages_synced_at'] );
 		$this->assertArrayNotHasKey( 'pages_cursor', $state );
 	}
+
+	/**
+	 * Up to 0.1.7 a pull could mark an audit as fully stored while MonoRanks had only ever sent its first batch, so the
+	 * update drops those marks once and every score is read again.
+	 */
+	public function test_updating_from_an_older_version_reads_the_scores_again() {
+		$this->options[ Insights::OPTION ] = array(
+			'status' => 'ok', 'fetched_at' => '2026-09-23T10:00:00+00:00',
+			'pages_synced_at' => '2026-09-22T19:38:43Z', 'pages_cursor' => 'c9', 'pages_newest' => '2026-09-22T19:38:43Z',
+			'overview' => array( 'health' => 94 ),
+		);
+		// The sites that hit the bug have no version stored at all, so that case has to reset as well.
+		Insights::maybe_upgrade();
+		$state = $this->options[ Insights::OPTION ];
+		$this->assertArrayNotHasKey( 'pages_synced_at', $state );
+		$this->assertArrayNotHasKey( 'pages_cursor', $state );
+		$this->assertSame( '', $state['fetched_at'], 'the next screen load pulls again' );
+		$this->assertSame( array( 'health' => 94 ), $state['overview'], 'what is already on screen stays' );
+		$this->assertSame( 'test', $this->options[ Insights::VERSION ] );
+
+		// Running again on the same version changes nothing.
+		$this->options[ Insights::OPTION ]['pages_synced_at'] = '2026-09-23T12:00:00Z';
+		Insights::maybe_upgrade();
+		$this->assertSame( '2026-09-23T12:00:00Z', $this->options[ Insights::OPTION ]['pages_synced_at'] );
+	}
 }

@@ -6,7 +6,7 @@
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 
 // The same list the "Delete all MonoRanks data" button uses (MonoRanks\Actions::delete_everything).
-foreach ( array( 'monoranks', 'monoranks_connection', 'monoranks_sync', 'monoranks_redirects', 'monoranks_change_log', 'monoranks_ai_bots', 'monoranks_llms_txt', 'monoranks_insights' ) as $monoranks_option ) {
+foreach ( array( 'monoranks', 'monoranks_connection', 'monoranks_sync', 'monoranks_redirects', 'monoranks_change_log', 'monoranks_ai_bots', 'monoranks_llms_txt', 'monoranks_insights', 'monoranks_version' ) as $monoranks_option ) {
 	delete_option( $monoranks_option );
 }
 wp_clear_scheduled_hook( 'monoranks_daily_sync' );

@@ -2,6 +2,11 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.8] — 2026-09-23
+
+- Reads every score again after this update. Earlier versions could mark an audit as stored while MonoRanks had only sent its first batch of pages, which left most posts without a score in the Posts list; the update clears that mark once and the scores come back in full.
+- Deleting the plugin also clears the lock it uses while reading from MonoRanks.
+
 ## [0.1.7] — 2026-09-23
 
 - Scores for every post, not just the first few hundred. A pull that ran out of time started again from the beginning each time, so on a site with many posts everything after the first batch stayed without a score; it now carries on where it stopped and finishes in the background.

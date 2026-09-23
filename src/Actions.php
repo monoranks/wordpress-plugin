@@ -57,7 +57,7 @@ class Actions {
 		Sync::unschedule();
 		Connection::clear();
 		Insights::clear();
-		foreach ( array( 'monoranks', 'monoranks_redirects', 'monoranks_change_log', 'monoranks_ai_bots', 'monoranks_llms_txt' ) as $option ) {
+		foreach ( array( 'monoranks', 'monoranks_redirects', 'monoranks_change_log', 'monoranks_ai_bots', 'monoranks_llms_txt', 'monoranks_version' ) as $option ) {
 			delete_option( $option );
 		}
 		delete_transient( 'monoranks_sync_lock' );

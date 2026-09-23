@@ -19,10 +19,32 @@ class Insights {
 	const RETRY_AFTER  = HOUR_IN_SECONDS;
 	const PAGE_LIMIT   = 25;
 	const LOCK         = 'monoranks_refreshing';
+	const VERSION      = 'monoranks_version';
 
 	public static function register() {
 		add_action( self::REFRESH_HOOK, array( __CLASS__, 'refresh' ) );
+		add_action( 'admin_init', array( __CLASS__, 'maybe_upgrade' ), 5 );
 		add_action( 'admin_init', array( __CLASS__, 'maybe_schedule' ) );
+	}
+
+	/**
+	 * Runs once after the plugin is updated. Up to 0.1.7 a pull could mark an audit as stored while most of its pages had
+	 * never arrived, so those marks are dropped here and every score is read from MonoRanks again.
+	 */
+	public static function maybe_upgrade() {
+		$was = (string) get_option( self::VERSION, '' );
+		if ( MONORANKS_CONNECTOR_VERSION === $was ) {
+			return;
+		}
+		// An install that predates this option has no version stored at all, and that is exactly the case that needs it;
+		// on a fresh install there is nothing stored to drop.
+		if ( '' === $was || version_compare( $was, '0.1.8', '<' ) ) {
+			$state = self::state();
+			unset( $state['pages_synced_at'], $state['pages_cursor'], $state['pages_newest'] );
+			$state['fetched_at'] = '';
+			update_option( self::OPTION, $state, false );
+		}
+		update_option( self::VERSION, MONORANKS_CONNECTOR_VERSION, false );
 	}
 
 	public static function state() {
