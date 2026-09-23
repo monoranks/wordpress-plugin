@@ -61,6 +61,7 @@ class Actions {
 			delete_option( $option );
 		}
 		delete_transient( 'monoranks_sync_lock' );
+		delete_transient( 'monoranks_refreshing' );
 		return 'deleted';
 	}
 

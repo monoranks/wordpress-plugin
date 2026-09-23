@@ -15,3 +15,4 @@ wp_clear_scheduled_hook( 'monoranks_refresh' );
 delete_post_meta_by_key( '_monoranks_score' );
 delete_post_meta_by_key( '_monoranks_health' );
 delete_transient( 'monoranks_sync_lock' );
+delete_transient( 'monoranks_refreshing' );
