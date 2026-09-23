@@ -133,8 +133,8 @@ class Admin {
 	 * A score ring for the Posts column (the app's ScoreBox): 'sm' 30px in the cell, 'md' 40px elsewhere. $place puts the
 	 * label beside the ring ('side') or under it ('under'), which keeps a narrow column to one line.
 	 */
-	public static function ring( $score, $size = 'sm', $label = '', $place = 'side' ) {
-		return self::view( 'partials/score-ring', array( 'score' => $score, 'size' => in_array( $size, array( 'md', 'lg' ), true ) ? $size : 'sm', 'label' => $label, 'place' => 'under' === $place ? 'under' : 'side', 'tone' => Insights::tone( $score ) ) );
+	public static function ring( $score, $size = 'sm', $label = '', $place = 'side', $empty = '' ) {
+		return self::view( 'partials/score-ring', array( 'score' => $score, 'size' => in_array( $size, array( 'md', 'lg' ), true ) ? $size : 'sm', 'label' => $label, 'place' => 'under' === $place ? 'under' : 'side', 'tone' => Insights::tone( $score ), 'empty' => (string) $empty ) );
 	}
 
 	/**

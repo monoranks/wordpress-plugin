@@ -2,6 +2,10 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.9] — 2026-09-23
+
+- An empty ring in the Posts list says what it means. MonoRanks reads AEO on a sample of pages, so a post without an AEO score has not been checked rather than scored badly, and the ring now says so.
+
 ## [0.1.8] — 2026-09-23
 
 - Reads every score again after this update. Earlier versions could mark an audit as stored while MonoRanks had only sent its first batch of pages, which left most posts without a score in the Posts list; the update clears that mark once and the scores come back in full.

@@ -4,7 +4,7 @@ Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.8
+Stable tag: 0.1.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,9 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.9 =
+* An empty score ring in the Posts list explains that the page has not been checked, instead of looking like a fault.
 
 = 0.1.8 =
 * Reads every score again after this update, so posts left without one get theirs back.

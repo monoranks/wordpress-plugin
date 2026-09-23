@@ -1,6 +1,7 @@
 <?php
 /**
- * A score ring. $score (0–100 or null), $size (sm | md | lg), $label, $place (side | under), $tone.
+ * A score ring. $score (0–100 or null), $size (sm | md | lg), $label, $place (side | under), $tone, and $empty: what
+ * the ring means when there is no score, so a ring MonoRanks has not measured does not read as a fault.
  *
  * @package MonoRanks
  */
@@ -13,7 +14,8 @@ $monoranks_r  = ( $monoranks_px - $monoranks_sw ) / 2;
 $monoranks_c  = 2 * M_PI * $monoranks_r;
 $monoranks_mid = $monoranks_px / 2;
 /* translators: %s: score out of 100 */
-$monoranks_title = null === $score ? __( 'Not scored yet', 'monoranks' ) : \MonoRanks\Admin::digits( sprintf( __( '%s of 100', 'monoranks' ), number_format_i18n( $score ) ) );
+$monoranks_empty = isset( $empty ) && '' !== $empty ? $empty : __( 'Not scored yet', 'monoranks' );
+$monoranks_title = null === $score ? $monoranks_empty : \MonoRanks\Admin::digits( sprintf( __( '%s of 100', 'monoranks' ), number_format_i18n( $score ) ) );
 ?>
 <span class="mr-score <?php echo esc_attr( 'mr-' . $size . ' mr-' . $tone . ' mr-' . ( isset( $place ) ? $place : 'side' ) ); ?>" title="<?php echo esc_attr( ( $label ? $label . ': ' : '' ) . $monoranks_title ); ?>">
 	<span class="mr-ring">

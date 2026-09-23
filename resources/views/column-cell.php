@@ -34,7 +34,7 @@ $monoranks_arrow = '<span class="mr-arrow" aria-hidden="true">&#8599;</span>';
 		<div class="mr-foot"><span class="mr-empty"><?php esc_html_e( 'Scores arrive after the next audit', 'monoranks' ); ?></span><a href="<?php echo esc_url( $app_url ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Open MonoRanks', 'monoranks' ); ?> <?php echo $monoranks_arrow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static markup ?></a></div>
 	</div>
 <?php else : ?>
-	<span class="mr-row" tabindex="0" aria-label="<?php echo esc_attr( $line ); ?>"><?php echo Admin::ring( $health, 'sm', __( 'Health', 'monoranks' ), 'under' ) . Admin::ring( $aeo, 'sm', __( 'AEO', 'monoranks' ), 'under' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></span>
+	<span class="mr-row" tabindex="0" aria-label="<?php echo esc_attr( $line ); ?>"><?php echo Admin::ring( $health, 'sm', __( 'Health', 'monoranks' ), 'under', __( 'Not checked in this audit', 'monoranks' ) ) . Admin::ring( $aeo, 'sm', __( 'AEO', 'monoranks' ), 'under', __( 'Not checked: MonoRanks reads AEO on a sample of pages', 'monoranks' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></span>
 	<div class="mr-tip" role="tooltip">
 		<div class="mr-kv">
 			<div><?php esc_html_e( 'Fixes', 'monoranks' ); ?></div>
