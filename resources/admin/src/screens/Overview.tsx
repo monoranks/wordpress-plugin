@@ -194,7 +194,7 @@ function Waiting({ data }: { data: OverviewData }) {
   const results = kind === 'unsupported'
     ? __('This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow.', 'monoranks')
     : kind === 'error'
-      ? __('MonoRanks could not be reached for the audit results. The plugin tries again within the hour.', 'monoranks')
+      ? __('MonoRanks could not be reached for the audit results. The plugin tries again within the hour, or when you reload this screen.', 'monoranks')
       : __('MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit.', 'monoranks');
   return (
     <Card>

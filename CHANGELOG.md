@@ -2,6 +2,12 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.6] — 2026-09-23
+
+- Scores now appear as soon as you open the MonoRanks screen. They used to arrive only through WP-Cron, so on a site where WP-Cron is switched off, or where the host blocks the request that starts it, the screen said "Waiting for the first audit" even though MonoRanks had already audited the site.
+- "Sync content now" brings the scores back with it instead of leaving them for a later background run.
+- The rest of the pages still come down in the background, so a site with thousands of posts does not hold up the screen.
+
 ## [0.1.5] — 2026-09-23
 
 - Disconnecting in WordPress now tells MonoRanks, so it revokes this website's key and stops showing the site as connected.

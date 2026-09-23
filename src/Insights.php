@@ -18,6 +18,7 @@ class Insights {
 	const FRESH_FOR    = HOUR_IN_SECONDS;
 	const RETRY_AFTER  = HOUR_IN_SECONDS;
 	const PAGE_LIMIT   = 25;
+	const LOCK         = 'monoranks_refreshing';
 
 	public static function register() {
 		add_action( self::REFRESH_HOOK, array( __CLASS__, 'refresh' ) );
@@ -62,16 +63,26 @@ class Insights {
 		}
 		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- screen check only
 		$ours = 'edit.php' === $pagenow || ( 'admin.php' === $pagenow && in_array( $page, array( Admin::MENU, Admin::SETTINGS ), true ) );
-		if ( ! $ours || ! self::is_stale( self::state() ) || wp_next_scheduled( self::REFRESH_HOOK ) ) {
+		if ( ! $ours || ! self::is_stale( self::state() ) ) {
 			return;
 		}
-		wp_schedule_single_event( time(), self::REFRESH_HOOK );
+		// Pull the scores in this request, with a short deadline: many sites turn WP-Cron off (DISABLE_WP_CRON) or block
+		// the loopback request that starts it, and the screen would sit on "waiting" until their own cron ran, if ever.
+		// Only on the plugin's own screens; the Posts list keeps to the background so it never waits on MonoRanks.
+		if ( 'admin.php' === $pagenow ) {
+			self::refresh( 8, 6 );
+		}
+		if ( wp_next_scheduled( self::REFRESH_HOOK ) ) {
+			return;
+		}
+		// The rest of the pages, in the background, so a big site finishes without holding up the screen.
+		wp_schedule_single_event( time() + 30, self::REFRESH_HOOK );
 		spawn_cron();
 	}
 
-	/** Asks for a refresh in the background (WP-Cron), so a button press never waits on MonoRanks. */
+	/** Pulls what the screens need now and leaves the rest of the pages to WP-Cron. */
 	public static function refresh_soon() {
-		if ( ! Connection::has_key() || wp_next_scheduled( self::REFRESH_HOOK ) ) {
+		if ( ! Connection::has_key() ) {
 			return;
 		}
 		// Forget an earlier "this MonoRanks cannot answer yet" so the next pull really happens.
@@ -80,21 +91,39 @@ class Insights {
 			$state['fetched_at'] = '';
 			update_option( self::OPTION, $state, false );
 		}
-		wp_schedule_single_event( time(), self::REFRESH_HOOK );
-		spawn_cron();
+		if ( ! wp_next_scheduled( self::REFRESH_HOOK ) ) {
+			wp_schedule_single_event( time() + 30, self::REFRESH_HOOK );
+			spawn_cron();
+		}
+		// A site with WP-Cron switched off would never run that event, so the scores come down here and now as well,
+		// on a short deadline: the button has already spent time sending the content.
+		if ( ! wp_doing_cron() ) {
+			self::refresh( 6, 4 );
+		}
 	}
 
-	/** Pulls the overview and the changed pages from MonoRanks. Returns the new state. */
-	public static function refresh() {
+	/**
+	 * Pulls the overview and the changed pages from MonoRanks. Returns the new state.
+	 *
+	 * @param int $timeout Seconds to wait for each request.
+	 * @param int $budget  Seconds to spend on the pages, 0 for as long as it takes (WP-Cron).
+	 */
+	public static function refresh( $timeout = 15, $budget = 0 ) {
 		if ( ! Connection::has_key() ) {
 			return self::state();
 		}
+		// One pull at a time: two screens opened together would otherwise both wait on the same requests.
+		if ( get_transient( self::LOCK ) ) {
+			return self::state();
+		}
+		set_transient( self::LOCK, 1, 30 );
 		$state = self::state();
-		$res   = Api::get( '/overview' );
+		$res   = Api::get( '/overview', $timeout );
 		if ( 404 === $res['code'] ) {
 			$state['status']     = 'unsupported';
 			$state['fetched_at'] = gmdate( 'c' );
 			update_option( self::OPTION, $state, false );
+			delete_transient( self::LOCK );
 			return $state;
 		}
 		if ( 200 !== $res['code'] || ! is_array( $res['body'] ) ) {
@@ -102,6 +131,7 @@ class Insights {
 			$state['fetched_at'] = gmdate( 'c' );
 			$state['error']      = (string) $res['error'];
 			update_option( self::OPTION, $state, false );
+			delete_transient( self::LOCK );
 			return $state;
 		}
 		$overview            = self::normalise_overview( $res['body'] );
@@ -110,7 +140,8 @@ class Insights {
 		$state['fetched_at'] = gmdate( 'c' );
 		unset( $state['error'] );
 		update_option( self::OPTION, $state, false );
-		self::refresh_pages( $state );
+		self::refresh_pages( $state, $timeout, $budget );
+		delete_transient( self::LOCK );
 		return $state;
 	}
 
@@ -118,14 +149,18 @@ class Insights {
 	 * Pages changed since the last pull, in batches, written to post meta. The cursor only moves when the whole run
 	 * finished: a batch that fails midway would otherwise leave the pages it never fetched out of the next run too.
 	 */
-	private static function refresh_pages( array $state ) {
+	private static function refresh_pages( array $state, $timeout = 15, $budget = 0 ) {
 		$since  = isset( $state['pages_synced_at'] ) ? (string) $state['pages_synced_at'] : '';
 		$cursor = '';
 		$newest = $since;
 		$done   = false;
+		$until  = $budget > 0 ? microtime( true ) + (int) $budget : 0;
 		for ( $i = 0; $i < self::PAGE_LIMIT; $i++ ) {
+			if ( $until && microtime( true ) > $until ) {
+				break;
+			}
 			$path = '/pages' . ( $since || $cursor ? '?' . http_build_query( array_filter( array( 'since' => $since, 'cursor' => $cursor ) ) ) : '' );
-			$res  = Api::get( $path );
+			$res  = Api::get( $path, $timeout );
 			if ( 200 !== $res['code'] || ! is_array( $res['body'] ) || ! isset( $res['body']['pages'] ) || ! is_array( $res['body']['pages'] ) ) {
 				break;
 			}

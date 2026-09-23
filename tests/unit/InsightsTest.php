@@ -108,4 +108,48 @@ class InsightsTest extends TestCase {
 		$this->assertSame( array( array( 'id' => 'b' ) ), Insights::overview()['ready'] );
 		$this->assertSame( 1, Insights::overview()['fixes']['ready'] );
 	}
+
+	/**
+	 * A site with WP-Cron switched off (or a host that blocks the loopback request starting it) would never run the
+	 * background refresh, and the screen would sit on "Waiting for the first audit" forever, so opening the plugin's
+	 * own screen pulls the scores during that request.
+	 */
+	public function test_opening_the_plugin_screen_pulls_the_scores_without_wp_cron() {
+		$calls = array();
+		$this->options['monoranks_connection'] = array( 'key' => 'mr_site_test', 'api_base' => 'https://app.monoranks.com', 'key_state' => 'ok' );
+		$transients = array();
+		Functions\when( 'get_transient' )->alias( static function ( $k ) use ( &$transients ) { return isset( $transients[ $k ] ) ? $transients[ $k ] : false; } );
+		Functions\when( 'set_transient' )->alias( static function ( $k, $v ) use ( &$transients ) { $transients[ $k ] = $v; return true; } );
+		Functions\when( 'delete_transient' )->alias( static function ( $k ) use ( &$transients ) { unset( $transients[ $k ] ); return true; } );
+		Functions\when( 'current_user_can' )->justReturn( true );
+		Functions\when( 'wp_doing_ajax' )->justReturn( false );
+		Functions\when( 'wp_doing_cron' )->justReturn( false );
+		Functions\when( 'wp_unslash' )->returnArg();
+		Functions\when( 'sanitize_key' )->alias( static function ( $s ) { return strtolower( preg_replace( '/[^a-z0-9_\-]/i', '', (string) $s ) ); } );
+		Functions\when( 'wp_next_scheduled' )->justReturn( false );
+		Functions\when( 'wp_schedule_single_event' )->justReturn( true );
+		Functions\when( 'spawn_cron' )->justReturn( null );
+		Functions\when( 'is_wp_error' )->justReturn( false );
+		Functions\when( 'wp_remote_retrieve_response_code' )->alias( static function ( $r ) { return $r['code']; } );
+		Functions\when( 'wp_remote_retrieve_body' )->alias( static function ( $r ) { return $r['body']; } );
+		Functions\when( 'wp_remote_get' )->alias( static function ( $url, $args ) use ( &$calls ) {
+			$calls[] = array( 'url' => $url, 'timeout' => $args['timeout'] );
+			$body = false === strpos( $url, '/overview' )
+				? array( 'pages' => array( array( 'post_id' => 7, 'health' => 52, 'audited_at' => '2026-09-22T19:38:46.962Z' ) ), 'next' => null )
+				: array( 'site_id' => 'site_1', 'health' => 94, 'aeo' => 53, 'pages_scored' => 449, 'audited_at' => '2026-09-22T19:38:46.962Z' );
+			return array( 'code' => 200, 'body' => wp_json_encode( $body ) );
+		} );
+		Functions\when( 'wp_json_encode' )->alias( static function ( $v ) { return json_encode( $v ); } );
+
+		global $pagenow;
+		$pagenow       = 'admin.php';
+		$_GET['page']  = 'monoranks';
+		Insights::maybe_schedule();
+
+		$this->assertSame( 'ok', Insights::status(), 'the scores are there when the screen is drawn, not an hour later' );
+		$this->assertSame( 94, Insights::overview()['health'] );
+		$this->assertSame( 52, $this->meta[7][ Insights::META_HEALTH ] );
+		$this->assertSame( 8, $calls[0]['timeout'], 'the screen waits seconds, not the full connector timeout' );
+		$this->assertStringContainsString( '/api/connector/overview', $calls[0]['url'] );
+	}
 }

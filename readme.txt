@@ -4,7 +4,7 @@ Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.5
+Stable tag: 0.1.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,11 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.6 =
+* Scores appear as soon as you open the MonoRanks screen, also on sites where WP-Cron is switched off.
+* "Sync content now" brings the scores back with it.
+* The remaining pages still update in the background.
 
 = 0.1.5 =
 * Disconnecting in WordPress tells MonoRanks, which revokes this website's key.
