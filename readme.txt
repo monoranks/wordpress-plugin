@@ -96,6 +96,7 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 = 0.1.10 =
 * The search clicks change on the MonoRanks screen says what it is compared with: the previous 28 days, not this week.
 * Persian: the last untranslated messages on the MonoRanks screen are translated.
+* A site that was never connected no longer offers to erase data it does not have.
 
 = 0.1.9 =
 * An empty score ring in the Posts list explains that the page has not been checked, instead of looking like a fault.

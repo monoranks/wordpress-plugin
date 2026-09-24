@@ -13,8 +13,8 @@ $monoranks_sw = 'lg' === $size ? 5 : ( 'md' === $size ? 4 : 3 );
 $monoranks_r  = ( $monoranks_px - $monoranks_sw ) / 2;
 $monoranks_c  = 2 * M_PI * $monoranks_r;
 $monoranks_mid = $monoranks_px / 2;
-/* translators: %s: score out of 100 */
 $monoranks_empty = isset( $empty ) && '' !== $empty ? $empty : __( 'Not scored yet', 'monoranks' );
+/* translators: %s: score out of 100 */
 $monoranks_title = null === $score ? $monoranks_empty : \MonoRanks\Admin::digits( sprintf( __( '%s of 100', 'monoranks' ), number_format_i18n( $score ) ) );
 ?>
 <span class="mr-score <?php echo esc_attr( 'mr-' . $size . ' mr-' . $tone . ' mr-' . ( isset( $place ) ? $place : 'side' ) ); ?>" title="<?php echo esc_attr( ( $label ? $label . ': ' : '' ) . $monoranks_title ); ?>">

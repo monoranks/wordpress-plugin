@@ -6,6 +6,7 @@ All notable changes to the MonoRanks WordPress plugin. The format follows [Keep 
 
 - The change beside search clicks on the MonoRanks screen reads "+8% vs previous 28 days" instead of "+8% this week". The figure has always compared the last 28 days with the 28 days before; only the label was wrong.
 - Persian: three messages added in recent versions were still in English and are now translated.
+- A site that was never connected no longer shows the "Danger zone" erase card in Settings. Since 0.1.8 the update step saved an empty record on a fresh install, so the plugin thought it had data to erase.
 
 ## [0.1.9] — 2026-09-23
 

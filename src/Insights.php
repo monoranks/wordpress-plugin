@@ -38,7 +38,8 @@ class Insights {
 		}
 		// An install that predates this option has no version stored at all, and that is exactly the case that needs it;
 		// on a fresh install there is nothing stored to drop.
-		if ( '' === $was || version_compare( $was, '0.1.8', '<' ) ) {
+		// Only an existing record is rewritten: creating one would make a never-connected site look as if it had data to erase.
+		if ( ( '' === $was || version_compare( $was, '0.1.8', '<' ) ) && false !== get_option( self::OPTION, false ) ) {
 			$state = self::state();
 			unset( $state['pages_synced_at'], $state['pages_cursor'], $state['pages_newest'] );
 			$state['fetched_at'] = '';
