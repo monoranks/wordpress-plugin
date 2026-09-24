@@ -37,12 +37,16 @@ export function Ring({ score, size = 'sm', label }: { score: Score; size?: 'sm' 
   );
 }
 
-/** "+3 this week" / "−2 this week". */
-export function Delta({ n, unit = '' }: { n: number | null | undefined; unit?: string }) {
+/** "+3 this week" / "−2 this week", or "+8% vs previous 28 days" for figures compared across 28-day periods. */
+export function Delta({ n, unit = '', period = 'week' }: { n: number | null | undefined; unit?: string; period?: 'week' | 'previous28' }) {
   if (n === null || n === undefined) return null;
   const dir = n > 0 ? 'text-good-ink' : n < 0 ? 'text-critical' : 'text-mute';
-  const txt = fmtSigned(n, unit);
-  return <span className={cn('text-[12px] font-medium', dir)}>{sprintf(__('%s this week', 'monoranks'), '⁨' + txt + '⁩')}</span>;
+  const txt = '⁨' + fmtSigned(n, unit) + '⁩';
+  const label = period === 'previous28'
+    /* translators: %s: signed change, for example "+8%". */
+    ? sprintf(__('%s vs previous 28 days', 'monoranks'), txt)
+    : sprintf(__('%s this week', 'monoranks'), txt);
+  return <span className={cn('text-[12px] font-medium', dir)}>{label}</span>;
 }
 
 /** A 28-day sparkline: area, line, emphasised end point. */

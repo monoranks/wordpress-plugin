@@ -5,14 +5,18 @@ msgstr "Project-Id-Version: MonoRanks ۱.۰.۰\nLanguage: fa_IR\nMIME-Version: �
 #: monoranks.php
 #: src/Admin.php:46
 #: src/Column.php:35
+#: tmp/dist/monoranks/src/Admin.php:46
+#: tmp/dist/monoranks/src/Column.php:35
+#: tmp/monoranks-check/src/Admin.php:46
+#: tmp/monoranks-check/src/Column.php:35
 #: tmp/monoranks/src/Admin.php:46
-#: tmp/monoranks/src/Column.php:34
+#: tmp/monoranks/src/Column.php:35
 msgid "MonoRanks"
 msgstr "مونورنکس"
 
 #. Plugin URI of the plugin
 #: monoranks.php
-msgid "https://monoranks.com/product/wordpress/?utm_source=wordpress-plugin&utm_medium=plugins-list&utm_campaign=plugin-meta"
+msgid "https://monoranks.com/product/wordpress/"
 msgstr ""
 
 #. Description of the plugin
@@ -27,138 +31,198 @@ msgstr ""
 
 #. Author URI of the plugin
 #: monoranks.php
-msgid "https://veronalabs.com/?utm_source=wordpress-plugin&utm_medium=plugins-list&utm_campaign=plugin-meta&utm_content=monoranks"
+msgid "https://veronalabs.com/"
 msgstr ""
 
 #: resources/views/app.php:13
+#: tmp/dist/monoranks/resources/views/app.php:13
+#: tmp/monoranks-check/resources/views/app.php:13
 #: tmp/monoranks/resources/views/app.php:13
 msgid "The MonoRanks admin app is not built. Run npm install and npm run build in the plugin folder."
 msgstr "برنامهٔ مدیریت مونورنکس ساخته نشده است. در پوشهٔ افزونه npm install و سپس npm run build را اجرا کنید."
 
-#: resources/views/column-cell.php:18
-#: tmp/monoranks/resources/views/column-cell.php:18
-#: tmp/i18n/screens/Overview.js:142
+#: resources/views/column-cell.php:20
+#: tmp/dist/monoranks/resources/views/column-cell.php:20
+#: tmp/monoranks-check/resources/views/column-cell.php:20
+#: tmp/monoranks/resources/views/column-cell.php:20
+#: tmp/i18n/screens/Overview.js:147
 msgid "Connect MonoRanks"
 msgstr "اتصال مونورنکس"
 
-#: resources/views/column-cell.php:22
-#: tmp/monoranks/resources/views/column-cell.php:22
+#: resources/views/column-cell.php:24
+#: tmp/dist/monoranks/resources/views/column-cell.php:24
+#: tmp/monoranks-check/resources/views/column-cell.php:24
+#: tmp/monoranks/resources/views/column-cell.php:24
 msgid "Drafts are not sent to MonoRanks. This page gets its scores after the first audit that follows publishing."
 msgstr "پیش‌نویس‌ها به مونورنکس فرستاده نمی‌شوند. این صفحه پس از نخستین ممیزیِ بعد از انتشار امتیاز می‌گیرد."
 
-#: resources/views/column-cell.php:25
-#: resources/views/column-cell.php:35
-#: tmp/monoranks/resources/views/column-cell.php:25
-#: tmp/monoranks/resources/views/column-cell.php:35
+#: resources/views/column-cell.php:27
+#: resources/views/column-cell.php:37
+#: tmp/dist/monoranks/resources/views/column-cell.php:27
+#: tmp/dist/monoranks/resources/views/column-cell.php:37
+#: tmp/monoranks-check/resources/views/column-cell.php:27
+#: tmp/monoranks-check/resources/views/column-cell.php:37
+#: tmp/monoranks/resources/views/column-cell.php:27
+#: tmp/monoranks/resources/views/column-cell.php:37
 #: tmp/i18n/screens/Overview.js:89
 msgid "Health"
 msgstr "سلامت"
 
-#: resources/views/column-cell.php:25
-#: resources/views/column-cell.php:35
-#: tmp/monoranks/resources/views/column-cell.php:25
-#: tmp/monoranks/resources/views/column-cell.php:35
+#: resources/views/column-cell.php:27
+#: resources/views/column-cell.php:37
+#: tmp/dist/monoranks/resources/views/column-cell.php:27
+#: tmp/dist/monoranks/resources/views/column-cell.php:37
+#: tmp/monoranks-check/resources/views/column-cell.php:27
+#: tmp/monoranks-check/resources/views/column-cell.php:37
+#: tmp/monoranks/resources/views/column-cell.php:27
+#: tmp/monoranks/resources/views/column-cell.php:37
 #: tmp/i18n/screens/Overview.js:89
 msgid "AEO"
 msgstr "AEO"
 
-#: resources/views/column-cell.php:28
-#: tmp/monoranks/resources/views/column-cell.php:28
+#: resources/views/column-cell.php:30
+#: tmp/dist/monoranks/resources/views/column-cell.php:30
+#: tmp/monoranks-check/resources/views/column-cell.php:30
+#: tmp/monoranks/resources/views/column-cell.php:30
 #: tmp/i18n/screens/Settings.js:59
 msgid "Status"
 msgstr "وضعیت"
 
-#: resources/views/column-cell.php:28
+#: resources/views/column-cell.php:30
 #: src/Column.php:68
-#: tmp/monoranks/resources/views/column-cell.php:28
-#: tmp/monoranks/src/Column.php:67
+#: tmp/dist/monoranks/resources/views/column-cell.php:30
+#: tmp/dist/monoranks/src/Column.php:68
+#: tmp/monoranks-check/resources/views/column-cell.php:30
+#: tmp/monoranks-check/src/Column.php:68
+#: tmp/monoranks/resources/views/column-cell.php:30
+#: tmp/monoranks/src/Column.php:68
 msgid "Not audited yet"
 msgstr "هنوز ممیزی نشده"
 
-#: resources/views/column-cell.php:29
-#: resources/views/column-cell.php:51
-#: tmp/monoranks/resources/views/column-cell.php:29
-#: tmp/monoranks/resources/views/column-cell.php:51
+#: resources/views/column-cell.php:31
+#: resources/views/column-cell.php:53
+#: tmp/dist/monoranks/resources/views/column-cell.php:31
+#: tmp/dist/monoranks/resources/views/column-cell.php:53
+#: tmp/monoranks-check/resources/views/column-cell.php:31
+#: tmp/monoranks-check/resources/views/column-cell.php:53
+#: tmp/monoranks/resources/views/column-cell.php:31
+#: tmp/monoranks/resources/views/column-cell.php:53
 #: tmp/i18n/screens/Settings.js:62
 msgid "Next audit"
 msgstr "ممیزی بعدی"
 
-#: resources/views/column-cell.php:30
-#: tmp/monoranks/resources/views/column-cell.php:30
+#: resources/views/column-cell.php:32
+#: tmp/dist/monoranks/resources/views/column-cell.php:32
+#: tmp/monoranks-check/resources/views/column-cell.php:32
+#: tmp/monoranks/resources/views/column-cell.php:32
 msgid "Published"
 msgstr "انتشار"
 
-#: resources/views/column-cell.php:32
-#: tmp/monoranks/resources/views/column-cell.php:32
+#: resources/views/column-cell.php:34
+#: tmp/dist/monoranks/resources/views/column-cell.php:34
+#: tmp/monoranks-check/resources/views/column-cell.php:34
+#: tmp/monoranks/resources/views/column-cell.php:34
 msgid "Scores arrive after the next audit"
 msgstr "امتیازها پس از ممیزی بعدی می‌آیند"
 
-#: resources/views/column-cell.php:32
-#: tmp/monoranks/resources/views/column-cell.php:32
-#: tmp/i18n/screens/Overview.js:144
+#: resources/views/column-cell.php:34
+#: tmp/dist/monoranks/resources/views/column-cell.php:34
+#: tmp/monoranks-check/resources/views/column-cell.php:34
+#: tmp/monoranks/resources/views/column-cell.php:34
+#: tmp/i18n/screens/Overview.js:149
 #: tmp/i18n/screens/Settings.js:72
-#: tmp/i18n/shell/Shell.js:37
+#: tmp/i18n/shell/Shell.js:38
 msgid "Open MonoRanks"
 msgstr "باز کردن مونورنکس"
 
-#: resources/views/column-cell.php:38
-#: tmp/monoranks/resources/views/column-cell.php:38
+#: resources/views/column-cell.php:37
+msgid "Not checked in this audit"
+msgstr "در این ممیزی بررسی نشد"
+
+#: resources/views/column-cell.php:37
+msgid "Not checked: MonoRanks reads AEO on a sample of pages"
+msgstr "بررسی نشده: مونورنکس AEO را روی نمونه‌ای از صفحه‌ها می‌سنجد"
+
+#: resources/views/column-cell.php:40
+#: tmp/dist/monoranks/resources/views/column-cell.php:40
+#: tmp/monoranks-check/resources/views/column-cell.php:40
+#: tmp/monoranks/resources/views/column-cell.php:40
 #: tmp/i18n/screens/Overview.js:75
 msgid "Fixes"
 msgstr "اصلاح‌ها"
 
 #. translators: %s: number
 #, php-format
-#: resources/views/column-cell.php:40
-#: tmp/monoranks/resources/views/column-cell.php:40
+#: resources/views/column-cell.php:42
+#: tmp/dist/monoranks/resources/views/column-cell.php:42
+#: tmp/monoranks-check/resources/views/column-cell.php:42
+#: tmp/monoranks/resources/views/column-cell.php:42
 msgid "%s ready to apply"
 msgid_plural "%s ready to apply"
 msgstr[0] "%s آمادهٔ اعمال"
 msgstr[1] "%s آمادهٔ اعمال"
 
-#: resources/views/column-cell.php:42
-#: tmp/monoranks/resources/views/column-cell.php:42
+#: resources/views/column-cell.php:44
+#: tmp/dist/monoranks/resources/views/column-cell.php:44
+#: tmp/monoranks-check/resources/views/column-cell.php:44
+#: tmp/monoranks/resources/views/column-cell.php:44
 msgid "Nothing waiting"
 msgstr "چیزی در انتظار نیست"
 
-#: resources/views/column-cell.php:44
-#: tmp/monoranks/resources/views/column-cell.php:44
+#: resources/views/column-cell.php:46
+#: tmp/dist/monoranks/resources/views/column-cell.php:46
+#: tmp/monoranks-check/resources/views/column-cell.php:46
+#: tmp/monoranks/resources/views/column-cell.php:46
 msgid "Issues"
 msgstr "مشکل‌ها"
 
 #. translators: %s: number
 #, php-format
-#: resources/views/column-cell.php:46
-#: tmp/monoranks/resources/views/column-cell.php:46
+#: resources/views/column-cell.php:48
+#: tmp/dist/monoranks/resources/views/column-cell.php:48
+#: tmp/monoranks-check/resources/views/column-cell.php:48
+#: tmp/monoranks/resources/views/column-cell.php:48
 msgid "%s open"
 msgid_plural "%s open"
 msgstr[0] "%s باز"
 msgstr[1] "%s باز"
 
-#: resources/views/column-cell.php:48
+#: resources/views/column-cell.php:50
 #: src/Column.php:107
-#: tmp/monoranks/resources/views/column-cell.php:48
-#: tmp/monoranks/src/Column.php:106
+#: tmp/dist/monoranks/resources/views/column-cell.php:50
+#: tmp/dist/monoranks/src/Column.php:107
+#: tmp/monoranks-check/resources/views/column-cell.php:50
+#: tmp/monoranks-check/src/Column.php:107
+#: tmp/monoranks/resources/views/column-cell.php:50
+#: tmp/monoranks/src/Column.php:107
 msgid "No open issues"
 msgstr "بدون مشکل باز"
 
-#: resources/views/column-cell.php:50
-#: tmp/monoranks/resources/views/column-cell.php:50
+#: resources/views/column-cell.php:52
+#: tmp/dist/monoranks/resources/views/column-cell.php:52
+#: tmp/monoranks-check/resources/views/column-cell.php:52
+#: tmp/monoranks/resources/views/column-cell.php:52
 msgid "Audited"
 msgstr "ممیزی"
 
-#: resources/views/column-cell.php:54
-#: tmp/monoranks/resources/views/column-cell.php:54
+#: resources/views/column-cell.php:56
+#: tmp/dist/monoranks/resources/views/column-cell.php:56
+#: tmp/monoranks-check/resources/views/column-cell.php:56
+#: tmp/monoranks/resources/views/column-cell.php:56
 msgid "Apply fixes"
 msgstr "اعمال اصلاح‌ها"
 
-#: resources/views/column-cell.php:55
-#: tmp/monoranks/resources/views/column-cell.php:55
+#: resources/views/column-cell.php:57
+#: tmp/dist/monoranks/resources/views/column-cell.php:57
+#: tmp/monoranks-check/resources/views/column-cell.php:57
+#: tmp/monoranks/resources/views/column-cell.php:57
 msgid "Open in MonoRanks"
 msgstr "باز کردن در مونورنکس"
 
 #. translators: %s: score out of 100
-#: resources/views/partials/score-ring.php:16
+#: resources/views/partials/score-ring.php:17
+#: tmp/dist/monoranks/resources/views/partials/score-ring.php:16
+#: tmp/monoranks-check/resources/views/partials/score-ring.php:16
 #: tmp/monoranks/resources/views/partials/score-ring.php:16
 #: tmp/i18n/shell/Ring.js:14
 msgid "Not scored yet"
@@ -166,7 +230,9 @@ msgstr "هنوز امتیاز نگرفته"
 
 #. translators: %s: score out of 100
 #, php-format,js-format
-#: resources/views/partials/score-ring.php:16
+#: resources/views/partials/score-ring.php:18
+#: tmp/dist/monoranks/resources/views/partials/score-ring.php:16
+#: tmp/monoranks-check/resources/views/partials/score-ring.php:16
 #: tmp/monoranks/resources/views/partials/score-ring.php:16
 #: tmp/i18n/shell/Ring.js:14
 msgid "%s of 100"
@@ -174,122 +240,168 @@ msgstr "%s از ۱۰۰"
 
 #: src/Admin.php:47
 #: src/Assets.php:66
+#: tmp/dist/monoranks/src/Admin.php:47
+#: tmp/dist/monoranks/src/Assets.php:66
+#: tmp/monoranks-check/src/Admin.php:47
+#: tmp/monoranks-check/src/Assets.php:66
 #: tmp/monoranks/src/Admin.php:47
 #: tmp/monoranks/src/Assets.php:66
 #: tmp/i18n/screens/Overview.js:54
-#: tmp/i18n/shell/Shell.js:13
+#: tmp/i18n/shell/Shell.js:14
 msgid "Overview"
 msgstr "نمای کلی"
 
 #: src/Admin.php:48
 #: src/Assets.php:66
+#: tmp/dist/monoranks/src/Admin.php:48
+#: tmp/dist/monoranks/src/Assets.php:66
+#: tmp/monoranks-check/src/Admin.php:48
+#: tmp/monoranks-check/src/Assets.php:66
 #: tmp/monoranks/src/Admin.php:48
 #: tmp/monoranks/src/Assets.php:66
 msgid "MonoRanks settings"
 msgstr "تنظیمات مونورنکس"
 
 #: src/Admin.php:48
+#: tmp/dist/monoranks/src/Admin.php:48
+#: tmp/monoranks-check/src/Admin.php:48
 #: tmp/monoranks/src/Admin.php:48
 #: tmp/i18n/screens/Settings.js:46
-#: tmp/i18n/shell/Shell.js:14
+#: tmp/i18n/shell/Shell.js:15
 msgid "Settings"
 msgstr "تنظیمات"
 
 #. translators: 1: relative time, 2: date
 #, php-format
 #: src/Admin.php:168
-#: tmp/monoranks/src/Admin.php:165
+#: tmp/dist/monoranks/src/Admin.php:168
+#: tmp/monoranks-check/src/Admin.php:168
+#: tmp/monoranks/src/Admin.php:168
 msgid "in %1$s (%2$s)"
 msgstr "%1$s دیگر (%2$s)"
 
 #. translators: 1: relative time, 2: date
 #, php-format
 #: src/Admin.php:171
-#: tmp/monoranks/src/Admin.php:168
+#: tmp/dist/monoranks/src/Admin.php:171
+#: tmp/monoranks-check/src/Admin.php:171
+#: tmp/monoranks/src/Admin.php:171
 msgid "%1$s ago (%2$s)"
 msgstr "%1$s پیش (%2$s)"
 
 #: src/Admin.php:177
-#: tmp/monoranks/src/Admin.php:174
+#: tmp/dist/monoranks/src/Admin.php:177
+#: tmp/monoranks-check/src/Admin.php:177
+#: tmp/monoranks/src/Admin.php:177
 msgid "Connected. Your published content is on its way to MonoRanks."
 msgstr "متصل شد. محتوای منتشرشدهٔ شما در راه مونورنکس است."
 
 #: src/Admin.php:178
-#: tmp/monoranks/src/Admin.php:175
+#: tmp/dist/monoranks/src/Admin.php:178
+#: tmp/monoranks-check/src/Admin.php:178
+#: tmp/monoranks/src/Admin.php:178
 msgid "Content sent to MonoRanks."
 msgstr "محتوا به مونورنکس فرستاده شد."
 
 #: src/Admin.php:179
-#: tmp/monoranks/src/Admin.php:176
+#: tmp/dist/monoranks/src/Admin.php:179
+#: tmp/monoranks-check/src/Admin.php:179
+#: tmp/monoranks/src/Admin.php:179
 msgid "Disconnected. Nothing is sent to MonoRanks any more."
 msgstr "اتصال قطع شد. دیگر چیزی به مونورنکس فرستاده نمی‌شود."
 
 #: src/Admin.php:180
-#: tmp/monoranks/src/Admin.php:177
+#: tmp/dist/monoranks/src/Admin.php:180
+#: tmp/monoranks-check/src/Admin.php:180
+#: tmp/monoranks/src/Admin.php:180
 msgid "Everything MonoRanks stored in WordPress is gone: the connection, the scores, the redirects and the change log."
 msgstr "هر چه مونورنکس در وردپرس ذخیره کرده بود پاک شد: اتصال، امتیازها، تغییر مسیرها و فهرست تغییرات."
 
 #: src/Admin.php:181
-#: tmp/monoranks/src/Admin.php:178
+#: tmp/dist/monoranks/src/Admin.php:181
+#: tmp/monoranks-check/src/Admin.php:181
+#: tmp/monoranks/src/Admin.php:181
 msgid "Applied. The change is listed under Recent changes and can be undone."
 msgstr "اعمال شد. این تغییر در «تغییرات اخیر» آمده و قابل بازگردانی است."
 
 #: src/Admin.php:182
-#: tmp/monoranks/src/Admin.php:179
+#: tmp/dist/monoranks/src/Admin.php:182
+#: tmp/monoranks-check/src/Admin.php:182
+#: tmp/monoranks/src/Admin.php:182
 msgid "Some fixes were applied; the rest were refused because those pages changed since MonoRanks reviewed them. Recent changes lists what was written."
 msgstr "بخشی از اصلاح‌ها اعمال شد؛ بقیه رد شدند چون آن صفحه‌ها از زمان بررسی مونورنکس تغییر کرده‌اند. «تغییرات اخیر» آنچه نوشته شد را نشان می‌دهد."
 
 #: src/Admin.php:183
-#: tmp/monoranks/src/Admin.php:180
+#: tmp/dist/monoranks/src/Admin.php:183
+#: tmp/monoranks-check/src/Admin.php:183
+#: tmp/monoranks/src/Admin.php:183
 msgid "That change has moved in the log since this screen loaded. Reload and try Undo again."
 msgstr "این تغییر از زمان باز شدن صفحه در فهرست جابه‌جا شده است. صفحه را تازه کنید و دوباره بازگردانی را بزنید."
 
 #: src/Admin.php:184
-#: tmp/monoranks/src/Admin.php:181
+#: tmp/dist/monoranks/src/Admin.php:184
+#: tmp/monoranks-check/src/Admin.php:184
+#: tmp/monoranks/src/Admin.php:184
 msgid "Undone. The previous value is back."
 msgstr "بازگردانده شد. مقدار قبلی برگشت."
 
 #: src/Admin.php:185
-#: tmp/monoranks/src/Admin.php:182
+#: tmp/dist/monoranks/src/Admin.php:185
+#: tmp/monoranks-check/src/Admin.php:185
+#: tmp/monoranks/src/Admin.php:185
 msgid "MonoRanks could not apply that change: the page changed since it was reviewed. Open it in MonoRanks to review again."
 msgstr "مونورنکس نتوانست این تغییر را اعمال کند: صفحه از زمان بررسی تغییر کرده است. برای بررسی دوباره آن را در مونورنکس باز کنید."
 
 #: src/Admin.php:186
-#: tmp/monoranks/src/Admin.php:183
+#: tmp/dist/monoranks/src/Admin.php:186
+#: tmp/monoranks-check/src/Admin.php:186
+#: tmp/monoranks/src/Admin.php:186
 msgid "That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP."
 msgstr "این شبیه کلید اتصال مونورنکس نیست. آن را دوباره از مونورنکس ← تنظیمات ← API و MCP کپی کنید."
 
 #: src/Admin.php:187
-#: tmp/monoranks/src/Admin.php:184
+#: tmp/dist/monoranks/src/Admin.php:187
+#: tmp/monoranks-check/src/Admin.php:187
+#: tmp/monoranks/src/Admin.php:187
 msgid "The MonoRanks address must start with https://."
 msgstr "نشانی مونورنکس باید با https:// شروع شود."
 
 #: src/Admin.php:188
-#: tmp/monoranks/src/Admin.php:185
+#: tmp/dist/monoranks/src/Admin.php:188
+#: tmp/monoranks-check/src/Admin.php:188
+#: tmp/monoranks/src/Admin.php:188
 msgid "MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks."
 msgstr "مونورنکس این کلید را نپذیرفت. شاید باطل یا جایگزین شده باشد؛ در مونورنکس کلید تازه‌ای بسازید."
 
 #: src/Admin.php:189
-#: tmp/monoranks/src/Admin.php:186
+#: tmp/dist/monoranks/src/Admin.php:189
+#: tmp/monoranks-check/src/Admin.php:189
+#: tmp/monoranks/src/Admin.php:189
 msgid "This key belongs to a different website in MonoRanks. Create the key on the website with this address."
 msgstr "این کلید متعلق به وب‌سایت دیگری در مونورنکس است. کلید را روی وب‌سایتی با همین نشانی بسازید."
 
 #: src/Admin.php:190
-#: tmp/monoranks/src/Admin.php:187
+#: tmp/dist/monoranks/src/Admin.php:190
+#: tmp/monoranks-check/src/Admin.php:190
+#: tmp/monoranks/src/Admin.php:190
 msgid "MonoRanks could not be reached. Check the address and try again."
 msgstr "دسترسی به مونورنکس ممکن نشد. نشانی را بررسی کنید و دوباره تلاش کنید."
 
 #. translators: %s: relative time such as "5 days"
 #, php-format
 #: src/Column.php:63
-#: tmp/monoranks/src/Column.php:62
+#: tmp/dist/monoranks/src/Column.php:63
+#: tmp/monoranks-check/src/Column.php:63
+#: tmp/monoranks/src/Column.php:63
 msgid "in %s"
 msgstr "%s دیگر"
 
 #. translators: %s: relative time such as "in 5 days"
 #, php-format
 #: src/Column.php:71
-#: tmp/monoranks/src/Column.php:70
+#: tmp/dist/monoranks/src/Column.php:71
+#: tmp/monoranks-check/src/Column.php:71
+#: tmp/monoranks/src/Column.php:71
 msgid "next audit %s"
 msgstr "ممیزی بعدی %s"
 
@@ -297,15 +409,21 @@ msgstr "ممیزی بعدی %s"
 #, php-format
 #: src/Column.php:78
 #: src/Column.php:91
-#: tmp/monoranks/src/Column.php:77
-#: tmp/monoranks/src/Column.php:90
+#: tmp/dist/monoranks/src/Column.php:78
+#: tmp/dist/monoranks/src/Column.php:91
+#: tmp/monoranks-check/src/Column.php:78
+#: tmp/monoranks-check/src/Column.php:91
+#: tmp/monoranks/src/Column.php:78
+#: tmp/monoranks/src/Column.php:91
 msgid "%s ago"
 msgstr "%s پیش"
 
 #. translators: %s: number of fixes
 #, php-format
 #: src/Column.php:102
-#: tmp/monoranks/src/Column.php:101
+#: tmp/dist/monoranks/src/Column.php:102
+#: tmp/monoranks-check/src/Column.php:102
+#: tmp/monoranks/src/Column.php:102
 msgid "%s fix ready"
 msgid_plural "%s fixes ready"
 msgstr[0] "%s اصلاح آماده"
@@ -314,7 +432,9 @@ msgstr[1] "%s اصلاح آماده"
 #. translators: %s: number of issues
 #, php-format
 #: src/Column.php:105
-#: tmp/monoranks/src/Column.php:104
+#: tmp/dist/monoranks/src/Column.php:105
+#: tmp/monoranks-check/src/Column.php:105
+#: tmp/monoranks/src/Column.php:105
 msgid "%s open issue"
 msgid_plural "%s open issues"
 msgstr[0] "%s مشکل باز"
@@ -323,86 +443,118 @@ msgstr[1] "%s مشکل باز"
 #. translators: %s: relative time such as "2 days"
 #, php-format
 #: src/Column.php:111
-#: tmp/monoranks/src/Column.php:110
+#: tmp/dist/monoranks/src/Column.php:111
+#: tmp/monoranks-check/src/Column.php:111
+#: tmp/monoranks/src/Column.php:111
 msgid "audited %s ago"
 msgstr "ممیزی %s پیش"
 
 #: src/Column.php:151
-#: tmp/monoranks/src/Column.php:150
+#: tmp/dist/monoranks/src/Column.php:151
+#: tmp/monoranks-check/src/Column.php:151
+#: tmp/monoranks/src/Column.php:151
 msgid "Needs attention"
 msgstr "نیازمند توجه"
 
-#: src/Overview.php:37
+#: src/Overview.php:39
+#: tmp/dist/monoranks/src/Overview.php:37
+#: tmp/monoranks-check/src/Overview.php:37
 #: tmp/monoranks/src/Overview.php:37
 msgid "Title"
 msgstr "عنوان"
 
-#: src/Overview.php:38
+#: src/Overview.php:40
+#: tmp/dist/monoranks/src/Overview.php:38
+#: tmp/monoranks-check/src/Overview.php:38
 #: tmp/monoranks/src/Overview.php:38
 msgid "Meta description"
 msgstr "توضیح متا"
 
-#: src/Overview.php:39
+#: src/Overview.php:41
+#: tmp/dist/monoranks/src/Overview.php:39
+#: tmp/monoranks-check/src/Overview.php:39
 #: tmp/monoranks/src/Overview.php:39
 msgid "Canonical"
 msgstr "کانونیکال"
 
-#: src/Overview.php:40
+#: src/Overview.php:42
+#: tmp/dist/monoranks/src/Overview.php:40
+#: tmp/monoranks-check/src/Overview.php:40
 #: tmp/monoranks/src/Overview.php:40
 msgid "Noindex"
 msgstr "Noindex"
 
-#: src/Overview.php:41
+#: src/Overview.php:43
+#: tmp/dist/monoranks/src/Overview.php:41
+#: tmp/monoranks-check/src/Overview.php:41
 #: tmp/monoranks/src/Overview.php:41
 msgid "Image alt"
 msgstr "متن جایگزین تصویر"
 
-#: src/Overview.php:42
+#: src/Overview.php:44
+#: tmp/dist/monoranks/src/Overview.php:42
+#: tmp/monoranks-check/src/Overview.php:42
 #: tmp/monoranks/src/Overview.php:42
 msgid "Redirect"
 msgstr "تغییر مسیر"
 
-#: src/Overview.php:43
+#: src/Overview.php:45
+#: tmp/dist/monoranks/src/Overview.php:43
+#: tmp/monoranks-check/src/Overview.php:43
 #: tmp/monoranks/src/Overview.php:43
 msgid "Opening paragraph"
 msgstr "پاراگراف آغازین"
 
-#: src/Overview.php:44
+#: src/Overview.php:46
+#: tmp/dist/monoranks/src/Overview.php:44
+#: tmp/monoranks-check/src/Overview.php:44
 #: tmp/monoranks/src/Overview.php:44
 msgid "robots.txt"
 msgstr "robots.txt"
 
-#: src/Overview.php:45
+#: src/Overview.php:47
+#: tmp/dist/monoranks/src/Overview.php:45
+#: tmp/monoranks-check/src/Overview.php:45
 #: tmp/monoranks/src/Overview.php:45
 msgid "llms.txt"
 msgstr "llms.txt"
 
 #. translators: %d: attachment ID
 #, php-format
-#: src/Overview.php:64
+#: src/Overview.php:66
+#: tmp/dist/monoranks/src/Overview.php:64
+#: tmp/monoranks-check/src/Overview.php:64
 #: tmp/monoranks/src/Overview.php:64
 msgid "Image #%d"
 msgstr "تصویر #%d"
 
-#: src/Overview.php:66
+#: src/Overview.php:68
+#: tmp/dist/monoranks/src/Overview.php:66
+#: tmp/monoranks-check/src/Overview.php:66
 #: tmp/monoranks/src/Overview.php:66
-#: tmp/i18n/screens/Overview.js:113
+#: tmp/i18n/screens/Overview.js:114
 msgid "Site"
 msgstr "سایت"
 
 #. translators: 1: user, 2: date
 #, php-format
 #: src/Settings.php:35
+#: tmp/dist/monoranks/src/Settings.php:35
+#: tmp/monoranks-check/src/Settings.php:35
 #: tmp/monoranks/src/Settings.php:35
 msgid "set when %1$s connected MonoRanks on %2$s"
 msgstr "هنگام اتصال %1$s به مونورنکس در %2$s تنظیم شد"
 
 #: src/Settings.php:36
+#: tmp/dist/monoranks/src/Settings.php:36
+#: tmp/monoranks-check/src/Settings.php:36
 #: tmp/monoranks/src/Settings.php:36
 msgid "pasted by hand"
 msgstr "دستی وارد شده"
 
 #: src/Settings.php:38
+#: tmp/dist/monoranks/src/Settings.php:38
+#: tmp/monoranks-check/src/Settings.php:38
 #: tmp/monoranks/src/Settings.php:38
 msgid "Never"
 msgstr "هرگز"
@@ -546,120 +698,120 @@ msgstr "اصلاحی در انتظار نیست"
 msgid "Fixes you approve in MonoRanks appear here, ready to write into WordPress."
 msgstr "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا می‌آیند، آماده برای نوشتن در وردپرس."
 
-#: tmp/i18n/screens/Overview.js:114
+#: tmp/i18n/screens/Overview.js:116
 msgid "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first."
 msgstr "یک پاراگراف پاسخ‌محور به بالای نوشته اضافه می‌کند. ابتدا قبل/بعد را در مونورنکس بررسی کنید."
 
-#: tmp/i18n/screens/Overview.js:116
+#: tmp/i18n/screens/Overview.js:121
 msgid "Review"
 msgstr "بررسی"
 
-#: tmp/i18n/screens/Overview.js:116
+#: tmp/i18n/screens/Overview.js:121
 msgid "Apply"
 msgstr "اعمال"
 
-#: tmp/i18n/screens/Overview.js:118
+#: tmp/i18n/screens/Overview.js:123
 msgid "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days."
 msgstr "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
 
-#: tmp/i18n/screens/Overview.js:124
+#: tmp/i18n/screens/Overview.js:129
 #: tmp/i18n/screens/Settings.js:103
 msgid "Recent changes"
 msgstr "تغییرات اخیر"
 
-#: tmp/i18n/screens/Overview.js:127
+#: tmp/i18n/screens/Overview.js:132
 msgid "All changes"
 msgstr "همهٔ تغییرات"
 
-#: tmp/i18n/screens/Overview.js:142
+#: tmp/i18n/screens/Overview.js:147
 msgid "Connect MonoRanks again"
 msgstr "مونورنکس را دوباره متصل کنید"
 
-#: tmp/i18n/screens/Overview.js:142
+#: tmp/i18n/screens/Overview.js:147
 #: tmp/i18n/screens/Settings.js:54
 msgid "Key revoked"
 msgstr "کلید باطل شده"
 
-#: tmp/i18n/screens/Overview.js:142
+#: tmp/i18n/screens/Overview.js:147
 #: tmp/i18n/screens/Settings.js:54
 msgid "Not connected"
 msgstr "متصل نیست"
 
-#: tmp/i18n/screens/Overview.js:144
+#: tmp/i18n/screens/Overview.js:149
 #: tmp/i18n/screens/Settings.js:72
 msgid "Connect from MonoRanks"
 msgstr "اتصال از مونورنکس"
 
-#: tmp/i18n/screens/Overview.js:144
+#: tmp/i18n/screens/Overview.js:149
 #: tmp/i18n/screens/Settings.js:72
 msgid "In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect."
 msgstr "در مونورنکس وب‌سایت خود را باز کنید ← یکپارچه‌سازی‌ها ← وردپرس ← اتصال به وردپرس، و وقتی وردپرس پرسید به مونورنکس اجازه دهید. پیش از اتصال چیزی فرستاده نمی‌شود."
 
-#: tmp/i18n/screens/Overview.js:145
+#: tmp/i18n/screens/Overview.js:150
 #: tmp/i18n/screens/Settings.js:73
 msgid "Or paste a connector key"
 msgstr "یا کلید اتصال را وارد کنید"
 
-#: tmp/i18n/screens/Overview.js:145
+#: tmp/i18n/screens/Overview.js:150
 msgid "Use this when your host blocks Application Passwords."
 msgstr "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید."
 
-#: tmp/i18n/screens/Overview.js:148
+#: tmp/i18n/screens/Overview.js:153
 msgid "Open settings"
 msgstr "باز کردن تنظیمات"
 
-#: tmp/i18n/screens/Overview.js:149
+#: tmp/i18n/screens/Overview.js:154
 msgid "See scores here and in your Posts list"
 msgstr "امتیازها را اینجا و در فهرست نوشته‌ها ببینید"
 
-#: tmp/i18n/screens/Overview.js:149
+#: tmp/i18n/screens/Overview.js:154
 msgid "After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list."
 msgstr "پس از نخستین ممیزی، این صفحه امتیاز سلامت و AEO سایت، صفحه‌های نیازمند توجه و اصلاح‌های تأییدشدهٔ شما را نشان می‌دهد؛ هر نوشته و برگه هم امتیازش را در فهرست می‌گیرد."
 
-#: tmp/i18n/screens/Overview.js:158
+#: tmp/i18n/screens/Overview.js:163
 msgid "This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow."
 msgstr "این مونورنکس هنوز نتایج ممیزی را با افزونه به اشتراک نمی‌گذارد. فعلاً امتیازها در مونورنکس می‌مانند؛ افزونه فردا دوباره می‌پرسد."
 
-#: tmp/i18n/screens/Overview.js:158
-msgid "MonoRanks could not be reached for the audit results. The plugin tries again within the hour."
-msgstr "برای دریافت نتایج ممیزی دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر دوباره تلاش می‌کند."
+#: tmp/i18n/screens/Overview.js:163
+msgid "MonoRanks could not be reached for the audit results. The plugin tries again within the hour, or when you reload this screen."
+msgstr "برای دریافت نتایج ممیزی دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر یا با بارگذاری دوباره این صفحه، دوباره تلاش می‌کند."
 
-#: tmp/i18n/screens/Overview.js:158
+#: tmp/i18n/screens/Overview.js:163
 msgid "MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit."
 msgstr "مونورنکس هنوز به این سایت امتیاز نداده است. امتیازها پس از نخستین ممیزی هفتگی اینجا و در فهرست نوشته‌ها دیده می‌شوند."
 
-#: tmp/i18n/screens/Overview.js:160
+#: tmp/i18n/screens/Overview.js:165
 msgid "Waiting for the first audit"
 msgstr "در انتظار نخستین ممیزی"
 
-#: tmp/i18n/screens/Overview.js:160
+#: tmp/i18n/screens/Overview.js:165
 #: tmp/i18n/screens/Settings.js:54
 msgid "Connected"
 msgstr "متصل"
 
-#: tmp/i18n/screens/Overview.js:163
+#: tmp/i18n/screens/Overview.js:168
 msgid "Content"
 msgstr "محتوا"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:163
+#: tmp/i18n/screens/Overview.js:168
 msgid "%1$s published items sent %2$s"
 msgstr "%1$s مورد منتشرشده %2$s فرستاده شد"
 
-#: tmp/i18n/screens/Overview.js:163
+#: tmp/i18n/screens/Overview.js:168
 msgid "Not sent yet. Use \"Sync content now\" above."
 msgstr "هنوز فرستاده نشده. از «همگام‌سازی محتوا» در بالا استفاده کنید."
 
-#: tmp/i18n/screens/Overview.js:164
+#: tmp/i18n/screens/Overview.js:169
 msgid "Audit results"
 msgstr "نتایج ممیزی"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:164
+#: tmp/i18n/screens/Overview.js:169
 msgid "checked %s"
 msgstr "بررسی‌شده %s"
 
-#: tmp/i18n/screens/Overview.js:166
+#: tmp/i18n/screens/Overview.js:171
 msgid "Open the audit in MonoRanks"
 msgstr "باز کردن ممیزی در مونورنکس"
 
@@ -876,33 +1028,38 @@ msgstr "بازگردانی"
 
 #, js-format
 #: tmp/i18n/shell/Ring.js:32
+msgid "%s vs previous 28 days"
+msgstr "%s نسبت به ۲۸ روز قبل"
+
+#, js-format
+#: tmp/i18n/shell/Ring.js:32
 msgid "%s this week"
 msgstr "%s این هفته"
 
-#: tmp/i18n/shell/Shell.js:23
+#: tmp/i18n/shell/Shell.js:24
 msgid "MonoRanks sections"
 msgstr "بخش‌های مونورنکس"
 
-#: tmp/i18n/shell/Shell.js:36
+#: tmp/i18n/shell/Shell.js:37
 msgid "Help"
 msgstr "راهنما"
 
-#: tmp/i18n/shell/Shell.js:58
+#: tmp/i18n/shell/Shell.js:64
 msgid "Your data"
 msgstr "داده‌های شما"
 
-#: tmp/i18n/shell/Shell.js:62
+#: tmp/i18n/shell/Shell.js:68
 msgid "What is sent and what can change"
 msgstr "چه چیزی فرستاده می‌شود و چه چیزی می‌تواند تغییر کند"
 
-#: tmp/i18n/shell/Shell.js:65
+#: tmp/i18n/shell/Shell.js:71
 msgid "Need a hand?"
 msgstr "کمک لازم دارید؟"
 
-#: tmp/i18n/shell/Shell.js:66
+#: tmp/i18n/shell/Shell.js:72
 msgid "Help and resources"
 msgstr "راهنما و منابع"
 
-#: tmp/i18n/shell/Shell.js:71
+#: tmp/i18n/shell/Shell.js:77
 msgid "A product by"
 msgstr "محصولی از"

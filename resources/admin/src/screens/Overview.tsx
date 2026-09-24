@@ -82,7 +82,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
               <div className="flex items-center gap-[14px]"><Ring score={o.aeo} size="lg" /><div className="flex flex-col gap-0.5"><span className="text-[12px] text-ink2">{__('Answer-first, structure, entities', 'monoranks')}</span><span className="text-[11px] text-mute">{__('How well AI answers can use your pages', 'monoranks')}</span></div></div>
             </Card>
             <Card className="flex flex-col gap-2.5 px-5 py-[18px]">
-              <div className="flex items-center justify-between"><span className="text-[12px] font-medium text-ink2">{__('Search clicks, 28 days', 'monoranks')}</span>{o.traffic && <Delta n={o.traffic.delta_pct} unit="%" />}</div>
+              <div className="flex items-center justify-between"><span className="text-[12px] font-medium text-ink2">{__('Search clicks, 28 days', 'monoranks')}</span>{o.traffic && <Delta n={o.traffic.delta_pct} unit="%" period="previous28" />}</div>
               {o.traffic ? (
                 <><div className="text-2xl font-semibold leading-none tabular-nums tracking-[-0.01em]">{fmt(o.traffic.clicks_28d)}</div><Sparkline series={o.traffic.series} /><span className="text-[11px] text-mute">{__('From Google Search Console, through MonoRanks', 'monoranks')}</span></>
               ) : (

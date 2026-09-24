@@ -2,6 +2,11 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.10] — 2026-09-24
+
+- The change beside search clicks on the MonoRanks screen reads "+8% vs previous 28 days" instead of "+8% this week". The figure has always compared the last 28 days with the 28 days before; only the label was wrong.
+- Persian: three messages added in recent versions were still in English and are now translated.
+
 ## [0.1.9] — 2026-09-23
 
 - An empty ring in the Posts list says what it means. MonoRanks reads AEO on a sample of pages, so a post without an AEO score has not been checked rather than scored badly, and the ring now says so.
