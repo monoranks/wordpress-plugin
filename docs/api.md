@@ -42,6 +42,8 @@ One object for the site. Every field is optional; unknown fields are ignored. Sc
 }
 ```
 
+- `deltas`: the change against the newest score at least six and a half days older than the latest one. Each value is `null` when there is no such score yet (a site's first week) or one of the two runs has no score; the plugin then shows no change at all rather than "0". Every plugin release since 0.1.2 accepts `null` here.
+- `pages_scored` / `pages_total`: pages with a score and all pages MonoRanks knows for the site, counted separately.
 - `attention`: at most 10 rows, lowest health first; `page_url` opens the page's report in MonoRanks.
 - `ready`: fixes the owner approved in MonoRanks that are not written yet, at most 50. `field` is one of the fields the plugin can write (`seo_title`, `seo_description`, `canonical`, `noindex`, `alt`, `redirect`, `content`, `ai_bots`, `llms_txt`); `before` is the value MonoRanks saw (the plugin refuses the change when the site differs) and `after` the value to write. The plugin applies them through the same code path as `POST /wp-json/monoranks/v1/apply`, then reports back (below). `content` changes are only reviewed in MonoRanks (the plugin links to `page_url`), not applied from WordPress.
 - `series` holds up to 28 daily click counts, oldest first.
