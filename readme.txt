@@ -4,7 +4,7 @@ Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.10
+Stable tag: 0.1.11
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,9 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.11 =
+* When no fix is approved yet, the MonoRanks screen says how many fixes MonoRanks can write for this site, by type, with a link to review them.
 
 = 0.1.10 =
 * The search clicks change on the MonoRanks screen says what it is compared with: the previous 28 days, not this week.

@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-09-24T15:28:48+00:00",
+    "translation-revision-date": "2026-09-25T14:45:29+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -282,6 +282,9 @@
             "applied in 30 days": [
                 "اعمال‌شده در ۳۰ روز"
             ],
+            "%s waiting for your approval in MonoRanks": [
+                "%s مورد در مونورنکس منتظر تأیید شماست"
+            ],
             "AI crawler rules on": [
                 "قوانین خزنده‌های هوش مصنوعی فعال"
             ],
@@ -320,6 +323,15 @@
             ],
             "Apply all": [
                 "اعمال همه"
+            ],
+            "%s fixes are ready for your approval": [
+                "%s اصلاح آماده‌ی تأیید شماست"
+            ],
+            "Approve them in MonoRanks and they are written here, with undo.": [
+                "در مونورنکس تأییدشان کنید تا این‌جا نوشته شوند، با امکان بازگردانی."
+            ],
+            "Review in MonoRanks": [
+                "بررسی در مونورنکس"
             ],
             "No fixes waiting": [
                 "اصلاحی در انتظار نیست"

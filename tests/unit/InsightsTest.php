@@ -74,6 +74,24 @@ class InsightsTest extends TestCase {
 		$this->assertArrayNotHasKey( 'junk', $o );
 	}
 
+	public function test_fixes_to_review_keep_only_writable_fields_and_are_absent_from_older_monoranks() {
+		$o = Insights::normalise_overview( array(
+			'site_id'   => 'site_1',
+			'health'    => 80,
+			'to_review' => array(
+				'total'      => 58,
+				'by_field'   => array( 'seo_title' => 12, 'alt' => '41', 'plugins' => 9, 'llms_txt' => 1, 'redirect' => 0 ),
+				'review_url' => 'https://app.monoranks.com/sites/site_1/actions?view=wordpress',
+				'geo_url'    => 'javascript:alert(1)',
+			),
+		) );
+		$this->assertSame( 58, $o['to_review']['total'] );
+		$this->assertSame( array( 'seo_title' => 12, 'alt' => 41, 'llms_txt' => 1 ), $o['to_review']['by_field'] );
+		$this->assertSame( 'https://app.monoranks.com/sites/site_1/actions?view=wordpress', $o['to_review']['review_url'] );
+		$this->assertSame( '', $o['to_review']['geo_url'] );
+		$this->assertNull( Insights::normalise_overview( array( 'site_id' => 'site_1', 'health' => 80 ) )['to_review'] );
+	}
+
 	public function test_an_overview_without_any_data_is_null() {
 		$this->assertNull( Insights::normalise_overview( array( 'site_id' => 'x', 'health' => null, 'aeo' => null, 'pages_scored' => 0 ) ) );
 	}

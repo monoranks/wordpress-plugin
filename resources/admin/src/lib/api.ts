@@ -19,6 +19,8 @@ export type OverviewData = {
     traffic: null | { clicks_28d: number; delta_pct: number | null; series: number[] };
     fixes: { ready: number; applied_30d: number };
     ai: { bots_rules: boolean; llms_txt: boolean };
+    /** Fixes MonoRanks can write once approved there; null from MonoRanks before 1.0.41. */
+    to_review?: null | { total: number; by_field: Record<string, number>; review_url: string; geo_url: string };
     attention: { post_id: number; url: string; title: string; health: Score; aeo: Score; issue: string; page_url: string }[];
     ready: { id: string; field: string; post_id: number; title: string; before: string | null; after: string; page_url: string; from: string; op: string }[];
   };

@@ -2,6 +2,10 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.11] — 2026-09-25
+
+- "Ready to apply" no longer ends at "No fixes waiting" when MonoRanks has fixes it could write. It says how many are ready for approval, split by type (page titles, image alt text, llms.txt and so on), with a Review in MonoRanks button; the Fixes card links to the same place. Needs MonoRanks 1.0.41 or later; with an older MonoRanks the screen looks as before.
+
 ## [0.1.10] — 2026-09-24
 
 - The change beside search clicks on the MonoRanks screen reads "+8% vs previous 28 days" instead of "+8% this week". The figure has always compared the last 28 days with the 28 days before; only the label was wrong.

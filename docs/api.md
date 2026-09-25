@@ -29,6 +29,7 @@ One object for the site. Every field is optional; unknown fields are ignored. Sc
   "deltas": { "health": 3, "aeo": -2 },
   "traffic": { "clicks_28d": 12480, "delta_pct": 8, "series": [380, 402, 395, "... 28 daily values"] },
   "fixes": { "ready": 6, "applied_30d": 14 },
+  "to_review": { "total": 58, "by_field": { "seo_title": 12, "alt": 41, "content": 4, "llms_txt": 1 }, "review_url": "https://app.monoranks.com/sites/site_abc/actions?view=wordpress", "geo_url": "https://app.monoranks.com/sites/site_abc/geo" },
   "ai": { "bots_rules": true, "llms_txt": true },
   "attention": [
     { "post_id": 12, "url": "https://example.com/pricing/", "title": "Pricing", "health": 38, "aeo": 44, "issue": "Meta description missing", "page_url": "https://app.monoranks.com/sites/site_abc/pages/p_1" }
@@ -45,6 +46,7 @@ One object for the site. Every field is optional; unknown fields are ignored. Sc
 - `deltas`: the change against the newest score at least six and a half days older than the latest one. Each value is `null` when there is no such score yet (a site's first week) or one of the two runs has no score; the plugin then shows no change at all rather than "0". Every plugin release since 0.1.2 accepts `null` here.
 - `pages_scored` / `pages_total`: pages with a score and all pages MonoRanks knows for the site, counted separately.
 - `attention`: at most 10 rows, lowest health first; `page_url` opens the page's report in MonoRanks.
+- `to_review` (MonoRanks 1.0.41+, absent before): fixes MonoRanks can write once someone approves them there. `by_field` counts the pages of open issues per writable field, plus 1 for a missing `llms_txt` and 1 for missing `ai_bots` rules. `review_url` opens the Fix in WordPress view of Actions; `geo_url` the GEO screen for llms.txt and AI crawler rules.
 - `ready`: fixes the owner approved in MonoRanks that are not written yet, at most 50. `field` is one of the fields the plugin can write (`seo_title`, `seo_description`, `canonical`, `noindex`, `alt`, `redirect`, `content`, `ai_bots`, `llms_txt`); `before` is the value MonoRanks saw (the plugin refuses the change when the site differs) and `after` the value to write. The plugin applies them through the same code path as `POST /wp-json/monoranks/v1/apply`, then reports back (below). `content` changes are only reviewed in MonoRanks (the plugin links to `page_url`), not applied from WordPress.
 - `series` holds up to 28 daily click counts, oldest first.
 

@@ -276,6 +276,24 @@ class Insights {
 			'attention'     => array(),
 			'ready'         => array(),
 		);
+		// Fixes MonoRanks can write once someone approves them there (MonoRanks 1.0.41+); absent from older MonoRanks.
+		$out['to_review'] = null;
+		if ( isset( $o['to_review'] ) && is_array( $o['to_review'] ) && isset( $o['to_review']['total'] ) ) {
+			$by = array();
+			if ( isset( $o['to_review']['by_field'] ) && is_array( $o['to_review']['by_field'] ) ) {
+				foreach ( $o['to_review']['by_field'] as $field => $n ) {
+					if ( in_array( (string) $field, Writer::FIELDS, true ) && is_numeric( $n ) && (int) $n > 0 ) {
+						$by[ (string) $field ] = (int) $n;
+					}
+				}
+			}
+			$out['to_review'] = array(
+				'total'      => max( 0, (int) $int( $o['to_review']['total'] ) ),
+				'by_field'   => $by,
+				'review_url' => $url( isset( $o['to_review']['review_url'] ) ? $o['to_review']['review_url'] : '' ),
+				'geo_url'    => $url( isset( $o['to_review']['geo_url'] ) ? $o['to_review']['geo_url'] : '' ),
+			);
+		}
 		if ( isset( $o['traffic'] ) && is_array( $o['traffic'] ) && isset( $o['traffic']['clicks_28d'] ) ) {
 			$series = isset( $o['traffic']['series'] ) && is_array( $o['traffic']['series'] ) ? array_map( 'intval', array_slice( $o['traffic']['series'], -28 ) ) : array();
 			$out['traffic'] = array(
