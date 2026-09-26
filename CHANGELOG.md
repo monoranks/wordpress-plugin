@@ -2,6 +2,10 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.12] — 2026-09-26
+
+- The plugin description lists only the fixes it can write: titles, meta descriptions, image alt text, canonical URLs, noindex, redirects, one opening paragraph, AI crawler rules and llms.txt.
+
 ## [0.1.11] — 2026-09-25
 
 - "Ready to apply" no longer ends at "No fixes waiting" when MonoRanks has fixes it could write. It says how many are ready for approval, split by type (page titles, image alt text, llms.txt and so on), with a Review in MonoRanks button; the Fixes card links to the same place. Needs MonoRanks 1.0.41 or later; with an older MonoRanks the screen looks as before.

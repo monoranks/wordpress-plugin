@@ -3,7 +3,7 @@
 The WordPress plugin for [MonoRanks](https://monoranks.com): SEO, AEO and GEO audits every week, fixes explained in plain words, and the ones you approve written into WordPress with undo.
 
 - Sends published content metadata so audits and rechecks stay current (never drafts, comments or credentials).
-- Applies approved fixes: titles, meta descriptions, headings, image alt text, canonical, noindex, redirects, an answer-first opening paragraph, AI crawler rules in robots.txt, llms.txt.
+- Applies approved fixes: titles, meta descriptions, image alt text, canonical, noindex, redirects, an answer-first opening paragraph, AI crawler rules in robots.txt, llms.txt.
 - Works next to Yoast SEO, Rank Math and All in One SEO.
 - Shows the audit inside WordPress: a MonoRanks menu with an Overview (site health and AEO scores, search clicks, pages needing attention, fixes ready to apply, recent changes with Undo) and Settings, plus a MonoRanks column with each page's scores in Posts and Pages.
 - Every write is logged under MonoRanks → Settings and can be undone.

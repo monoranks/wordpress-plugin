@@ -4,7 +4,7 @@ Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.11
+Stable tag: 0.1.12
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ What you get with the plugin connected:
 
 * A MonoRanks screen in your WordPress admin: the site's health and AEO scores and how they moved this week, search clicks, the pages that need attention most, the fixes you approved ready to apply with one click, and every change written so far with Undo.
 * A MonoRanks column in Posts and Pages with each page's health and AEO scores; hover a row for the fixes waiting, open issues and audit dates. Sortable by score, with a "Needs attention" view.
-* One-click fixes for titles, meta descriptions, headings, image alt text, canonical URLs, noindex and redirects, written into the same fields Yoast SEO, Rank Math and All in One SEO read.
+* One-click fixes for titles, meta descriptions, image alt text, canonical URLs, noindex and redirects, written into the same fields Yoast SEO, Rank Math and All in One SEO read.
 * An answer-first opening paragraph for pages that bury their answer, shown as a before/after diff first.
 * AI crawler rules (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) in robots.txt and an llms.txt file, published only after you approve them.
 * A recheck of the affected pages the same day a post changes, so the audit never goes stale.
@@ -92,6 +92,9 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.12 =
+* The description lists only the fixes the plugin can write.
 
 = 0.1.11 =
 * When no fix is approved yet, the MonoRanks screen says how many fixes MonoRanks can write for this site, by type, with a link to review them.
