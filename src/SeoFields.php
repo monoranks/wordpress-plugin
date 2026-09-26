@@ -81,10 +81,61 @@ class SeoFields {
 	public static function register_output() {
 		add_filter( 'pre_get_document_title', array( __CLASS__, 'filter_title' ), 20 );
 		add_action( 'wp_head', array( __CLASS__, 'print_head' ), 1 );
+		add_filter( 'wp_robots', array( __CLASS__, 'core_robots' ) );
+		// All in One SEO prints its own tags: hand it the approved values through its filters instead of printing a
+		// second description, canonical or robots tag next to its own.
+		add_filter( 'aioseo_title', array( __CLASS__, 'aioseo_title' ), 20 );
+		add_filter( 'aioseo_description', array( __CLASS__, 'aioseo_description' ), 20 );
+		add_filter( 'aioseo_canonical_url', array( __CLASS__, 'aioseo_canonical' ), 20 );
+		add_filter( 'aioseo_robots_meta', array( __CLASS__, 'aioseo_robots' ), 20 );
+	}
+
+	/** The connector's own value for the current singular page, or '' when none was approved. */
+	private static function own( $key ) {
+		if ( 'aioseo' !== self::plugin() || ! is_singular() ) {
+			return '';
+		}
+		$value = get_post_meta( get_queried_object_id(), $key, true );
+		return is_string( $value ) ? $value : '';
+	}
+
+	public static function aioseo_title( $title ) {
+		$own = self::own( self::OWN_TITLE );
+		return '' !== $own ? $own : $title;
+	}
+
+	public static function aioseo_description( $description ) {
+		$own = self::own( self::OWN_DESCRIPTION );
+		return '' !== $own ? $own : $description;
+	}
+
+	public static function aioseo_canonical( $url ) {
+		$own = self::own( self::OWN_CANONICAL );
+		return '' !== $own ? $own : $url;
+	}
+
+	public static function aioseo_robots( $robots ) {
+		if ( '1' === self::own( self::OWN_NOINDEX ) && is_array( $robots ) ) {
+			$robots['noindex'] = 'noindex';
+			unset( $robots['index'] );
+		}
+		return $robots;
+	}
+
+	/** Without an SEO plugin, an approved noindex joins WordPress's own robots tag instead of printing a second one. */
+	public static function core_robots( $robots ) {
+		if ( 'none' !== self::plugin() || ! is_singular() ) {
+			return $robots;
+		}
+		if ( '1' === (string) get_post_meta( get_queried_object_id(), self::OWN_NOINDEX, true ) ) {
+			$robots['noindex'] = true;
+			$robots['follow']  = true;
+		}
+		return $robots;
 	}
 
 	public static function filter_title( $title ) {
-		if ( 'none' !== self::plugin() && 'aioseo' !== self::plugin() ) {
+		if ( 'none' !== self::plugin() ) {
 			return $title;
 		}
 		if ( is_singular() ) {
@@ -97,22 +148,18 @@ class SeoFields {
 	}
 
 	public static function print_head() {
-		if ( ( 'none' !== self::plugin() && 'aioseo' !== self::plugin() ) || ! is_singular() ) {
+		if ( 'none' !== self::plugin() || ! is_singular() ) {
 			return;
 		}
 		$id          = get_queried_object_id();
 		$description = get_post_meta( $id, self::OWN_DESCRIPTION, true );
 		$canonical   = get_post_meta( $id, self::OWN_CANONICAL, true );
-		$noindex     = get_post_meta( $id, self::OWN_NOINDEX, true );
 		if ( $description ) {
 			echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
 		}
 		if ( $canonical ) {
 			remove_action( 'wp_head', 'rel_canonical' );
 			echo '<link rel="canonical" href="' . esc_url( $canonical ) . '">' . "\n";
-		}
-		if ( '1' === (string) $noindex ) {
-			echo '<meta name="robots" content="noindex, follow">' . "\n";
 		}
 	}
 }

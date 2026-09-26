@@ -2,9 +2,12 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
-## [0.1.12] — 2026-09-26
+## [0.1.13] — 2026-09-26
 
 - The plugin description lists only the fixes it can write: titles, meta descriptions, image alt text, canonical URLs, noindex, redirects, one opening paragraph, AI crawler rules and llms.txt.
+- With All in One SEO active, approved titles, descriptions, canonicals and noindex are passed to it through its filters (`aioseo_title`, `aioseo_description`, `aioseo_canonical_url`, `aioseo_robots_meta`) instead of printing a second set of tags.
+- Without an SEO plugin, an approved noindex is added to WordPress's own robots tag through `wp_robots` instead of a second robots tag.
+- The readme links to the admin app's source code and build steps.
 
 ## [0.1.11] — 2026-09-25
 
