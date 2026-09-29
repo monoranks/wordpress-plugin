@@ -4,7 +4,7 @@ Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.13
+Stable tag: 0.1.14
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,10 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.14 =
+* In block editor posts, the approved opening paragraph goes in as its own paragraph block before the first block. Other blocks, including those from other plugins, are never changed.
+* Every body edit is checked right after it is saved. If a block would break, the post is put back as it was and the fix is reported as failed, with the reason.
 
 = 0.1.13 =
 * The description lists only the fixes the plugin can write.

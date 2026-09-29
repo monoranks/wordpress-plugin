@@ -2,6 +2,13 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.14] — unreleased
+
+- In block editor posts the approved opening paragraph is written as its own `core/paragraph` block (with `<!-- wp:paragraph -->` delimiters, named "MonoRanks opening" in the List View) in front of the first block, instead of a marker-wrapped paragraph that the editor showed as a Classic block. Classic posts keep the marker-wrapped paragraph. An opening written by an earlier version is still found, replaced and removed (monoranks/monoranks#48).
+- Blocks from other plugins (Rank Math, Yoast and others) are never rewritten: only our own paragraph is added or removed, and kses is skipped for this one save so it cannot re-filter markup that is already stored.
+- After every body edit and every undo the post is read back: the stored content must be exactly what was meant, the new block must be a registered `core/paragraph` whose `serialize_block()` round trip equals its stored markup, and every other block must still be there in order. Otherwise the previous content is put back byte for byte and the change fails with `error: "block_check_failed"` and a plain-language `reason`.
+- Integration tests run against a local WordPress (`MONORANKS_WP_PATH=… composer test:integration`).
+
 ## [0.1.13] — 2026-09-26
 
 - The plugin description lists only the fixes it can write: titles, meta descriptions, image alt text, canonical URLs, noindex, redirects, one opening paragraph, AI crawler rules and llms.txt.

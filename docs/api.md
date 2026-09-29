@@ -79,6 +79,8 @@ After the plugin applied fixes from the Overview it tells MonoRanks what happene
 
 Same result shape as `POST /wp-json/monoranks/v1/apply`. Best-effort: the plugin does not retry it.
 
+Since 0.1.14 a `content` change (or its undo) whose saved result would break a block is rolled back and comes back as `{ "ok": false, "error": "block_check_failed", "reason": "The new paragraph block does not match what the block editor would save. The post was put back as it was." }`. `reason` is a plain-language sentence meant to be shown as is; `update_failed` now carries a `reason` too.
+
 ## Storage on the WordPress side
 
 - Option `monoranks_insights` (not autoloaded): `status` (ok | none | unsupported | error | revoked), `fetched_at`, `overview`, `pages_synced_at`.
