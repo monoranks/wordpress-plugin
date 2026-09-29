@@ -214,9 +214,13 @@ class Writer {
 		if ( $kses ) {
 			kses_remove_filters();
 		}
-		$r = wp_update_post( array( 'ID' => $post_id, 'post_content' => wp_slash( $next ) ), true );
-		if ( $kses ) {
-			kses_init_filters();
+		try {
+			$r = wp_update_post( array( 'ID' => $post_id, 'post_content' => wp_slash( $next ) ), true );
+		} finally {
+			// Always back on, even if a save hook throws: the rest of the request must stay filtered.
+			if ( $kses ) {
+				kses_init_filters();
+			}
 		}
 		clean_post_cache( $post_id );
 		if ( is_wp_error( $r ) || ! $r ) {
