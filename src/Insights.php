@@ -287,11 +287,20 @@ class Insights {
 					}
 				}
 			}
+			// Pages that still need a value typed or drafted in MonoRanks (MonoRanks 1.0.68+ `needs_value`; the same number was
+			// sent as `needs_draft` since 1.0.42). Null when MonoRanks sends neither, so the screen keeps its older wording.
+			$need = null;
+			foreach ( array( 'needs_value', 'needs_draft' ) as $k ) {
+				if ( null === $need && isset( $o['to_review'][ $k ] ) && is_numeric( $o['to_review'][ $k ] ) ) {
+					$need = max( 0, (int) $o['to_review'][ $k ] );
+				}
+			}
 			$out['to_review'] = array(
-				'total'      => max( 0, (int) $int( $o['to_review']['total'] ) ),
-				'by_field'   => $by,
-				'review_url' => $url( isset( $o['to_review']['review_url'] ) ? $o['to_review']['review_url'] : '' ),
-				'geo_url'    => $url( isset( $o['to_review']['geo_url'] ) ? $o['to_review']['geo_url'] : '' ),
+				'total'       => max( 0, (int) $int( $o['to_review']['total'] ) ),
+				'by_field'    => $by,
+				'needs_value' => $need,
+				'review_url'  => $url( isset( $o['to_review']['review_url'] ) ? $o['to_review']['review_url'] : '' ),
+				'geo_url'     => $url( isset( $o['to_review']['geo_url'] ) ? $o['to_review']['geo_url'] : '' ),
 			);
 		}
 		if ( isset( $o['traffic'] ) && is_array( $o['traffic'] ) && isset( $o['traffic']['clicks_28d'] ) ) {

@@ -90,6 +90,20 @@ class InsightsTest extends TestCase {
 		$this->assertSame( 'https://app.monoranks.com/sites/site_1/actions?view=wordpress', $o['to_review']['review_url'] );
 		$this->assertSame( '', $o['to_review']['geo_url'] );
 		$this->assertNull( Insights::normalise_overview( array( 'site_id' => 'site_1', 'health' => 80 ) )['to_review'] );
+		// No count of pages that still need a value: the screen keeps the older "ready for your approval" wording.
+		$this->assertNull( $o['to_review']['needs_value'] );
+	}
+
+	public function test_fixes_that_still_need_a_value_are_counted_apart() {
+		$review = function ( $extra ) {
+			return Insights::normalise_overview( array( 'site_id' => 'site_1', 'health' => 80, 'to_review' => array_merge( array( 'total' => 3, 'by_field' => array( 'seo_title' => 3 ) ), $extra ) ) )['to_review'];
+		};
+		$this->assertSame( 101, $review( array( 'needs_value' => 101, 'needs_draft' => 5 ) )['needs_value'] );
+		// MonoRanks 1.0.42 to 1.0.67 sent the same number as needs_draft.
+		$this->assertSame( 101, $review( array( 'needs_draft' => '101' ) )['needs_value'] );
+		$this->assertSame( 0, $review( array( 'needs_value' => -4 ) )['needs_value'] );
+		$this->assertNull( $review( array( 'needs_value' => 'many' ) )['needs_value'] );
+		$this->assertSame( 3, $review( array( 'needs_value' => 101 ) )['total'] );
 	}
 
 	public function test_an_overview_without_any_data_is_null() {

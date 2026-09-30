@@ -2,6 +2,12 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.16] — unreleased
+
+- The Overview's "Ready to apply" card splits the count: "3 ready to apply · 101 need a value in MonoRanks". It reads `to_review.needs_value` (MonoRanks 1.0.68+, or `needs_draft` from 1.0.42) and keeps the older "N fixes are ready for your approval" when MonoRanks sends neither (monoranks/monoranks#73).
+- The card also shows when nothing is ready yet but some fixes need a value, and its text says to type or draft the value in MonoRanks.
+- `docs/api.md` documents `needs_value` and `needs_value_by_field`.
+
 ## [0.1.15] — unreleased
 
 - The SEO Framework is detected (`THE_SEO_FRAMEWORK_VERSION` or `The_SEO_Framework\Load`). Approved titles, descriptions, canonicals and noindex are written into its post meta: `_genesis_title`, `_genesis_description`, `_genesis_canonical_uri` and `_genesis_noindex` (`1` for noindex; turning it off goes back to its "Default", a forced index `-1` stays). Before, it was treated as "no SEO plugin", so an applied title never reached the page and a description or canonical would have been printed twice (#2).

@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-09-25T14:45:29+00:00",
+    "translation-revision-date": "2026-09-30T11:29:37+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -131,6 +131,9 @@
             "%s detected": [
                 "%s شناسایی شد"
             ],
+            "MonoRanks cannot write titles, descriptions, canonicals or noindex into %s yet, so those fixes are refused": [
+                ""
+            ],
             "titles and descriptions go into the fields %s reads": [
                 "عنوان‌ها و توضیح‌ها در فیلدهایی نوشته می‌شوند که %s می‌خواند"
             ],
@@ -223,6 +226,10 @@
             ],
             "Fixes": [
                 "اصلاح‌ها"
+            ],
+            "%s ready to apply": [
+                "%s آمادهٔ اعمال",
+                "%s آمادهٔ اعمال"
             ],
             "Overview": [
                 "نمای کلی"
@@ -326,6 +333,13 @@
             ],
             "%s fixes are ready for your approval": [
                 "%s اصلاح آماده‌ی تأیید شماست"
+            ],
+            "%s needs a value in MonoRanks": [
+                "%s نیاز به مقدار در مونورنکس",
+                "%s نیاز به مقدار در مونورنکس"
+            ],
+            "Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo.": [
+                "در مونورنکس مقدار را بنویسید یا با هوش مصنوعی پیش‌نویس کنید و تأیید کنید تا این‌جا نوشته شود، با امکان بازگردانی."
             ],
             "Approve them in MonoRanks and they are written here, with undo.": [
                 "در مونورنکس تأییدشان کنید تا این‌جا نوشته شوند، با امکان بازگردانی."
