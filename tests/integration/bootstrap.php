@@ -3,13 +3,23 @@
 // wp-load.php), for example `MONORANKS_WP_PATH=~/Sites/wordpress composer test:integration`. No other plugin is loaded,
 // so the tests see core's block parser and registry only. Every post a test creates is deleted again.
 // Without MONORANKS_WP_PATH the tests are skipped.
+//
+// MONORANKS_WP_PLUGINS loads installed plugins for this run only (comma separated, as in active_plugins), without
+// activating them in the database. The tests in group "tsf" need The SEO Framework:
+//   MONORANKS_WP_PLUGINS=autodescription/autodescription.php composer test:integration -- --group tsf
 require_once dirname( __DIR__, 2 ) . '/vendor/autoload.php';
 
 $monoranks_wp = getenv( 'MONORANKS_WP_PATH' );
 if ( $monoranks_wp && is_file( rtrim( $monoranks_wp, '/' ) . '/wp-load.php' ) ) {
-	// Hooks set before WordPress loads (WP_Hook::build_preinitialized_hooks): keep every plugin off, the installed
-	// MonoRanks copy included, so these tests load the classes from this checkout.
-	$GLOBALS['wp_filter']['option_active_plugins'][1][]           = array( 'function' => '__return_empty_array', 'accepted_args' => 1 );
+	// Hooks set before WordPress loads (WP_Hook::build_preinitialized_hooks): keep every plugin off but those in
+	// MONORANKS_WP_PLUGINS, the installed MonoRanks copy included, so these tests load the classes from this checkout.
+	$monoranks_plugins = array_values( array_filter( array_map( 'trim', explode( ',', (string) getenv( 'MONORANKS_WP_PLUGINS' ) ) ) ) );
+	$GLOBALS['wp_filter']['option_active_plugins'][1][]           = array(
+		'function'      => static function () use ( $monoranks_plugins ) {
+			return $monoranks_plugins;
+		},
+		'accepted_args' => 1,
+	);
 	$GLOBALS['wp_filter']['site_option_active_sitewide_plugins'][1][] = array( 'function' => '__return_empty_array', 'accepted_args' => 1 );
 	$_SERVER['HTTP_HOST']   = $_SERVER['HTTP_HOST'] ?? 'localhost';
 	$_SERVER['REQUEST_URI'] = $_SERVER['REQUEST_URI'] ?? '/';
