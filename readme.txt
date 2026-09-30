@@ -60,11 +60,26 @@ MonoRanks → Settings → Disconnect stops sending. Revoking the "MonoRanks" Ap
 
 == Installation ==
 
-1. Install and activate the plugin.
-2. In your MonoRanks account, open the website → Integrations → WordPress → Connect to WordPress, and approve MonoRanks when WordPress asks. The plugin turns itself on and sends the first batch of content metadata.
-3. Alternatively, copy the connector key from MonoRanks and paste it under MonoRanks → Settings in WordPress.
+= Install the plugin =
 
-To stop everything: MonoRanks → Settings → Disconnect (and revoke the "MonoRanks" application password under Users → Profile).
+1. In your WordPress admin, go to **Plugins → Add Plugin** (called **Add New** in older WordPress versions).
+2. Search for **MonoRanks**, click **Install Now**, then **Activate**.
+
+= Connect it to MonoRanks =
+
+1. Sign in at [app.monoranks.com](https://app.monoranks.com) (a free account is enough) and add your website.
+2. Open the website, go to **Integrations → WordPress** and click **Connect to WordPress**.
+3. WordPress asks you to approve MonoRanks. Click **Yes, I approve of this connection**. That is all: the plugin turns itself on and sends the first batch of content metadata.
+
+= Connect with a key instead =
+
+If your site cannot use Application Passwords (they need HTTPS, and some security plugins turn them off), create a key in MonoRanks under **Settings → API and MCP** and paste it in WordPress under **MonoRanks → Settings**. Your content reaches MonoRanks, but approved fixes cannot be written back until you connect as above.
+
+= Disconnect =
+
+Go to **MonoRanks → Settings → Disconnect**. To also stop MonoRanks from writing, go to **Users → Profile → Application Passwords** and click **Revoke** next to "MonoRanks". Fixes already applied stay on your site.
+
+Step-by-step guide: [MonoRanks WordPress plugin docs](https://monoranks.com/docs/wordpress-plugin/).
 
 == Frequently Asked Questions ==
 
