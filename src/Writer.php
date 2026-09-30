@@ -93,6 +93,12 @@ class Writer {
 		if ( 'content' === $field ) {
 			return self::content( $post, $c, $id, $actor );
 		}
+		// An SEO plugin MonoRanks cannot write for, or a setting that overrides this field: refuse instead of storing a
+		// value that would never show on the page.
+		$refused = SeoFields::refusal( $post_id, $field );
+		if ( $refused ) {
+			return array( 'id' => $id, 'ok' => false, 'error' => $refused['error'], 'reason' => $refused['reason'] );
+		}
 		$previous = (string) SeoFields::get( $post_id, $field );
 		if ( isset( $c['expected'] ) && null !== $c['expected'] && (string) $c['expected'] !== $previous ) {
 			return array( 'id' => $id, 'ok' => false, 'error' => 'changed_since_preview', 'current' => $previous );
