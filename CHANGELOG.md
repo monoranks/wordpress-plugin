@@ -2,6 +2,12 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.17] — unreleased
+
+- After MonoRanks writes llms.txt or the AI crawler rules, the plugin asks the active page cache to drop `/llms.txt` or `/robots.txt`, so a copy cached before the change (often a 404 from before the file existed) does not hide it from AI crawlers or from MonoRanks' own check (monoranks/monoranks#87). Supported through each plugin's public API: WP Rocket (`rocket_clean_files`), LiteSpeed Cache (`litespeed_purge_url`), W3 Total Cache (`w3tc_flush_url`), WP Super Cache (`wpsc_delete_url_cache`) and SiteGround Optimizer (`sg_cachepress_purge_cache`). The official Cloudflare plugin has no public way to purge one URL and is left alone; a CDN cache rule outside WordPress still clears only when it expires or is purged there.
+- New filter `monoranks_purge_file_urls` to add URLs to that purge, and action `monoranks_purged_file_cache` for other caches.
+- `/llms.txt` served by the plugin is marked as not cacheable: `Cache-Control: no-cache, must-revalidate, max-age=0, no-store, private`, `DONOTCACHEPAGE`, and LiteSpeed's no-cache control.
+
 ## [0.1.16] — unreleased
 
 - The Overview's "Ready to apply" card splits the count: "3 ready to apply · 101 need a value in MonoRanks". It reads `to_review.needs_value` (MonoRanks 1.0.68+, or `needs_draft` from 1.0.42) and keeps the older "N fixes are ready for your approval" when MonoRanks sends neither (monoranks/monoranks#73).
