@@ -8,6 +8,9 @@
 // activating them in the database. The tests in group "tsf" need The SEO Framework:
 //   MONORANKS_WP_PLUGINS=autodescription/autodescription.php composer test:integration -- --group tsf
 require_once dirname( __DIR__, 2 ) . '/vendor/autoload.php';
+// On PHP 7.4 the test tools' symfony/polyfill-php80 defines str_starts_with(), whose class loads lazily. The SEO
+// Framework's autoloader calls str_starts_with() while that class is being loaded and fails, so load it up front.
+class_exists( 'Symfony\\Polyfill\\Php80\\Php80' );
 
 $monoranks_wp = getenv( 'MONORANKS_WP_PATH' );
 if ( $monoranks_wp && is_file( rtrim( $monoranks_wp, '/' ) . '/wp-load.php' ) ) {
