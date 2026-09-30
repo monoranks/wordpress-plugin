@@ -1,9 +1,15 @@
 name: Deploy
 
-# Publishing a GitHub release (tag v<version>) runs the full test suite on that commit and, only when it is green,
-# pushes the version to the WordPress.org directory over SVN and attaches the zip to the release. Before the plugin is
-# listed there, the SVN step is skipped and the release still carries a zip to submit by hand.
-# Secrets: SVN_USERNAME and SVN_PASSWORD (the wordpress.org account that owns the plugin).
+# Publishing a GitHub release tagged v<version> runs the full test suite on that commit and, only when it is green,
+# builds the zip with bin/build-zip.sh, pushes the version to the WordPress.org directory over SVN and attaches the zip
+# to the release.
+#
+# The deploy job runs in the `wordpress-org` environment (Settings > Environments; only v* tags may deploy), which holds
+# the WordPress.org account that commits to the plugin:
+#   - variable SVN_USERNAME (the WordPress.org username)
+#   - secret SVN_PASSWORD (that account's SVN password)
+# Until WordPress.org has approved the plugin there is no SVN repository to push to, so the SVN step is skipped while
+# SVN_USERNAME is unset; the release still gets the zip to submit by hand.
 on:
   release:
     types: [published]
@@ -18,63 +24,53 @@ jobs:
     uses: ./.github/workflows/tests.yml
 
   deploy:
-    name: Deploy release to WordPress.org
+    name: Build and deploy
     needs: test
     runs-on: ubuntu-latest
+    environment:
+      name: wordpress-org
+      url: https://wordpress.org/plugins/monoranks/
+    timeout-minutes: 20
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Release tag matches the plugin version
         id: version
+        env:
+          TAG: ${{ github.event.release.tag_name }}
         run: |
-          V=$(grep -oE 'Version:\s+[0-9.]+' monoranks.php | awk '{print $2}')
-          test "v$V" = "${{ github.event.release.tag_name }}" || { echo "release ${{ github.event.release.tag_name }} but plugin is $V"; exit 1; }
+          V=$(grep -oE 'Version:[[:space:]]+[0-9.]+' monoranks.php | awk '{print $2}')
+          test "v$V" = "$TAG" || { echo "Release $TAG but the plugin is $V"; exit 1; }
           echo "value=$V" >> "$GITHUB_OUTPUT"
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
+          tools: composer:v2
           coverage: none
-      - run: composer install --no-interaction --prefer-dist
-      - run: composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
-      - name: The admin app in the zip is built from this commit
-        run: npm run build && git diff --exit-code --stat build
-      # Until WordPress.org has approved the plugin there is no SVN repository to push to, so the deploy step waits for
-      # the credentials; the zip is built and attached to the release either way.
+      # The zip is what people install by hand and what app.monoranks.com/downloads/monoranks.zip points at. The script
+      # ships production Composer packages only and the committed build/, and fails if npm run build changes build/.
+      - name: Build the zip
+        run: bash bin/build-zip.sh
       - name: Is WordPress.org set up for this plugin yet?
         id: wporg
         env:
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_USERNAME: ${{ vars.SVN_USERNAME }}
         run: echo "ready=${SVN_USERNAME:+yes}" >> "$GITHUB_OUTPUT"
-      # The zip is what people install by hand and what app.monoranks.com/downloads/monoranks.zip points at. WordPress
-      # names the installed folder after the folder inside the zip, so both the folder and the file are named for the
-      # plugin, never for this repository: a "wordpress-plugin" folder installs as a second, separate plugin.
-      - name: Build the installable zip
-        run: |
-          rm -rf tmp && mkdir -p tmp
-          # The plugin loads packages/autoload.php; there are no third-party runtime packages, so a PSR-4 loader for
-          # src/ is all it needs, and without it the shipped plugin finds none of its classes.
-          mkdir -p packages
-          [ -f packages/autoload.php ] || cp bin/autoload-template.php packages/autoload.php
-          rsync -a --exclude-from=.distignore ./ tmp/monoranks/
-          for f in monoranks.php packages/autoload.php build/main.js build/main.css readme.txt; do
-            test -s "tmp/monoranks/$f" || { echo "the zip would miss $f"; exit 1; }
-          done
-          (cd tmp && zip -rq "../monoranks-${{ steps.version.outputs.value }}.zip" monoranks)
-          unzip -l "monoranks-${{ steps.version.outputs.value }}.zip" | head -5
-      - uses: 10up/action-wordpress-plugin-deploy@stable
+      - name: Deploy to WordPress.org
         if: steps.wporg.outputs.ready == 'yes'
+        uses: 10up/action-wordpress-plugin-deploy@stable
         env:
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_USERNAME: ${{ vars.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: monoranks
+          BUILD_DIR: dist/monoranks
           ASSETS_DIR: .wordpress-org
-      - name: Attach the zip to the GitHub release
-        uses: softprops/action-gh-release@v2
+      - name: Attach the zip to the release
+        uses: softprops/action-gh-release@v3
         with:
-          files: ${{ github.workspace }}/monoranks-${{ steps.version.outputs.value }}.zip
+          files: dist/monoranks-${{ steps.version.outputs.value }}.zip
