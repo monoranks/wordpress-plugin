@@ -81,6 +81,15 @@ Same result shape as `POST /wp-json/monoranks/v1/apply`. Best-effort: the plugin
 
 Since 0.1.14 a `content` change (or its undo) whose saved result would break a block is rolled back and comes back as `{ "ok": false, "error": "block_check_failed", "reason": "The new paragraph block does not match what the block editor would save. The post was put back as it was." }`. `reason` is a plain-language sentence meant to be shown as is; `update_failed` now carries a `reason` too.
 
+Since 0.1.15 an SEO field (`seo_title`, `seo_description`, `canonical`, `noindex`) can also be refused before anything is written:
+
+- `seo_plugin_unsupported`: an SEO plugin MonoRanks cannot write into is active (status `seo_plugin: "other"`), for example `"reason": "SEOPress is active on this site and prints its own SEO tags. MonoRanks cannot write into SEOPress yet, so nothing was changed. Make this change in SEOPress instead."`
+- `seo_plugin_homepage_setting`: with The SEO Framework, the post is the static front page and that field is set in its Homepage Settings, which win over the page's own field.
+
+## `POST /api/connector/status`
+
+The plugin's status, sent after connecting, on "Send content now" and daily (the same object as `GET /wp-json/monoranks/v1/status` without the user fields). `seo_plugin` is `yoast`, `rankmath`, `aioseo`, `tsf` (The SEO Framework, since 0.1.15), `other` (an SEO plugin MonoRanks cannot write into, since 0.1.15) or `none`; `seo_plugin_name` (since 0.1.15) is its name, or `""`. If MonoRanks answers 400 to a status whose `seo_plugin` is `tsf` or `other`, the plugin sends it once more with `seo_plugin: "none"`.
+
 ## Storage on the WordPress side
 
 - Option `monoranks_insights` (not autoloaded): `status` (ok | none | unsupported | error | revoked), `fetched_at`, `overview`, `pages_synced_at`.

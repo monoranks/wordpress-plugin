@@ -4,7 +4,7 @@ Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.14
+Stable tag: 0.1.15
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,7 +35,7 @@ Each problem comes with a plain explanation and a suggested fix, sorted by what 
 
 = Works with your SEO plugin =
 
-**Yoast SEO** and **Rank Math**: fixes go into their own fields. **All in One SEO**: fixes are passed to it through its filters. **No SEO plugin?** MonoRanks prints the approved title, description, canonical and noindex itself.
+**Yoast SEO**, **Rank Math** and **The SEO Framework**: fixes go into their own fields. **All in One SEO**: fixes are passed to it through its filters. **No SEO plugin?** MonoRanks prints the approved title, description, canonical and noindex itself. **Another SEO plugin**, such as SEOPress? Those four fixes are not written, and MonoRanks tells you why, because that plugin prints its own tags. The other fixes still work.
 
 = You stay in control =
 
@@ -98,7 +98,7 @@ Step-by-step guide: [MonoRanks WordPress plugin docs](https://monoranks.com/docs
 
 **No.** It only applies changes you approved one by one in MonoRanks. Every change is listed under **MonoRanks → Settings** and can be undone for 30 days.
 
-= Do I need Yoast, Rank Math or All in One SEO? =
+= Do I need Yoast, Rank Math, All in One SEO or The SEO Framework? =
 
 **No.** Without an SEO plugin, MonoRanks prints the approved title, description, canonical and noindex tags itself. Nothing else about your theme is touched.
 
@@ -126,6 +126,11 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.15 =
+* Works with The SEO Framework: approved titles, descriptions, canonicals and noindex go into its own fields, and the page shows them once.
+* On the homepage, if The SEO Framework's Homepage Settings already set that field, the fix is refused with the reason, because that setting wins.
+* With an SEO plugin MonoRanks cannot write into yet (such as SEOPress), those fixes are refused with a reason that names the plugin, and no second set of tags is printed.
 
 = 0.1.14 =
 * In block editor posts, the approved opening paragraph goes in as its own paragraph block before the first block. Other blocks, including those from other plugins, are never changed.

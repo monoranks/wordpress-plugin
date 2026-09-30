@@ -13,7 +13,7 @@
 - **Fixes for you.** Titles, meta descriptions, image alt text, canonical and noindex, redirects, a short answer-first opening for key pages, and rules for AI crawlers. You approve each one first.
 - **Undo any change.** Every change is listed under **MonoRanks → Settings** and can be undone.
 - **Results inside WordPress.** A MonoRanks menu shows your site's scores, search clicks, pages that need attention and fixes ready to apply. Posts and Pages get a column with each page's scores.
-- **Works with your SEO plugin.** Yoast SEO, Rank Math and All in One SEO keep working as before; MonoRanks writes into their fields.
+- **Works with your SEO plugin.** Yoast SEO, Rank Math, All in One SEO and The SEO Framework keep working as before; MonoRanks writes into their fields. With another SEO plugin, MonoRanks does not write titles, descriptions, canonicals or noindex, and says why.
 - **Sends only what is needed.** Published page details such as titles and descriptions, so checks stay up to date. Never drafts, comments or passwords.
 
 ## Get started
