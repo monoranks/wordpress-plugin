@@ -2,6 +2,16 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.15] — unreleased
+
+- The SEO Framework is detected (`THE_SEO_FRAMEWORK_VERSION` or `The_SEO_Framework\Load`). Approved titles, descriptions, canonicals and noindex are written into its post meta: `_genesis_title`, `_genesis_description`, `_genesis_canonical_uri` and `_genesis_noindex` (`1` for noindex; turning it off goes back to its "Default", a forced index `-1` stays). Before, it was treated as "no SEO plugin", so an applied title never reached the page and a description or canonical would have been printed twice (#2).
+- A title MonoRanks wrote is the whole title: The SEO Framework's site name (or homepage tagline) addition is left off it through `the_seo_framework_use_title_branding`, for as long as the field still holds that title.
+- On a static front page, The SEO Framework's Homepage Settings (Meta Title, Meta Description, Canonical URL) win over the page's own fields. When one is set, that write is refused with `error: "seo_plugin_homepage_setting"` and a `reason`; reads return the Homepage Settings value.
+- SEOPress, Slim SEO, Squirrly SEO, SmartCrawl, WP Meta SEO and SEO SIMPLE PACK are detected as `seo_plugin: "other"`. Title, description, canonical and noindex writes are refused with `error: "seo_plugin_unsupported"` and a `reason` that names the plugin, and the connector prints none of its own tags next to theirs.
+- The status sent to MonoRanks has `seo_plugin` `tsf` or `other` where it applies, and a new `seo_plugin_name`. A MonoRanks that does not accept the new values yet answers 400; the plugin then sends the status again with `seo_plugin: "none"` so connecting keeps working.
+- Settings shows a warning when an SEO plugin MonoRanks cannot write into is active.
+- Integration tests run with The SEO Framework loaded (`MONORANKS_WP_PLUGINS=autodescription/autodescription.php`, group `tsf`).
+
 ## [0.1.14] — unreleased
 
 - In block editor posts the approved opening paragraph is written as its own `core/paragraph` block (with `<!-- wp:paragraph -->` delimiters, named "MonoRanks opening" in the List View) in front of the first block, instead of a marker-wrapped paragraph that the editor showed as a Classic block. Classic posts keep the marker-wrapped paragraph. An opening written by an earlier version is still found, replaced and removed (monoranks/monoranks#48).

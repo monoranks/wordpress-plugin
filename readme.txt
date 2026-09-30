@@ -4,7 +4,7 @@ Tags: seo, audit, ai, redirects, meta description
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.14
+Stable tag: 0.1.15
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ What you get with the plugin connected:
 
 * A MonoRanks screen in your WordPress admin: the site's health and AEO scores and how they moved this week, search clicks, the pages that need attention most, the fixes you approved ready to apply with one click, and every change written so far with Undo.
 * A MonoRanks column in Posts and Pages with each page's health and AEO scores; hover a row for the fixes waiting, open issues and audit dates. Sortable by score, with a "Needs attention" view.
-* One-click fixes for titles, meta descriptions, image alt text, canonical URLs, noindex and redirects, applied through Yoast SEO, Rank Math or All in One SEO when one is active.
+* One-click fixes for titles, meta descriptions, image alt text, canonical URLs, noindex and redirects, applied through Yoast SEO, Rank Math, All in One SEO or The SEO Framework when one is active.
 * An answer-first opening paragraph for pages that bury their answer, shown as a before/after diff first.
 * AI crawler rules (GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others) in robots.txt and an llms.txt file, published only after you approve them.
 * A recheck of the affected pages the same day a post changes, so the audit never goes stale.
@@ -45,7 +45,7 @@ Read from MonoRanks, with the same key, and cached in WordPress: this website's 
 
 What MonoRanks can change, only after you approve each change in MonoRanks: SEO title, meta description, canonical URL, noindex, image alt text, redirects, one opening paragraph at the top of a post (shown to you as a before/after diff first; it never rewrites your existing text and can be removed again with Undo), per-crawler AI access lines in robots.txt, and an llms.txt file. It cannot edit themes, settings or users. When you approve MonoRanks, it may turn this plugin on if it is installed but inactive. Every change is listed under MonoRanks → Settings and can be undone there or from MonoRanks for 30 days.
 
-Works with Yoast SEO and Rank Math (written into their own fields) and All in One SEO (passed to it through its filters). Without an SEO plugin, the connector outputs the approved title, description, canonical and noindex itself.
+Works with Yoast SEO, Rank Math and The SEO Framework (written into their own fields) and All in One SEO (passed to it through its filters). Without an SEO plugin, the connector outputs the approved title, description, canonical and noindex itself. With another SEO plugin, such as SEOPress, those four fixes are refused with a note that names the plugin, because that plugin prints its own tags; the other fixes still work.
 
 * Terms of service: https://monoranks.com/legal/terms/
 * Privacy policy: https://monoranks.com/legal/privacy/
@@ -87,9 +87,9 @@ Step-by-step guide: [MonoRanks WordPress plugin docs](https://monoranks.com/docs
 
 No. It only applies changes you approved one by one in MonoRanks, and lists every change under MonoRanks → Settings, where each can be undone for 30 days.
 
-= What if I do not use Yoast, Rank Math or All in One SEO? =
+= What if I do not use Yoast, Rank Math, All in One SEO or The SEO Framework? =
 
-The connector prints the approved title, description, canonical and noindex tags itself. Nothing else about your theme is touched.
+Without an SEO plugin, the connector prints the approved title, description, canonical and noindex tags itself. Nothing else about your theme is touched. With another SEO plugin, MonoRanks does not write those four fields and tells you why, so nothing is saved that would never show on the page.
 
 = Does it slow my site down? =
 
@@ -111,6 +111,11 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.15 =
+* Works with The SEO Framework: approved titles, descriptions, canonicals and noindex go into its own fields, and the page shows them once.
+* On the homepage, if The SEO Framework's Homepage Settings already set that field, the fix is refused with the reason, because that setting wins.
+* With an SEO plugin MonoRanks cannot write into yet (such as SEOPress), those fixes are refused with a reason that names the plugin, and no second set of tags is printed.
 
 = 0.1.14 =
 * In block editor posts, the approved opening paragraph goes in as its own paragraph block before the first block. Other blocks, including those from other plugins, are never changed.
