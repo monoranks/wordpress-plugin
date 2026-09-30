@@ -55,4 +55,27 @@ class ApiTest extends TestCase {
 		Api::get( '/overview' );
 		$this->assertSame( 'revoked', $this->options['monoranks_connection']['key_state'] );
 	}
+
+	public function test_a_status_the_app_refuses_for_a_new_seo_plugin_value_is_sent_again_as_none() {
+		$this->options['monoranks_connection'] = array( 'api_base' => 'https://app.monoranks.com', 'key' => 'mr_ws_' . str_repeat( 'a', 30 ) );
+		Functions\when( 'wp_json_encode' )->alias( 'json_encode' );
+		$sent = array();
+		Functions\when( 'wp_remote_post' )->alias( static function ( $url, $args ) use ( &$sent ) {
+			$body   = json_decode( $args['body'], true );
+			$sent[] = $body['seo_plugin'];
+			return 'tsf' === $body['seo_plugin'] ? array( 'code' => 400, 'body' => '{"error":"bad_payload"}' ) : array( 'code' => 200, 'body' => '{"ok":true}' );
+		} );
+		$res = Api::send_status( array( 'site_url' => 'https://example.com', 'seo_plugin' => 'tsf', 'seo_plugin_name' => 'The SEO Framework' ) );
+		$this->assertSame( 200, $res['code'] );
+		$this->assertSame( array( 'tsf', 'none' ), $sent );
+
+		// A known value that is refused is not sent twice.
+		$sent = array();
+		Functions\when( 'wp_remote_post' )->alias( static function ( $url, $args ) use ( &$sent ) {
+			$sent[] = json_decode( $args['body'], true )['seo_plugin'];
+			return array( 'code' => 400, 'body' => '{"error":"bad_payload"}' );
+		} );
+		$this->assertSame( 400, Api::send_status( array( 'seo_plugin' => 'yoast' ) )['code'] );
+		$this->assertSame( array( 'yoast' ), $sent );
+	}
 }

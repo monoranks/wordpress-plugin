@@ -65,7 +65,18 @@ class Api {
 		return array( 'code' => $code, 'body' => is_array( $json ) ? $json : null, 'error' => $code >= 200 && $code < 300 ? null : ( is_array( $json ) && isset( $json['error'] ) ? (string) $json['error'] : 'http_' . $code ) );
 	}
 
-	public static function send_status() {
-		return self::post( '/status', Rest::status_payload() );
+	/** The values of seo_plugin that MonoRanks accepted before 0.1.15 ('tsf' and 'other' came with it). */
+	const KNOWN_SEO_PLUGINS = array( 'yoast', 'rankmath', 'aioseo', 'none' );
+
+	public static function send_status( $status = null ) {
+		$status = null === $status ? Rest::status_payload() : $status;
+		$res    = self::post( '/status', $status );
+		// A MonoRanks app that does not know the new seo_plugin values yet refuses the whole status with 400. Send it
+		// again as 'none' (seo_plugin_name still says which plugin it is) so connecting keeps working until it does.
+		if ( 400 === $res['code'] && isset( $status['seo_plugin'] ) && ! in_array( $status['seo_plugin'], self::KNOWN_SEO_PLUGINS, true ) ) {
+			$status['seo_plugin'] = 'none';
+			$res                  = self::post( '/status', $status );
+		}
+		return $res;
 	}
 }

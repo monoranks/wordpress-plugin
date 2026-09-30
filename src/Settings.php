@@ -22,8 +22,6 @@ class Settings {
 		$revoked   = $connected && isset( $conn['key_state'] ) && 'revoked' === $conn['key_state'];
 		$sync      = get_option( 'monoranks_sync', array() );
 		$overview  = Insights::overview();
-		$plugins   = array( 'yoast' => 'Yoast SEO', 'rankmath' => 'Rank Math', 'aioseo' => 'All in One SEO' );
-		$seo       = SeoFields::plugin();
 		return array(
 			'connected'    => $connected,
 			'revoked'      => $revoked,
@@ -40,7 +38,8 @@ class Settings {
 			'sending'      => ! empty( $sync['run_id'] ) ? array( 'page' => (int) $sync['page'], 'pages' => (int) $sync['pages'] ) : null,
 			'items'        => array_sum( Rest::status_payload()['post_types'] ),
 			'next_audit'   => $overview && ! empty( $overview['next_audit_at'] ) ? Admin::ago( $overview['next_audit_at'] ) : '',
-			'seo_plugin'   => isset( $plugins[ $seo ] ) ? $plugins[ $seo ] : '',
+			'seo_plugin'   => SeoFields::plugin_name(),
+			'seo_supported' => SeoFields::supported(),
 			'profile_url'  => admin_url( 'profile.php#application-passwords-section' ),
 			'show_address' => Admin::shows_address_field(),
 			'app_url'      => $connected ? $conn['api_base'] : MONORANKS_API_BASE,

@@ -89,13 +89,14 @@ class Rest {
 			$counts[ $type ] = isset( $c->publish ) ? (int) $c->publish : 0;
 		}
 		return array(
-			'site_url'   => home_url(),
-			'name'       => get_bloginfo( 'name' ),
-			'version'    => MONORANKS_CONNECTOR_VERSION,
-			'wordpress'  => get_bloginfo( 'version' ),
-			'seo_plugin' => SeoFields::plugin(),
-			'post_types' => $counts,
-			'can_write'  => Writer::FIELDS,
+			'site_url'        => home_url(),
+			'name'            => get_bloginfo( 'name' ),
+			'version'         => MONORANKS_CONNECTOR_VERSION,
+			'wordpress'       => get_bloginfo( 'version' ),
+			'seo_plugin'      => SeoFields::plugin(),
+			'seo_plugin_name' => SeoFields::plugin_name(),
+			'post_types'      => $counts,
+			'can_write'       => Writer::FIELDS,
 		);
 	}
 
