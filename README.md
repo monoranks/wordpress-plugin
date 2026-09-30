@@ -1,28 +1,31 @@
 # MonoRanks for WordPress
 
-The WordPress plugin for [MonoRanks](https://monoranks.com): SEO, AEO and GEO audits every week, fixes explained in plain words, and the ones you approve written into WordPress with undo.
+![MonoRanks: less manual work. Monitor, optimize, recheck. SEO, AEO, GEO.](.github/cover.png)
 
-- Sends published content metadata so audits and rechecks stay current (never drafts, comments or credentials).
-- Applies approved fixes: titles, meta descriptions, image alt text, canonical, noindex, redirects, an answer-first opening paragraph, AI crawler rules in robots.txt, llms.txt.
-- Works next to Yoast SEO, Rank Math and All in One SEO.
-- Shows the audit inside WordPress: a MonoRanks menu with an Overview (site health and AEO scores, search clicks, pages needing attention, fixes ready to apply, recent changes with Undo) and Settings, plus a MonoRanks column with each page's scores in Posts and Pages.
-- Every write is logged under MonoRanks → Settings and can be undone.
+**Find what holds your site back in search and AI answers, and fix it from one place.**
 
-Full description, what is sent and the FAQ: `readme.txt` (the WordPress.org listing).
+[MonoRanks](https://monoranks.com) checks your website every week for SEO (Google), AEO (answer engines) and GEO (AI search like ChatGPT and Perplexity). It explains each problem in plain words and suggests the fix. This plugin connects your WordPress site, so the fixes you approve are written for you, and each one can be undone.
 
-## Development
+[Install from WordPress.org](https://wordpress.org/plugins/monoranks/) · [Setup guide](https://monoranks.com/docs/wordpress-plugin/) · [Create a free account](https://app.monoranks.com)
 
-This repository is the plugin's home. The MonoRanks monorepo includes it as a git submodule (`packages/wp-plugin/monoranks`) for its own end-to-end tests and the in-app download.
+## What it does
 
-- `tests.yml`: the suite, on every pull request (and by hand from the Actions tab) — PHP syntax on 7.4, 8.1 and 8.3; the admin app (`npm run typecheck`, `npm run build`, and the committed `build/` must match); PHPUnit on PHP 7.4 / WordPress 6.0 up to PHP 8.4 / latest: the unit tests (Brain Monkey, no WordPress needed: `composer install && vendor/bin/phpunit`) and the integration tests against a real WordPress with MariaDB, once more with The SEO Framework loaded; the WordPress.org plugin checker on the folder `bin/build-zip.sh` builds; a version consistency check (header, constant, readme, changelog); Chromium tests (Playwright) against a real WordPress started with wp-env.
-- `deploy.yml`: publishing a GitHub release `v<version>` runs `tests.yml` on that commit and, only when green, builds the zip with `bin/build-zip.sh`, deploys `dist/monoranks/` to WordPress.org and attaches `dist/monoranks-<version>.zip` to the release. It runs in the `wordpress-org` environment, which holds the variable `SVN_USERNAME` and the secret `SVN_PASSWORD`.
-- `bin/build-zip.sh [--skip-install]`: builds `dist/monoranks/` and `dist/monoranks-<version>.zip` (production Composer packages only, the committed `build/`) and checks the files the plugin cannot run without.
-- Integration tests locally: `bin/install-wp-tests.sh <db> <user> <pass> [host] [wp-version]` installs a throwaway WordPress in `/tmp/wordpress` (needs WP-CLI and MySQL or MariaDB), then `MONORANKS_WP_PATH=/tmp/wordpress composer test:integration`. The tests in group `tsf` need The SEO Framework installed there (`wp plugin install autodescription`, no need to activate it): `MONORANKS_WP_PATH=/tmp/wordpress MONORANKS_WP_PLUGINS=autodescription/autodescription.php composer test:integration -- --group tsf`. Without it they are skipped.
-- Classes: `src/` (namespace `MonoRanks`, Composer PSR-4). The Overview and Settings screens are a React app in `resources/admin/` (Vite, Tailwind 4, shadcn-style components, the same stack as WConvert; `@wordpress/i18n` and `@wordpress/api-fetch` come from WordPress) that reads and acts through `monoranks/v1/admin/*` REST routes; `npm run build` writes `build/` (the app plus the Posts column's stylesheet from `resources/assets/column.css`), which is committed so every checkout works without Node. The Posts and Pages column stays server-rendered (`resources/views/`); brand SVGs live in `resources/assets/`.
-- Translations: `bin/i18n.sh` rebuilds `languages/monoranks.pot` from PHP and the app's sources, syncs the `.po` files (`bin/po-sync.py` keeps translations, prints what is missing), and writes `.mo` plus the JSON catalogue the app loads (`monoranks-<locale>-admin.json`).
-- `docs/api.md`: what the plugin reads from MonoRanks with the connector key (overview, per-page scores, applied-fix reports) and how it caches it. Third-party libraries are listed under `extra.wp-scoper.packages`; [WP Scoper](https://github.com/veronalabs/wp-scoper) prefixes them into `packages/` under `MonoRanks\Deps` on `composer install`, so nothing collides with other plugins.
-- Locally: `npm install`, `npx wp-env start` (Docker), `npx playwright test`. The site runs at http://localhost:8889 (admin / password).
-- `.wordpress-org/`: banner, icon and screenshots for the directory listing.
-- What ships in the zip (`.distignore` lists what does not): `monoranks.php`, `uninstall.php`, `readme.txt`, `src/`, `resources/views/`, `resources/assets/` (SVGs), `build/` (the app and the column stylesheet), `languages/` (`.mo`, `.po`, `.pot` and the app's JSON catalogues) and `packages/` (WP Scoper's autoloader for `src/` and any prefixed library, written by `composer install`). No `vendor/`: the app's sources under `resources/admin/`, Composer's own files, tests, docs and tooling stay out.
+- **Fixes for you.** Titles, meta descriptions, image alt text, canonical and noindex, redirects, a short answer-first opening for key pages, and rules for AI crawlers. You approve each one first.
+- **Undo any change.** Every change is listed under **MonoRanks → Settings** and can be undone.
+- **Results inside WordPress.** A MonoRanks menu shows your site's scores, search clicks, pages that need attention and fixes ready to apply. Posts and Pages get a column with each page's scores.
+- **Works with your SEO plugin.** Yoast SEO, Rank Math, All in One SEO and The SEO Framework keep working as before; MonoRanks writes into their fields. With another SEO plugin, MonoRanks does not write titles, descriptions, canonicals or noindex, and says why.
+- **Sends only what is needed.** Published page details such as titles and descriptions, so checks stay up to date. Never drafts, comments or passwords.
+
+## Get started
+
+1. In WordPress, go to **Plugins → Add Plugin**, search for **MonoRanks**, click **Install Now**, then **Activate**.
+2. In [MonoRanks](https://app.monoranks.com), open your website, go to **Integrations → WordPress** and click **Connect to WordPress**.
+3. Approve the connection when WordPress asks. That's it.
+
+To stop at any time: **MonoRanks → Settings → Disconnect**.
+
+## For developers
+
+Build, tests and releases are described in [docs/development.md](docs/development.md). The plugin's API use is in [docs/api.md](docs/api.md).
 
 License: GPL-2.0-or-later.
