@@ -54,7 +54,9 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
 
   const o = data?.overview ?? null;
   // Fixes MonoRanks could write once someone approves them there; only shown when there are some.
-  const review = o?.to_review && o.to_review.total > 0 && o.to_review.review_url ? o.to_review : null;
+  // A newer MonoRanks also says how many still need a value there (typed or drafted); older ones leave it out.
+  const need = typeof o?.to_review?.needs_value === 'number' ? o.to_review.needs_value : null;
+  const review = o?.to_review && (o.to_review.total > 0 || (need ?? 0) > 0) && o.to_review.review_url ? o.to_review : null;
   const description = data
     ? o
       ? <>{__('Weekly SEO, AEO and GEO audit of', 'monoranks')} <code>{data.host}</code>{data.audited && <> · {sprintf(__('last audit %s', 'monoranks'), data.audited)}</>}{o.pages_total > 0 && <> · {sprintf(__('%1$s of %2$s published pages scored', 'monoranks'), fmt(o.pages_scored), fmt(o.pages_total))}</>}</>
@@ -94,7 +96,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
             <Card className="flex flex-col gap-2.5 px-5 py-[18px]">
               <div className="flex items-center justify-between"><span className="text-[12px] font-medium text-ink2">{__('Fixes', 'monoranks')}</span>{o.fixes.ready > 0 && <Badge>{sprintf(__('%s ready', 'monoranks'), fmt(o.fixes.ready))}</Badge>}</div>
               <div className="text-2xl font-semibold leading-none tabular-nums tracking-[-0.01em]">{fmt(o.fixes.applied_30d)} <span className="text-[12px] font-normal text-ink2">{__('applied in 30 days', 'monoranks')}</span></div>
-              {review && <a className="text-[12px] font-medium text-brand-ink hover:underline" href={out(review.review_url, 'fixes-card')} target="_blank" rel="noopener">{sprintf(__('%s waiting for your approval in MonoRanks', 'monoranks'), fmt(review.total))} →</a>}
+              {review && review.total > 0 && <a className="text-[12px] font-medium text-brand-ink hover:underline" href={out(review.review_url, 'fixes-card')} target="_blank" rel="noopener">{sprintf(__('%s waiting for your approval in MonoRanks', 'monoranks'), fmt(review.total))} →</a>}
               <div className="flex flex-wrap gap-1.5">
                 <Badge variant="pill"><Dot tone={o.ai.bots_rules ? 'good' : 'muted'} />{o.ai.bots_rules ? __('AI crawler rules on', 'monoranks') : __('No AI crawler rules', 'monoranks')}</Badge>
                 <Badge variant="pill"><Dot tone={o.ai.llms_txt ? 'good' : 'muted'} />{o.ai.llms_txt ? __('llms.txt published', 'monoranks') : __('No llms.txt', 'monoranks')}</Badge>
@@ -134,8 +136,12 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
                 {o.ready.length === 0 && review && (
                   <div className="flex flex-col gap-3 py-2">
                     <div className="grid gap-1">
-                      <b className="text-[13px] font-semibold">{sprintf(__('%s fixes are ready for your approval', 'monoranks'), fmt(review.total))}</b>
-                      <span className="text-[12px] text-ink2">{__('Approve them in MonoRanks and they are written here, with undo.', 'monoranks')}</span>
+                      {need === null ? (
+                        <b className="text-[13px] font-semibold">{sprintf(__('%s fixes are ready for your approval', 'monoranks'), fmt(review.total))}</b>
+                      ) : (
+                        <b className="text-[13px] font-semibold">{[review.total > 0 && sprintf(_n('%s ready to apply', '%s ready to apply', review.total, 'monoranks'), fmt(review.total)), need > 0 && sprintf(_n('%s needs a value in MonoRanks', '%s need a value in MonoRanks', need, 'monoranks'), fmt(need))].filter(Boolean).join(' · ')}</b>
+                      )}
+                      <span className="text-[12px] text-ink2">{need !== null && need > 0 ? __('Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo.', 'monoranks') : __('Approve them in MonoRanks and they are written here, with undo.', 'monoranks')}</span>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {Object.entries(review.by_field).sort((a, b) => b[1] - a[1]).map(([field, n]) => <Badge key={field} variant="pill"><bdi>{data.labels[field] ?? field}</bdi><span className="tabular-nums text-ink2">{fmt(n)}</span></Badge>)}

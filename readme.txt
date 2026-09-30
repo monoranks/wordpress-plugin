@@ -4,7 +4,7 @@ Tags: seo, aeo, geo, ai, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.15
+Stable tag: 0.1.16
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,9 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.16 =
+* The Overview says how many fixes are ready to apply and how many still need a value in MonoRanks, instead of counting them all as ready.
 
 = 0.1.15 =
 * Works with The SEO Framework: approved titles, descriptions, canonicals and noindex go into its own fields, and the page shows them once.
