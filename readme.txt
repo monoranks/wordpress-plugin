@@ -1,6 +1,6 @@
 === MonoRanks ===
 Contributors: veronalabs, mostafas1990, kashani
-Tags: seo, audit, ai, redirects, meta description
+Tags: seo, aeo, geo, ai, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
