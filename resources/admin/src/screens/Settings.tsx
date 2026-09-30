@@ -68,7 +68,9 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
                     [__('Last sync', 'monoranks'), <span className="flex flex-wrap items-center gap-2"><span className="tabular-nums">{data.last_sent}</span>{data.sending && <Badge>{sprintf(__('sending, batch %1$s of %2$s', 'monoranks'), fmt(data.sending.page), fmt(Math.max(1, data.sending.pages)))}</Badge>}{data.items > 0 && <Badge>{sprintf(_n('%s published item', '%s published items', data.items, 'monoranks'), fmt(data.items))}</Badge>}{data.last_error && <Badge variant="warn">{data.last_error}</Badge>}</span>],
                     ...(data.next_audit ? [[__('Next audit', 'monoranks'), data.next_audit] as [string, React.ReactNode]] : []),
                     [__('Fixes written with', 'monoranks'), <>{__('The "MonoRanks" Application Password', 'monoranks')} · <a href={data.profile_url}>{__('revoke it in your profile', 'monoranks')}</a> {__('to stop writes', 'monoranks')}</>],
-                    [__('Works with', 'monoranks'), data.seo_plugin
+                    [__('Works with', 'monoranks'), data.seo_plugin && !data.seo_supported
+                      ? <span className="flex flex-wrap items-center gap-2"><Badge variant="warn">{sprintf(__('%s detected', 'monoranks'), data.seo_plugin)}</Badge><span className="text-mute">{sprintf(__('MonoRanks cannot write titles, descriptions, canonicals or noindex into %s yet, so those fixes are refused', 'monoranks'), data.seo_plugin)}</span></span>
+                      : data.seo_plugin
                       ? <span className="flex flex-wrap items-center gap-2"><Badge>{sprintf(__('%s detected', 'monoranks'), data.seo_plugin)}</Badge><span className="text-mute">{sprintf(__('titles and descriptions go into the fields %s reads', 'monoranks'), data.seo_plugin)}</span></span>
                       : <span className="flex flex-wrap items-center gap-2"><Badge>{__('No SEO plugin', 'monoranks')}</Badge><span className="text-mute">{__('MonoRanks prints the approved title, description, canonical and noindex tags itself', 'monoranks')}</span></span>],
                   ]} />

@@ -31,7 +31,7 @@ export type OverviewData = {
 export type SettingsData = {
   connected: boolean; revoked: boolean; state: 'connected' | 'revoked' | 'none'; has_data: boolean;
   key_hint: string; key_via: string; api_base: string; last_sent: string; last_error: string;
-  sending: null | { page: number; pages: number }; items: number; next_audit: string; seo_plugin: string;
+  sending: null | { page: number; pages: number }; items: number; next_audit: string; seo_plugin: string; seo_supported: boolean;
   profile_url: string; show_address: boolean; app_url: string; log: LogRow[]; labels: Record<string, string>;
 };
 
