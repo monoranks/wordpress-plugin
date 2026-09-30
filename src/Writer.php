@@ -51,6 +51,8 @@ class Writer {
 				return array( 'id' => $id, 'ok' => false, 'error' => 'invalid_value' );
 			}
 			self::log( $actor, $field, 'site', $previous, $value );
+			// Page caches may still hold the old file (often a 404 from before it existed): ask them to drop it (#87).
+			CachePurger::purge_file( 'llms_txt' === $field ? '/llms.txt' : '/robots.txt' );
 			return array( 'id' => $id, 'ok' => true, 'previous' => $previous );
 		}
 		if ( 'redirect' === $field ) {

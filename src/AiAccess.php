@@ -81,7 +81,8 @@ class AiAccess {
 		if ( '' === $text ) {
 			return;
 		}
-		nocache_headers();
+		// Never cached (monoranks/monoranks#87): a page cache holding an old copy hides the next change MonoRanks writes.
+		CachePurger::no_cache_response();
 		header( 'Content-Type: text/plain; charset=utf-8' );
 		echo $text; // phpcs:ignore WordPress.Security.EscapeOutput -- plain text written by the site owner through MonoRanks
 		exit;
