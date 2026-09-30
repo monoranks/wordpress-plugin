@@ -54,7 +54,7 @@ class SeoFields {
 		if ( defined( 'AIOSEO_VERSION' ) || function_exists( 'aioseo' ) ) {
 			return 'aioseo';
 		}
-		if ( defined( 'THE_SEO_FRAMEWORK_VERSION' ) || class_exists( 'The_SEO_Framework\Load' ) ) {
+		if ( defined( 'THE_SEO_FRAMEWORK_VERSION' ) || class_exists( 'The_SEO_Framework\Load', false ) ) {
 			return 'tsf';
 		}
 		return '' !== self::unsupported() ? 'other' : 'none';
