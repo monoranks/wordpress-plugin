@@ -81,6 +81,20 @@ Same result shape as `POST /wp-json/monoranks/v1/apply`. Best-effort: the plugin
 
 Since 0.1.14 a `content` change (or its undo) whose saved result would break a block is rolled back and comes back as `{ "ok": false, "error": "block_check_failed", "reason": "The new paragraph block does not match what the block editor would save. The post was put back as it was." }`. `reason` is a plain-language sentence meant to be shown as is; `update_failed` now carries a `reason` too.
 
+### `cache` (since 0.1.18)
+
+Every successful write or undo (`ok: true`) also says what the site's page caches did with the page that changed, so MonoRanks can explain a page that still shows the old version:
+
+```json
+{ "id": "chg_1", "ok": true, "previous": "", "post_id": 12, "cache": { "purged": ["wp-optimize"], "failed": [], "none": false } }
+```
+
+- `purged`: caches that were asked to drop the page. Names: `wp-rocket`, `litespeed`, `w3-total-cache`, `wp-super-cache`, `siteground`, `wp-optimize`, `nginx-helper`, `breeze`, `kinsta`, `wp-engine`, `pantheon`.
+- `failed`: caches that reported a failure or threw. The write itself still succeeded.
+- `none`: `true` when no supported cache was active for this change, so nothing was purged (a cache the plugin cannot reach, such as a Cloudflare cache rule, may still hold the page).
+- What is purged: the post's URL for SEO fields and the opening paragraph (plus the home page when the post is the static front page); the post the image belongs to for `alt` (the change's `post_id`, else the post it was uploaded to; no `cache` field when neither is known); the source URL for `redirect`; `/llms.txt` or `/robots.txt` for `llms_txt` and `ai_bots`.
+- Absent on refused changes (`ok: false`) and from plugins before 0.1.18; treat a missing field as "unknown".
+
 Since 0.1.15 an SEO field (`seo_title`, `seo_description`, `canonical`, `noindex`) can also be refused before anything is written:
 
 - `seo_plugin_unsupported`: an SEO plugin MonoRanks cannot write into is active (status `seo_plugin: "other"`), for example `"reason": "SEOPress is active on this site and prints its own SEO tags. MonoRanks cannot write into SEOPress yet, so nothing was changed. Make this change in SEOPress instead."`

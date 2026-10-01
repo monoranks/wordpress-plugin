@@ -4,7 +4,7 @@ Tags: seo, aeo, geo, ai, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.17
+Stable tag: 0.1.18
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,10 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.18 =
+* After every fix MonoRanks writes (or undoes), the plugin clears that page from the active page cache, so the change shows right away. Adds WP-Optimize, Nginx Helper, Breeze, Kinsta, WP Engine and Pantheon to WP Rocket, LiteSpeed Cache, W3 Total Cache, WP Super Cache and SiteGround Optimizer.
+* MonoRanks is told which cache was cleared, so it can tell you when a page may still show the old version.
 
 = 0.1.17 =
 * After MonoRanks writes llms.txt or the AI crawler rules, the plugin clears /llms.txt or /robots.txt from WP Rocket, LiteSpeed Cache, W3 Total Cache, WP Super Cache and SiteGround Optimizer, so an old cached copy does not hide the change.
