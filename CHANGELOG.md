@@ -2,6 +2,14 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [0.1.18] — unreleased
+
+- After every write and undo, the plugin asks the active page caches to drop the page that changed, so the new title, description, canonical, noindex, alt text, opening paragraph or redirect shows right away instead of when the cache expires (#11). SEO fields and the opening paragraph purge the post's URL, plus the home page when the post is the static front page; alt text purges the post the image belongs to; a redirect purges its source URL; llms.txt and the AI crawler rules purge `/llms.txt` or `/robots.txt` as before.
+- New caches, each through its public API and only when active: WP-Optimize (`WPO_Page_Cache::delete_cache_by_url()`, only when its page cache is on), Nginx Helper (the `$nginx_purger->purge_url()` it exposes as a global, only when purging is on), Breeze (`do_action( 'purge_post_cache', $post_id )`, posts only), Kinsta (`$kinsta_cache->kinsta_cache_purge->initiate_purge( $post_id, 'post' )`), WP Engine (`WpeCommon::purge_varnish_cache( $post_id )`) and Pantheon Advanced Page Cache (`pantheon_wp_clear_edge_paths()`). Kinsta and WP Engine have no one-URL purge, so for `/llms.txt` and `/robots.txt` they purge everything (`purge_complete_caches()`, `purge_varnish_cache()`); a redirect source that is not a post is left alone there. WP Rocket purges the home page with `rocket_clean_home()`.
+- The official Cloudflare plugin still has no public function or action to purge one URL, so it is not called. Its own hook already purges a post when the opening paragraph is written (that write saves the post).
+- Each successful write result has a new `cache` field: `{ "purged": ["wp-optimize"], "failed": [], "none": false }`. `none` is true when no supported cache was active. A cache that reports a failure or throws is listed in `failed`; the write itself still succeeds. Older fields are unchanged.
+- New filter `monoranks_purge_urls` and action `monoranks_purged_cache` for page purges, next to the existing `monoranks_purge_file_urls` and `monoranks_purged_file_cache`.
+
 ## [0.1.17] — unreleased
 
 - After MonoRanks writes llms.txt or the AI crawler rules, the plugin asks the active page cache to drop `/llms.txt` or `/robots.txt`, so a copy cached before the change (often a 404 from before the file existed) does not hide it from AI crawlers or from MonoRanks' own check (monoranks/monoranks#87). Supported through each plugin's public API: WP Rocket (`rocket_clean_files`), LiteSpeed Cache (`litespeed_purge_url`), W3 Total Cache (`w3tc_flush_url`), WP Super Cache (`wpsc_delete_url_cache`) and SiteGround Optimizer (`sg_cachepress_purge_cache`). The official Cloudflare plugin has no public way to purge one URL and is left alone; a CDN cache rule outside WordPress still clears only when it expires or is purged there.

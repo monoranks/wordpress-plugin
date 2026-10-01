@@ -52,8 +52,8 @@ class Writer {
 			}
 			self::log( $actor, $field, 'site', $previous, $value );
 			// Page caches may still hold the old file (often a 404 from before it existed): ask them to drop it (#87).
-			CachePurger::purge_file( 'llms_txt' === $field ? '/llms.txt' : '/robots.txt' );
-			return array( 'id' => $id, 'ok' => true, 'previous' => $previous );
+			$cache = CachePurger::file( 'llms_txt' === $field ? '/llms.txt' : '/robots.txt' );
+			return array( 'id' => $id, 'ok' => true, 'previous' => $previous, 'cache' => $cache );
 		}
 		if ( 'redirect' === $field ) {
 			$from = isset( $c['from'] ) ? (string) $c['from'] : '';
@@ -69,7 +69,8 @@ class Writer {
 			}
 			Redirects::set( $from, $value );
 			self::log( $actor, $field, $from, $previous, $value );
-			return array( 'id' => $id, 'ok' => true, 'previous' => $previous );
+			// A cached copy of the old page at the source would keep hiding the redirect (#11).
+			return array( 'id' => $id, 'ok' => true, 'previous' => $previous, 'cache' => CachePurger::url( $from ) );
 		}
 		if ( 'alt' === $field ) {
 			$attachment = isset( $c['attachment_id'] ) ? (int) $c['attachment_id'] : 0;
@@ -82,7 +83,13 @@ class Writer {
 			}
 			update_post_meta( $attachment, '_wp_attachment_image_alt', wp_slash( sanitize_text_field( $value ) ) );
 			self::log( $actor, $field, 'attachment:' . $attachment, $previous, $value );
-			return array( 'id' => $id, 'ok' => true, 'previous' => $previous );
+			$result = array( 'id' => $id, 'ok' => true, 'previous' => $previous );
+			// The page that shows the image: the post the change names, else the post the image was uploaded to (#11).
+			$page = isset( $c['post_id'] ) ? (int) $c['post_id'] : (int) wp_get_post_parent_id( $attachment );
+			if ( $page && 'publish' === get_post_status( $page ) ) {
+				$result['cache'] = CachePurger::post( $page );
+			}
+			return $result;
 		}
 		$post_id = isset( $c['post_id'] ) ? (int) $c['post_id'] : 0;
 		if ( ! $post_id && ! empty( $c['url'] ) ) {
@@ -112,7 +119,7 @@ class Writer {
 		SeoFields::set( $post_id, $field, $clean );
 		clean_post_cache( $post_id );
 		self::log( $actor, $field, 'post:' . $post_id, $previous, $clean );
-		return array( 'id' => $id, 'ok' => true, 'previous' => $previous, 'post_id' => $post_id );
+		return array( 'id' => $id, 'ok' => true, 'previous' => $previous, 'post_id' => $post_id, 'cache' => CachePurger::post( $post_id ) );
 	}
 
 	/**
@@ -163,7 +170,7 @@ class Writer {
 		}
 		// The stored paragraph is the sanitised one, so that is what the log (and therefore Undo's expected value) carries.
 		self::log( $actor, 'content', 'post:' . $post->ID, $has, $stored );
-		return array( 'id' => $id, 'ok' => true, 'previous' => $has, 'post_id' => $post->ID );
+		return array( 'id' => $id, 'ok' => true, 'previous' => $has, 'post_id' => $post->ID, 'cache' => CachePurger::post( $post->ID ) );
 	}
 
 	/** Block content, as has_blocks() decides it: at least one block comment delimiter. */
