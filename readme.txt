@@ -4,7 +4,7 @@ Tags: seo, aeo, geo, ai, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.18
+Stable tag: 0.1.19
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,12 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.19 - 2026-10-04 =
+* **New:** "What to do next" on the Overview: outreach, backlinks, competitors and keyword movers.
+* **New:** A MonoRanks box in the post editor with search, visits, revenue and lost links for the page.
+* **Enhancement:** The Posts list card shows clicks, revenue and lost links.
+* **Fix:** Persian translation file header.
 
 = 0.1.18 =
 * After every fix MonoRanks writes (or undoes), the plugin clears that page from the active page cache, so the change shows right away. Adds WP-Optimize, Nginx Helper, Breeze, Kinsta, WP Engine and Pantheon to WP Rocket, LiteSpeed Cache, W3 Total Cache, WP Super Cache and SiteGround Optimizer.
