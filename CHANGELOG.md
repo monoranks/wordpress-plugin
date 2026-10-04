@@ -2,6 +2,13 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## v0.1.19 - 2026-10-04
+
+- **New:** "What to do next" on the Overview: outreach, backlinks, competitors and keyword movers.
+- **New:** A MonoRanks box in the post editor with search, visits, revenue and lost links for the page.
+- **Enhancement:** The Posts list card shows clicks, revenue and lost links.
+- **Fix:** Persian translation file header.
+
 ## [0.1.18] — unreleased
 
 - After every write and undo, the plugin asks the active page caches to drop the page that changed, so the new title, description, canonical, noindex, alt text, opening paragraph or redirect shows right away instead of when the cache expires (#11). SEO fields and the opening paragraph purge the post's URL, plus the home page when the post is the static front page; alt text purges the post the image belongs to; a redirect purges its source URL; llms.txt and the AI crawler rules purge `/llms.txt` or `/robots.txt` as before.

@@ -30,6 +30,7 @@ $monoranks_arrow = '<span class="mr-arrow" aria-hidden="true">&#8599;</span>';
 			<div><?php esc_html_e( 'Status', 'monoranks' ); ?></div><div><?php esc_html_e( 'Not audited yet', 'monoranks' ); ?></div>
 			<?php if ( $next_in ) : ?><div><?php esc_html_e( 'Next audit', 'monoranks' ); ?></div><div><?php echo esc_html( $next_in ); ?></div><?php endif; ?>
 			<div><?php esc_html_e( 'Published', 'monoranks' ); ?></div><div><?php echo esc_html( $published ); ?></div>
+			<?php foreach ( $values as $monoranks_v ) : ?><div><?php echo esc_html( $monoranks_v[0] ); ?></div><div><?php echo esc_html( $monoranks_v[1] ); ?></div><?php endforeach; ?>
 		</div>
 		<div class="mr-foot"><span class="mr-empty"><?php esc_html_e( 'Scores arrive after the next audit', 'monoranks' ); ?></span><a href="<?php echo esc_url( $app_url ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Open MonoRanks', 'monoranks' ); ?> <?php echo $monoranks_arrow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static markup ?></a></div>
 	</div>
@@ -51,6 +52,7 @@ $monoranks_arrow = '<span class="mr-arrow" aria-hidden="true">&#8599;</span>';
 			<?php endif; ?>
 			<?php if ( $audited ) : ?><div><?php esc_html_e( 'Audited', 'monoranks' ); ?></div><div><?php echo esc_html( $audited ); ?></div><?php endif; ?>
 			<?php if ( $next_in ) : ?><div><?php esc_html_e( 'Next audit', 'monoranks' ); ?></div><div><?php echo esc_html( $next_in ); ?></div><?php endif; ?>
+			<?php foreach ( $values as $monoranks_v ) : ?><div><?php echo esc_html( $monoranks_v[0] ); ?></div><div><?php echo esc_html( $monoranks_v[1] ); ?></div><?php endforeach; ?>
 		</div>
 		<div class="mr-foot">
 			<?php if ( $fixes_ready > 0 ) : ?><a href="<?php echo esc_url( $overview_url ); ?>"><?php esc_html_e( 'Apply fixes', 'monoranks' ); ?></a><?php else : ?><span></span><?php endif; ?>

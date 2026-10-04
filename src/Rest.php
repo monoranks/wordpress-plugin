@@ -25,6 +25,18 @@ class Rest {
 		// The admin app's own routes (cookie + nonce through wp.apiFetch): what the screens read, and what their buttons do.
 		register_rest_route( self::NS, '/admin/overview', array( 'methods' => 'GET', 'callback' => array( 'MonoRanks\\Overview', 'data' ), 'permission_callback' => $admin ) );
 		register_rest_route( self::NS, '/admin/settings', array( 'methods' => 'GET', 'callback' => array( 'MonoRanks\\Settings', 'data' ), 'permission_callback' => $admin ) );
+		// What to do next (Overview's Grow cards) and one post's data (the box in the post editor), both read-only.
+		register_rest_route( self::NS, '/admin/grow', array( 'methods' => 'GET', 'callback' => array( 'MonoRanks\\Grow', 'data' ), 'permission_callback' => $admin ) );
+		register_rest_route(
+			self::NS,
+			'/admin/post/(?P<id>\\d+)',
+			array(
+				'methods'             => 'GET',
+				'callback'            => array( 'MonoRanks\\PostPanel', 'rest' ),
+				'permission_callback' => array( 'MonoRanks\\PostPanel', 'can_read' ),
+				'args'                => array( 'id' => array( 'validate_callback' => static function ( $v ) { return is_numeric( $v ) && (int) $v > 0; } ) ),
+			)
+		);
 		foreach ( array( 'apply', 'undo', 'sync', 'connect', 'disconnect', 'delete' ) as $action ) {
 			register_rest_route( self::NS, '/admin/' . $action, array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'admin_' . $action ), 'permission_callback' => $admin ) );
 		}
@@ -125,6 +137,7 @@ class Rest {
 		}
 		Connection::update( array( 'api_base' => $base, 'key' => $key, 'site_id' => $site_id, 'via' => 'pairing', 'key_state' => 'ok', 'paired_at' => gmdate( 'c' ), 'paired_by' => wp_get_current_user()->user_login, 'last_error' => null ) );
 		Sync::schedule_daily();
+		Grow::clear_all();
 		return self::status();
 	}
 

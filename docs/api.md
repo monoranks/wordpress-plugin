@@ -104,8 +104,48 @@ Since 0.1.15 an SEO field (`seo_title`, `seo_description`, `canonical`, `noindex
 
 The plugin's status, sent after connecting, on "Send content now" and daily (the same object as `GET /wp-json/monoranks/v1/status` without the user fields). `seo_plugin` is `yoast`, `rankmath`, `aioseo`, `tsf` (The SEO Framework, since 0.1.15), `other` (an SEO plugin MonoRanks cannot write into, since 0.1.15) or `none`; `seo_plugin_name` (since 0.1.15) is its name, or `""`. If MonoRanks answers 400 to a status whose `seo_plugin` is `tsf` or `other`, the plugin sends it once more with `seo_plugin: "none"`.
 
+## What to do next and per-post data: API v1 reads
+
+The Overview's **What to do next** cards and the **MonoRanks** box in the post editor read MonoRanks API v1 with the same key: `GET {api_base}/api/v1/sites/{site_id}/<route>`, `Authorization: Bearer <connector key>`. `site_id` is the one stored at pairing (or the overview's `site_id` for a key pasted by hand). The full shapes are in MonoRanks' `/api/v1/openapi.json`; the plugin keeps only the fields below and ignores the rest.
+
+| Shown in WordPress | Route | Scope |
+| --- | --- | --- |
+| Outreach card: targets to contact, the top 3 with why | `outreach?status=to_contact&per=3` | `search:read` |
+| Backlinks card: websites won and lost in 28 days, to review for spam, newest strong ones | `backlinks?view=new&per=3&sort=strength` | `search:read` |
+| Competitors card: top 3 (the ones that drive gaps first), gap count, top 3 gap keywords | `competitors`, `competitors/gaps?view=gaps&per=3` | `search:read` |
+| Keyword movers card: tracked keywords up and down since a week ago | `keywords?view=tracked&sort=change&dir=desc&per=10` and `dir=asc` | `search:read` |
+| Latest report line | `reports?limit=1` (monoranks/monoranks#199) | `sites:read` |
+| Post box and column card: visits, key events and revenue per page (28 days) | `analytics/pages?limit=1000&sort=-revenue` | `analytics:read` |
+| Same, clicks only, when Google Analytics is not connected (409) | `search/rows?dimension=page&limit=1000&from=…&to=…` | `search:read` |
+| Post box and column card: lost links to win back for the page | `outreach?source=lost_link&per=200` (grouped by `reason.lostTo`) | `search:read` |
+| Post box: last change MonoRanks saw | `pages/history?limit=10&url=<permalink>` | `pages:read` |
+| Post box: top searches for the page | `search/rows?dimension=query_page&limit=5&from=…&to=…&page=<permalink>` | `search:read` |
+
+The 28 days end three days ago, the last day of final Search Console data, as MonoRanks uses by default.
+
+Keys made by a WordPress pairing once monoranks/monoranks#199 is released carry `search:read` and `analytics:read` next to the three locked plugin scopes. Plugin keys paired earlier get the two scopes once, from a one-time job in the same release. If the owner unticks them, the cards say the key cannot read this yet and link to the website's Integrations screen in MonoRanks.
+
+How each answer is used:
+
+- `200`: shown. An empty list is shown as a plain "nothing yet" line, never as an error.
+- `403 missing_scope` (or the key owner left the workspace): the card says the key cannot read it yet. The key is **not** marked revoked.
+- `503 api_disabled` or `404 no_route` (an older MonoRanks): "Not available in your MonoRanks yet".
+- `409 ga4_not_connected` / `ga4_no_access` on `analytics/pages`: the post box offers to connect Google Analytics and shows clicks from `search/rows` instead.
+- Anything else (timeouts, `429`, `5xx`): "could not be reached", asked again within the hour.
+
+How often:
+
+- The cards: one pull of at most 7 calls when the Overview opens and the cache is older than six hours (one hour after a failed section), within a 12-second budget; sections it had no time for are finished by WP-Cron.
+- Page values (analytics or search rows, plus lost links): at most 3 calls a day, in the background (WP-Cron) when a Posts list or the post editor opens, never while the list renders.
+- The post box: 2 calls per post, when the editor opens and that post's reads are older than twelve hours (one hour after a failure). The box loads after the editor, so opening a post never waits on MonoRanks.
+
+All of it is read in the admin only, by administrators (`manage_options`); nothing is fetched on the public site.
+
 ## Storage on the WordPress side
 
 - Option `monoranks_insights` (not autoloaded): `status` (ok | none | unsupported | error | revoked), `fetched_at`, `overview`, `pages_synced_at`.
 - Post meta `_monoranks_score` (the page row above) and `_monoranks_health` (integer, for sorting the column).
-- Disconnecting or deleting the plugin removes all of it.
+- Transient `monoranks_grow` (kept 3 days, fresh for 6 hours): the What to do next cards, one entry per section with its `state` (ok | empty | no_access | off | error | pending).
+- Transient `monoranks_page_values` (kept 3 days, fresh for a day): per page path, clicks, impressions and position, and with Google Analytics sessions, key events and revenue; lost links per page; the currency and period.
+- Transients `monoranks_post_<id>` (12 hours): the post box's last change and top searches for that post.
+- Disconnecting, connecting a new key, or deleting the plugin removes all of it.

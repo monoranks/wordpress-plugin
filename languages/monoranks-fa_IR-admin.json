@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-09-30T11:29:37+00:00",
+    "translation-revision-date": "2026-10-04T07:14:07+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -8,7 +8,7 @@
             "": {
                 "domain": "messages",
                 "lang": "fa_IR",
-                "plural-forms": "nplurals=2; plural=(n != 1);"
+                "plural-forms": "nplurals=2; plural=(n > 1);"
             },
             "No changes yet": [
                 "هنوز تغییری نیست"
@@ -215,6 +215,144 @@
             "Connect": [
                 "اتصال"
             ],
+            "(opens in a new tab)": [
+                "(در زبانهٔ تازه باز می‌شود)"
+            ],
+            "What to do next": [
+                "گام‌های بعدی"
+            ],
+            "Updated %s": [
+                "به‌روزشده %s"
+            ],
+            "The MonoRanks key of this site cannot read this yet. Allow it under Integrations in MonoRanks, or connect again.": [
+                "کلید مونورنکس این سایت هنوز اجازهٔ خواندن این را ندارد. در مونورنکس از بخش یکپارچه‌سازی‌ها اجازه دهید، یا دوباره متصل کنید."
+            ],
+            "Open Integrations": [
+                "باز کردن یکپارچه‌سازی‌ها"
+            ],
+            "Not available in your MonoRanks yet.": [
+                "هنوز در مونورنکس شما در دسترس نیست."
+            ],
+            "MonoRanks could not be reached. The plugin tries again within the hour.": [
+                "دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر دوباره تلاش می‌کند."
+            ],
+            "Still loading. Reload this screen in a minute.": [
+                "هنوز در حال بارگذاری است. یک دقیقهٔ دیگر این صفحه را بازخوانی کنید."
+            ],
+            "Outreach": [
+                "جذب لینک"
+            ],
+            "%s to contact": [
+                "%s برای تماس",
+                "%s برای تماس"
+            ],
+            "All targets": [
+                "همهٔ هدف‌ها"
+            ],
+            "Every target is contacted. MonoRanks looks for new ones each week.": [
+                "با همهٔ هدف‌ها تماس گرفته شده. مونورنکس هر هفته هدف‌های تازه پیدا می‌کند."
+            ],
+            "Sites worth asking for a link or a mention. MonoRanks never sends email; you reach out and set the status there.": [
+                "سایت‌هایی که ارزش دارد از آن‌ها لینک یا نام‌بردن بخواهید. مونورنکس هرگز ایمیل نمی‌فرستد؛ تماس با شماست و وضعیت را در مونورنکس ثبت می‌کنید."
+            ],
+            "No outreach targets yet. MonoRanks looks for pages worth a link each week.": [
+                "هنوز هدفی برای جذب لینک نیست. مونورنکس هر هفته صفحه‌هایی را پیدا می‌کند که ارزش لینک‌گرفتن دارند."
+            ],
+            "Backlinks": [
+                "بک‌لینک‌ها"
+            ],
+            "All backlinks": [
+                "همهٔ بک‌لینک‌ها"
+            ],
+            "websites linking to you, won and lost in 28 days": [
+                "سایت‌هایی که به شما لینک می‌دهند، به‌دست‌آمده و ازدست‌رفته در ۲۸ روز"
+            ],
+            "%s website links to you": [
+                "%s سایت به شما لینک می‌دهد",
+                "%s سایت به شما لینک می‌دهند"
+            ],
+            "%s to review for spam": [
+                "%s مورد برای بررسی اسپم",
+                "%s مورد برای بررسی اسپم"
+            ],
+            "Newest strong links": [
+                "تازه‌ترین لینک‌های قوی"
+            ],
+            "strength %s": [
+                "قدرت %s"
+            ],
+            "No backlink data yet. MonoRanks refreshes it weekly.": [
+                "هنوز داده‌ای از بک‌لینک‌ها نیست. مونورنکس آن را هر هفته به‌روز می‌کند."
+            ],
+            "Competitors": [
+                "رقیبان"
+            ],
+            "%s keyword gap": [
+                "%s شکاف کلیدواژه",
+                "%s شکاف کلیدواژه"
+            ],
+            "All competitors": [
+                "همهٔ رقیبان"
+            ],
+            "suggested": [
+                "پیشنهادی"
+            ],
+            "%1$s shared keyword, %2$s where they rank higher": [
+                "%1$s کلیدواژهٔ مشترک، در %2$s مورد بالاتر از شما",
+                "%1$s کلیدواژهٔ مشترک، در %2$s مورد بالاتر از شما"
+            ],
+            "They rank for these, you do not": [
+                "آن‌ها برای این‌ها رتبه دارند، شما نه"
+            ],
+            "%s/mo": [
+                "%s در ماه"
+            ],
+            "No competitors yet. Pick some in MonoRanks to see the keywords they win.": [
+                "هنوز رقیبی نیست. در مونورنکس چند رقیب انتخاب کنید تا کلیدواژه‌هایی را که می‌برند ببینید."
+            ],
+            "up": [
+                "بالا"
+            ],
+            "down": [
+                "پایین"
+            ],
+            "%1$s → %2$s": [
+                "%1$s ← %2$s"
+            ],
+            "Keyword movers this week": [
+                "جابه‌جایی کلیدواژه‌ها در این هفته"
+            ],
+            "All keywords": [
+                "همهٔ کلیدواژه‌ها"
+            ],
+            "Up": [
+                "بالا رفته"
+            ],
+            "Down": [
+                "پایین آمده"
+            ],
+            "Your %s tracked keyword held its place this week.": [
+                "%s کلیدواژهٔ پیگیری‌شدهٔ شما این هفته جایگاهش را حفظ کرد.",
+                "%s کلیدواژهٔ پیگیری‌شدهٔ شما این هفته جایگاهشان را حفظ کردند."
+            ],
+            "No tracked keywords yet. Track some in MonoRanks to see them move here.": [
+                "هنوز کلیدواژهٔ پیگیری‌شده‌ای نیست. در مونورنکس چند کلیدواژه را پیگیری کنید تا جابه‌جایی‌شان را اینجا ببینید."
+            ],
+            "Latest client report": [
+                "تازه‌ترین گزارش مشتری"
+            ],
+            "Latest report": [
+                "تازه‌ترین گزارش"
+            ],
+            "Open report": [
+                "باز کردن گزارش"
+            ],
+            "No reports yet. Create a website or client report in MonoRanks to share progress.": [
+                "هنوز گزارشی نیست. برای به‌اشتراک‌گذاشتن پیشرفت، در مونورنکس گزارش سایت یا مشتری بسازید."
+            ],
+            "Open reports": [
+                "باز کردن گزارش‌ها"
+            ],
             "Connect MonoRanks": [
                 "اتصال مونورنکس"
             ],
@@ -231,11 +369,20 @@
                 "%s آمادهٔ اعمال",
                 "%s آمادهٔ اعمال"
             ],
+            "Connect Google Search Console in MonoRanks to see clicks here.": [
+                "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
+            ],
             "Overview": [
                 "نمای کلی"
             ],
             "Site": [
                 "سایت"
+            ],
+            "Health score": [
+                "امتیاز سلامت"
+            ],
+            "AEO score": [
+                "امتیاز AEO"
             ],
             "Could not load the overview.": [
                 "بارگذاری نمای کلی ممکن نشد."
@@ -255,18 +402,12 @@
             "Sync content now": [
                 "همگام‌سازی محتوا"
             ],
-            "Health score": [
-                "امتیاز سلامت"
-            ],
             "Technical, on-page, links, speed": [
                 "فنی، درون‌صفحه، پیوندها، سرعت"
             ],
             "Site average, %s page": [
                 "میانگین سایت، %s صفحه",
                 "میانگین سایت، %s صفحه"
-            ],
-            "AEO score": [
-                "امتیاز AEO"
             ],
             "Answer-first, structure, entities": [
                 "پاسخ‌محوری، ساختار، موجودیت‌ها"
@@ -279,9 +420,6 @@
             ],
             "From Google Search Console, through MonoRanks": [
                 "از گوگل سرچ کنسول، از طریق مونورنکس"
-            ],
-            "Connect Google Search Console in MonoRanks to see clicks here.": [
-                "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
             ],
             "%s ready": [
                 "%s آماده"

@@ -77,6 +77,7 @@ class Column {
 				/* translators: %s: relative time such as "2 days" */
 				'published' => Admin::digits( sprintf( __( '%s ago', 'monoranks' ), human_time_diff( get_post_time( 'U', true, $post ), time() ) ) ),
 				'app_url'   => Admin::out( $app, 'posts-column-unscored', 'posts-list' ),
+				'values'    => self::value_rows( $post ),
 			);
 		}
 		$audited = $score['audited_at'] ? strtotime( $score['audited_at'] ) : 0;
@@ -92,7 +93,41 @@ class Column {
 			'next_in'      => $next_in,
 			'page_url'     => Admin::out( $score['page_url'], 'posts-column', 'posts-list' ),
 			'overview_url' => Admin::overview_url(),
+			'values'       => self::value_rows( $post ),
 		);
+	}
+
+	/**
+	 * Extra lines for the card, administrators only: search clicks and revenue over 28 days, and lost links to win back
+	 * (PageValues). Read from the cache only; nothing is fetched while the list renders.
+	 *
+	 * @return array<int, array{0:string, 1:string}>
+	 */
+	public static function value_rows( $post ) {
+		static $cache = null;
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return array();
+		}
+		if ( null === $cache ) {
+			$cache = PageValues::cached();
+		}
+		$v = PageValues::for_url( (string) get_permalink( $post ), $cache );
+		if ( ! $v ) {
+			return array();
+		}
+		$rows = array();
+		$row  = $v['row'];
+		if ( 'ok' === $v['search'] ) {
+			$rows[] = array( __( 'Clicks, 28 days', 'monoranks' ), Admin::n( $row && null !== $row['clicks'] ? $row['clicks'] : 0 ) );
+		}
+		if ( 'ok' === $v['analytics'] && $row && ! empty( $row['revenue'] ) ) {
+			$rows[] = array( __( 'Revenue, 28 days', 'monoranks' ), PageValues::money( $row['revenue'], $v['currency'] ) );
+		}
+		if ( $v['lost'] ) {
+			/* translators: %s: number of links */
+			$rows[] = array( __( 'Lost links', 'monoranks' ), sprintf( _n( '%s to win back', '%s to win back', $v['lost']['count'], 'monoranks' ), Admin::n( $v['lost']['count'] ) ) );
+		}
+		return $rows;
 	}
 
 	/** "3 fixes ready · audited 2 days ago", "No open issues · audited …", "2 open issues · audited …". */

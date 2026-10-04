@@ -12,7 +12,18 @@ foreach ( array( 'monoranks', 'monoranks_connection', 'monoranks_sync', 'monoran
 wp_clear_scheduled_hook( 'monoranks_daily_sync' );
 wp_clear_scheduled_hook( 'monoranks_sync_step' );
 wp_clear_scheduled_hook( 'monoranks_refresh' );
+wp_clear_scheduled_hook( 'monoranks_grow_refresh' );
+wp_clear_scheduled_hook( 'monoranks_page_values_refresh' );
 delete_post_meta_by_key( '_monoranks_score' );
 delete_post_meta_by_key( '_monoranks_health' );
 delete_transient( 'monoranks_sync_lock' );
 delete_transient( 'monoranks_refreshing' );
+foreach ( array( 'monoranks_grow', 'monoranks_grow_lock', 'monoranks_page_values', 'monoranks_page_values_lock' ) as $monoranks_transient ) {
+	delete_transient( $monoranks_transient );
+}
+// Each post's cached reads for the post editor box (monoranks_post_<id>, twelve hours).
+global $wpdb;
+$monoranks_keys = $wpdb->get_col( $wpdb->prepare( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( '_transient_monoranks_post_' ) . '%' ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- one cleanup query
+foreach ( (array) $monoranks_keys as $monoranks_key ) {
+	delete_transient( substr( (string) $monoranks_key, strlen( '_transient_' ) ) );
+}

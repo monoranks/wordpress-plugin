@@ -4,7 +4,7 @@ Tags: seo, aeo, geo, ai, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.18
+Stable tag: 0.1.19
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,8 @@ Each problem comes with a plain explanation and a suggested fix, sorted by what 
 
 * **A MonoRanks screen in WordPress.** Your scores and how they moved this week, search clicks, the pages that need attention most, and fixes ready to apply.
 * **Scores in Posts and Pages.** A MonoRanks column shows each page's scores. Sort by score, or open the **Needs attention** view.
+* **What to do next.** Sites worth asking for a link, backlinks won and lost, your competitors and the keywords they win, keyword movers this week, and your latest report.
+* **MonoRanks in the post editor.** Each post's scores, Google clicks and top searches, revenue when Google Analytics is connected, lost links to win back, and the last change MonoRanks saw.
 * **One-click fixes.** Titles, meta descriptions, image alt text, canonical URLs, noindex and redirects.
 * **Answer-first openings.** A short opening paragraph for pages that bury their answer. You see a before/after first.
 * **AI crawler control.** Rules for GPTBot, ClaudeBot, PerplexityBot, Google-Extended and others in robots.txt, plus an llms.txt file.
@@ -61,7 +63,7 @@ The plugin talks to [MonoRanks](https://monoranks.com). **Nothing is sent until 
 
 **Never sent:** drafts, private or password-protected posts, comments, user emails or passwords, plugin or theme settings.
 
-**What is read back:** this site's audit results (scores, open issues, the fixes you approved, and search clicks if you connected Google Search Console in MonoRanks). They are cached in WordPress and shown to admins only, never on the public site.
+**What is read back:** this site's audit results (scores, open issues, the fixes you approved, and search clicks if you connected Google Search Console in MonoRanks), and this site's backlinks, outreach targets, competitors, keyword positions, reports, page history, and visits and revenue per page if you connected Google Analytics in MonoRanks. They are cached in WordPress and shown to admins only, never on the public site.
 
 **Legal:** [Terms of service](https://monoranks.com/legal/terms/) · [Privacy policy](https://monoranks.com/legal/privacy/)
 
@@ -126,6 +128,12 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.19 - 2026-10-04 =
+* **New:** "What to do next" on the Overview: outreach, backlinks, competitors and keyword movers.
+* **New:** A MonoRanks box in the post editor with search, visits, revenue and lost links for the page.
+* **Enhancement:** The Posts list card shows clicks, revenue and lost links.
+* **Fix:** Persian translation file header.
 
 = 0.1.18 =
 * After every fix MonoRanks writes (or undoes), the plugin clears that page from the active page cache, so the change shows right away. Adds WP-Optimize, Nginx Helper, Breeze, Kinsta, WP Engine and Pantheon to WP Rocket, LiteSpeed Cache, W3 Total Cache, WP Super Cache and SiteGround Optimizer.

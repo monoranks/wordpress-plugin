@@ -35,11 +35,27 @@ export type SettingsData = {
   profile_url: string; show_address: boolean; app_url: string; log: LogRow[]; labels: Record<string, string>;
 };
 
+/** One Grow section's state: ok, empty (no data yet), no_access (the key lacks the read scope), off, error, pending. */
+export type GrowState = 'ok' | 'empty' | 'no_access' | 'off' | 'error' | 'pending';
+type Section<T> = ({ state: 'ok' } & T) | { state: Exclude<GrowState, 'ok'>; link?: string; all_link?: string };
+
+export type GrowData = {
+  connected: boolean;
+  fetched?: string;
+  scope_url?: string;
+  outreach?: Section<{ to_contact: number; added: number; all: number; link: string; top: { title: string; domain: string; url: string; source: string; why: string; score: number | null; link: string }[] }>;
+  backlinks?: Section<{ domains: number; new: number; lost: number; review: number; rank: number | null; link: string; top: { domain: string; rank: number | null; link: string }[] }>;
+  competitors?: Section<{ link: string; gaps: number | null; top: { domain: string; picked: boolean; shared: number; above_us: number; reason: string }[]; keywords: { keyword: string; volume: number | null }[] }>;
+  keywords?: Section<{ tracked: number; link: string; up: { keyword: string; from: number; to: number; url: string }[]; down: { keyword: string; from: number; to: number; url: string }[] }>;
+  report?: Section<{ title: string; scope: string; client: boolean; created_at: string; when?: string; link: string; all_link: string }>;
+};
+
 export type ActionResult<T> = { ok: boolean; notice: Notice; data: T };
 
 export const api = {
   overview: () => apiFetch<OverviewData>({ path: `${NS}/overview` }),
   settings: () => apiFetch<SettingsData>({ path: `${NS}/settings` }),
+  grow: () => apiFetch<GrowData>({ path: `${NS}/grow` }),
   apply: (fix: string) => apiFetch<ActionResult<OverviewData>>({ path: `${NS}/apply`, method: 'POST', data: { fix } }),
   undo: (row: LogRow, screen: 'overview' | 'settings') => apiFetch<ActionResult<OverviewData | SettingsData>>({ path: `${NS}/undo`, method: 'POST', data: { entry: row.index, at: row.at, screen } }),
   sync: (screen: 'overview' | 'settings') => apiFetch<ActionResult<OverviewData | SettingsData>>({ path: `${NS}/sync`, method: 'POST', data: { screen } }),
