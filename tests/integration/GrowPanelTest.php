@@ -33,6 +33,8 @@ class GrowPanelTest extends TestCase {
 		require_once ABSPATH . 'wp-admin/includes/template.php';
 		require_once ABSPATH . 'wp-admin/includes/class-wp-screen.php';
 		require_once ABSPATH . 'wp-admin/includes/screen.php';
+		// WordPress 6.0's WP_Screen asks use_block_editor_for_post_type(), which lives here.
+		require_once ABSPATH . 'wp-admin/includes/post.php';
 		$this->conn = get_option( 'monoranks_connection', null );
 		// Pretty permalinks, so the post has a path of its own to match MonoRanks' rows on.
 		$this->structure = get_option( 'permalink_structure' );
