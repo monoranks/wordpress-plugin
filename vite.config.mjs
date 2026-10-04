@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 
 /**
  * The admin app is built into build/ (main.js, main.css) next to the Posts column's stylesheet (column.css, from
- * resources/assets/) and enqueued by src/Assets.php. build/ is committed so a checkout without Node still works.
+ * resources/assets/) and the post editor box's (post-panel.css) and enqueued by src/Assets.php. build/ is committed so a checkout without Node still works.
  *
  * `@wordpress/i18n` and `@wordpress/api-fetch` are never bundled: WordPress ships both, and wp_set_script_translations()
  * loads the catalogue into WordPress's own wp.i18n, so a bundled copy would read an empty catalogue. The shim below turns
@@ -51,6 +51,7 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, 'resources/admin/src/main.tsx'),
         column: resolve(import.meta.dirname, 'resources/assets/column.css'),
+        'post-panel': resolve(import.meta.dirname, 'resources/assets/post-panel.css'),
       },
       output: {
         format: 'es',

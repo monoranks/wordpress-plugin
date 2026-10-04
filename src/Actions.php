@@ -26,6 +26,7 @@ class Actions {
 		if ( isset( $res['body']['site_id'] ) ) {
 			Connection::update( array( 'site_id' => sanitize_text_field( (string) $res['body']['site_id'] ) ) );
 		}
+		Grow::clear_all();
 		Sync::start();
 		Insights::refresh_soon();
 		return 'connected';

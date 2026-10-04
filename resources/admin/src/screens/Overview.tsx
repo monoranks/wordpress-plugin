@@ -11,6 +11,7 @@ import type { Screen } from '@/lib/screen';
 import { fmt } from '@/lib/format';
 import { Button } from '@/components/ui/button';
 import { Badge, Dot } from '@/components/ui/badge';
+import { GrowCards } from '@/screens/Grow';
 
 const th = 'whitespace-nowrap border-b border-border px-[10px] py-[11px] text-start text-[12px] font-medium text-mute';
 const td = 'border-b border-grid px-[10px] py-3 align-middle group-last:border-b-0';
@@ -73,7 +74,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
       {error && <NoticeBox notice={{ type: 'error', text: error }} />}
       {!data && !error && <Skeleton />}
       {data && (!data.connected || data.revoked) && <ConnectSteps revoked={data.revoked} go={go} />}
-      {data && data.connected && !data.revoked && !o && <Waiting data={data} />}
+      {data && data.connected && !data.revoked && !o && <><Waiting data={data} /><GrowCards /></>}
       {data && o && (
         <>
           <div className="grid grid-cols-4 gap-[14px] max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
@@ -103,6 +104,8 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
               </div>
             </Card>
           </div>
+
+          {!data.revoked && <GrowCards />}
 
           <div className="grid grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-start gap-5 max-[960px]:grid-cols-1">
             <Card>

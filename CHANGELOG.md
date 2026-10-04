@@ -2,6 +2,15 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+- **What to do next** on the Overview: four cards and a line under the scores. Outreach (targets to contact, the top three with why), Backlinks (websites won and lost in 28 days, how many to review for spam, the newest strong ones), Competitors (the top three, how many keywords they rank for and this site does not, the top three of those), Keyword movers (tracked keywords up and down since a week ago) and the latest website or client report. Each card says plainly when the key cannot read it yet, when MonoRanks has it switched off, or when there is no data. Read from MonoRanks API v1, cached for six hours.
+- A **MonoRanks box in the post editor** (block and classic editor), for administrators: the page's scores, Google search clicks, impressions, average position and top searches over 28 days, visits from search, key events and revenue when Google Analytics is connected in MonoRanks, lost links to win back, and the last change MonoRanks saw on the page. It loads after the editor, so opening a post never waits.
+- The card in the Posts and Pages column shows administrators the page's clicks and revenue over 28 days and its lost links.
+- Needs the `search:read` and `analytics:read` scopes on the site's key, which a WordPress pairing gives once monoranks/monoranks#199 is released. Older keys keep working; those cards point to the website's Integrations screen to allow them.
+- The Persian catalogue's header had Persian digits in its charset and plural rule (`UTF-۸`, `n > ۱`); they are Latin again.
+- `docs/api.md` lists every route, scope, cache time and how each answer is shown.
+
 ## [0.1.18] — unreleased
 
 - After every write and undo, the plugin asks the active page caches to drop the page that changed, so the new title, description, canonical, noindex, alt text, opening paragraph or redirect shows right away instead of when the cache expires (#11). SEO fields and the opening paragraph purge the post's URL, plus the home page when the post is the static front page; alt text purges the post the image belongs to; a redirect purges its source URL; llms.txt and the AI crawler rules purge `/llms.txt` or `/robots.txt` as before.

@@ -392,6 +392,7 @@ class Insights {
 		wp_clear_scheduled_hook( self::REFRESH_HOOK );
 		delete_post_meta_by_key( self::META );
 		delete_post_meta_by_key( self::META_HEALTH );
+		Grow::clear_all();
 	}
 
 	/** Drops one applied fix from the cached overview so the screen does not offer it twice. */

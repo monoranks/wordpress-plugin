@@ -1,0 +1,22 @@
+/*
+ * The MonoRanks box in the post editor (src/PostPanel.php, resources/views/post-panel.php). Built by Vite into
+ * build/post-panel.css; the score rings come from build/column.css, enqueued with it. Light palette, as the editor's
+ * side column is light.
+ */
+.mr-panel { --ink: #14181f; --muted: #646d7a; --line: #cbd2db; --good: #0ca30c; --warn: #e6a100; --critical: #d03b3b; --grayTrack: #e6e9ee; color: var(--ink); font-size: 13px; line-height: 1.45; }
+.mr-panel .mr-panel-section { padding: 10px 0; border-top: 1px solid #e6e9ee; }
+.mr-panel .mr-panel-section:first-child { padding-top: 0; border-top: 0; }
+.mr-panel .mr-panel-h { margin: 0 0 6px; font-size: 12px; font-weight: 600; color: var(--ink); }
+.mr-panel .mr-panel-rings { display: flex; gap: 16px; margin-bottom: 6px; }
+.mr-panel .mr-panel-note, .mr-panel-note { margin: 0; color: var(--muted, #646d7a); font-size: 12px; }
+.mr-panel .mr-panel-sub { margin: 8px 0 4px; font-size: 12px; color: var(--muted); }
+.mr-panel .mr-panel-kv { display: grid; grid-template-columns: 1fr auto; gap: 3px 12px; margin: 0; }
+.mr-panel .mr-panel-kv dt { color: var(--muted); }
+.mr-panel .mr-panel-kv dd { margin: 0; text-align: end; font-variant-numeric: tabular-nums; font-weight: 500; }
+.mr-panel .mr-panel-list { margin: 0; padding: 0; list-style: none; }
+.mr-panel .mr-panel-list li { margin: 0 0 3px; overflow-wrap: anywhere; }
+.mr-panel .mr-panel-mute { color: var(--muted); font-size: 12px; }
+.mr-panel .mr-panel-foot { margin: 6px 0 0; padding-top: 10px; border-top: 1px solid #e6e9ee; }
+.mr-panel a { color: #1d5bbf; }
+.mr-panel .mr-arrow { display: inline-block; }
+[dir="rtl"] .mr-panel .mr-arrow { transform: scaleX(-1); }

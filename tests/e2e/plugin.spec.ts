@@ -68,3 +68,19 @@ test('nothing is published before an approval', async ({ request }) => {
   const llms = await request.get('/llms.txt', { maxRedirects: 0 });
   expect(llms.status()).not.toBe(200);
 });
+
+test('not connected: no "What to do next" cards, no editor box, and the read routes stay admin-only', async ({ page, request }) => {
+  await page.goto('/wp-admin/admin.php?page=monoranks');
+  await expect(page.getByText('Connect MonoRanks', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'What to do next' })).toHaveCount(0);
+  const nonce = await page.evaluate(() => (window as unknown as { wpApiSettings?: { nonce: string } }).wpApiSettings?.nonce ?? '');
+  if (nonce) {
+    const grow = await page.request.get('/wp-json/monoranks/v1/admin/grow', { headers: { 'X-WP-Nonce': nonce } });
+    expect(grow.ok()).toBeTruthy();
+    expect(await grow.json()).toEqual({ connected: false });
+  }
+  expect((await request.get('/wp-json/monoranks/v1/admin/grow')).status()).toBe(401);
+  expect((await request.get('/wp-json/monoranks/v1/admin/post/1')).status()).toBe(401);
+  await page.goto('/wp-admin/post-new.php?post_type=page');
+  await expect(page.locator('#monoranks-panel')).toHaveCount(0);
+});

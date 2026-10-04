@@ -48,6 +48,9 @@ add_action( \MonoRanks\Sync::DAILY_HOOK, array( 'MonoRanks\\Sync', 'daily' ) );
 \MonoRanks\Assets::register();
 \MonoRanks\Column::register();
 \MonoRanks\Insights::register();
+\MonoRanks\Grow::register();
+\MonoRanks\PageValues::register();
+\MonoRanks\PostPanel::register();
 
 register_deactivation_hook( __FILE__, array( 'MonoRanks\\Sync', 'unschedule' ) );
 // Deleting the plugin runs uninstall.php, which is the only cleanup path (WordPress ignores register_uninstall_hook when

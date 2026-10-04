@@ -78,5 +78,8 @@ class Sync {
 	public static function unschedule() {
 		wp_clear_scheduled_hook( self::DAILY_HOOK );
 		wp_clear_scheduled_hook( self::STEP_HOOK );
+		// The one-off pulls of the Grow cards and page values, so a deactivated plugin leaves no events behind.
+		wp_clear_scheduled_hook( Grow::REFRESH_HOOK );
+		wp_clear_scheduled_hook( PageValues::REFRESH_HOOK );
 	}
 }
