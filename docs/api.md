@@ -123,7 +123,7 @@ The Overview's **What to do next** cards and the **MonoRanks** box in the post e
 
 The 28 days end three days ago, the last day of final Search Console data, as MonoRanks uses by default.
 
-Keys made by a WordPress pairing once monoranks/monoranks#199 is released carry `search:read` and `analytics:read` next to the three locked plugin scopes. Older keys have only `content:write`, `sites:read` and `pages:read`: the cards then say the key cannot read this yet and link to the website's Integrations screen in MonoRanks, where the owner can tick the scopes, or the site can be connected again.
+Keys made by a WordPress pairing once monoranks/monoranks#199 is released carry `search:read` and `analytics:read` next to the three locked plugin scopes. Plugin keys paired earlier get the two scopes once, from a one-time job in the same release. If the owner unticks them, the cards say the key cannot read this yet and link to the website's Integrations screen in MonoRanks.
 
 How each answer is used:
 
