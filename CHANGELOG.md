@@ -2,6 +2,13 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## Unreleased
+
+- **Enhancement:** Each fix on the Overview reads "Image alt on <page>" and shows the old value, an arrow and the new one, with the image name.
+- **Enhancement:** The Reports panel lists the website's weekly emails (name, next send, recipients, on or off) next to its reports.
+- **Fix:** A fix whose value was changed in WordPress after it was reviewed is no longer listed as ready to apply. It shows under "Needs review in MonoRanks" with a link, and MonoRanks moves it back to review.
+- **Fix:** The apply error no longer says the whole page changed; it names what happened.
+
 ## v0.1.19 - 2026-10-04
 
 - **New:** "What to do next" on the Overview: outreach, backlinks, competitors and keyword movers.

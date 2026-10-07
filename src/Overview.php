@@ -13,6 +13,8 @@ class Overview {
 		$conn      = Connection::get();
 		$connected = Connection::has_key();
 		$overview  = $connected ? Insights::overview() : null;
+		// A fix whose image alt was changed since the review is shown as needing review, not as ready (checked here, never written).
+		$overview  = $overview ? Insights::split_stale( $overview, array( Writer::class, 'current_value' ) ) : $overview;
 		$app       = $connected ? $conn['api_base'] : MONORANKS_API_BASE;
 		// Link straight to this website in MonoRanks: from the overview when it is there, else from the id stored at pairing.
 		$site_id   = $overview && ! empty( $overview['site_id'] ) ? (string) $overview['site_id'] : ( ! empty( $conn['site_id'] ) ? (string) $conn['site_id'] : '' );

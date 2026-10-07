@@ -22,7 +22,9 @@ export type OverviewData = {
     /** Fixes MonoRanks can write once approved there; null from MonoRanks before 1.0.41. */
     to_review?: null | { total: number; by_field: Record<string, number>; needs_value?: number | null; review_url: string; geo_url: string };
     attention: { post_id: number; url: string; title: string; health: Score; aeo: Score; issue: string; page_url: string }[];
-    ready: { id: string; field: string; post_id: number; title: string; before: string | null; after: string; page_url: string; from: string; op: string }[];
+    ready: { id: string; field: string; post_id: number; title: string; url?: string; image?: string; note?: string; before: string | null; after: string; page_url: string; from: string; op: string }[];
+    /** Approved, then changed in WordPress: reviewed again in MonoRanks, never applied from here. */
+    needs_review: { id: string; field: string; post_id: number; title: string; url?: string; image?: string; note?: string; before: string | null; after: string; page_url: string; from: string; op: string }[];
   };
   host: string; audited: string; next_audit: string; fetched: string; last_sent: string; items: number;
   app_url: string; log: LogRow[]; labels: Record<string, string>;
@@ -47,7 +49,7 @@ export type GrowData = {
   backlinks?: Section<{ domains: number; new: number; lost: number; review: number; rank: number | null; link: string; top: { domain: string; rank: number | null; link: string }[] }>;
   competitors?: Section<{ link: string; gaps: number | null; top: { domain: string; picked: boolean; shared: number; above_us: number; reason: string }[]; keywords: { keyword: string; volume: number | null }[] }>;
   keywords?: Section<{ tracked: number; link: string; up: { keyword: string; from: number; to: number; url: string }[]; down: { keyword: string; from: number; to: number; url: string }[] }>;
-  report?: Section<{ title: string; scope: string; client: boolean; created_at: string; when?: string; link: string; all_link: string }>;
+  report?: Section<{ title: string; scope: string; client: boolean; created_at: string; when?: string; link: string; all_link: string; reports?: { title: string; scope: string; client: boolean; when?: string; link: string }[]; emails?: { name: string; enabled: boolean; recipients: number; next: string; next_label?: string; last_label?: string; link: string }[] }>;
 };
 
 export type ActionResult<T> = { ok: boolean; notice: Notice; data: T };

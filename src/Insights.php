@@ -158,6 +158,7 @@ class Insights {
 			return $state;
 		}
 		$overview            = self::normalise_overview( $res['body'] );
+		$overview            = $overview ? self::split_stale( $overview, array( Writer::class, 'current_value' ), true ) : $overview;
 		$state['status']     = $overview ? 'ok' : 'none';
 		$state['overview']   = $overview;
 		$state['fetched_at'] = gmdate( 'c' );
@@ -275,6 +276,7 @@ class Insights {
 			),
 			'attention'     => array(),
 			'ready'         => array(),
+			'needs_review'  => array(),
 		);
 		// Fixes MonoRanks can write once someone approves them there (MonoRanks 1.0.41+); absent from older MonoRanks.
 		$out['to_review'] = null;
@@ -327,26 +329,34 @@ class Insights {
 				);
 			}
 		}
-		if ( isset( $o['ready'] ) && is_array( $o['ready'] ) ) {
-			foreach ( array_slice( $o['ready'], 0, 50 ) as $row ) {
-				if ( ! is_array( $row ) || empty( $row['id'] ) || empty( $row['field'] ) || ! in_array( (string) $row['field'], Writer::FIELDS, true ) ) {
-					continue;
+		// Fixes approved in MonoRanks and waiting to be written (`ready`), and fixes whose value changed in WordPress after the
+		// review (`needs_review`, MonoRanks 1.8+): those are reviewed again in MonoRanks, never written from here.
+		foreach ( array( 'ready', 'needs_review' ) as $list ) {
+			$out[ $list ] = array();
+			if ( isset( $o[ $list ] ) && is_array( $o[ $list ] ) ) {
+				foreach ( array_slice( $o[ $list ], 0, 50 ) as $row ) {
+					if ( ! is_array( $row ) || empty( $row['id'] ) || empty( $row['field'] ) || ! in_array( (string) $row['field'], Writer::FIELDS, true ) ) {
+						continue;
+					}
+					$out[ $list ][] = array(
+						'id'            => $str( $row['id'], 80 ),
+						'field'         => (string) $row['field'],
+						'post_id'       => isset( $row['post_id'] ) ? (int) $row['post_id'] : 0,
+						'attachment_id' => isset( $row['attachment_id'] ) ? (int) $row['attachment_id'] : 0,
+						'from'          => $str( isset( $row['from'] ) ? $row['from'] : '', 2000 ),
+						'op'            => isset( $row['op'] ) && 'remove' === $row['op'] ? 'remove' : 'insert_top',
+						'title'         => $str( isset( $row['title'] ) ? $row['title'] : '' ),
+						'url'           => $url( isset( $row['url'] ) ? $row['url'] : '' ),
+						'image'         => $str( isset( $row['image'] ) ? $row['image'] : '', 200 ),
+						'note'          => $str( isset( $row['note'] ) ? $row['note'] : '', 300 ),
+						'before'        => isset( $row['before'] ) && null !== $row['before'] ? mb_substr( (string) $row['before'], 0, 60000 ) : null,
+						'after'         => isset( $row['after'] ) ? mb_substr( (string) $row['after'], 0, 60000 ) : '',
+						'page_url'      => $url( isset( $row['page_url'] ) ? $row['page_url'] : '' ),
+					);
 				}
-				$out['ready'][] = array(
-					'id'            => $str( $row['id'], 80 ),
-					'field'         => (string) $row['field'],
-					'post_id'       => isset( $row['post_id'] ) ? (int) $row['post_id'] : 0,
-					'attachment_id' => isset( $row['attachment_id'] ) ? (int) $row['attachment_id'] : 0,
-					'from'          => $str( isset( $row['from'] ) ? $row['from'] : '', 2000 ),
-					'op'            => isset( $row['op'] ) && 'remove' === $row['op'] ? 'remove' : 'insert_top',
-					'title'         => $str( isset( $row['title'] ) ? $row['title'] : '' ),
-					'before'        => isset( $row['before'] ) && null !== $row['before'] ? mb_substr( (string) $row['before'], 0, 60000 ) : null,
-					'after'         => isset( $row['after'] ) ? mb_substr( (string) $row['after'], 0, 60000 ) : '',
-					'page_url'      => $url( isset( $row['page_url'] ) ? $row['page_url'] : '' ),
-				);
 			}
 		}
-		$has_anything = null !== $out['health'] || null !== $out['aeo'] || $out['pages_scored'] > 0 || $out['attention'] || $out['ready'] || $out['traffic'];
+		$has_anything = null !== $out['health'] || null !== $out['aeo'] || $out['pages_scored'] > 0 || $out['attention'] || $out['ready'] || $out['needs_review'] || $out['traffic'];
 		return $has_anything ? $out : null;
 	}
 
@@ -403,6 +413,53 @@ class Insights {
 		}
 		$state['overview']['ready']          = array_values( array_filter( $state['overview']['ready'], static function ( $row ) use ( $ids ) { return ! in_array( $row['id'], $ids, true ); } ) );
 		$state['overview']['fixes']['ready'] = max( 0, (int) $state['overview']['fixes']['ready'] - count( $ids ) );
+		update_option( self::OPTION, $state, false );
+	}
+	/**
+	 * Moves the ready fixes whose field already holds another value here (an image whose alt text was changed since the
+	 * review, say) into needs_review, so they are not offered as ready: applying them would be refused. `$current` returns
+	 * the value WordPress holds now, or null when this fix cannot be checked from here. With $tell, MonoRanks hears about
+	 * each one so it moves the change back to review too.
+	 */
+	public static function split_stale( array $overview, callable $current, $tell = false ) {
+		if ( empty( $overview['ready'] ) ) {
+			return $overview;
+		}
+		$keep  = array();
+		$moved = array();
+		foreach ( $overview['ready'] as $fix ) {
+			$now = call_user_func( $current, $fix );
+			if ( null !== $now && null !== $fix['before'] && (string) $now !== (string) $fix['before'] ) {
+				$fix['note'] = '';
+				$moved[]     = array( 'fix' => $fix, 'current' => (string) $now );
+			} else {
+				$keep[] = $fix;
+			}
+		}
+		if ( ! $moved ) {
+			return $overview;
+		}
+		$overview['ready']                = $keep;
+		$overview['fixes']['ready']       = max( 0, (int) $overview['fixes']['ready'] - count( $moved ) );
+		$overview['needs_review']         = array_merge( isset( $overview['needs_review'] ) ? $overview['needs_review'] : array(), array_column( $moved, 'fix' ) );
+		if ( $tell ) {
+			$results = array();
+			foreach ( $moved as $m ) {
+				$results[] = array( 'id' => $m['fix']['id'], 'ok' => false, 'error' => 'changed_since_preview', 'current' => $m['current'] );
+			}
+			Api::post( '/fixes', array( 'results' => $results ), 5 );
+		}
+		return $overview;
+	}
+
+	/** Moves one fix that was refused as out of date from ready to needs_review in the cached overview. */
+	public static function move_to_review( $id, $current ) {
+		$state = self::state();
+		if ( empty( $state['overview']['ready'] ) ) {
+			return;
+		}
+		$ids                  = array( $id );
+		$state['overview']    = self::split_stale( $state['overview'], static function ( $fix ) use ( $ids, $current ) { return in_array( $fix['id'], $ids, true ) ? $current : null; } );
 		update_option( self::OPTION, $state, false );
 	}
 }

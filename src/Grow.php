@@ -65,6 +65,17 @@ class Grow {
 		}
 		if ( 'ok' === $out['report']['state'] ) {
 			$out['report']['when'] = Admin::ago( $out['report']['created_at'] );
+			foreach ( array( 'reports', 'emails' ) as $list ) {
+				foreach ( isset( $out['report'][ $list ] ) && is_array( $out['report'][ $list ] ) ? array_keys( $out['report'][ $list ] ) : array() as $i ) {
+					$row = $out['report'][ $list ][ $i ];
+					if ( 'reports' === $list ) {
+						$out['report']['reports'][ $i ]['when'] = Admin::ago( $row['created_at'] );
+					} else {
+						$out['report']['emails'][ $i ]['next_label'] = self::day( $row['next'] );
+						$out['report']['emails'][ $i ]['last_label'] = Admin::ago( $row['last'] );
+					}
+				}
+			}
 		}
 		$out['fetched']   = Admin::ago( isset( $cache['fetched_at'] ) ? $cache['fetched_at'] : '' );
 		$out['scope_url'] = self::app_link( '/integrations' );
@@ -316,31 +327,59 @@ class Grow {
 		);
 	}
 
-	/** The newest report about this website (a site summary or its client's monthly report). */
+	/** The newest reports about this website (a site summary or its client's monthly report) and the weekly emails that cover it. */
 	public static function pull_report( $timeout = 10 ) {
-		$res = Api::v1_get( 'reports?limit=1', $timeout );
+		$res = Api::v1_get( 'reports?limit=5', $timeout );
 		if ( 200 !== $res['code'] || ! is_array( $res['body'] ) ) {
 			return array( 'state' => Api::v1_state( $res ) );
 		}
 		return self::normalise_report( $res['body'] );
 	}
 
+	/**
+	 * `weeklyEmails` (MonoRanks 1.8+) lists the weekly emails; older answers have none. The newest report keeps its own
+	 * fields (title, scope, link) for the Overview; `reports` and `emails` feed the list on the Reports panel.
+	 */
 	public static function normalise_report( array $b ) {
-		$rows = self::rows( $b, 'reports', 1 );
-		$all  = self::url( isset( $b['link'] ) ? $b['link'] : '' );
-		if ( ! $rows ) {
+		$rows   = self::rows( $b, 'reports', 5 );
+		$mails  = self::rows( $b, 'weeklyEmails', 10 );
+		$all    = self::url( isset( $b['link'] ) ? $b['link'] : '' );
+		$emails = array();
+		foreach ( $mails as $m ) {
+			$emails[] = array(
+				'name'       => self::str( isset( $m['name'] ) ? $m['name'] : '', 120 ),
+				'enabled'    => ! empty( $m['enabled'] ),
+				'recipients' => (int) self::int( isset( $m['recipients'] ) ? $m['recipients'] : 0 ),
+				'next'       => self::str( isset( $m['nextSendAt'] ) ? $m['nextSendAt'] : '', 40 ),
+				'last'       => self::str( isset( $m['lastSentAt'] ) ? $m['lastSentAt'] : '', 40 ),
+				'link'       => self::url( isset( $m['link'] ) ? $m['link'] : '' ),
+			);
+		}
+		$reports = array();
+		foreach ( $rows as $r ) {
+			$reports[] = array(
+				'title'      => self::str( isset( $r['title'] ) ? $r['title'] : '', 120 ),
+				'scope'      => self::str( isset( $r['scope'] ) ? $r['scope'] : '', 120 ),
+				'client'     => isset( $r['kind'] ) && 'client_summary' === $r['kind'],
+				'created_at' => self::str( isset( $r['createdAt'] ) ? $r['createdAt'] : '', 40 ),
+				'link'       => self::url( isset( $r['link'] ) ? $r['link'] : '' ),
+			);
+		}
+		if ( ! $reports && ! $emails ) {
 			return array( 'state' => 'empty', 'all_link' => $all );
 		}
-		$r = $rows[0];
-		return array(
-			'state'      => 'ok',
-			'title'      => self::str( isset( $r['title'] ) ? $r['title'] : '', 120 ),
-			'scope'      => self::str( isset( $r['scope'] ) ? $r['scope'] : '', 120 ),
-			'client'     => isset( $r['kind'] ) && 'client_summary' === $r['kind'],
-			'created_at' => self::str( isset( $r['createdAt'] ) ? $r['createdAt'] : '', 40 ),
-			'link'       => self::url( isset( $r['link'] ) ? $r['link'] : '' ),
-			'all_link'   => $all,
+		$first = $reports ? $reports[0] : array( 'title' => '', 'scope' => '', 'client' => false, 'created_at' => '', 'link' => '' );
+		return array_merge(
+			array( 'state' => 'ok' ),
+			$first,
+			array( 'all_link' => $all, 'reports' => $reports, 'emails' => $emails )
 		);
+	}
+
+	/** A day such as 2026-10-12 in the site's date format; empty when it is not a day. */
+	public static function day( $ymd ) {
+		$ts = preg_match( '/^\d{4}-\d{2}-\d{2}$/', (string) $ymd ) ? strtotime( $ymd . ' 12:00:00 UTC' ) : 0;
+		return $ts ? Admin::digits( wp_date( get_option( 'date_format' ), $ts, new \DateTimeZone( 'UTC' ) ) ) : '';
 	}
 
 	// ---- helpers, shared with PageValues ----

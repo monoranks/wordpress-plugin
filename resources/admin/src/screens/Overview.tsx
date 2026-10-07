@@ -25,6 +25,34 @@ function relativePath(url: string) {
   try { const u = new URL(url); return u.pathname + u.search; } catch { return url; }
 }
 
+type Fix = NonNullable<OverviewData['overview']>['ready'][number];
+
+/** One fix: what it changes, where, and old to new, so the same text never shows twice without saying which is which. */
+function FixText({ fix, labels }: { fix: Fix; labels: Record<string, string> }) {
+  const where = fix.title || (fix.field === 'redirect' ? fix.from : __('Site', 'monoranks'));
+  const old = fix.before ? excerpt(fix.before, 90) : null;
+  return (
+    <div className="grid min-w-0 flex-1 gap-1">
+      <div className="flex min-w-0 flex-wrap items-center gap-2">
+        <Badge>{labels[fix.field] ?? fix.field}</Badge>
+        <span className="min-w-0 truncate text-[12px] text-ink2">{fix.field === 'redirect' || fix.field === 'ai_bots' || fix.field === 'llms_txt' ? <b className="font-semibold text-ink"><bdi>{where}</bdi></b> : <bdi>{sprintf(__('on %s', 'monoranks'), where)}</bdi>}</span>
+      </div>
+      {fix.field === 'alt' && fix.image && <span className="truncate text-[11px] text-mute"><bdi>{sprintf(__('Image: %s', 'monoranks'), fix.image)}</bdi></span>}
+      {fix.field === 'content' ? (
+        <span className="text-[12px] text-mute">{__('Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first.', 'monoranks')}</span>
+      ) : (
+        <span className="flex min-w-0 flex-wrap items-baseline gap-x-1.5 text-[12px]">
+          <span className="text-mute">{old ? <s><bdi>{old}</bdi></s> : __('(empty)', 'monoranks')}</span>
+          <span aria-hidden="true">→</span>
+          <span className="sr-only">{__('changes to', 'monoranks')}</span>
+          <b className="font-semibold"><bdi>{excerpt(fix.after, 120)}</bdi></b>
+        </span>
+      )}
+      {fix.note && <span className="text-[11px] text-mute"><bdi>{fix.note}</bdi></span>}
+    </div>
+  );
+}
+
 /** MonoRanks → Overview: site scores, search clicks, pages needing attention, fixes ready to apply, recent changes. */
 export function Overview({ go }: { go: (next: Screen) => void }) {
   const s = adminSettings();
@@ -155,20 +183,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
                 {o.ready.length === 0 && !review && <Empty title={__('No fixes waiting', 'monoranks')} text={__('Fixes you approve in MonoRanks appear here, ready to write into WordPress.', 'monoranks')} />}
                 {o.ready.map((fix) => (
                   <div key={fix.id} className="flex items-start gap-3 border-b border-grid py-3 last-of-type:border-b-0">
-                    <div className="grid min-w-0 flex-1 gap-1">
-                      <div className="flex min-w-0 flex-wrap items-center gap-2">
-                        <Badge>{data.labels[fix.field] ?? fix.field}</Badge>
-                        <b className="min-w-0 truncate text-[12px] font-semibold"><bdi>{fix.title || (fix.field === 'redirect' ? fix.from : __('Site', 'monoranks'))}</bdi></b>
-                      </div>
-                      {fix.field === 'content' ? (
-                        <span className="text-[12px] text-mute">{__('Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first.', 'monoranks')}</span>
-                      ) : (
-                        <>
-                          {fix.before && <s className="truncate text-[12px] text-mute"><bdi>{excerpt(fix.before, 90)}</bdi></s>}
-                          <span className="text-[12px]"><bdi>{excerpt(fix.after, 120)}</bdi></span>
-                        </>
-                      )}
-                    </div>
+                    <FixText fix={fix} labels={data.labels} />
                     {fix.field === 'content' && fix.page_url ? (
                       <Button size="sm" asChild><a href={out(fix.page_url, 'review-fix')} target="_blank" rel="noopener">{__('Review', 'monoranks')}</a></Button>
                     ) : (
@@ -179,6 +194,20 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
                 {o.ready.length > 0 && <div className="pt-3 text-[11px] text-mute">{__('Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days.', 'monoranks')}</div>}
               </CardBody>
             </Card>
+            {(o.needs_review ?? []).length > 0 && (
+              <Card>
+                <CardHeader><CardTitle>{__('Needs review in MonoRanks', 'monoranks')}<Badge>{fmt(o.needs_review.length)}</Badge></CardTitle></CardHeader>
+                <CardBody className="flex flex-col pt-1.5">
+                  <p className="m-0 pb-1 text-[12px] text-ink2">{__('These changed in WordPress after they were reviewed, so they are not applied from here. Review them again in MonoRanks.', 'monoranks')}</p>
+                  {o.needs_review.map((fix) => (
+                    <div key={fix.id} className="flex items-start gap-3 border-b border-grid py-3 last-of-type:border-b-0">
+                      <FixText fix={fix} labels={data.labels} />
+                      <Button size="sm" asChild><a href={out(fix.page_url || o.site_url, 'review-fix')} target="_blank" rel="noopener">{__('Review in MonoRanks', 'monoranks')}</a></Button>
+                    </div>
+                  ))}
+                </CardBody>
+              </Card>
+            )}
           </div>
 
           <Card>
