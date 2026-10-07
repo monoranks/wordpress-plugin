@@ -4,7 +4,7 @@ Tags: seo, aeo, geo, ai, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.19
+Stable tag: 0.1.20
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,7 +129,7 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 
 == Changelog ==
 
-= Unreleased =
+= 0.1.20 - 2026-10-07 =
 * **Enhancement:** Each fix on the Overview reads "Image alt on <page>" and shows the old value, an arrow and the new one, with the image name.
 * **Enhancement:** The Reports panel lists the website's weekly emails (name, next send, recipients, on or off) next to its reports.
 * **Fix:** A fix whose value was changed in WordPress after it was reviewed is no longer listed as ready to apply. It shows under "Needs review in MonoRanks" with a link, and MonoRanks moves it back to review.

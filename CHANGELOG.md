@@ -2,7 +2,7 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
-## Unreleased
+## v0.1.20 - 2026-10-07
 
 - **Enhancement:** Each fix on the Overview reads "Image alt on <page>" and shows the old value, an arrow and the new one, with the image name.
 - **Enhancement:** The Reports panel lists the website's weekly emails (name, next send, recipients, on or off) next to its reports.
