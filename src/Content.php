@@ -40,6 +40,32 @@ class Content {
 		if ( $thumb && ! wp_list_filter( $images, array( 'id' => $thumb ) ) ) {
 			$images[] = array( 'id' => (int) $thumb, 'src' => wp_get_attachment_url( $thumb ), 'alt' => (string) get_post_meta( $thumb, '_wp_attachment_image_alt', true ) );
 		}
+		// Images in the body: WordPress renders the alt attribute written there, not the attachment's stored alt, so both go to MonoRanks.
+		foreach ( ImageAlt::images( $post->post_content ) as $found ) {
+			if ( ! $found['id'] ) {
+				continue;
+			}
+			$content_alt = null === $found['alt'] ? '' : $found['alt'];
+			$at          = null;
+			foreach ( $images as $i => $known ) {
+				if ( (int) $known['id'] === $found['id'] ) {
+					$at = $i;
+					break;
+				}
+			}
+			if ( null === $at ) {
+				$src = wp_get_attachment_url( $found['id'] );
+				if ( ! $src ) {
+					continue;
+				}
+				$images[] = array( 'id' => $found['id'], 'src' => $src, 'alt' => (string) get_post_meta( $found['id'], '_wp_attachment_image_alt', true ) );
+				$at       = count( $images ) - 1;
+			}
+			if ( empty( $images[ $at ]['in_content'] ) ) {
+				$images[ $at ]['in_content']  = true;
+				$images[ $at ]['content_alt'] = $content_alt;
+			}
+		}
 		$type_object = get_post_type_object( $post->post_type );
 		return array(
 			'id'              => $post->ID,
