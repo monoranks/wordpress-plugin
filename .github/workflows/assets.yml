@@ -37,7 +37,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           T=$(grep -oE 'Stable tag: [0-9.]+' readme.txt | awk '{print $3}')
-          if gh release view "v$T" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+          if grep -qiE '^= *Unreleased *=' readme.txt; then
+            # Notes for the next version wait for its release; WordPress.org must never show an "Unreleased" section.
+            echo "::notice::readme.txt has an Unreleased section; it goes out with the next release."
+            echo "ok=no" >> "$GITHUB_OUTPUT"
+          elif gh release view "v$T" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
             echo "ok=yes" >> "$GITHUB_OUTPUT"
           else
             echo "::notice::Stable tag $T is not released yet; the readme goes out with that release."
