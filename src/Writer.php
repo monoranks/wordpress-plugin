@@ -77,15 +77,22 @@ class Writer {
 			if ( ! $attachment || 'attachment' !== get_post_type( $attachment ) ) {
 				return array( 'id' => $id, 'ok' => false, 'error' => 'attachment_not_found' );
 			}
-			$previous = (string) get_post_meta( $attachment, '_wp_attachment_image_alt', true );
-			if ( isset( $c['expected'] ) && (string) $c['expected'] !== $previous ) {
+			// Where the alt renders: the alt attribute in the post body when the image sits there, else the attachment's stored alt.
+			$page     = isset( $c['post_id'] ) ? (int) $c['post_id'] : 0;
+			$state    = self::alt_state( $attachment, $page );
+			$previous = $state['current'];
+			if ( isset( $c['expected'] ) && (string) $c['expected'] !== $state['current'] && (string) $c['expected'] !== $state['stored'] ) {
 				return array( 'id' => $id, 'ok' => false, 'error' => 'changed_since_preview', 'current' => $previous );
 			}
-			update_post_meta( $attachment, '_wp_attachment_image_alt', wp_slash( sanitize_text_field( $value ) ) );
-			self::log( $actor, $field, 'attachment:' . $attachment, $previous, $value );
+			$clean = sanitize_text_field( $value );
+			update_post_meta( $attachment, '_wp_attachment_image_alt', wp_slash( $clean ) );
+			if ( null !== $state['body'] && $state['body'] !== $clean ) {
+				self::restore( $page, ImageAlt::set_body_alt( $state['content'], $attachment, $clean ) );
+			}
+			self::log( $actor, $field, 'attachment:' . $attachment, $previous, $value, null !== $state['body'] ? $page : 0 );
 			$result = array( 'id' => $id, 'ok' => true, 'previous' => $previous );
 			// The page that shows the image: the post the change names, else the post the image was uploaded to (#11).
-			$page = isset( $c['post_id'] ) ? (int) $c['post_id'] : (int) wp_get_post_parent_id( $attachment );
+			$page = $page ? $page : (int) wp_get_post_parent_id( $attachment );
 			if ( $page && 'publish' === get_post_status( $page ) ) {
 				$result['cache'] = CachePurger::post( $page );
 			}
@@ -327,6 +334,9 @@ class Writer {
 			$c['from'] = $target;
 		} elseif ( 'alt' === $field && 0 === strpos( $target, 'attachment:' ) ) {
 			$c['attachment_id'] = (int) substr( $target, 11 );
+			if ( ! empty( $row['post'] ) ) {
+				$c['post_id'] = (int) $row['post'];
+			}
 		} elseif ( 0 === strpos( $target, 'post:' ) ) {
 			$c['post_id'] = (int) substr( $target, 5 );
 		} elseif ( 'site' !== $target ) {
@@ -344,9 +354,30 @@ class Writer {
 	 */
 	public static function current_value( array $fix ) {
 		if ( isset( $fix['field'] ) && 'alt' === $fix['field'] && ! empty( $fix['attachment_id'] ) && 'attachment' === get_post_type( (int) $fix['attachment_id'] ) ) {
-			return (string) get_post_meta( (int) $fix['attachment_id'], '_wp_attachment_image_alt', true );
+			$state = self::alt_state( (int) $fix['attachment_id'], empty( $fix['post_id'] ) ? 0 : (int) $fix['post_id'] );
+			// The reviewed value may be the rendered alt or the stored one; only a value matching neither is out of date.
+			if ( isset( $fix['before'] ) && ( (string) $fix['before'] === $state['stored'] || (string) $fix['before'] === $state['current'] ) ) {
+				return (string) $fix['before'];
+			}
+			return $state['current'];
 		}
 		return null;
+	}
+
+	/**
+	 * What WordPress holds for one image: 'stored' (attachment alt), 'body' (the alt attribute in that post's body, null when
+	 * the image is not in it, '' when it has none), 'content' (the body) and 'current' (what renders: body, else stored).
+	 */
+	public static function alt_state( $attachment, $post_id ) {
+		$stored  = (string) get_post_meta( $attachment, '_wp_attachment_image_alt', true );
+		$body    = null;
+		$content = '';
+		$post    = $post_id ? get_post( $post_id ) : null;
+		if ( $post ) {
+			$content = (string) $post->post_content;
+			$body    = ImageAlt::body_alt( $content, $attachment );
+		}
+		return array( 'stored' => $stored, 'body' => $body, 'content' => $content, 'current' => null === $body ? $stored : $body );
 	}
 
 	private static function same_site( $url ) {
@@ -355,10 +386,14 @@ class Writer {
 		return ! $to || preg_replace( '/^www\./', '', (string) $to ) === preg_replace( '/^www\./', '', (string) $host );
 	}
 
-	private static function log( $actor, $field, $target, $previous, $value ) {
-		$log   = get_option( 'monoranks_change_log', array() );
-		$log   = is_array( $log ) ? $log : array();
-		$log[] = array( 'at' => gmdate( 'c' ), 'actor' => sanitize_text_field( (string) $actor ), 'field' => $field, 'target' => $target, 'previous' => $previous, 'value' => $value );
+	private static function log( $actor, $field, $target, $previous, $value, $post = 0 ) {
+		$log = get_option( 'monoranks_change_log', array() );
+		$log = is_array( $log ) ? $log : array();
+		$row = array( 'at' => gmdate( 'c' ), 'actor' => sanitize_text_field( (string) $actor ), 'field' => $field, 'target' => $target, 'previous' => $previous, 'value' => $value );
+		if ( $post ) {
+			$row['post'] = (int) $post;
+		}
+		$log[] = $row;
 		update_option( 'monoranks_change_log', array_slice( $log, -200 ), false );
 	}
 }
