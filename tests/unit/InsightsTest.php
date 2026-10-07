@@ -258,4 +258,27 @@ class InsightsTest extends TestCase {
 		Insights::maybe_upgrade();
 		$this->assertSame( '2026-09-23T12:00:00Z', $this->options[ Insights::OPTION ]['pages_synced_at'] );
 	}
+	private function fix( $id, $before, $after = 'New alt' ) {
+		return array( 'id' => $id, 'field' => 'alt', 'post_id' => 5, 'attachment_id' => 77, 'from' => '', 'op' => 'insert_top', 'title' => 'Privacy Audit', 'url' => '', 'image' => 'shot.png', 'note' => '', 'before' => $before, 'after' => $after, 'page_url' => '' );
+	}
+
+	/** One image whose alt was changed since the review is out of date; nothing else about the page matters. */
+	public function test_a_fix_whose_field_changed_is_not_offered_as_ready() {
+		$overview = array( 'fixes' => array( 'ready' => 3 ), 'ready' => array( $this->fix( 'a', '' ), $this->fix( 'b', 'Same' ), $this->fix( 'c', null ) ), 'needs_review' => array() );
+		$current  = static function ( $fix ) { return 'a' === $fix['id'] ? 'Someone typed this' : ( 'b' === $fix['id'] ? 'Same' : null ); };
+		$out      = Insights::split_stale( $overview, $current );
+		$this->assertSame( array( 'b', 'c' ), array_column( $out['ready'], 'id' ) );
+		$this->assertSame( array( 'a' ), array_column( $out['needs_review'], 'id' ) );
+		$this->assertSame( 2, $out['fixes']['ready'] );
+		// Nothing out of date: the overview comes back as it was.
+		$this->assertSame( $overview, Insights::split_stale( $overview, static function () { return null; } ) );
+	}
+
+	public function test_needs_review_and_the_image_are_kept_when_the_overview_is_read() {
+		$row = array( 'id' => 'x', 'field' => 'alt', 'attachment_id' => 77, 'title' => 'Privacy Audit', 'image' => 'shot.png', 'note' => 'changed', 'before' => '', 'after' => 'Privacy Audit' );
+		$out = Insights::normalise_overview( array( 'health' => 90, 'ready' => array( $row ), 'needs_review' => array( $row ) ) );
+		$this->assertSame( 'shot.png', $out['ready'][0]['image'] );
+		$this->assertSame( array( 'x' ), array_column( $out['needs_review'], 'id' ) );
+		$this->assertSame( 'changed', $out['needs_review'][0]['note'] );
+	}
 }

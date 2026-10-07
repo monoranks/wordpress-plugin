@@ -183,6 +183,26 @@ class GrowTest extends TestCase {
 		$this->assertSame( 'empty', Grow::normalise_report( array( 'reports' => array() ) )['state'] );
 	}
 
+	public function test_weekly_emails_are_listed_with_their_reports() {
+		$out = Grow::normalise_report( array(
+			'weeklyEmails' => array(
+				array( 'name' => 'WP Statistics', 'enabled' => true, 'recipients' => 1, 'nextSendAt' => '2026-10-12', 'lastSentAt' => null, 'link' => 'https://app.monoranks.com/reports' ),
+				array( 'name' => 'Paused', 'enabled' => false, 'recipients' => 3, 'nextSendAt' => null, 'lastSentAt' => '2026-10-05T08:00:00.000Z', 'link' => 'http://evil.test/' ),
+			),
+			'reports'      => array(),
+			'link'         => 'https://app.monoranks.com/reports',
+		) );
+		// Weekly emails alone are enough: the panel no longer says there are no reports.
+		$this->assertSame( 'ok', $out['state'] );
+		$this->assertSame( array( 'WP Statistics', 'Paused' ), array_column( $out['emails'], 'name' ) );
+		$this->assertSame( array( true, false ), array_column( $out['emails'], 'enabled' ) );
+		$this->assertSame( array( 1, 3 ), array_column( $out['emails'], 'recipients' ) );
+		$this->assertSame( '2026-10-12', $out['emails'][0]['next'] );
+		$this->assertSame( '', $out['emails'][1]['next'] );
+		$this->assertSame( '', $out['emails'][1]['link'] );
+		$this->assertSame( array(), $out['reports'] );
+	}
+
 	public function test_refresh_reads_every_section_and_caches_them() {
 		$this->connect();
 		$this->answer(

@@ -338,6 +338,17 @@ class Writer {
 		return $c;
 	}
 
+	/**
+	 * The value WordPress holds now for a fix that can be checked from here, or null. Only image alt text is checked: it is
+	 * stored per image, so a changed alt means that one fix is out of date (never the whole page).
+	 */
+	public static function current_value( array $fix ) {
+		if ( isset( $fix['field'] ) && 'alt' === $fix['field'] && ! empty( $fix['attachment_id'] ) && 'attachment' === get_post_type( (int) $fix['attachment_id'] ) ) {
+			return (string) get_post_meta( (int) $fix['attachment_id'], '_wp_attachment_image_alt', true );
+		}
+		return null;
+	}
+
 	private static function same_site( $url ) {
 		$host = wp_parse_url( home_url(), PHP_URL_HOST );
 		$to   = wp_parse_url( $url, PHP_URL_HOST );

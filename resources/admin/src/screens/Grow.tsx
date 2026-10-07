@@ -190,17 +190,39 @@ function Keywords({ d, scope }: { d: GrowData['keywords']; scope: string }) {
 
 function Report({ d }: { d: GrowData['report'] }) {
   if (!d || (d.state !== 'ok' && d.state !== 'empty')) return null;
+  const emails = d.state === 'ok' ? d.emails ?? [] : [];
+  const reports = d.state === 'ok' ? d.reports ?? [] : [];
   return (
-    <Card className="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5">
-      {d.state === 'ok' ? (
-        <>
-          <span className="text-[13px]"><b className="font-semibold">{d.client ? __('Latest client report', 'monoranks') : __('Latest report', 'monoranks')}</b> · <bdi>{d.scope || d.title}</bdi>{d.when && <span className="text-mute"> · {d.when}</span>}</span>
-          {d.link && <Button size="sm" asChild><a href={out(d.link, 'latest-report')} {...ext}>{__('Open report', 'monoranks')}<span className="sr-only"> {__('(opens in a new tab)', 'monoranks')}</span></a></Button>}
-        </>
+    <Card className="grid gap-3 px-5 py-3.5">
+      {d.state === 'empty' ? (
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <span className="text-[13px] text-ink2">{__('No reports yet. Create a website report, a client report or a weekly email in MonoRanks to share progress.', 'monoranks')}</span>
+          {d.all_link && <Button size="sm" variant="ghost" asChild><a href={out(d.all_link, 'reports')} {...ext}>{__('Open reports', 'monoranks')}</a></Button>}
+        </div>
       ) : (
         <>
-          <span className="text-[13px] text-ink2">{__('No reports yet. Create a website or client report in MonoRanks to share progress.', 'monoranks')}</span>
-          {d.all_link && <Button size="sm" variant="ghost" asChild><a href={out(d.all_link, 'reports')} {...ext}>{__('Open reports', 'monoranks')}</a></Button>}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <b className="text-[13px] font-semibold">{__('Reports', 'monoranks')}</b>
+            {d.all_link && <Button size="sm" variant="ghost" asChild><a href={out(d.all_link, 'reports')} {...ext}>{__('Open reports', 'monoranks')}</a></Button>}
+          </div>
+          <ul className="m-0 flex list-none flex-col p-0">
+            {emails.map((m, i) => (
+              <li key={`e${i}`} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-grid py-2 last:border-b-0">
+                <span className="text-[13px]"><b className="font-semibold"><bdi>{m.name}</bdi></b> <span className="text-mute">· {__('Weekly email', 'monoranks')}</span></span>
+                <span className="flex flex-wrap items-center gap-2 text-[12px] text-ink2">
+                  {m.enabled && m.next_label ? <span>{sprintf(__('Next send %s', 'monoranks'), m.next_label)}</span> : null}
+                  <span>{sprintf(_n('%s recipient', '%s recipients', m.recipients, 'monoranks'), fmt(m.recipients))}</span>
+                  <Badge>{m.enabled ? __('On', 'monoranks') : __('Off', 'monoranks')}</Badge>
+                </span>
+              </li>
+            ))}
+            {reports.map((r, i) => (
+              <li key={`r${i}`} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-grid py-2 last:border-b-0">
+                <span className="text-[13px]"><b className="font-semibold"><bdi>{r.scope || r.title}</bdi></b> <span className="text-mute">· {r.client ? __('Client report', 'monoranks') : __('Report', 'monoranks')}{r.when ? ` · ${r.when}` : ''}</span></span>
+                {r.link && <Button size="sm" asChild><a href={out(r.link, 'latest-report')} {...ext}>{__('Open report', 'monoranks')}<span className="sr-only"> {__('(opens in a new tab)', 'monoranks')}</span></a></Button>}
+              </li>
+            ))}
+          </ul>
         </>
       )}
     </Card>

@@ -84,15 +84,23 @@ class Actions {
 		}
 		$results = Writer::apply( $changes, 'MonoRanks (' . wp_get_current_user()->user_login . ')' );
 		$done    = array();
+		$stale   = 0;
 		foreach ( $results as $r ) {
 			if ( ! empty( $r['ok'] ) ) {
 				$done[] = $r['id'];
+			} elseif ( isset( $r['error'] ) && 'changed_since_preview' === $r['error'] ) {
+				// That one field holds another value now: it is reviewed again in MonoRanks, not offered as ready.
+				Insights::move_to_review( $r['id'], isset( $r['current'] ) ? (string) $r['current'] : '' );
+				++$stale;
 			}
 		}
 		Insights::forget_ready( $done );
 		Api::post( '/fixes', array( 'results' => $results ), 5 );
 		if ( count( $done ) === count( $changes ) ) {
 			return 'applied';
+		}
+		if ( $stale && $stale + count( $done ) === count( $changes ) ) {
+			return $done ? 'applied_some_stale' : 'apply_stale';
 		}
 		return $done ? 'applied_some' : 'apply_failed';
 	}
