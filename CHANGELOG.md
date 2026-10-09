@@ -2,7 +2,7 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
-## Unreleased
+## v0.1.21 - 2026-10-09
 
 - **Enhancement:** The content sync also sends each image in a post with the alt written in the post body, next to the alt stored on the image.
 - **Fix:** Image alt text is checked and written where it shows: the alt in the post body when the image sits there, and the stored alt. Fixes are no longer refused as changed when the page and the stored alt differ.

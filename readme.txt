@@ -4,7 +4,7 @@ Tags: seo, aeo, geo, ai, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.20
+Stable tag: 0.1.21
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,10 @@ Deleting the plugin removes its settings and scheduled tasks. Deleting the websi
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.21 - 2026-10-09 =
+* **Enhancement:** The content sync also sends each image in a post with the alt written in the post body, next to the alt stored on the image.
+* **Fix:** Image alt text is checked and written where it shows: the alt in the post body when the image sits there, and the stored alt. Fixes are no longer refused as changed when the page and the stored alt differ.
 
 = 0.1.20 - 2026-10-07 =
 * **Enhancement:** Each fix on the Overview reads "Image alt on <page>" and shows the old value, an arrow and the new one, with the image name.
