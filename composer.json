@@ -22,7 +22,7 @@
   "scripts": {
     "test": "phpunit",
     "test:integration": "phpunit -c phpunit-integration.xml.dist",
-    "build": "composer install --no-dev --optimize-autoloader --classmap-authoritative"
+    "dist": "composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction"
   },
   "require-dev": {
     "brain/monkey": "^2.6",

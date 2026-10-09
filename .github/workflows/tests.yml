@@ -162,7 +162,7 @@ jobs:
           php-version: '8.2'
           coverage: none
       - run: composer install --no-interaction --prefer-dist
-      - run: composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction
+      - run: composer dist
       - uses: actions/setup-node@v7
         with:
           node-version: 22
