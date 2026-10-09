@@ -22,7 +22,7 @@ VERSION=$(grep -oE 'Version:[[:space:]]+[0-9.]+' "$SLUG.php" | awk '{print $2}')
 
 if [ "${1:-}" != "--skip-install" ]; then
 	composer install --no-interaction --prefer-dist --no-progress
-	composer install --no-dev --optimize-autoloader --classmap-authoritative --no-interaction --no-progress
+	composer dist --no-progress
 	npm ci --no-audit --no-fund
 	npm run build
 	git diff --exit-code --stat -- build || { echo "build/ is out of date: run npm run build and commit it" >&2; exit 1; }
