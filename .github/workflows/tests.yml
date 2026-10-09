@@ -70,6 +70,14 @@ jobs:
           tools: composer:v2, wp-cli
           coverage: none
       - uses: ramsey/composer-install@v4
+      # setup-php's wp-cli tool is sometimes missing on the runner; a pinned WP-CLI phar keeps the WordPress install working.
+      - name: WP-CLI
+        run: |
+          if ! command -v wp >/dev/null 2>&1; then
+            curl -fsSL -o /tmp/wp-cli.phar https://github.com/wp-cli/wp-cli/releases/download/v2.12.0/wp-cli-2.12.0.phar
+            sudo install -m 0755 /tmp/wp-cli.phar /usr/local/bin/wp
+          fi
+          wp --info --allow-root | head -3
       - name: Unit tests
         run: vendor/bin/phpunit
       - name: Install WordPress ${{ matrix.wp }}
