@@ -1,6 +1,6 @@
-=== MonoRanks: SEO, AEO and GEO Audit with Fixes You Approve ===
+=== MonoRanks: AI SEO, AEO and GEO Audit with Fixes You Approve ===
 Contributors: veronalabs, mostafas1990, kashani
-Tags: seo, aeo, geo, llms-txt, audit
+Tags: seo, aeo, geo, llms-txt, ai-seo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -8,7 +8,7 @@ Stable tag: 0.1.21
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Weekly SEO, AEO and GEO checks for your site, with fixes written for you after you approve them. Every change can be undone.
+Weekly SEO, AEO and GEO checks plus llms.txt for AI crawlers, with fixes written after you approve them. Every change can be undone.
 
 == Description ==
 
