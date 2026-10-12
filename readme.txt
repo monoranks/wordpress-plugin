@@ -1,6 +1,6 @@
-=== MonoRanks ===
+=== MonoRanks: SEO, AEO and GEO Audit with Fixes You Approve ===
 Contributors: veronalabs, mostafas1990, kashani
-Tags: seo, aeo, geo, ai, audit
+Tags: seo, aeo, geo, llms-txt, audit
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
