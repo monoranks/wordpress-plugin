@@ -120,6 +120,10 @@ Go to **MonoRanks → Settings → Disconnect** to stop sending. To stop writes 
 
 Deleting the plugin removes its settings and scheduled tasks. Deleting the website in MonoRanks removes what was sent there.
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the MonoRanks plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/2bfe1074-71dc-42e7-89ac-c10e0df3ed52). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Screenshots ==
 
 1. MonoRanks → Overview: site health and AEO scores, search clicks, pages needing attention, fixes ready to apply, recent changes with Undo (also in Persian).
