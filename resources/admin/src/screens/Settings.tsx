@@ -29,6 +29,22 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
     api.settings().then((d) => { setData(d); setKeyOpen(d.revoked); }).catch((e) => setError(errorText(e, __('Could not load the settings.', 'monoranks'))));
   }, []);
 
+  // After Connect opens MonoRanks in another tab, check every few seconds (while this tab is visible) so the page shows
+  // Connected by itself once the person approves there. Gives up after 10 minutes.
+  const [waitingSince, setWaitingSince] = useState<number | null>(null);
+  useEffect(() => {
+    if (waitingSince === null || data?.connected) return;
+    let stopped = false;
+    const check = () => {
+      if (stopped || document.visibilityState !== 'visible') return;
+      if (Date.now() - waitingSince > 10 * 60 * 1000) { setWaitingSince(null); return; }
+      api.settings().then((d) => { if (!stopped && d.connected) { setData(d); setKeyOpen(false); setWaitingSince(null); } }).catch(() => {});
+    };
+    const timer = window.setInterval(check, 4000);
+    document.addEventListener('visibilitychange', check);
+    return () => { stopped = true; window.clearInterval(timer); document.removeEventListener('visibilitychange', check); };
+  }, [waitingSince, data?.connected]);
+
   async function run(key: string, call: () => Promise<{ ok: boolean; notice: Notice; data: unknown }>) {
     setBusy(key);
     try {
@@ -82,8 +98,8 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
                 </>
               ) : (
                 <>
-                  <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect from MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(data.app_url, 'connect-step', 'settings')} target="_blank" rel="noopener">{__('Open MonoRanks', 'monoranks')}</a></Button></div></Step>
-                  <Step n={2} later><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Use this when your host blocks Application Passwords. In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website.', 'monoranks')}</span><KeyForm data={data} busy={busy} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} /></Step>
+                  <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect to MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Sign in and approve. Takes a minute.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(data.connect_url, 'connect-step', 'settings')} target="_blank" rel="noopener" onClick={() => setWaitingSince(Date.now())}>{__('Connect', 'monoranks')}</a></Button></div></Step>
+                  <Step n={2} later><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Use this when your host blocks Application Passwords.', 'monoranks')}</span><KeyForm data={data} busy={busy} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} /></Step>
                 </>
               )}
             </CardBody>

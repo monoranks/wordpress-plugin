@@ -5,7 +5,7 @@ export type AdminSettings = {
   theme: 'light' | 'dark';
   version: string;
   host: string;
-  urls: { overview: string; settings: string; app: string; profile: string; docs: string };
+  urls: { overview: string; settings: string; app: string; connect: string; profile: string; docs: string };
   titles: { overview: string; settings: string };
   showAddress: boolean;
   apiBase: string;

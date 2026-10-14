@@ -34,7 +34,7 @@ export type SettingsData = {
   connected: boolean; revoked: boolean; state: 'connected' | 'revoked' | 'none'; has_data: boolean;
   key_hint: string; key_via: string; api_base: string; last_sent: string; last_error: string;
   sending: null | { page: number; pages: number }; items: number; next_audit: string; seo_plugin: string; seo_supported: boolean;
-  profile_url: string; show_address: boolean; app_url: string; log: LogRow[]; labels: Record<string, string>;
+  profile_url: string; show_address: boolean; app_url: string; connect_url: string; log: LogRow[]; labels: Record<string, string>;
 };
 
 /** One Grow section's state: ok, empty (no data yet), no_access (the key lacks the read scope), off, error, pending. */
