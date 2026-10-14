@@ -375,6 +375,10 @@ msgstr "این کلید متعلق به وب‌سایت دیگری در مونو
 msgid "MonoRanks could not be reached. Check the address and try again."
 msgstr "دسترسی به مونورنکس ممکن نشد. نشانی را بررسی کنید و دوباره تلاش کنید."
 
+#: src/AuthorizeScreen.php:39
+msgid "Reads your content and applies only fixes you approve."
+msgstr "محتوای شما را می‌خواند و فقط اصلاحاتی را که تأیید کنید اعمال می‌کند."
+
 #. translators: %s: relative time such as "5 days"
 #, php-format
 #: src/Column.php:63

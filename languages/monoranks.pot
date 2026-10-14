@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-14T11:00:24+00:00\n"
+"POT-Creation-Date: 2026-10-14T11:51:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: monoranks\n"
@@ -386,6 +386,10 @@ msgstr ""
 
 #: src/Admin.php:192
 msgid "MonoRanks could not be reached. Check the address and try again."
+msgstr ""
+
+#: src/AuthorizeScreen.php:39
+msgid "Reads your content and applies only fixes you approve."
 msgstr ""
 
 #. translators: %s: relative time such as "5 days"
