@@ -8,7 +8,7 @@ Stable tag: 0.1.21
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Weekly SEO, AEO and GEO checks plus llms.txt for AI crawlers, with fixes written after you approve them. Every change can be undone.
+AEO (answer engine optimization), GEO and SEO audits plus llms.txt. Fixes are written after you approve them and can be undone.
 
 == Description ==
 
