@@ -2,6 +2,12 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## v0.1.22 - 2026-10-16
+
+- **New:** Connect to MonoRanks with one button: sign in or sign up, approve in WordPress, done. The settings page shows "Connected" by itself.
+- **Enhancement:** The WordPress approve screen shows the MonoRanks logo and what it can do.
+- **Enhancement:** Shorter connect steps on the Overview and Settings screens.
+
 ## v0.1.21 - 2026-10-09
 
 - **Enhancement:** The content sync also sends each image in a post with the alt written in the post body, next to the alt stored on the image.

@@ -4,7 +4,7 @@ Tags: seo, aeo, geo, llms-txt, ai-seo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.21
+Stable tag: 0.1.22
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,11 @@ Please report security bugs found in the source code of the MonoRanks plugin thr
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.22 - 2026-10-16 =
+* **New:** Connect to MonoRanks with one button: sign in or sign up, approve in WordPress, done. The settings page shows "Connected" by itself.
+* **Enhancement:** The WordPress approve screen shows the MonoRanks logo and what it can do.
+* **Enhancement:** Shorter connect steps on the Overview and Settings screens.
 
 = 0.1.21 - 2026-10-09 =
 * **Enhancement:** The content sync also sends each image in a post with the alt written in the post body, next to the alt stored on the image.
