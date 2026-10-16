@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-10-04T07:14:07+00:00",
+    "translation-revision-date": "2026-10-14T11:51:45+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -55,9 +55,6 @@
             "Next audit": [
                 "ممیزی بعدی"
             ],
-            "Open MonoRanks": [
-                "باز کردن مونورنکس"
-            ],
             "Settings": [
                 "تنظیمات"
             ],
@@ -73,14 +70,20 @@
             "Not connected": [
                 "متصل نیست"
             ],
-            "Connect from MonoRanks": [
-                "اتصال از مونورنکس"
+            "Connect to MonoRanks": [
+                "اتصال به MonoRanks"
             ],
-            "In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect.": [
-                "در مونورنکس وب‌سایت خود را باز کنید ← یکپارچه‌سازی‌ها ← وردپرس ← اتصال به وردپرس، و وقتی وردپرس پرسید به مونورنکس اجازه دهید. پیش از اتصال چیزی فرستاده نمی‌شود."
+            "Sign in and approve. Takes a minute.": [
+                "وارد شوید و تأیید کنید. یک دقیقه طول می‌کشد."
+            ],
+            "Connect": [
+                "اتصال"
             ],
             "Or paste a connector key": [
                 "یا کلید اتصال را وارد کنید"
+            ],
+            "Use this when your host blocks Application Passwords.": [
+                "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید."
             ],
             "Connected": [
                 "متصل"
@@ -152,9 +155,6 @@
             "Disconnect stops sending. Fixes already applied stay.": [
                 "قطع اتصال ارسال را متوقف می‌کند. اصلاح‌های اعمال‌شده می‌مانند."
             ],
-            "Use this when your host blocks Application Passwords. In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website.": [
-                "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید. در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت."
-            ],
             "Use a different key": [
                 "استفاده از کلید دیگر"
             ],
@@ -211,9 +211,6 @@
             ],
             "MonoRanks address (development sites only)": [
                 "نشانی مونورنکس (فقط سایت‌های توسعه)"
-            ],
-            "Connect": [
-                "اتصال"
             ],
             "(opens in a new tab)": [
                 "(در زبانهٔ تازه باز می‌شود)"
@@ -338,20 +335,38 @@
             "No tracked keywords yet. Track some in MonoRanks to see them move here.": [
                 "هنوز کلیدواژهٔ پیگیری‌شده‌ای نیست. در مونورنکس چند کلیدواژه را پیگیری کنید تا جابه‌جایی‌شان را اینجا ببینید."
             ],
-            "Latest client report": [
-                "تازه‌ترین گزارش مشتری"
-            ],
-            "Latest report": [
-                "تازه‌ترین گزارش"
-            ],
-            "Open report": [
-                "باز کردن گزارش"
-            ],
-            "No reports yet. Create a website or client report in MonoRanks to share progress.": [
-                "هنوز گزارشی نیست. برای به‌اشتراک‌گذاشتن پیشرفت، در مونورنکس گزارش سایت یا مشتری بسازید."
+            "No reports yet. Create a website report, a client report or a weekly email in MonoRanks to share progress.": [
+                ""
             ],
             "Open reports": [
                 "باز کردن گزارش‌ها"
+            ],
+            "Reports": [
+                ""
+            ],
+            "Weekly email": [
+                ""
+            ],
+            "Next send %s": [
+                ""
+            ],
+            "%s recipient": [
+                ""
+            ],
+            "On": [
+                ""
+            ],
+            "Off": [
+                ""
+            ],
+            "Client report": [
+                ""
+            ],
+            "Report": [
+                ""
+            ],
+            "Open report": [
+                "باز کردن گزارش"
             ],
             "Connect MonoRanks": [
                 "اتصال مونورنکس"
@@ -383,6 +398,21 @@
             ],
             "AEO score": [
                 "امتیاز AEO"
+            ],
+            "on %s": [
+                ""
+            ],
+            "Image: %s": [
+                ""
+            ],
+            "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first.": [
+                "یک پاراگراف پاسخ‌محور به بالای نوشته اضافه می‌کند. ابتدا قبل/بعد را در مونورنکس بررسی کنید."
+            ],
+            "(empty)": [
+                ""
+            ],
+            "changes to": [
+                ""
             ],
             "Could not load the overview.": [
                 "بارگذاری نمای کلی ممکن نشد."
@@ -491,9 +521,6 @@
             "Fixes you approve in MonoRanks appear here, ready to write into WordPress.": [
                 "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا می‌آیند، آماده برای نوشتن در وردپرس."
             ],
-            "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first.": [
-                "یک پاراگراف پاسخ‌محور به بالای نوشته اضافه می‌کند. ابتدا قبل/بعد را در مونورنکس بررسی کنید."
-            ],
             "Review": [
                 "بررسی"
             ],
@@ -503,14 +530,17 @@
             "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days.": [
                 "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
             ],
+            "Needs review in MonoRanks": [
+                ""
+            ],
+            "These changed in WordPress after they were reviewed, so they are not applied from here. Review them again in MonoRanks.": [
+                ""
+            ],
             "All changes": [
                 "همهٔ تغییرات"
             ],
             "Connect MonoRanks again": [
                 "مونورنکس را دوباره متصل کنید"
-            ],
-            "Use this when your host blocks Application Passwords.": [
-                "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید."
             ],
             "Open settings": [
                 "باز کردن تنظیمات"
@@ -550,6 +580,9 @@
             ],
             "Open the audit in MonoRanks": [
                 "باز کردن ممیزی در مونورنکس"
+            ],
+            "Open MonoRanks": [
+                "باز کردن مونورنکس"
             ],
             "MonoRanks sections": [
                 "بخش‌های مونورنکس"

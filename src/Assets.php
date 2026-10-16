@@ -60,6 +60,7 @@ class Assets {
 				'overview' => Admin::overview_url(),
 				'settings' => Admin::settings_url(),
 				'app'      => $overview && ! empty( $overview['site_url'] ) ? $overview['site_url'] : $app,
+				'connect'  => Settings::connect_url( $app ),
 				'profile'  => admin_url( 'profile.php#application-passwords-section' ),
 				'docs'     => 'https://monoranks.com/docs/wordpress-plugin/',
 			),

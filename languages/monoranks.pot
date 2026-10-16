@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-04T08:24:19+00:00\n"
+"POT-Creation-Date: 2026-10-14T11:51:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: monoranks\n"
@@ -48,7 +48,7 @@ msgstr ""
 
 #: resources/views/column-cell.php:20
 #: resources/views/post-panel.php:25
-#: tmp/i18n/screens/Overview.js:163
+#: tmp/i18n/screens/Overview.js:182
 msgid "Connect MonoRanks"
 msgstr ""
 
@@ -59,19 +59,19 @@ msgstr ""
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
 #: resources/views/post-panel.php:35
-#: tmp/i18n/screens/Overview.js:95
+#: tmp/i18n/screens/Overview.js:113
 msgid "Health"
 msgstr ""
 
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
 #: resources/views/post-panel.php:35
-#: tmp/i18n/screens/Overview.js:95
+#: tmp/i18n/screens/Overview.js:113
 msgid "AEO"
 msgstr ""
 
 #: resources/views/column-cell.php:30
-#: tmp/i18n/screens/Settings.js:59
+#: tmp/i18n/screens/Settings.js:86
 msgid "Status"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 
 #: resources/views/column-cell.php:31
 #: resources/views/column-cell.php:54
-#: tmp/i18n/screens/Settings.js:62
+#: tmp/i18n/screens/Settings.js:89
 msgid "Next audit"
 msgstr ""
 
@@ -95,8 +95,6 @@ msgid "Scores arrive after the next audit"
 msgstr ""
 
 #: resources/views/column-cell.php:35
-#: tmp/i18n/screens/Overview.js:165
-#: tmp/i18n/screens/Settings.js:72
 #: tmp/i18n/shell/Shell.js:38
 msgid "Open MonoRanks"
 msgstr ""
@@ -110,13 +108,13 @@ msgid "Not checked: MonoRanks reads AEO on a sample of pages"
 msgstr ""
 
 #: resources/views/column-cell.php:41
-#: tmp/i18n/screens/Overview.js:78
+#: tmp/i18n/screens/Overview.js:96
 msgid "Fixes"
 msgstr ""
 
 #. translators: %s: number
 #: resources/views/column-cell.php:43
-#: tmp/i18n/screens/Overview.js:117
+#: tmp/i18n/screens/Overview.js:135
 #, php-format,js-format
 msgid "%s ready to apply"
 msgid_plural "%s ready to apply"
@@ -196,7 +194,7 @@ msgid "Search data arrives with the next refresh."
 msgstr ""
 
 #: resources/views/post-panel.php:49
-#: tmp/i18n/screens/Overview.js:75
+#: tmp/i18n/screens/Overview.js:93
 msgid "Connect Google Search Console in MonoRanks to see clicks here."
 msgstr ""
 
@@ -292,24 +290,24 @@ msgstr ""
 #: resources/views/post-panel.php:122
 #: tmp/i18n/screens/Grow.js:55
 #: tmp/i18n/screens/Grow.js:66
-#: tmp/i18n/screens/Grow.js:142
+#: tmp/i18n/screens/Grow.js:161
 msgid "(opens in a new tab)"
 msgstr ""
 
 #: src/Admin.php:47
-#: src/Assets.php:66
-#: tmp/i18n/screens/Overview.js:57
+#: src/Assets.php:67
+#: tmp/i18n/screens/Overview.js:75
 #: tmp/i18n/shell/Shell.js:14
 msgid "Overview"
 msgstr ""
 
 #: src/Admin.php:48
-#: src/Assets.php:66
+#: src/Assets.php:67
 msgid "MonoRanks settings"
 msgstr ""
 
 #: src/Admin.php:48
-#: tmp/i18n/screens/Settings.js:46
+#: tmp/i18n/screens/Settings.js:73
 #: tmp/i18n/shell/Shell.js:15
 msgid "Settings"
 msgstr ""
@@ -347,7 +345,7 @@ msgid "Applied. The change is listed under Recent changes and can be undone."
 msgstr ""
 
 #: src/Admin.php:182
-msgid "Some fixes were applied; the rest were refused because those pages changed since MonoRanks reviewed them. Recent changes lists what was written."
+msgid "Some fixes were applied; the rest could not be applied. Recent changes lists what was written."
 msgstr ""
 
 #: src/Admin.php:183
@@ -359,27 +357,39 @@ msgid "Undone. The previous value is back."
 msgstr ""
 
 #: src/Admin.php:185
-msgid "MonoRanks could not apply that change: the page changed since it was reviewed. Open it in MonoRanks to review again."
+msgid "MonoRanks could not apply that change. Open it in MonoRanks to review it again."
 msgstr ""
 
 #: src/Admin.php:186
-msgid "That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP."
+msgid "Nothing was changed: the value in WordPress is not the one that was reviewed. It now needs review in MonoRanks."
 msgstr ""
 
 #: src/Admin.php:187
-msgid "The MonoRanks address must start with https://."
+msgid "Some changes were applied. The others no longer match WordPress and need review in MonoRanks."
 msgstr ""
 
 #: src/Admin.php:188
-msgid "MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks."
+msgid "That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP."
 msgstr ""
 
 #: src/Admin.php:189
-msgid "This key belongs to a different website in MonoRanks. Create the key on the website with this address."
+msgid "The MonoRanks address must start with https://."
 msgstr ""
 
 #: src/Admin.php:190
+msgid "MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks."
+msgstr ""
+
+#: src/Admin.php:191
+msgid "This key belongs to a different website in MonoRanks. Create the key on the website with this address."
+msgstr ""
+
+#: src/Admin.php:192
 msgid "MonoRanks could not be reached. Check the address and try again."
+msgstr ""
+
+#: src/AuthorizeScreen.php:39
+msgid "Reads your content and applies only fixes you approve."
 msgstr ""
 
 #. translators: %s: relative time such as "5 days"
@@ -449,29 +459,29 @@ msgid "Needs attention"
 msgstr ""
 
 #. translators: %s: a question people ask
-#: src/Grow.php:210
+#: src/Grow.php:221
 #, php-format
 msgid "AI answers quote this page for \"%s\""
 msgstr ""
 
 #. translators: %s: a question people ask
-#: src/Grow.php:210
+#: src/Grow.php:221
 msgid "AI answers quote this page"
 msgstr ""
 
 #. translators: %s: a search keyword
-#: src/Grow.php:214
+#: src/Grow.php:225
 #, php-format
 msgid "A \"best of\" list for \"%s\" that leaves you out"
 msgstr ""
 
 #. translators: %s: a search keyword
-#: src/Grow.php:214
+#: src/Grow.php:225
 msgid "A \"best of\" list that leaves you out"
 msgstr ""
 
 #. translators: %s: number of competitors
-#: src/Grow.php:218
+#: src/Grow.php:229
 #, php-format
 msgid "Links to %s competitor, not to you"
 msgid_plural "Links to %s of your competitors, not to you"
@@ -479,74 +489,74 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: number of competitors
-#: src/Grow.php:218
+#: src/Grow.php:229
 msgid "Links to your competitors, not to you"
 msgstr ""
 
 #. translators: %s: a page address on this site, like /pricing
-#: src/Grow.php:222
+#: src/Grow.php:233
 #, php-format
 msgid "Used to link to %s"
 msgstr ""
 
 #. translators: %s: a page address on this site, like /pricing
-#: src/Grow.php:222
+#: src/Grow.php:233
 msgid "Used to link to you"
 msgstr ""
 
-#: src/Grow.php:224
+#: src/Grow.php:235
 msgid "Added by hand"
 msgstr ""
 
-#: src/Overview.php:39
+#: src/Overview.php:41
 #: src/PostPanel.php:152
 msgid "Title"
 msgstr ""
 
-#: src/Overview.php:40
+#: src/Overview.php:42
 #: src/PostPanel.php:153
 msgid "Meta description"
 msgstr ""
 
-#: src/Overview.php:41
+#: src/Overview.php:43
 #: src/PostPanel.php:156
 msgid "Canonical"
 msgstr ""
 
-#: src/Overview.php:42
+#: src/Overview.php:44
 #: src/PostPanel.php:157
 msgid "Noindex"
 msgstr ""
 
-#: src/Overview.php:43
+#: src/Overview.php:45
 msgid "Image alt"
 msgstr ""
 
-#: src/Overview.php:44
+#: src/Overview.php:46
 #: src/PostPanel.php:151
 msgid "Redirect"
 msgstr ""
 
-#: src/Overview.php:45
+#: src/Overview.php:47
 msgid "Opening paragraph"
 msgstr ""
 
-#: src/Overview.php:46
+#: src/Overview.php:48
 msgid "robots.txt"
 msgstr ""
 
-#: src/Overview.php:47
+#: src/Overview.php:49
 msgid "llms.txt"
 msgstr ""
 
 #. translators: %d: attachment ID
-#: src/Overview.php:66
+#: src/Overview.php:68
 #, php-format
 msgid "Image #%d"
 msgstr ""
 
-#: src/Overview.php:68
-#: tmp/i18n/screens/Overview.js:130
+#: src/Overview.php:70
+#: tmp/i18n/screens/Overview.js:29
 msgid "Site"
 msgstr ""
 
@@ -587,12 +597,12 @@ msgid "Internal links"
 msgstr ""
 
 #: src/PostPanel.php:162
-#: tmp/i18n/screens/Overview.js:66
+#: tmp/i18n/screens/Overview.js:84
 msgid "Health score"
 msgstr ""
 
 #: src/PostPanel.php:163
-#: tmp/i18n/screens/Overview.js:70
+#: tmp/i18n/screens/Overview.js:88
 msgid "AEO score"
 msgstr ""
 
@@ -603,16 +613,16 @@ msgid "%1$s %2$s → %3$s"
 msgstr ""
 
 #. translators: 1: user, 2: date
-#: src/Settings.php:33
+#: src/Settings.php:42
 #, php-format
 msgid "set when %1$s connected MonoRanks on %2$s"
 msgstr ""
 
-#: src/Settings.php:34
+#: src/Settings.php:43
 msgid "pasted by hand"
 msgstr ""
 
-#: src/Settings.php:36
+#: src/Settings.php:45
 msgid "Never"
 msgstr ""
 
@@ -791,296 +801,359 @@ msgstr[1] ""
 msgid "No tracked keywords yet. Track some in MonoRanks to see them move here."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:141
-msgid "Latest client report"
-msgstr ""
-
-#: tmp/i18n/screens/Grow.js:141
-msgid "Latest report"
-msgstr ""
-
-#: tmp/i18n/screens/Grow.js:142
-msgid "Open report"
+#: tmp/i18n/screens/Grow.js:143
+msgid "No reports yet. Create a website report, a client report or a weekly email in MonoRanks to share progress."
 msgstr ""
 
 #: tmp/i18n/screens/Grow.js:144
-msgid "No reports yet. Create a website or client report in MonoRanks to share progress."
-msgstr ""
-
-#: tmp/i18n/screens/Grow.js:145
+#: tmp/i18n/screens/Grow.js:148
 msgid "Open reports"
 msgstr ""
 
+#: tmp/i18n/screens/Grow.js:147
+msgid "Reports"
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:152
+msgid "Weekly email"
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:154
+#, js-format
+msgid "Next send %s"
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:155
+#, js-format
+msgid "%s recipient"
+msgid_plural "%s recipients"
+msgstr[0] ""
+msgstr[1] ""
+
+#: tmp/i18n/screens/Grow.js:156
+msgid "On"
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:156
+msgid "Off"
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:160
+msgid "Client report"
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:160
+msgid "Report"
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:161
+msgid "Open report"
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:34
+#, js-format
+msgid "on %s"
+msgstr ""
+
 #: tmp/i18n/screens/Overview.js:36
+#, js-format
+msgid "Image: %s"
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:37
+msgid "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first."
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:38
+msgid "(empty)"
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:40
+msgid "changes to"
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:54
 msgid "Could not load the overview."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:46
-#: tmp/i18n/screens/Settings.js:38
+#: tmp/i18n/screens/Overview.js:64
+#: tmp/i18n/screens/Settings.js:65
 msgid "Something went wrong. Try again."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:55
+#: tmp/i18n/screens/Overview.js:73
 msgid "Weekly SEO, AEO and GEO audit of"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:55
+#: tmp/i18n/screens/Overview.js:73
 #, js-format
 msgid "last audit %s"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:55
+#: tmp/i18n/screens/Overview.js:73
 #, js-format
 msgid "%1$s of %2$s published pages scored"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:55
+#: tmp/i18n/screens/Overview.js:73
 msgid "Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:56
+#: tmp/i18n/screens/Overview.js:74
 msgid "Sync content now"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:67
+#: tmp/i18n/screens/Overview.js:85
 msgid "Technical, on-page, links, speed"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:67
+#: tmp/i18n/screens/Overview.js:85
 #, js-format
 msgid "Site average, %s page"
 msgid_plural "Site average, %s pages"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Overview.js:71
+#: tmp/i18n/screens/Overview.js:89
 msgid "Answer-first, structure, entities"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:71
+#: tmp/i18n/screens/Overview.js:89
 msgid "How well AI answers can use your pages"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:74
+#: tmp/i18n/screens/Overview.js:92
 msgid "Search clicks, 28 days"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:75
+#: tmp/i18n/screens/Overview.js:93
 msgid "From Google Search Console, through MonoRanks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:78
+#: tmp/i18n/screens/Overview.js:96
 #, js-format
 msgid "%s ready"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:79
+#: tmp/i18n/screens/Overview.js:97
 msgid "applied in 30 days"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:80
+#: tmp/i18n/screens/Overview.js:98
 #, js-format
 msgid "%s waiting for your approval in MonoRanks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:82
+#: tmp/i18n/screens/Overview.js:100
 msgid "AI crawler rules on"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:82
+#: tmp/i18n/screens/Overview.js:100
 msgid "No AI crawler rules"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:83
+#: tmp/i18n/screens/Overview.js:101
 msgid "llms.txt published"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:83
+#: tmp/i18n/screens/Overview.js:101
 msgid "No llms.txt"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:92
+#: tmp/i18n/screens/Overview.js:110
 msgid "Pages needing attention"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:92
+#: tmp/i18n/screens/Overview.js:110
 msgid "All pages in MonoRanks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:95
+#: tmp/i18n/screens/Overview.js:113
 msgid "Page"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:95
+#: tmp/i18n/screens/Overview.js:113
 msgid "Biggest issue"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:102
+#: tmp/i18n/screens/Overview.js:120
 msgid "Fix in MonoRanks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:106
+#: tmp/i18n/screens/Overview.js:124
 msgid "Nothing needs attention"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:106
+#: tmp/i18n/screens/Overview.js:124
 msgid "Every scored page is above 60. The next audit may change that."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:111
+#: tmp/i18n/screens/Overview.js:129
 msgid "Ready to apply"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:112
+#: tmp/i18n/screens/Overview.js:130
 msgid "Apply all"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:117
+#: tmp/i18n/screens/Overview.js:135
 #, js-format
 msgid "%s fixes are ready for your approval"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:117
+#: tmp/i18n/screens/Overview.js:135
 #, js-format
 msgid "%s needs a value in MonoRanks"
 msgid_plural "%s need a value in MonoRanks"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Overview.js:118
+#: tmp/i18n/screens/Overview.js:136
 msgid "Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:118
+#: tmp/i18n/screens/Overview.js:136
 msgid "Approve them in MonoRanks and they are written here, with undo."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:123
+#: tmp/i18n/screens/Overview.js:141
+#: tmp/i18n/screens/Overview.js:157
 msgid "Review in MonoRanks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:125
+#: tmp/i18n/screens/Overview.js:143
 msgid "No fixes waiting"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:125
+#: tmp/i18n/screens/Overview.js:143
 msgid "Fixes you approve in MonoRanks appear here, ready to write into WordPress."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:132
-msgid "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first."
-msgstr ""
-
-#: tmp/i18n/screens/Overview.js:137
+#: tmp/i18n/screens/Overview.js:146
 msgid "Review"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:137
+#: tmp/i18n/screens/Overview.js:146
 msgid "Apply"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:139
+#: tmp/i18n/screens/Overview.js:148
 msgid "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:145
-#: tmp/i18n/screens/Settings.js:103
+#: tmp/i18n/screens/Overview.js:152
+msgid "Needs review in MonoRanks"
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:154
+msgid "These changed in WordPress after they were reviewed, so they are not applied from here. Review them again in MonoRanks."
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:164
+#: tmp/i18n/screens/Settings.js:130
 msgid "Recent changes"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:148
+#: tmp/i18n/screens/Overview.js:167
 msgid "All changes"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:163
+#: tmp/i18n/screens/Overview.js:182
 msgid "Connect MonoRanks again"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:163
-#: tmp/i18n/screens/Settings.js:54
+#: tmp/i18n/screens/Overview.js:182
+#: tmp/i18n/screens/Settings.js:81
 msgid "Key revoked"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:163
-#: tmp/i18n/screens/Settings.js:54
+#: tmp/i18n/screens/Overview.js:182
+#: tmp/i18n/screens/Settings.js:81
 msgid "Not connected"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:165
-#: tmp/i18n/screens/Settings.js:72
-msgid "Connect from MonoRanks"
+#: tmp/i18n/screens/Overview.js:184
+#: tmp/i18n/screens/Settings.js:99
+msgid "Connect to MonoRanks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:165
-#: tmp/i18n/screens/Settings.js:72
-msgid "In MonoRanks open your website → Integrations → WordPress → Connect to WordPress, and allow MonoRanks when WordPress asks. Nothing is sent before you connect."
+#: tmp/i18n/screens/Overview.js:184
+#: tmp/i18n/screens/Settings.js:99
+msgid "Sign in and approve. Takes a minute."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:166
-#: tmp/i18n/screens/Settings.js:73
+#: tmp/i18n/screens/Overview.js:184
+#: tmp/i18n/screens/Settings.js:99
+#: tmp/i18n/screens/Settings.js:164
+msgid "Connect"
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:185
+#: tmp/i18n/screens/Settings.js:100
 msgid "Or paste a connector key"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:166
+#: tmp/i18n/screens/Overview.js:185
+#: tmp/i18n/screens/Settings.js:100
 msgid "Use this when your host blocks Application Passwords."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:169
+#: tmp/i18n/screens/Overview.js:188
 msgid "Open settings"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:170
+#: tmp/i18n/screens/Overview.js:189
 msgid "See scores here and in your Posts list"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:170
+#: tmp/i18n/screens/Overview.js:189
 msgid "After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:179
+#: tmp/i18n/screens/Overview.js:198
 msgid "This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:179
+#: tmp/i18n/screens/Overview.js:198
 msgid "MonoRanks could not be reached for the audit results. The plugin tries again within the hour, or when you reload this screen."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:179
+#: tmp/i18n/screens/Overview.js:198
 msgid "MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:181
+#: tmp/i18n/screens/Overview.js:200
 msgid "Waiting for the first audit"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:181
-#: tmp/i18n/screens/Settings.js:54
+#: tmp/i18n/screens/Overview.js:200
+#: tmp/i18n/screens/Settings.js:81
 msgid "Connected"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:184
+#: tmp/i18n/screens/Overview.js:203
 msgid "Content"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:184
+#: tmp/i18n/screens/Overview.js:203
 #, js-format
 msgid "%1$s published items sent %2$s"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:184
+#: tmp/i18n/screens/Overview.js:203
 msgid "Not sent yet. Use \"Sync content now\" above."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:185
+#: tmp/i18n/screens/Overview.js:204
 msgid "Audit results"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:185
+#: tmp/i18n/screens/Overview.js:204
 #, js-format
 msgid "checked %s"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:187
+#: tmp/i18n/screens/Overview.js:206
 msgid "Open the audit in MonoRanks"
 msgstr ""
 
@@ -1088,180 +1161,172 @@ msgstr ""
 msgid "Could not load the settings."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:46
+#: tmp/i18n/screens/Settings.js:73
 msgid "Connection, what is sent, and every change written into this site."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:53
+#: tmp/i18n/screens/Settings.js:80
 msgid "Connection"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:59
+#: tmp/i18n/screens/Settings.js:86
 msgid "MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:59
+#: tmp/i18n/screens/Settings.js:86
 msgid "Sending published content to MonoRanks. Nothing else leaves this site."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:60
-#: tmp/i18n/screens/Settings.js:135
+#: tmp/i18n/screens/Settings.js:87
+#: tmp/i18n/screens/Settings.js:162
 msgid "Connector key"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:61
+#: tmp/i18n/screens/Settings.js:88
 msgid "Last sync"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:61
+#: tmp/i18n/screens/Settings.js:88
 #, js-format
 msgid "sending, batch %1$s of %2$s"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:61
+#: tmp/i18n/screens/Settings.js:88
 #, js-format
 msgid "%s published item"
 msgid_plural "%s published items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Settings.js:63
+#: tmp/i18n/screens/Settings.js:90
 msgid "Fixes written with"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:63
+#: tmp/i18n/screens/Settings.js:90
 msgid "The \"MonoRanks\" Application Password"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:63
+#: tmp/i18n/screens/Settings.js:90
 msgid "revoke it in your profile"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:63
+#: tmp/i18n/screens/Settings.js:90
 msgid "to stop writes"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:64
+#: tmp/i18n/screens/Settings.js:91
 msgid "Works with"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:64
+#: tmp/i18n/screens/Settings.js:91
 #, js-format
 msgid "%s detected"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:64
+#: tmp/i18n/screens/Settings.js:91
 #, js-format
 msgid "MonoRanks cannot write titles, descriptions, canonicals or noindex into %s yet, so those fixes are refused"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:64
+#: tmp/i18n/screens/Settings.js:91
 #, js-format
 msgid "titles and descriptions go into the fields %s reads"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:64
+#: tmp/i18n/screens/Settings.js:91
 msgid "No SEO plugin"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:64
+#: tmp/i18n/screens/Settings.js:91
 msgid "MonoRanks prints the approved title, description, canonical and noindex tags itself"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:67
+#: tmp/i18n/screens/Settings.js:94
 msgid "Send content now"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:68
+#: tmp/i18n/screens/Settings.js:95
 msgid "Disconnect"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:69
+#: tmp/i18n/screens/Settings.js:96
 msgid "Disconnect stops sending. Fixes already applied stay."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:73
-msgid "Use this when your host blocks Application Passwords. In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website."
-msgstr ""
-
-#: tmp/i18n/screens/Settings.js:80
+#: tmp/i18n/screens/Settings.js:107
 msgid "Use a different key"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:83
+#: tmp/i18n/screens/Settings.js:110
 msgid "In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website. Paste it here. With a key alone MonoRanks receives your content; to apply fixes, also use Connect to WordPress in MonoRanks."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:91
+#: tmp/i18n/screens/Settings.js:118
 msgid "What is sent"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:94
+#: tmp/i18n/screens/Settings.js:121
 msgid "Sent"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:94
+#: tmp/i18n/screens/Settings.js:121
 msgid "Published titles, a 40-word excerpt, dates, authors, categories, tags, SEO fields, image alt text and plugin status."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:95
+#: tmp/i18n/screens/Settings.js:122
 msgid "Read back"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:95
+#: tmp/i18n/screens/Settings.js:122
 msgid "This website's audit results: scores, issues and the fixes you approved, shown here and in the Posts list."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:96
+#: tmp/i18n/screens/Settings.js:123
 msgid "Never sent"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:96
+#: tmp/i18n/screens/Settings.js:123
 msgid "Drafts, private posts, comments, emails, passwords, plugin or theme settings."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:97
+#: tmp/i18n/screens/Settings.js:124
 msgid "Can change"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:97
+#: tmp/i18n/screens/Settings.js:124
 msgid "SEO title, meta description, canonical, noindex, image alt text, redirects, one opening paragraph, AI crawler rules, llms.txt. Only after you approve each one."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:103
+#: tmp/i18n/screens/Settings.js:130
 msgid "Last 50 · undo for 30 days"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:111
+#: tmp/i18n/screens/Settings.js:138
 msgid "Danger zone"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:113
+#: tmp/i18n/screens/Settings.js:140
 msgid "This site is not connected to MonoRanks. You can erase everything the plugin stored here: the connection, the scores on your posts and pages, the redirects and AI access files it was asked to write, and the change log. Pages themselves are not touched — a fix that was written stays written, so undo those first if you want them back."
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:115
+#: tmp/i18n/screens/Settings.js:142
 msgid "This cannot be undone. Delete everything?"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:119
+#: tmp/i18n/screens/Settings.js:146
 msgid "Yes, delete all data"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:120
+#: tmp/i18n/screens/Settings.js:147
 msgid "Cancel"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:121
+#: tmp/i18n/screens/Settings.js:148
 msgid "Delete all MonoRanks data"
 msgstr ""
 
-#: tmp/i18n/screens/Settings.js:136
+#: tmp/i18n/screens/Settings.js:163
 msgid "MonoRanks address (development sites only)"
-msgstr ""
-
-#: tmp/i18n/screens/Settings.js:137
-msgid "Connect"
 msgstr ""
 
 #: tmp/i18n/shell/ChangeLog.js:8

@@ -16,6 +16,15 @@ class Settings {
 		return false;
 	}
 
+	/**
+	 * The one-link connect page in MonoRanks: it signs the person in, has them approve, and sends them back here.
+	 * {base}/connect/wordpress?site=<home URL without the trailing slash>&return=<this settings page>.
+	 */
+	public static function connect_url( $base = '' ) {
+		$base = untrailingslashit( $base ? (string) $base : MONORANKS_API_BASE );
+		return $base . '/connect/wordpress?site=' . rawurlencode( untrailingslashit( home_url( '/' ) ) ) . '&return=' . rawurlencode( Admin::settings_url() );
+	}
+
 	public static function data() {
 		$conn      = Connection::get();
 		$connected = Connection::has_key();
@@ -43,6 +52,7 @@ class Settings {
 			'profile_url'  => admin_url( 'profile.php#application-passwords-section' ),
 			'show_address' => Admin::shows_address_field(),
 			'app_url'      => $connected ? $conn['api_base'] : MONORANKS_API_BASE,
+			'connect_url'  => self::connect_url( $connected ? $conn['api_base'] : MONORANKS_API_BASE ),
 			'log'          => Overview::log_rows( 50 ),
 			'labels'       => Overview::field_labels(),
 		);
