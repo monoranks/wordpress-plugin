@@ -92,7 +92,9 @@ jobs:
       # The SEO Framework is installed but not activated; MONORANKS_WP_PLUGINS loads it for this run only.
       - name: Integration tests with The SEO Framework
         run: |
-          for i in 1 2 3; do wp plugin install autodescription --path=/tmp/wordpress --allow-root && break; sleep 10; done
+          # The SEO Framework 5.2 needs WordPress 7.0; older WordPress gets 5.1.4, the last release that supports 6.0.
+          tsf=""; case "${{ matrix.wp }}" in latest) ;; *) tsf="--version=5.1.4";; esac
+          for i in 1 2 3; do wp plugin install autodescription $tsf --path=/tmp/wordpress --allow-root && break; sleep 10; done
           vendor/bin/phpunit -c phpunit-integration.xml.dist --group tsf --fail-on-skipped
         env:
           MONORANKS_WP_PATH: /tmp/wordpress
