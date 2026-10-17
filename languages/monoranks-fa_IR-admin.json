@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-10-14T11:51:45+00:00",
+    "translation-revision-date": "2026-10-17T10:10:18+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -49,9 +49,6 @@
             "%s this week": [
                 "%s این هفته"
             ],
-            "Status": [
-                "وضعیت"
-            ],
             "Next audit": [
                 "ممیزی بعدی"
             ],
@@ -91,9 +88,6 @@
             "Could not load the settings.": [
                 "بارگذاری تنظیمات ممکن نشد."
             ],
-            "Connection, what is sent, and every change written into this site.": [
-                "اتصال، آنچه فرستاده می‌شود، و هر تغییری که در این سایت نوشته شده است."
-            ],
             "Connection": [
                 "اتصال"
             ],
@@ -119,14 +113,14 @@
             "Fixes written with": [
                 "اصلاح‌ها نوشته می‌شوند با"
             ],
-            "The \"MonoRanks\" Application Password": [
-                "گذرواژهٔ برنامهٔ «MonoRanks»"
+            "App password": [
+                "گذرواژهٔ برنامه"
             ],
-            "revoke it in your profile": [
-                "آن را در نمایهٔ خود باطل کنید"
+            "Fixes are written with the \"MonoRanks\" Application Password. Revoke it in your profile to stop writes.": [
+                "اصلاح‌ها با گذرواژهٔ برنامهٔ «MonoRanks» نوشته می‌شوند. برای توقف نوشتن، آن را در نمایه‌تان لغو کنید."
             ],
-            "to stop writes": [
-                "تا نوشتن متوقف شود"
+            "Revoke": [
+                "لغو"
             ],
             "Works with": [
                 "سازگار با"
@@ -135,7 +129,7 @@
                 "%s شناسایی شد"
             ],
             "MonoRanks cannot write titles, descriptions, canonicals or noindex into %s yet, so those fixes are refused": [
-                ""
+                "مونورنکس هنوز نمی‌تواند عنوان، توضیحات، canonical یا noindex را در %s بنویسد، پس این اصلاح‌ها رد می‌شوند"
             ],
             "titles and descriptions go into the fields %s reads": [
                 "عنوان‌ها و توضیح‌ها در فیلدهایی نوشته می‌شوند که %s می‌خواند"
@@ -149,17 +143,17 @@
             "Send content now": [
                 "ارسال محتوا"
             ],
-            "Disconnect": [
-                "قطع اتصال"
-            ],
             "Disconnect stops sending. Fixes already applied stay.": [
                 "قطع اتصال ارسال را متوقف می‌کند. اصلاح‌های اعمال‌شده می‌مانند."
+            ],
+            "Disconnect": [
+                "قطع اتصال"
             ],
             "Use a different key": [
                 "استفاده از کلید دیگر"
             ],
-            "In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website. Paste it here. With a key alone MonoRanks receives your content; to apply fixes, also use Connect to WordPress in MonoRanks.": [
-                "در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت. آن را اینجا وارد کنید. با کلید به‌تنهایی مونورنکس محتوای شما را دریافت می‌کند؛ برای اعمال اصلاح‌ها، «اتصال به وردپرس» را هم در مونورنکس انجام دهید."
+            "In MonoRanks: Settings → API and MCP → New credential, content:write, this website.": [
+                "در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید، content:write، همین وب‌سایت."
             ],
             "What is sent": [
                 "چه چیزی فرستاده می‌شود"
@@ -194,8 +188,8 @@
             "Danger zone": [
                 "منطقهٔ خطر"
             ],
-            "This site is not connected to MonoRanks. You can erase everything the plugin stored here: the connection, the scores on your posts and pages, the redirects and AI access files it was asked to write, and the change log. Pages themselves are not touched — a fix that was written stays written, so undo those first if you want them back.": [
-                "این سایت به مونورنکس متصل نیست. می‌توانید هر چه افزونه اینجا ذخیره کرده پاک کنید: اتصال، امتیاز نوشته‌ها و برگه‌ها، تغییر مسیرها و فایل‌های دسترسی هوش مصنوعی که نوشته شده‌اند، و فهرست تغییرات. خود صفحه‌ها دست‌نخورده می‌مانند؛ اصلاحی که نوشته شده نوشته می‌ماند، پس اگر می‌خواهید برگردد ابتدا آن را بازگردانی کنید."
+            "Erases the connection, scores, redirects, AI files and change log. Written fixes stay.": [
+                "اتصال، امتیازها، تغییر مسیرها، فایل‌های هوش مصنوعی و گزارش تغییرات را پاک می‌کند. اصلاح‌های نوشته‌شده می‌مانند."
             ],
             "This cannot be undone. Delete everything?": [
                 "این کار برگشت‌پذیر نیست. همه چیز پاک شود؟"
@@ -426,9 +420,6 @@
             "%1$s of %2$s published pages scored": [
                 "%1$s از %2$s صفحهٔ منتشرشده امتیاز گرفته"
             ],
-            "Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress.": [
-                "ممیزی هفتگی SEO، AEO و GEO، با اصلاح‌هایی که تأیید می‌کنید و در وردپرس نوشته می‌شوند."
-            ],
             "Sync content now": [
                 "همگام‌سازی محتوا"
             ],
@@ -496,6 +487,9 @@
             "Ready to apply": [
                 "آمادهٔ اعمال"
             ],
+            "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days.": [
+                "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
+            ],
             "Apply all": [
                 "اعمال همه"
             ],
@@ -527,9 +521,6 @@
             "Apply": [
                 "اعمال"
             ],
-            "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days.": [
-                "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
-            ],
             "Needs review in MonoRanks": [
                 ""
             ],
@@ -548,11 +539,14 @@
             "See scores here and in your Posts list": [
                 "امتیازها را اینجا و در فهرست نوشته‌ها ببینید"
             ],
-            "After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list.": [
-                "پس از نخستین ممیزی، این صفحه امتیاز سلامت و AEO سایت، صفحه‌های نیازمند توجه و اصلاح‌های تأییدشدهٔ شما را نشان می‌دهد؛ هر نوشته و برگه هم امتیازش را در فهرست می‌گیرد."
+            "Not shared yet": [
+                "هنوز به اشتراک گذاشته نشده"
             ],
             "This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow.": [
                 "این مونورنکس هنوز نتایج ممیزی را با افزونه به اشتراک نمی‌گذارد. فعلاً امتیازها در مونورنکس می‌مانند؛ افزونه فردا دوباره می‌پرسد."
+            ],
+            "MonoRanks not reached": [
+                "دسترسی به مونورنکس ممکن نشد"
             ],
             "MonoRanks could not be reached for the audit results. The plugin tries again within the hour, or when you reload this screen.": [
                 "برای دریافت نتایج ممیزی دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر یا با بارگذاری دوباره این صفحه، دوباره تلاش می‌کند."
@@ -580,6 +574,9 @@
             ],
             "Open the audit in MonoRanks": [
                 "باز کردن ممیزی در مونورنکس"
+            ],
+            "More info": [
+                "اطلاعات بیشتر"
             ],
             "Open MonoRanks": [
                 "باز کردن مونورنکس"

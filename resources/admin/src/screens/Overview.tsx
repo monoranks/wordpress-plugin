@@ -11,6 +11,7 @@ import type { Screen } from '@/lib/screen';
 import { fmt } from '@/lib/format';
 import { Button } from '@/components/ui/button';
 import { Badge, Dot } from '@/components/ui/badge';
+import { Tip } from '@/components/ui/tip';
 import { GrowCards } from '@/screens/Grow';
 
 const th = 'whitespace-nowrap border-b border-border px-[10px] py-[11px] text-start text-[12px] font-medium text-mute';
@@ -89,7 +90,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
   const description = data
     ? o
       ? <>{__('Weekly SEO, AEO and GEO audit of', 'monoranks')} <code>{data.host}</code>{data.audited && <> · {sprintf(__('last audit %s', 'monoranks'), data.audited)}</>}{o.pages_total > 0 && <> · {sprintf(__('%1$s of %2$s published pages scored', 'monoranks'), fmt(o.pages_scored), fmt(o.pages_total))}</>}</>
-      : __('Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress.', 'monoranks')
+      : undefined
     : ' ';
 
   const actions = data?.connected ? (
@@ -160,19 +161,19 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
 
             <Card>
               <CardHeader>
-                <CardTitle>{__('Ready to apply', 'monoranks')}{o.ready.length > 0 && <Badge>{fmt(o.ready.length)}</Badge>}</CardTitle>
+                <CardTitle>{__('Ready to apply', 'monoranks')}{o.ready.length > 0 && <Badge>{fmt(o.ready.length)}</Badge>}{o.ready.length > 0 && <Tip text={__('Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days.', 'monoranks')} />}</CardTitle>
                 {o.ready.length > 1 && <Button variant="primary" size="sm" disabled={busy !== null} aria-busy={busy === 'all'} onClick={() => run('all', () => api.apply('all'))}>{__('Apply all', 'monoranks')}</Button>}
               </CardHeader>
               <CardBody className="flex flex-col pt-1.5">
                 {o.ready.length === 0 && review && (
                   <div className="flex flex-col gap-3 py-2">
-                    <div className="grid gap-1">
+                    <div className="flex flex-wrap items-center gap-1.5">
                       {need === null ? (
                         <b className="text-[13px] font-semibold">{sprintf(__('%s fixes are ready for your approval', 'monoranks'), fmt(review.total))}</b>
                       ) : (
                         <b className="text-[13px] font-semibold">{[review.total > 0 && sprintf(_n('%s ready to apply', '%s ready to apply', review.total, 'monoranks'), fmt(review.total)), need > 0 && sprintf(_n('%s needs a value in MonoRanks', '%s need a value in MonoRanks', need, 'monoranks'), fmt(need))].filter(Boolean).join(' · ')}</b>
                       )}
-                      <span className="text-[12px] text-ink2">{need !== null && need > 0 ? __('Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo.', 'monoranks') : __('Approve them in MonoRanks and they are written here, with undo.', 'monoranks')}</span>
+                      <Tip text={need !== null && need > 0 ? __('Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo.', 'monoranks') : __('Approve them in MonoRanks and they are written here, with undo.', 'monoranks')} />
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                       {Object.entries(review.by_field).sort((a, b) => b[1] - a[1]).map(([field, n]) => <Badge key={field} variant="pill"><bdi>{data.labels[field] ?? field}</bdi><span className="tabular-nums text-ink2">{fmt(n)}</span></Badge>)}
@@ -191,14 +192,12 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
                     )}
                   </div>
                 ))}
-                {o.ready.length > 0 && <div className="pt-3 text-[11px] text-mute">{__('Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days.', 'monoranks')}</div>}
               </CardBody>
             </Card>
             {(o.needs_review ?? []).length > 0 && (
               <Card>
-                <CardHeader><CardTitle>{__('Needs review in MonoRanks', 'monoranks')}<Badge>{fmt(o.needs_review.length)}</Badge></CardTitle></CardHeader>
+                <CardHeader><CardTitle>{__('Needs review in MonoRanks', 'monoranks')}<Badge>{fmt(o.needs_review.length)}</Badge><Tip text={__('These changed in WordPress after they were reviewed, so they are not applied from here. Review them again in MonoRanks.', 'monoranks')} /></CardTitle></CardHeader>
                 <CardBody className="flex flex-col pt-1.5">
-                  <p className="m-0 pb-1 text-[12px] text-ink2">{__('These changed in WordPress after they were reviewed, so they are not applied from here. Review them again in MonoRanks.', 'monoranks')}</p>
                   {o.needs_review.map((fix) => (
                     <div key={fix.id} className="flex items-start gap-3 border-b border-grid py-3 last-of-type:border-b-0">
                       <FixText fix={fix} labels={data.labels} />
@@ -231,8 +230,8 @@ export function ConnectSteps({ revoked, go }: { revoked: boolean; go: (next: Scr
       <CardHeader><CardTitle>{revoked ? __('Connect MonoRanks again', 'monoranks') : __('Connect MonoRanks', 'monoranks')}</CardTitle><Badge variant="pill"><Dot tone={revoked ? 'critical' : 'muted'} />{revoked ? __('Key revoked', 'monoranks') : __('Not connected', 'monoranks')}</Badge></CardHeader>
       <CardBody className="flex flex-col gap-4">
         <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect to MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Sign in and approve. Takes a minute.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(s.urls.connect, 'connect-step')} target="_blank" rel="noopener">{__('Connect', 'monoranks')}</a></Button></div></Step>
-        <Step n={2} later><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Use this when your host blocks Application Passwords.', 'monoranks')}</span><div><Button size="sm" asChild><a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }}>{__('Open settings', 'monoranks')}</a></Button></div></Step>
-        <Step n={3} later><b className="text-[13px] font-semibold text-ink">{__('See scores here and in your Posts list', 'monoranks')}</b><span className="text-[12px] text-ink2">{__("After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list.", 'monoranks')}</span></Step>
+        <Step n={2} later><span className="inline-flex items-center gap-1.5"><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><Tip text={__('Use this when your host blocks Application Passwords.', 'monoranks')} /></span><div><Button size="sm" asChild><a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }}>{__('Open settings', 'monoranks')}</a></Button></div></Step>
+        <Step n={3} later><b className="text-[13px] font-semibold text-ink">{__('See scores here and in your Posts list', 'monoranks')}</b></Step>
       </CardBody>
     </Card>
   );
@@ -244,18 +243,18 @@ export function Step({ n, later, children }: { n: number; later?: boolean; child
 
 function Waiting({ data }: { data: OverviewData }) {
   const kind = data.status;
-  const results = kind === 'unsupported'
-    ? __('This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow.', 'monoranks')
+  const [short, results] = kind === 'unsupported'
+    ? [__('Not shared yet', 'monoranks'), __('This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow.', 'monoranks')]
     : kind === 'error'
-      ? __('MonoRanks could not be reached for the audit results. The plugin tries again within the hour, or when you reload this screen.', 'monoranks')
-      : __('MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit.', 'monoranks');
+      ? [__('MonoRanks not reached', 'monoranks'), __('MonoRanks could not be reached for the audit results. The plugin tries again within the hour, or when you reload this screen.', 'monoranks')]
+      : [__('Not scored yet', 'monoranks'), __('MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit.', 'monoranks')];
   return (
     <Card>
       <CardHeader><CardTitle>{__('Waiting for the first audit', 'monoranks')}</CardTitle><Badge variant="pill"><Dot tone="good" />{__('Connected', 'monoranks')}</Badge></CardHeader>
       <CardBody className="flex flex-col gap-4">
         <KV rows={[
           [__('Content', 'monoranks'), data.last_sent ? sprintf(__('%1$s published items sent %2$s', 'monoranks'), fmt(data.items), data.last_sent) : __('Not sent yet. Use "Sync content now" above.', 'monoranks')],
-          [__('Audit results', 'monoranks'), <>{results}{data.fetched && <span className="text-mute"> · {sprintf(__('checked %s', 'monoranks'), data.fetched)}</span>}</>],
+          [__('Audit results', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{short}<Tip text={data.fetched ? <>{results} · {sprintf(__('checked %s', 'monoranks'), data.fetched)}</> : results} /></span>],
         ]} />
         <div><Button size="sm" asChild><a href={out(data.app_url, 'open-audit')} target="_blank" rel="noopener">{__('Open the audit in MonoRanks', 'monoranks')}</a></Button></div>
       </CardBody>

@@ -18,11 +18,13 @@ class Settings {
 
 	/**
 	 * The one-link connect page in MonoRanks: it signs the person in, has them approve, and sends them back here.
-	 * {base}/connect/wordpress?site=<home URL without the trailing slash>&return=<this settings page>.
+	 * {base}/connect/wordpress?site=<home URL without the trailing slash>&return=<this settings page>&state=<per-user state>.
+	 * The state lets MonoRanks hand the key back through Settings when it cannot reach this site (Handoff).
 	 */
 	public static function connect_url( $base = '' ) {
-		$base = untrailingslashit( $base ? (string) $base : MONORANKS_API_BASE );
-		return $base . '/connect/wordpress?site=' . rawurlencode( untrailingslashit( home_url( '/' ) ) ) . '&return=' . rawurlencode( Admin::settings_url() );
+		$base  = untrailingslashit( $base ? (string) $base : MONORANKS_API_BASE );
+		$state = Handoff::state( $base );
+		return $base . '/connect/wordpress?site=' . rawurlencode( untrailingslashit( home_url( '/' ) ) ) . '&return=' . rawurlencode( Admin::settings_url() ) . ( $state ? '&state=' . $state : '' );
 	}
 
 	public static function data() {
@@ -43,6 +45,8 @@ class Settings {
 				: __( 'pasted by hand', 'monoranks' ),
 			'api_base'     => $connected ? $conn['api_base'] : MONORANKS_API_BASE,
 			'last_sent'    => Admin::ago( isset( $conn['last_sent_at'] ) ? $conn['last_sent_at'] : '', __( 'Never', 'monoranks' ) ),
+			'last_sent_short' => Admin::ago_short( isset( $conn['last_sent_at'] ) ? $conn['last_sent_at'] : '', __( 'Never', 'monoranks' ) ),
+			'last_sent_date'  => Admin::date_of( isset( $conn['last_sent_at'] ) ? $conn['last_sent_at'] : '' ),
 			'last_error'   => isset( $conn['last_error'] ) ? (string) $conn['last_error'] : '',
 			'sending'      => ! empty( $sync['run_id'] ) ? array( 'page' => (int) $sync['page'], 'pages' => (int) $sync['pages'] ) : null,
 			'items'        => array_sum( Rest::status_payload()['post_types'] ),

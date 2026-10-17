@@ -35,7 +35,7 @@ msgstr "برنامهٔ مدیریت مونورنکس ساخته نشده است.
 
 #: resources/views/column-cell.php:20
 #: resources/views/post-panel.php:25
-#: tmp/i18n/screens/Overview.js:182
+#: tmp/i18n/screens/Overview.js:181
 msgid "Connect MonoRanks"
 msgstr "اتصال مونورنکس"
 
@@ -46,19 +46,18 @@ msgstr "پیش‌نویس‌ها به مونورنکس فرستاده نمی‌�
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
 #: resources/views/post-panel.php:35
-#: tmp/i18n/screens/Overview.js:113
+#: tmp/i18n/screens/Overview.js:114
 msgid "Health"
 msgstr "سلامت"
 
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
 #: resources/views/post-panel.php:35
-#: tmp/i18n/screens/Overview.js:113
+#: tmp/i18n/screens/Overview.js:114
 msgid "AEO"
 msgstr "AEO"
 
 #: resources/views/column-cell.php:30
-#: tmp/i18n/screens/Settings.js:86
 msgid "Status"
 msgstr "وضعیت"
 
@@ -95,14 +94,14 @@ msgid "Not checked: MonoRanks reads AEO on a sample of pages"
 msgstr "بررسی نشده: مونورنکس AEO را روی نمونه‌ای از صفحه‌ها می‌سنجد"
 
 #: resources/views/column-cell.php:41
-#: tmp/i18n/screens/Overview.js:96
+#: tmp/i18n/screens/Overview.js:97
 msgid "Fixes"
 msgstr "اصلاح‌ها"
 
 #. translators: %s: number
 #, php-format,js-format
 #: resources/views/column-cell.php:43
-#: tmp/i18n/screens/Overview.js:135
+#: tmp/i18n/screens/Overview.js:136
 msgid "%s ready to apply"
 msgid_plural "%s ready to apply"
 msgstr[0] "%s آمادهٔ اعمال"
@@ -142,6 +141,7 @@ msgid "Open in MonoRanks"
 msgstr "باز کردن در مونورنکس"
 
 #: resources/views/partials/score-ring.php:16
+#: tmp/i18n/screens/Overview.js:197
 #: tmp/i18n/shell/Ring.js:14
 msgid "Not scored yet"
 msgstr "هنوز امتیاز نگرفته"
@@ -181,7 +181,7 @@ msgid "Search data arrives with the next refresh."
 msgstr "داده‌های جستجو با به‌روزرسانی بعدی می‌رسند."
 
 #: resources/views/post-panel.php:49
-#: tmp/i18n/screens/Overview.js:93
+#: tmp/i18n/screens/Overview.js:94
 msgid "Connect Google Search Console in MonoRanks to see clicks here."
 msgstr "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
 
@@ -283,7 +283,7 @@ msgstr "(در زبانهٔ تازه باز می‌شود)"
 
 #: src/Admin.php:47
 #: src/Assets.php:67
-#: tmp/i18n/screens/Overview.js:75
+#: tmp/i18n/screens/Overview.js:76
 #: tmp/i18n/shell/Shell.js:14
 msgid "Overview"
 msgstr "نمای کلی"
@@ -294,7 +294,7 @@ msgid "MonoRanks settings"
 msgstr "تنظیمات مونورنکس"
 
 #: src/Admin.php:48
-#: tmp/i18n/screens/Settings.js:73
+#: tmp/i18n/screens/Settings.js:74
 #: tmp/i18n/shell/Shell.js:15
 msgid "Settings"
 msgstr "تنظیمات"
@@ -311,92 +311,100 @@ msgstr "%1$s دیگر (%2$s)"
 msgid "%1$s ago (%2$s)"
 msgstr "%1$s پیش (%2$s)"
 
-#: src/Admin.php:177
+#. translators: %s: relative time, e.g. 3 minutes
+#. translators: %s: relative time such as "5 days"
+#, php-format
+#: src/Admin.php:181
+#: src/Column.php:63
+msgid "in %s"
+msgstr "%s دیگر"
+
+#. translators: %s: relative time, e.g. 3 minutes
+#. translators: %s: relative time such as "2 days"
+#, php-format
+#: src/Admin.php:181
+#: src/Column.php:78
+#: src/Column.php:92
+msgid "%s ago"
+msgstr "%s پیش"
+
+#: src/Admin.php:193
 msgid "Connected. Your published content is on its way to MonoRanks."
 msgstr "متصل شد. محتوای منتشرشدهٔ شما در راه مونورنکس است."
 
-#: src/Admin.php:178
+#: src/Admin.php:194
 msgid "Content sent to MonoRanks."
 msgstr "محتوا به مونورنکس فرستاده شد."
 
-#: src/Admin.php:179
+#: src/Admin.php:195
 msgid "Disconnected. Nothing is sent to MonoRanks any more."
 msgstr "اتصال قطع شد. دیگر چیزی به مونورنکس فرستاده نمی‌شود."
 
-#: src/Admin.php:180
+#: src/Admin.php:196
 msgid "Everything MonoRanks stored in WordPress is gone: the connection, the scores, the redirects and the change log."
 msgstr "هر چه مونورنکس در وردپرس ذخیره کرده بود پاک شد: اتصال، امتیازها، تغییر مسیرها و فهرست تغییرات."
 
-#: src/Admin.php:181
+#: src/Admin.php:197
 msgid "Applied. The change is listed under Recent changes and can be undone."
 msgstr "اعمال شد. این تغییر در «تغییرات اخیر» آمده و قابل بازگردانی است."
 
-#: src/Admin.php:182
+#: src/Admin.php:198
 msgid "Some fixes were applied; the rest could not be applied. Recent changes lists what was written."
 msgstr ""
 
-#: src/Admin.php:183
+#: src/Admin.php:199
 msgid "That change has moved in the log since this screen loaded. Reload and try Undo again."
 msgstr "این تغییر از زمان باز شدن صفحه در فهرست جابه‌جا شده است. صفحه را تازه کنید و دوباره بازگردانی را بزنید."
 
-#: src/Admin.php:184
+#: src/Admin.php:200
 msgid "Undone. The previous value is back."
 msgstr "بازگردانده شد. مقدار قبلی برگشت."
 
-#: src/Admin.php:185
+#: src/Admin.php:201
 msgid "MonoRanks could not apply that change. Open it in MonoRanks to review it again."
 msgstr ""
 
-#: src/Admin.php:186
+#: src/Admin.php:202
 msgid "Nothing was changed: the value in WordPress is not the one that was reviewed. It now needs review in MonoRanks."
 msgstr ""
 
-#: src/Admin.php:187
+#: src/Admin.php:203
 msgid "Some changes were applied. The others no longer match WordPress and need review in MonoRanks."
 msgstr ""
 
-#: src/Admin.php:188
+#: src/Admin.php:204
 msgid "That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP."
 msgstr "این شبیه کلید اتصال مونورنکس نیست. آن را دوباره از مونورنکس ← تنظیمات ← API و MCP کپی کنید."
 
-#: src/Admin.php:189
+#: src/Admin.php:205
 msgid "The MonoRanks address must start with https://."
 msgstr "نشانی مونورنکس باید با https:// شروع شود."
 
-#: src/Admin.php:190
+#: src/Admin.php:206
 msgid "MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks."
 msgstr "مونورنکس این کلید را نپذیرفت. شاید باطل یا جایگزین شده باشد؛ در مونورنکس کلید تازه‌ای بسازید."
 
-#: src/Admin.php:191
+#: src/Admin.php:207
 msgid "This key belongs to a different website in MonoRanks. Create the key on the website with this address."
 msgstr "این کلید متعلق به وب‌سایت دیگری در مونورنکس است. کلید را روی وب‌سایتی با همین نشانی بسازید."
 
-#: src/Admin.php:192
+#: src/Admin.php:208
 msgid "MonoRanks could not be reached. Check the address and try again."
 msgstr "دسترسی به مونورنکس ممکن نشد. نشانی را بررسی کنید و دوباره تلاش کنید."
+
+#: src/Admin.php:209
+msgid "Could not connect. Please try again."
+msgstr "اتصال ممکن نشد. دوباره تلاش کنید."
 
 #: src/AuthorizeScreen.php:39
 msgid "Reads your content and applies only fixes you approve."
 msgstr "محتوای شما را می‌خواند و فقط اصلاحاتی را که تأیید کنید اعمال می‌کند."
-
-#. translators: %s: relative time such as "5 days"
-#, php-format
-#: src/Column.php:63
-msgid "in %s"
-msgstr "%s دیگر"
 
 #. translators: %s: relative time such as "in 5 days"
 #, php-format
 #: src/Column.php:71
 msgid "next audit %s"
 msgstr "ممیزی بعدی %s"
-
-#. translators: %s: relative time such as "2 days"
-#, php-format
-#: src/Column.php:78
-#: src/Column.php:92
-msgid "%s ago"
-msgstr "%s پیش"
 
 #: src/Column.php:121
 msgid "Clicks, 28 days"
@@ -543,7 +551,7 @@ msgid "Image #%d"
 msgstr "تصویر #%d"
 
 #: src/Overview.php:70
-#: tmp/i18n/screens/Overview.js:29
+#: tmp/i18n/screens/Overview.js:30
 msgid "Site"
 msgstr "سایت"
 
@@ -584,12 +592,12 @@ msgid "Internal links"
 msgstr "لینک‌های داخلی"
 
 #: src/PostPanel.php:162
-#: tmp/i18n/screens/Overview.js:84
+#: tmp/i18n/screens/Overview.js:85
 msgid "Health score"
 msgstr "امتیاز سلامت"
 
 #: src/PostPanel.php:163
-#: tmp/i18n/screens/Overview.js:88
+#: tmp/i18n/screens/Overview.js:89
 msgid "AEO score"
 msgstr "امتیاز AEO"
 
@@ -601,17 +609,22 @@ msgstr "%1$s %2$s ← %3$s"
 
 #. translators: 1: user, 2: date
 #, php-format
-#: src/Settings.php:42
+#: src/Settings.php:44
 msgid "set when %1$s connected MonoRanks on %2$s"
 msgstr "هنگام اتصال %1$s به مونورنکس در %2$s تنظیم شد"
 
-#: src/Settings.php:43
+#: src/Settings.php:45
 msgid "pasted by hand"
 msgstr "دستی وارد شده"
 
-#: src/Settings.php:45
+#: src/Settings.php:47
+#: src/Settings.php:48
 msgid "Never"
 msgstr "هرگز"
+
+#: tmp/i18n/components/ui/tip.js:10
+msgid "More info"
+msgstr "اطلاعات بیشتر"
 
 #: tmp/i18n/screens/Grow.js:18
 #: tmp/i18n/screens/Grow.js:26
@@ -838,334 +851,330 @@ msgid "Open report"
 msgstr "باز کردن گزارش"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:34
+#: tmp/i18n/screens/Overview.js:35
 msgid "on %s"
 msgstr ""
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:36
+#: tmp/i18n/screens/Overview.js:37
 msgid "Image: %s"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:37
+#: tmp/i18n/screens/Overview.js:38
 msgid "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first."
 msgstr "یک پاراگراف پاسخ‌محور به بالای نوشته اضافه می‌کند. ابتدا قبل/بعد را در مونورنکس بررسی کنید."
 
-#: tmp/i18n/screens/Overview.js:38
+#: tmp/i18n/screens/Overview.js:39
 msgid "(empty)"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:40
+#: tmp/i18n/screens/Overview.js:41
 msgid "changes to"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:54
+#: tmp/i18n/screens/Overview.js:55
 msgid "Could not load the overview."
 msgstr "بارگذاری نمای کلی ممکن نشد."
 
-#: tmp/i18n/screens/Overview.js:64
-#: tmp/i18n/screens/Settings.js:65
+#: tmp/i18n/screens/Overview.js:65
+#: tmp/i18n/screens/Settings.js:66
 msgid "Something went wrong. Try again."
 msgstr "مشکلی پیش آمد. دوباره تلاش کنید."
 
-#: tmp/i18n/screens/Overview.js:73
+#: tmp/i18n/screens/Overview.js:74
 msgid "Weekly SEO, AEO and GEO audit of"
 msgstr "ممیزی هفتگی SEO، AEO و GEO برای"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:73
+#: tmp/i18n/screens/Overview.js:74
 msgid "last audit %s"
 msgstr "آخرین ممیزی %s"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:73
+#: tmp/i18n/screens/Overview.js:74
 msgid "%1$s of %2$s published pages scored"
 msgstr "%1$s از %2$s صفحهٔ منتشرشده امتیاز گرفته"
 
-#: tmp/i18n/screens/Overview.js:73
-msgid "Weekly SEO, AEO and GEO audits, with the fixes you approve written into WordPress."
-msgstr "ممیزی هفتگی SEO، AEO و GEO، با اصلاح‌هایی که تأیید می‌کنید و در وردپرس نوشته می‌شوند."
-
-#: tmp/i18n/screens/Overview.js:74
+#: tmp/i18n/screens/Overview.js:75
 msgid "Sync content now"
 msgstr "همگام‌سازی محتوا"
 
-#: tmp/i18n/screens/Overview.js:85
+#: tmp/i18n/screens/Overview.js:86
 msgid "Technical, on-page, links, speed"
 msgstr "فنی، درون‌صفحه، پیوندها، سرعت"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:85
+#: tmp/i18n/screens/Overview.js:86
 msgid "Site average, %s page"
 msgid_plural "Site average, %s pages"
 msgstr[0] "میانگین سایت، %s صفحه"
 msgstr[1] "میانگین سایت، %s صفحه"
 
-#: tmp/i18n/screens/Overview.js:89
+#: tmp/i18n/screens/Overview.js:90
 msgid "Answer-first, structure, entities"
 msgstr "پاسخ‌محوری، ساختار، موجودیت‌ها"
 
-#: tmp/i18n/screens/Overview.js:89
+#: tmp/i18n/screens/Overview.js:90
 msgid "How well AI answers can use your pages"
 msgstr "پاسخ‌های هوش مصنوعی چقدر می‌توانند از صفحه‌های شما استفاده کنند"
 
-#: tmp/i18n/screens/Overview.js:92
+#: tmp/i18n/screens/Overview.js:93
 msgid "Search clicks, 28 days"
 msgstr "کلیک‌های جستجو، ۲۸ روز"
 
-#: tmp/i18n/screens/Overview.js:93
+#: tmp/i18n/screens/Overview.js:94
 msgid "From Google Search Console, through MonoRanks"
 msgstr "از گوگل سرچ کنسول، از طریق مونورنکس"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:96
+#: tmp/i18n/screens/Overview.js:97
 msgid "%s ready"
 msgstr "%s آماده"
 
-#: tmp/i18n/screens/Overview.js:97
+#: tmp/i18n/screens/Overview.js:98
 msgid "applied in 30 days"
 msgstr "اعمال‌شده در ۳۰ روز"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:98
+#: tmp/i18n/screens/Overview.js:99
 msgid "%s waiting for your approval in MonoRanks"
 msgstr "%s مورد در مونورنکس منتظر تأیید شماست"
 
-#: tmp/i18n/screens/Overview.js:100
+#: tmp/i18n/screens/Overview.js:101
 msgid "AI crawler rules on"
 msgstr "قوانین خزنده‌های هوش مصنوعی فعال"
 
-#: tmp/i18n/screens/Overview.js:100
+#: tmp/i18n/screens/Overview.js:101
 msgid "No AI crawler rules"
 msgstr "بدون قوانین خزندهٔ هوش مصنوعی"
 
-#: tmp/i18n/screens/Overview.js:101
+#: tmp/i18n/screens/Overview.js:102
 msgid "llms.txt published"
 msgstr "llms.txt منتشر شده"
 
-#: tmp/i18n/screens/Overview.js:101
+#: tmp/i18n/screens/Overview.js:102
 msgid "No llms.txt"
 msgstr "بدون llms.txt"
 
-#: tmp/i18n/screens/Overview.js:110
+#: tmp/i18n/screens/Overview.js:111
 msgid "Pages needing attention"
 msgstr "صفحه‌های نیازمند توجه"
 
-#: tmp/i18n/screens/Overview.js:110
+#: tmp/i18n/screens/Overview.js:111
 msgid "All pages in MonoRanks"
 msgstr "همهٔ صفحه‌ها در مونورنکس"
 
-#: tmp/i18n/screens/Overview.js:113
+#: tmp/i18n/screens/Overview.js:114
 msgid "Page"
 msgstr "صفحه"
 
-#: tmp/i18n/screens/Overview.js:113
+#: tmp/i18n/screens/Overview.js:114
 msgid "Biggest issue"
 msgstr "بزرگ‌ترین مشکل"
 
-#: tmp/i18n/screens/Overview.js:120
+#: tmp/i18n/screens/Overview.js:121
 msgid "Fix in MonoRanks"
 msgstr "اصلاح در مونورنکس"
 
-#: tmp/i18n/screens/Overview.js:124
+#: tmp/i18n/screens/Overview.js:125
 msgid "Nothing needs attention"
 msgstr "چیزی نیازمند توجه نیست"
 
-#: tmp/i18n/screens/Overview.js:124
+#: tmp/i18n/screens/Overview.js:125
 msgid "Every scored page is above 60. The next audit may change that."
 msgstr "همهٔ صفحه‌های امتیازگرفته بالای ۶۰ هستند. ممیزی بعدی ممکن است این را تغییر دهد."
 
-#: tmp/i18n/screens/Overview.js:129
+#: tmp/i18n/screens/Overview.js:130
 msgid "Ready to apply"
 msgstr "آمادهٔ اعمال"
 
 #: tmp/i18n/screens/Overview.js:130
+msgid "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days."
+msgstr "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
+
+#: tmp/i18n/screens/Overview.js:131
 msgid "Apply all"
 msgstr "اعمال همه"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:135
+#: tmp/i18n/screens/Overview.js:136
 msgid "%s fixes are ready for your approval"
 msgstr "%s اصلاح آماده‌ی تأیید شماست"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:135
+#: tmp/i18n/screens/Overview.js:136
 msgid "%s needs a value in MonoRanks"
 msgid_plural "%s need a value in MonoRanks"
 msgstr[0] "%s نیاز به مقدار در مونورنکس"
 msgstr[1] "%s نیاز به مقدار در مونورنکس"
 
-#: tmp/i18n/screens/Overview.js:136
+#: tmp/i18n/screens/Overview.js:137
 msgid "Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo."
 msgstr "در مونورنکس مقدار را بنویسید یا با هوش مصنوعی پیش‌نویس کنید و تأیید کنید تا این‌جا نوشته شود، با امکان بازگردانی."
 
-#: tmp/i18n/screens/Overview.js:136
+#: tmp/i18n/screens/Overview.js:137
 msgid "Approve them in MonoRanks and they are written here, with undo."
 msgstr "در مونورنکس تأییدشان کنید تا این‌جا نوشته شوند، با امکان بازگردانی."
 
-#: tmp/i18n/screens/Overview.js:141
-#: tmp/i18n/screens/Overview.js:157
+#: tmp/i18n/screens/Overview.js:142
+#: tmp/i18n/screens/Overview.js:156
 msgid "Review in MonoRanks"
 msgstr "بررسی در مونورنکس"
 
-#: tmp/i18n/screens/Overview.js:143
+#: tmp/i18n/screens/Overview.js:144
 msgid "No fixes waiting"
 msgstr "اصلاحی در انتظار نیست"
 
-#: tmp/i18n/screens/Overview.js:143
+#: tmp/i18n/screens/Overview.js:144
 msgid "Fixes you approve in MonoRanks appear here, ready to write into WordPress."
 msgstr "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا می‌آیند، آماده برای نوشتن در وردپرس."
 
-#: tmp/i18n/screens/Overview.js:146
+#: tmp/i18n/screens/Overview.js:147
 msgid "Review"
 msgstr "بررسی"
 
-#: tmp/i18n/screens/Overview.js:146
+#: tmp/i18n/screens/Overview.js:147
 msgid "Apply"
 msgstr "اعمال"
-
-#: tmp/i18n/screens/Overview.js:148
-msgid "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days."
-msgstr "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
 
 #: tmp/i18n/screens/Overview.js:152
 msgid "Needs review in MonoRanks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:154
+#: tmp/i18n/screens/Overview.js:152
 msgid "These changed in WordPress after they were reviewed, so they are not applied from here. Review them again in MonoRanks."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:164
-#: tmp/i18n/screens/Settings.js:130
+#: tmp/i18n/screens/Overview.js:163
+#: tmp/i18n/screens/Settings.js:128
 msgid "Recent changes"
 msgstr "تغییرات اخیر"
 
-#: tmp/i18n/screens/Overview.js:167
+#: tmp/i18n/screens/Overview.js:166
 msgid "All changes"
 msgstr "همهٔ تغییرات"
 
-#: tmp/i18n/screens/Overview.js:182
+#: tmp/i18n/screens/Overview.js:181
 msgid "Connect MonoRanks again"
 msgstr "مونورنکس را دوباره متصل کنید"
 
-#: tmp/i18n/screens/Overview.js:182
-#: tmp/i18n/screens/Settings.js:81
+#: tmp/i18n/screens/Overview.js:181
+#: tmp/i18n/screens/Settings.js:82
 msgid "Key revoked"
 msgstr "کلید باطل شده"
 
-#: tmp/i18n/screens/Overview.js:182
-#: tmp/i18n/screens/Settings.js:81
+#: tmp/i18n/screens/Overview.js:181
+#: tmp/i18n/screens/Settings.js:82
 msgid "Not connected"
 msgstr "متصل نیست"
 
-#: tmp/i18n/screens/Overview.js:184
-#: tmp/i18n/screens/Settings.js:99
+#: tmp/i18n/screens/Overview.js:183
+#: tmp/i18n/screens/Settings.js:98
 msgid "Connect to MonoRanks"
 msgstr "اتصال به MonoRanks"
 
-#: tmp/i18n/screens/Overview.js:184
-#: tmp/i18n/screens/Settings.js:99
+#: tmp/i18n/screens/Overview.js:183
+#: tmp/i18n/screens/Settings.js:98
 msgid "Sign in and approve. Takes a minute."
 msgstr "وارد شوید و تأیید کنید. یک دقیقه طول می‌کشد."
 
-#: tmp/i18n/screens/Overview.js:184
-#: tmp/i18n/screens/Settings.js:99
-#: tmp/i18n/screens/Settings.js:164
+#: tmp/i18n/screens/Overview.js:183
+#: tmp/i18n/screens/Settings.js:98
+#: tmp/i18n/screens/Settings.js:161
 msgid "Connect"
 msgstr "اتصال"
 
-#: tmp/i18n/screens/Overview.js:185
-#: tmp/i18n/screens/Settings.js:100
+#: tmp/i18n/screens/Overview.js:184
+#: tmp/i18n/screens/Settings.js:99
 msgid "Or paste a connector key"
 msgstr "یا کلید اتصال را وارد کنید"
 
-#: tmp/i18n/screens/Overview.js:185
-#: tmp/i18n/screens/Settings.js:100
+#: tmp/i18n/screens/Overview.js:184
+#: tmp/i18n/screens/Settings.js:99
 msgid "Use this when your host blocks Application Passwords."
 msgstr "وقتی میزبان شما «گذرواژه‌های برنامه» را مسدود کرده از این راه استفاده کنید."
 
-#: tmp/i18n/screens/Overview.js:188
+#: tmp/i18n/screens/Overview.js:187
 msgid "Open settings"
 msgstr "باز کردن تنظیمات"
 
-#: tmp/i18n/screens/Overview.js:189
+#: tmp/i18n/screens/Overview.js:188
 msgid "See scores here and in your Posts list"
 msgstr "امتیازها را اینجا و در فهرست نوشته‌ها ببینید"
 
-#: tmp/i18n/screens/Overview.js:189
-msgid "After the first audit this page shows the site's health and AEO scores, pages needing attention and the fixes you approved; every post and page gets its scores in the list."
-msgstr "پس از نخستین ممیزی، این صفحه امتیاز سلامت و AEO سایت، صفحه‌های نیازمند توجه و اصلاح‌های تأییدشدهٔ شما را نشان می‌دهد؛ هر نوشته و برگه هم امتیازش را در فهرست می‌گیرد."
+#: tmp/i18n/screens/Overview.js:197
+msgid "Not shared yet"
+msgstr "هنوز به اشتراک گذاشته نشده"
 
-#: tmp/i18n/screens/Overview.js:198
+#: tmp/i18n/screens/Overview.js:197
 msgid "This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow."
 msgstr "این مونورنکس هنوز نتایج ممیزی را با افزونه به اشتراک نمی‌گذارد. فعلاً امتیازها در مونورنکس می‌مانند؛ افزونه فردا دوباره می‌پرسد."
 
-#: tmp/i18n/screens/Overview.js:198
+#: tmp/i18n/screens/Overview.js:197
+msgid "MonoRanks not reached"
+msgstr "دسترسی به مونورنکس ممکن نشد"
+
+#: tmp/i18n/screens/Overview.js:197
 msgid "MonoRanks could not be reached for the audit results. The plugin tries again within the hour, or when you reload this screen."
 msgstr "برای دریافت نتایج ممیزی دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر یا با بارگذاری دوباره این صفحه، دوباره تلاش می‌کند."
 
-#: tmp/i18n/screens/Overview.js:198
+#: tmp/i18n/screens/Overview.js:197
 msgid "MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit."
 msgstr "مونورنکس هنوز به این سایت امتیاز نداده است. امتیازها پس از نخستین ممیزی هفتگی اینجا و در فهرست نوشته‌ها دیده می‌شوند."
 
-#: tmp/i18n/screens/Overview.js:200
+#: tmp/i18n/screens/Overview.js:199
 msgid "Waiting for the first audit"
 msgstr "در انتظار نخستین ممیزی"
 
-#: tmp/i18n/screens/Overview.js:200
-#: tmp/i18n/screens/Settings.js:81
+#: tmp/i18n/screens/Overview.js:199
+#: tmp/i18n/screens/Settings.js:82
 msgid "Connected"
 msgstr "متصل"
 
-#: tmp/i18n/screens/Overview.js:203
+#: tmp/i18n/screens/Overview.js:202
 msgid "Content"
 msgstr "محتوا"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:203
+#: tmp/i18n/screens/Overview.js:202
 msgid "%1$s published items sent %2$s"
 msgstr "%1$s مورد منتشرشده %2$s فرستاده شد"
 
-#: tmp/i18n/screens/Overview.js:203
+#: tmp/i18n/screens/Overview.js:202
 msgid "Not sent yet. Use \"Sync content now\" above."
 msgstr "هنوز فرستاده نشده. از «همگام‌سازی محتوا» در بالا استفاده کنید."
 
-#: tmp/i18n/screens/Overview.js:204
+#: tmp/i18n/screens/Overview.js:203
 msgid "Audit results"
 msgstr "نتایج ممیزی"
 
 #, js-format
-#: tmp/i18n/screens/Overview.js:204
+#: tmp/i18n/screens/Overview.js:203
 msgid "checked %s"
 msgstr "بررسی‌شده %s"
 
-#: tmp/i18n/screens/Overview.js:206
+#: tmp/i18n/screens/Overview.js:205
 msgid "Open the audit in MonoRanks"
 msgstr "باز کردن ممیزی در مونورنکس"
 
-#: tmp/i18n/screens/Settings.js:28
+#: tmp/i18n/screens/Settings.js:29
 msgid "Could not load the settings."
 msgstr "بارگذاری تنظیمات ممکن نشد."
 
-#: tmp/i18n/screens/Settings.js:73
-msgid "Connection, what is sent, and every change written into this site."
-msgstr "اتصال، آنچه فرستاده می‌شود، و هر تغییری که در این سایت نوشته شده است."
-
-#: tmp/i18n/screens/Settings.js:80
+#: tmp/i18n/screens/Settings.js:81
 msgid "Connection"
 msgstr "اتصال"
 
-#: tmp/i18n/screens/Settings.js:86
+#: tmp/i18n/screens/Settings.js:82
 msgid "MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below."
 msgstr "مونورنکس دیگر این کلید را نمی‌پذیرد. دوباره از مونورنکس متصل شوید یا کلید تازه‌ای در پایین وارد کنید."
 
-#: tmp/i18n/screens/Settings.js:86
+#: tmp/i18n/screens/Settings.js:82
 msgid "Sending published content to MonoRanks. Nothing else leaves this site."
 msgstr "محتوای منتشرشده به مونورنکس فرستاده می‌شود. چیز دیگری از این سایت خارج نمی‌شود."
 
 #: tmp/i18n/screens/Settings.js:87
-#: tmp/i18n/screens/Settings.js:162
+#: tmp/i18n/screens/Settings.js:159
 msgid "Connector key"
 msgstr "کلید اتصال"
 
@@ -1190,16 +1199,16 @@ msgid "Fixes written with"
 msgstr "اصلاح‌ها نوشته می‌شوند با"
 
 #: tmp/i18n/screens/Settings.js:90
-msgid "The \"MonoRanks\" Application Password"
-msgstr "گذرواژهٔ برنامهٔ «MonoRanks»"
+msgid "App password"
+msgstr "گذرواژهٔ برنامه"
 
 #: tmp/i18n/screens/Settings.js:90
-msgid "revoke it in your profile"
-msgstr "آن را در نمایهٔ خود باطل کنید"
+msgid "Fixes are written with the \"MonoRanks\" Application Password. Revoke it in your profile to stop writes."
+msgstr "اصلاح‌ها با گذرواژهٔ برنامهٔ «MonoRanks» نوشته می‌شوند. برای توقف نوشتن، آن را در نمایه‌تان لغو کنید."
 
 #: tmp/i18n/screens/Settings.js:90
-msgid "to stop writes"
-msgstr "تا نوشتن متوقف شود"
+msgid "Revoke"
+msgstr "لغو"
 
 #: tmp/i18n/screens/Settings.js:91
 msgid "Works with"
@@ -1213,7 +1222,7 @@ msgstr "%s شناسایی شد"
 #, js-format
 #: tmp/i18n/screens/Settings.js:91
 msgid "MonoRanks cannot write titles, descriptions, canonicals or noindex into %s yet, so those fixes are refused"
-msgstr ""
+msgstr "مونورنکس هنوز نمی‌تواند عنوان، توضیحات، canonical یا noindex را در %s بنویسد، پس این اصلاح‌ها رد می‌شوند"
 
 #, js-format
 #: tmp/i18n/screens/Settings.js:91
@@ -1233,86 +1242,86 @@ msgid "Send content now"
 msgstr "ارسال محتوا"
 
 #: tmp/i18n/screens/Settings.js:95
-msgid "Disconnect"
-msgstr "قطع اتصال"
-
-#: tmp/i18n/screens/Settings.js:96
 msgid "Disconnect stops sending. Fixes already applied stay."
 msgstr "قطع اتصال ارسال را متوقف می‌کند. اصلاح‌های اعمال‌شده می‌مانند."
 
-#: tmp/i18n/screens/Settings.js:107
+#: tmp/i18n/screens/Settings.js:95
+msgid "Disconnect"
+msgstr "قطع اتصال"
+
+#: tmp/i18n/screens/Settings.js:106
 msgid "Use a different key"
 msgstr "استفاده از کلید دیگر"
 
-#: tmp/i18n/screens/Settings.js:110
-msgid "In MonoRanks: Settings → API and MCP → New credential with the content:write scope, ticked for this website. Paste it here. With a key alone MonoRanks receives your content; to apply fixes, also use Connect to WordPress in MonoRanks."
-msgstr "در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید با دسترسی content:write، تیک‌خورده برای این وب‌سایت. آن را اینجا وارد کنید. با کلید به‌تنهایی مونورنکس محتوای شما را دریافت می‌کند؛ برای اعمال اصلاح‌ها، «اتصال به وردپرس» را هم در مونورنکس انجام دهید."
+#: tmp/i18n/screens/Settings.js:108
+msgid "In MonoRanks: Settings → API and MCP → New credential, content:write, this website."
+msgstr "در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید، content:write، همین وب‌سایت."
 
-#: tmp/i18n/screens/Settings.js:118
+#: tmp/i18n/screens/Settings.js:115
 msgid "What is sent"
 msgstr "چه چیزی فرستاده می‌شود"
 
-#: tmp/i18n/screens/Settings.js:121
+#: tmp/i18n/screens/Settings.js:118
 msgid "Sent"
 msgstr "فرستاده می‌شود"
 
-#: tmp/i18n/screens/Settings.js:121
+#: tmp/i18n/screens/Settings.js:118
 msgid "Published titles, a 40-word excerpt, dates, authors, categories, tags, SEO fields, image alt text and plugin status."
 msgstr "عنوان‌های منتشرشده، چکیدهٔ ۴۰ کلمه‌ای، تاریخ‌ها، نویسندگان، دسته‌ها، برچسب‌ها، فیلدهای سئو، متن جایگزین تصاویر و وضعیت افزونه."
 
-#: tmp/i18n/screens/Settings.js:122
+#: tmp/i18n/screens/Settings.js:119
 msgid "Read back"
 msgstr "خوانده می‌شود"
 
-#: tmp/i18n/screens/Settings.js:122
+#: tmp/i18n/screens/Settings.js:119
 msgid "This website's audit results: scores, issues and the fixes you approved, shown here and in the Posts list."
 msgstr "نتایج ممیزی این وب‌سایت: امتیازها، مشکل‌ها و اصلاح‌هایی که تأیید کرده‌اید، که اینجا و در فهرست نوشته‌ها نشان داده می‌شوند."
 
-#: tmp/i18n/screens/Settings.js:123
+#: tmp/i18n/screens/Settings.js:120
 msgid "Never sent"
 msgstr "هرگز فرستاده نمی‌شود"
 
-#: tmp/i18n/screens/Settings.js:123
+#: tmp/i18n/screens/Settings.js:120
 msgid "Drafts, private posts, comments, emails, passwords, plugin or theme settings."
 msgstr "پیش‌نویس‌ها، نوشته‌های خصوصی، دیدگاه‌ها، ایمیل‌ها، گذرواژه‌ها، تنظیمات افزونه یا پوسته."
 
-#: tmp/i18n/screens/Settings.js:124
+#: tmp/i18n/screens/Settings.js:121
 msgid "Can change"
 msgstr "می‌تواند تغییر دهد"
 
-#: tmp/i18n/screens/Settings.js:124
+#: tmp/i18n/screens/Settings.js:121
 msgid "SEO title, meta description, canonical, noindex, image alt text, redirects, one opening paragraph, AI crawler rules, llms.txt. Only after you approve each one."
 msgstr "عنوان سئو، توضیح متا، کانونیکال، noindex، متن جایگزین تصویر، تغییر مسیرها، یک پاراگراف آغازین، قوانین خزنده‌های هوش مصنوعی، llms.txt. فقط پس از آنکه هرکدام را تأیید کنید."
 
-#: tmp/i18n/screens/Settings.js:130
+#: tmp/i18n/screens/Settings.js:128
 msgid "Last 50 · undo for 30 days"
 msgstr "۵۰ مورد آخر · بازگردانی تا ۳۰ روز"
 
-#: tmp/i18n/screens/Settings.js:138
+#: tmp/i18n/screens/Settings.js:136
 msgid "Danger zone"
 msgstr "منطقهٔ خطر"
 
-#: tmp/i18n/screens/Settings.js:140
-msgid "This site is not connected to MonoRanks. You can erase everything the plugin stored here: the connection, the scores on your posts and pages, the redirects and AI access files it was asked to write, and the change log. Pages themselves are not touched — a fix that was written stays written, so undo those first if you want them back."
-msgstr "این سایت به مونورنکس متصل نیست. می‌توانید هر چه افزونه اینجا ذخیره کرده پاک کنید: اتصال، امتیاز نوشته‌ها و برگه‌ها، تغییر مسیرها و فایل‌های دسترسی هوش مصنوعی که نوشته شده‌اند، و فهرست تغییرات. خود صفحه‌ها دست‌نخورده می‌مانند؛ اصلاحی که نوشته شده نوشته می‌ماند، پس اگر می‌خواهید برگردد ابتدا آن را بازگردانی کنید."
+#: tmp/i18n/screens/Settings.js:136
+msgid "Erases the connection, scores, redirects, AI files and change log. Written fixes stay."
+msgstr "اتصال، امتیازها، تغییر مسیرها، فایل‌های هوش مصنوعی و گزارش تغییرات را پاک می‌کند. اصلاح‌های نوشته‌شده می‌مانند."
 
-#: tmp/i18n/screens/Settings.js:142
+#: tmp/i18n/screens/Settings.js:139
 msgid "This cannot be undone. Delete everything?"
 msgstr "این کار برگشت‌پذیر نیست. همه چیز پاک شود؟"
 
-#: tmp/i18n/screens/Settings.js:146
+#: tmp/i18n/screens/Settings.js:143
 msgid "Yes, delete all data"
 msgstr "بله، همهٔ داده‌ها پاک شود"
 
-#: tmp/i18n/screens/Settings.js:147
+#: tmp/i18n/screens/Settings.js:144
 msgid "Cancel"
 msgstr "انصراف"
 
-#: tmp/i18n/screens/Settings.js:148
+#: tmp/i18n/screens/Settings.js:145
 msgid "Delete all MonoRanks data"
 msgstr "پاک کردن همهٔ داده‌های مونورنکس"
 
-#: tmp/i18n/screens/Settings.js:163
+#: tmp/i18n/screens/Settings.js:160
 msgid "MonoRanks address (development sites only)"
 msgstr "نشانی مونورنکس (فقط سایت‌های توسعه)"
 

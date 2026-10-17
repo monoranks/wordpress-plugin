@@ -8,8 +8,16 @@ class Actions {
 
 	/** A key pasted by hand. $base is only honoured on development sites; everywhere else the address is MONORANKS_API_BASE. */
 	public static function connect_key( $key, $base = '' ) {
+		return self::use_key( $key, $base && Admin::shows_address_field() ? $base : MONORANKS_API_BASE, 'manual' );
+	}
+
+	/**
+	 * Connect with a key: pasted by hand (manual) or handed back by the connect link (pairing, Handoff). The key is checked
+	 * with MonoRanks first; when MonoRanks refuses it, the previous connection stays.
+	 */
+	public static function use_key( $key, $base, $via = 'manual', $site_id = '' ) {
 		$key  = Connection::valid_key( $key );
-		$base = Connection::valid_base( $base && Admin::shows_address_field() ? $base : MONORANKS_API_BASE );
+		$base = Connection::valid_base( $base );
 		if ( ! $key ) {
 			return 'bad_key';
 		}
@@ -17,7 +25,11 @@ class Actions {
 			return 'bad_address';
 		}
 		$previous = Connection::get();
-		Connection::update( array( 'api_base' => $base, 'key' => $key, 'via' => 'manual', 'key_state' => 'ok', 'paired_at' => gmdate( 'c' ), 'paired_by' => wp_get_current_user()->user_login ) );
+		$patch    = array( 'api_base' => $base, 'key' => $key, 'via' => 'pairing' === $via ? 'pairing' : 'manual', 'key_state' => 'ok', 'paired_at' => gmdate( 'c' ), 'paired_by' => wp_get_current_user()->user_login );
+		if ( $site_id ) {
+			$patch['site_id'] = $site_id;
+		}
+		Connection::update( $patch );
 		$res = Api::send_status();
 		if ( 200 !== $res['code'] ) {
 			$previous ? update_option( 'monoranks_connection', $previous, false ) : Connection::clear();

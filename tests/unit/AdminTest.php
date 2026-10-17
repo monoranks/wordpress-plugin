@@ -41,4 +41,17 @@ class AdminTest extends TestCase {
 		$this->assertSame( 'https://app.monoranks.com/sites/x', Admin::out( 'https://app.monoranks.com/sites/x', 'posts-column', 'posts-list' ), 'a link into the app keeps its plain address' );
 		$this->assertSame( '', Admin::out( '', 'x' ) );
 	}
+
+	public function test_last_sync_time_is_short_and_the_date_is_separate() {
+		Functions\when( 'determine_locale' )->justReturn( 'en_US' );
+		Functions\when( '__' )->returnArg();
+		Functions\when( 'human_time_diff' )->justReturn( '20 seconds' );
+		Functions\when( 'get_option' )->alias( static function ( $k ) { return 'date_format' === $k ? 'M j, Y' : 'H:i'; } );
+		Functions\when( 'wp_date' )->alias( static function ( $f, $ts ) { return gmdate( $f, $ts ); } );
+		$iso = gmdate( 'c', time() - 20 );
+		$this->assertSame( '20 seconds ago', Admin::ago_short( $iso ) );
+		$this->assertSame( gmdate( 'M j, Y, H:i', strtotime( $iso ) ), Admin::date_of( $iso ) );
+		$this->assertSame( 'Never', Admin::ago_short( '', 'Never' ) );
+		$this->assertSame( '', Admin::date_of( '' ) );
+	}
 }
