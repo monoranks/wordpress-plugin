@@ -4,7 +4,7 @@ Tags: seo, aeo, geo, llms-txt, ai-seo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.22
+Stable tag: 0.1.23
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,11 @@ Please report security bugs found in the source code of the MonoRanks plugin thr
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.23 - 2026-10-17 =
+* **Enhancement:** Sites MonoRanks cannot reach, such as local or firewalled sites, now connect with one button too: the key comes back by itself, nothing to copy.
+* **Enhancement:** Simpler Settings and Overview screens: short rows, with details in (i) tips.
+* **Enhancement:** "What is sent" opens on a click.
 
 = 0.1.22 - 2026-10-16 =
 * **New:** Connect to MonoRanks with one button: sign in or sign up, approve in WordPress, done. The settings page shows "Connected" by itself.
