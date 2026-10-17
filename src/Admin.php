@@ -171,6 +171,22 @@ class Admin {
 		return self::digits( sprintf( __( '%1$s ago (%2$s)', 'monoranks' ), human_time_diff( $ts, time() ), $when ) );
 	}
 
+	/** "3 minutes ago" alone (the full date goes in a tooltip: date_of), or the fallback. */
+	public static function ago_short( $iso, $fallback = '' ) {
+		$ts = $iso ? strtotime( (string) $iso ) : 0;
+		if ( ! $ts ) {
+			return $fallback;
+		}
+		/* translators: %s: relative time, e.g. 3 minutes */
+		return self::digits( $ts > time() ? sprintf( __( 'in %s', 'monoranks' ), human_time_diff( time(), $ts ) ) : sprintf( __( '%s ago', 'monoranks' ), human_time_diff( $ts, time() ) ) );
+	}
+
+	/** "22 Sep 2026, 14:03" in the site's formats, or ''. */
+	public static function date_of( $iso ) {
+		$ts = $iso ? strtotime( (string) $iso ) : 0;
+		return $ts ? self::digits( wp_date( get_option( 'date_format' ) . ', ' . get_option( 'time_format' ), $ts ) ) : '';
+	}
+
 	/** The notice for a result code (the app shows it after an action; the legacy URL carries one as ?monoranks=<code>). */
 	public static function notice_for( $code ) {
 		$map = array(

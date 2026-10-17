@@ -45,6 +45,8 @@ class Settings {
 				: __( 'pasted by hand', 'monoranks' ),
 			'api_base'     => $connected ? $conn['api_base'] : MONORANKS_API_BASE,
 			'last_sent'    => Admin::ago( isset( $conn['last_sent_at'] ) ? $conn['last_sent_at'] : '', __( 'Never', 'monoranks' ) ),
+			'last_sent_short' => Admin::ago_short( isset( $conn['last_sent_at'] ) ? $conn['last_sent_at'] : '', __( 'Never', 'monoranks' ) ),
+			'last_sent_date'  => Admin::date_of( isset( $conn['last_sent_at'] ) ? $conn['last_sent_at'] : '' ),
 			'last_error'   => isset( $conn['last_error'] ) ? (string) $conn['last_error'] : '',
 			'sending'      => ! empty( $sync['run_id'] ) ? array( 'page' => (int) $sync['page'], 'pages' => (int) $sync['pages'] ) : null,
 			'items'        => array_sum( Rest::status_payload()['post_types'] ),
