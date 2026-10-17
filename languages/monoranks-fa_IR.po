@@ -375,6 +375,10 @@ msgstr "این کلید متعلق به وب‌سایت دیگری در مونو
 msgid "MonoRanks could not be reached. Check the address and try again."
 msgstr "دسترسی به مونورنکس ممکن نشد. نشانی را بررسی کنید و دوباره تلاش کنید."
 
+#: src/Admin.php:193
+msgid "Could not connect. Please try again."
+msgstr "اتصال ممکن نشد. دوباره تلاش کنید."
+
 #: src/AuthorizeScreen.php:39
 msgid "Reads your content and applies only fixes you approve."
 msgstr "محتوای شما را می‌خواند و فقط اصلاحاتی را که تأیید کنید اعمال می‌کند."
@@ -601,15 +605,15 @@ msgstr "%1$s %2$s ← %3$s"
 
 #. translators: 1: user, 2: date
 #, php-format
-#: src/Settings.php:42
+#: src/Settings.php:44
 msgid "set when %1$s connected MonoRanks on %2$s"
 msgstr "هنگام اتصال %1$s به مونورنکس در %2$s تنظیم شد"
 
-#: src/Settings.php:43
+#: src/Settings.php:45
 msgid "pasted by hand"
 msgstr "دستی وارد شده"
 
-#: src/Settings.php:45
+#: src/Settings.php:47
 msgid "Never"
 msgstr "هرگز"
 

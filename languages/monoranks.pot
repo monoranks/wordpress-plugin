@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-14T11:51:44+00:00\n"
+"POT-Creation-Date: 2026-10-17T06:15:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: monoranks\n"
@@ -388,6 +388,10 @@ msgstr ""
 msgid "MonoRanks could not be reached. Check the address and try again."
 msgstr ""
 
+#: src/Admin.php:193
+msgid "Could not connect. Please try again."
+msgstr ""
+
 #: src/AuthorizeScreen.php:39
 msgid "Reads your content and applies only fixes you approve."
 msgstr ""
@@ -613,16 +617,16 @@ msgid "%1$s %2$s → %3$s"
 msgstr ""
 
 #. translators: 1: user, 2: date
-#: src/Settings.php:42
+#: src/Settings.php:44
 #, php-format
 msgid "set when %1$s connected MonoRanks on %2$s"
 msgstr ""
 
-#: src/Settings.php:43
+#: src/Settings.php:45
 msgid "pasted by hand"
 msgstr ""
 
-#: src/Settings.php:45
+#: src/Settings.php:47
 msgid "Never"
 msgstr ""
 
