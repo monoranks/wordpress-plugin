@@ -2,6 +2,12 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## v0.1.23 - 2026-10-17
+
+- **Enhancement:** Sites MonoRanks cannot reach, such as local or firewalled sites, now connect with one button too: the key comes back by itself, nothing to copy.
+- **Enhancement:** Simpler Settings and Overview screens: short rows, with details in (i) tips.
+- **Enhancement:** "What is sent" opens on a click.
+
 ## v0.1.22 - 2026-10-16
 
 - **New:** Connect to MonoRanks with one button: sign in or sign up, approve in WordPress, done. The settings page shows "Connected" by itself.
