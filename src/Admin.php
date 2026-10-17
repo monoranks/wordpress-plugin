@@ -190,6 +190,7 @@ class Admin {
 			'rejected'     => array( 'error', __( 'MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks.', 'monoranks' ) ),
 			'other_site'   => array( 'error', __( 'This key belongs to a different website in MonoRanks. Create the key on the website with this address.', 'monoranks' ) ),
 			'unreachable'  => array( 'error', __( 'MonoRanks could not be reached. Check the address and try again.', 'monoranks' ) ),
+			'connect_failed' => array( 'error', __( 'Could not connect. Please try again.', 'monoranks' ) ),
 		);
 		return isset( $map[ $code ] ) ? array( 'type' => $map[ $code ][0], 'text' => $map[ $code ][1] ) : null;
 	}
