@@ -2,6 +2,12 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## v0.1.24 - 2026-10-23
+
+- **New:** Category, tag and product category pages are sent to MonoRanks with their SEO title and meta description.
+- **New:** MonoRanks can write and undo the SEO title and meta description of these pages in Rank Math and Yoast SEO. Without an SEO plugin, it writes the category description.
+- **Enhancement:** Edited or deleted categories and tags are rechecked in MonoRanks within minutes.
+
 ## v0.1.23 - 2026-10-17
 
 - **Enhancement:** Sites MonoRanks cannot reach, such as local or firewalled sites, now connect with one button too: the key comes back by itself, nothing to copy.

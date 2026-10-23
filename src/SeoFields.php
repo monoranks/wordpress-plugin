@@ -207,6 +207,164 @@ class SeoFields {
 		return true;
 	}
 
+	/** Rank Math's term meta for the two term fields. */
+	const RANKMATH_TERM = array( 'seo_title' => 'rank_math_title', 'seo_description' => 'rank_math_description' );
+	/** Yoast's taxonomy meta option and its keys for the two term fields. */
+	const YOAST_TAX_OPTION = 'wpseo_taxonomy_meta';
+	const YOAST_TERM       = array( 'seo_title' => 'wpseo_title', 'seo_description' => 'wpseo_desc' );
+	/** The fields MonoRanks writes on category, tag and other archive pages. */
+	const TERM_FIELDS = array( 'seo_title', 'seo_description' );
+
+	/** True when term SEO fields can be written with the active SEO setup: Rank Math, Yoast or no SEO plugin. */
+	public static function term_supported() {
+		return in_array( self::plugin(), array( 'rankmath', 'yoast', 'none' ), true );
+	}
+
+	/**
+	 * Why a write of this field to a term would not show, as array( error, reason ), or null when it can go ahead.
+	 * Without an SEO plugin only the description can be written: it is the term's own description.
+	 */
+	public static function term_refusal( $field ) {
+		$plugin = self::plugin();
+		if ( ! self::term_supported() ) {
+			/* The reason is shown in the MonoRanks app, which is in English. */
+			return array( 'error' => 'not_supported', 'reason' => sprintf( 'MonoRanks cannot write category pages in %s yet.', self::plugin_name() ) );
+		}
+		if ( 'none' === $plugin && 'seo_title' === $field ) {
+			return array( 'error' => 'not_supported', 'reason' => 'Titles of category pages need an SEO plugin.' );
+		}
+		return null;
+	}
+
+	/** Yoast's stored values for one term, or an empty array. */
+	private static function yoast_term_meta( $term_id, $taxonomy ) {
+		$all = get_option( self::YOAST_TAX_OPTION );
+		return is_array( $all ) && isset( $all[ $taxonomy ][ $term_id ] ) && is_array( $all[ $taxonomy ][ $term_id ] ) ? $all[ $taxonomy ][ $term_id ] : array();
+	}
+
+	/**
+	 * The stored (raw, not rendered) value of a term field in the active SEO setup, '' when unset. Without an SEO plugin
+	 * the description is the term's own description and there is no title.
+	 */
+	public static function term_get( $term_id, $taxonomy, $field ) {
+		$term_id = (int) $term_id;
+		switch ( self::plugin() ) {
+			case 'rankmath':
+				if ( ! isset( self::RANKMATH_TERM[ $field ] ) ) {
+					return '';
+				}
+				$value = get_term_meta( $term_id, self::RANKMATH_TERM[ $field ], true );
+				return is_string( $value ) ? $value : '';
+			case 'yoast':
+				if ( ! isset( self::YOAST_TERM[ $field ] ) ) {
+					return '';
+				}
+				$meta = self::yoast_term_meta( $term_id, $taxonomy );
+				return isset( $meta[ self::YOAST_TERM[ $field ] ] ) && is_string( $meta[ self::YOAST_TERM[ $field ] ] ) ? $meta[ self::YOAST_TERM[ $field ] ] : '';
+			case 'none':
+				if ( 'seo_description' !== $field ) {
+					return '';
+				}
+				$value = get_term_field( 'description', $term_id, $taxonomy, 'raw' );
+				return is_string( $value ) ? $value : '';
+			default:
+				return '';
+		}
+	}
+
+	/** Noindex of a term in the active SEO plugin, false when unknown. */
+	public static function term_noindex( $term_id, $taxonomy ) {
+		$plugin = self::plugin();
+		if ( 'rankmath' === $plugin ) {
+			$robots = get_term_meta( (int) $term_id, 'rank_math_robots', true );
+			return is_array( $robots ) && in_array( 'noindex', $robots, true );
+		}
+		if ( 'yoast' === $plugin ) {
+			$meta = self::yoast_term_meta( (int) $term_id, $taxonomy );
+			return isset( $meta['wpseo_noindex'] ) && 'noindex' === $meta['wpseo_noindex'];
+		}
+		return false;
+	}
+
+	/**
+	 * Writes a term field into the active SEO setup ('' clears it). Values arrive sanitised by Writer. Returns true on
+	 * success. Callers check term_refusal() first.
+	 */
+	public static function term_set( $term_id, $taxonomy, $field, $value ) {
+		$term_id = (int) $term_id;
+		$value   = (string) $value;
+		switch ( self::plugin() ) {
+			case 'rankmath':
+				if ( ! isset( self::RANKMATH_TERM[ $field ] ) ) {
+					return false;
+				}
+				if ( '' === $value ) {
+					delete_term_meta( $term_id, self::RANKMATH_TERM[ $field ] );
+				} else {
+					update_term_meta( $term_id, self::RANKMATH_TERM[ $field ], wp_slash( $value ) );
+				}
+				return true;
+			case 'yoast':
+				return isset( self::YOAST_TERM[ $field ] ) ? self::yoast_term_set( $term_id, $taxonomy, self::YOAST_TERM[ $field ], $value ) : false;
+			case 'none':
+				if ( 'seo_description' !== $field ) {
+					return false;
+				}
+				$r = wp_update_term( $term_id, $taxonomy, array( 'description' => wp_slash( $value ) ) );
+				return ! is_wp_error( $r );
+			default:
+				return false;
+		}
+	}
+
+	/**
+	 * Yoast keeps term values in one option, wpseo_taxonomy_meta[ taxonomy ][ term_id ]. Its own API
+	 * (WPSEO_Taxonomy_Meta::set_values) is used when present, with every stored value of the term passed back in, because
+	 * it resets the keys it is not given. Then Yoast's indexable for the term is rebuilt, since its pages read the
+	 * indexable, not the option.
+	 */
+	private static function yoast_term_set( $term_id, $taxonomy, $key, $value ) {
+		$meta         = self::yoast_term_meta( $term_id, $taxonomy );
+		$meta[ $key ] = $value;
+		if ( class_exists( 'WPSEO_Taxonomy_Meta' ) && method_exists( 'WPSEO_Taxonomy_Meta', 'set_values' ) && class_exists( 'WPSEO_Utils' ) ) {
+			\WPSEO_Taxonomy_Meta::set_values( $term_id, $taxonomy, $meta );
+		} else {
+			$all = get_option( self::YOAST_TAX_OPTION );
+			$all = is_array( $all ) ? $all : array();
+			$meta = array_filter( $meta, static function ( $v ) { return '' !== $v; } );
+			if ( $meta ) {
+				$all[ $taxonomy ][ $term_id ] = $meta;
+			} else {
+				unset( $all[ $taxonomy ][ $term_id ] );
+				if ( isset( $all[ $taxonomy ] ) && array() === $all[ $taxonomy ] ) {
+					unset( $all[ $taxonomy ] );
+				}
+			}
+			// Yoast's marker that the option is already clean, so it does not validate the whole option again.
+			$all['wpseo_already_validated'] = true;
+			update_option( self::YOAST_TAX_OPTION, $all );
+		}
+		self::yoast_rebuild_term( $term_id );
+		return true;
+	}
+
+	/** Rebuild Yoast's indexable for a term, through its own term watcher, when Yoast offers it. */
+	private static function yoast_rebuild_term( $term_id ) {
+		$watcher = 'Yoast\\WP\\SEO\\Integrations\\Watchers\\Indexable_Term_Watcher';
+		if ( ! function_exists( 'YoastSEO' ) || ! class_exists( $watcher ) ) {
+			return;
+		}
+		try {
+			$instance = YoastSEO()->classes->get( $watcher );
+			if ( $instance && method_exists( $instance, 'build_indexable' ) ) {
+				$instance->build_indexable( (int) $term_id );
+			}
+		} catch ( \Throwable $e ) {
+			// The value is saved; Yoast rebuilds the indexable itself the next time the term is saved.
+			unset( $e );
+		}
+	}
+
 	/** When no SEO plugin handles output, print the connector's own values. */
 	public static function register_output() {
 		add_filter( 'pre_get_document_title', array( __CLASS__, 'filter_title' ), 20 );

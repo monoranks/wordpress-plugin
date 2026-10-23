@@ -86,7 +86,7 @@ jobs:
           WP_VERSION: ${{ matrix.wp }}
       # --fail-on-skipped: without a WordPress the integration tests skip themselves, which must not pass here.
       - name: Integration tests against WordPress ${{ matrix.wp }}
-        run: vendor/bin/phpunit -c phpunit-integration.xml.dist --exclude-group tsf --fail-on-skipped
+        run: vendor/bin/phpunit -c phpunit-integration.xml.dist --exclude-group tsf,yoast --fail-on-skipped
         env:
           MONORANKS_WP_PATH: /tmp/wordpress
       # The SEO Framework is installed but not activated; MONORANKS_WP_PLUGINS loads it for this run only.

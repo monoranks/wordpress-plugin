@@ -343,6 +343,8 @@ class Insights {
 						'field'         => (string) $row['field'],
 						'post_id'       => isset( $row['post_id'] ) ? (int) $row['post_id'] : 0,
 						'attachment_id' => isset( $row['attachment_id'] ) ? (int) $row['attachment_id'] : 0,
+						'term_id'       => isset( $row['term_id'] ) ? (int) $row['term_id'] : 0,
+						'taxonomy'      => isset( $row['taxonomy'] ) && is_string( $row['taxonomy'] ) ? sanitize_key( $row['taxonomy'] ) : '',
 						'from'          => $str( isset( $row['from'] ) ? $row['from'] : '', 2000 ),
 						'op'            => isset( $row['op'] ) && 'remove' === $row['op'] ? 'remove' : 'insert_top',
 						'title'         => $str( isset( $row['title'] ) ? $row['title'] : '' ),

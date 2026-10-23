@@ -122,6 +122,10 @@ class Actions {
 		$c = array( 'id' => $fix['id'], 'field' => $fix['field'], 'value' => (string) $fix['after'], 'expected' => $fix['before'] );
 		if ( $fix['post_id'] ) {
 			$c['post_id'] = (int) $fix['post_id'];
+		} elseif ( ! empty( $fix['term_id'] ) && ! empty( $fix['taxonomy'] ) ) {
+			// A category, tag or other archive page.
+			$c['term_id']  = (int) $fix['term_id'];
+			$c['taxonomy'] = (string) $fix['taxonomy'];
 		}
 		if ( 'alt' === $fix['field'] ) {
 			$c['attachment_id'] = (int) $fix['attachment_id'];

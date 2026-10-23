@@ -4,7 +4,7 @@
  * Description:       Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo.
  * Plugin URI:        https://monoranks.com/product/wordpress/
  * Author URI:        https://veronalabs.com/
- * Version:           0.1.23
+ * Version:           0.1.24
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            VeronaLabs
@@ -26,7 +26,7 @@ if ( file_exists( __DIR__ . '/packages/autoload.php' ) ) {
 	return;
 }
 
-define( 'MONORANKS_CONNECTOR_VERSION', '0.1.23' );
+define( 'MONORANKS_CONNECTOR_VERSION', '0.1.24' );
 define( 'MONORANKS_CONNECTOR_FILE', __FILE__ );
 // MonoRanks address used when a key is pasted by hand. The download build sets it; wp-config.php may override it.
 if ( ! defined( 'MONORANKS_API_BASE' ) ) {
@@ -40,6 +40,9 @@ add_filter( 'robots_txt', array( 'MonoRanks\\AiAccess', 'robots_txt' ), 20 );
 add_action( 'init', array( 'MonoRanks\\AiAccess', 'maybe_serve_llms' ), 1 );
 add_action( 'transition_post_status', array( 'MonoRanks\\Notifier', 'on_transition' ), 20, 3 );
 add_action( 'post_updated', array( 'MonoRanks\\Notifier', 'on_update' ), 20, 3 );
+add_action( 'created_term', array( 'MonoRanks\\Notifier', 'on_term' ), 20, 3 );
+add_action( 'edited_term', array( 'MonoRanks\\Notifier', 'on_term' ), 20, 3 );
+add_action( 'delete_term', array( 'MonoRanks\\Notifier', 'on_term_delete' ), 20, 4 );
 add_action( 'shutdown', array( 'MonoRanks\\Notifier', 'flush' ) );
 add_action( \MonoRanks\Sync::STEP_HOOK, array( 'MonoRanks\\Sync', 'run' ) );
 add_action( \MonoRanks\Sync::DAILY_HOOK, array( 'MonoRanks\\Sync', 'daily' ) );

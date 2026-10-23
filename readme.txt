@@ -4,7 +4,7 @@ Tags: seo, aeo, geo, llms-txt, ai-seo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.23
+Stable tag: 0.1.24
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,8 +58,9 @@ The plugin talks to [MonoRanks](https://monoranks.com). **Nothing is sent until 
 **What is sent, over HTTPS**
 
 * **Published content details:** post type, URL, title, a 40-word excerpt, author display name and avatar URL, categories, tags, publish and modified dates, SEO title, meta description, canonical URL, noindex flag, and image URLs with their alt text. Sent when you connect, when MonoRanks asks, and once a day.
+* **Category, tag and other archive pages:** name, URL, a 40-word description, SEO title, meta description and noindex flag.
 * **When you publish, update or unpublish a post:** its ID, URL and the details above, so MonoRanks can recheck that page.
-* **Plugin status:** site name and address, plugin and WordPress version, active SEO plugin, and the number of published items per type.
+* **Plugin status:** site name and address, plugin and WordPress version, active SEO plugin, and the number of published items per type and of categories, tags and other terms.
 
 **Never sent:** drafts, private or password-protected posts, comments, user emails or passwords, plugin or theme settings.
 
@@ -132,6 +133,11 @@ Please report security bugs found in the source code of the MonoRanks plugin thr
 4. Before connecting: the three steps to connect MonoRanks (also in Persian).
 
 == Changelog ==
+
+= 0.1.24 - 2026-10-23 =
+* **New:** Category, tag and product category pages are sent to MonoRanks with their SEO title and meta description.
+* **New:** MonoRanks can write and undo the SEO title and meta description of these pages in Rank Math and Yoast SEO. Without an SEO plugin, it writes the category description.
+* **Enhancement:** Edited or deleted categories and tags are rechecked in MonoRanks within minutes.
 
 = 0.1.23 - 2026-10-17 =
 * **Enhancement:** Sites MonoRanks cannot reach, such as local or firewalled sites, now connect with one button too: the key comes back by itself, nothing to copy.
