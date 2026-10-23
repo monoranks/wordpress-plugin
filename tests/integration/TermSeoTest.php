@@ -102,6 +102,11 @@ class TermSeoTest extends TestCase {
 		}
 	}
 
+	/**
+	 * Needs Yoast SEO loaded (MONORANKS_WP_PLUGINS=wordpress-seo/wp-seo.php), so CI leaves it out with the yoast group.
+	 *
+	 * @group yoast
+	 */
 	public function test_with_yoast_a_title_is_written_keeping_the_other_values() {
 		if ( 'yoast' !== SeoFields::plugin() ) {
 			$this->markTestSkipped( 'Needs Yoast SEO: MONORANKS_WP_PLUGINS=wordpress-seo/wp-seo.php.' );
