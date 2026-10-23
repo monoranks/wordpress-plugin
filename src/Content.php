@@ -12,6 +12,66 @@ class Content {
 		return array_values( $types );
 	}
 
+	/**
+	 * Taxonomies whose terms have archive pages: public, publicly queryable and with a rewrite (category, post_tag,
+	 * product_cat, product_tag and the like). Post formats are left out: their archives are not pages anyone writes for.
+	 */
+	public static function taxonomies() {
+		$out = array();
+		foreach ( get_taxonomies( array( 'public' => true ), 'objects' ) as $name => $tax ) {
+			if ( 'post_format' === $name || empty( $tax->publicly_queryable ) || empty( $tax->rewrite ) ) {
+				continue;
+			}
+			$out[] = $name;
+		}
+		return $out;
+	}
+
+	/** The content item id of a term: "term:<taxonomy>:<term_id>". */
+	public static function term_key( $taxonomy, $term_id ) {
+		return 'term:' . $taxonomy . ':' . (int) $term_id;
+	}
+
+	/** One term (an archive page) as a content item, in the same shape as a post, or null when it has no link. */
+	public static function term_item( \WP_Term $term ) {
+		$link = get_term_link( $term );
+		if ( is_wp_error( $link ) || ! $link ) {
+			return null;
+		}
+		$tax = get_taxonomy( $term->taxonomy );
+		return array(
+			'id'              => self::term_key( $term->taxonomy, $term->term_id ),
+			'type'            => 'term:' . $term->taxonomy,
+			'type_label'      => $tax ? $tax->labels->singular_name : $term->taxonomy,
+			'url'             => $link,
+			'title'           => $term->name,
+			'excerpt'         => wp_trim_words( wp_strip_all_tags( (string) $term->description ), 40, '' ),
+			'author'          => null,
+			'author_avatar'   => null,
+			'categories'      => array(),
+			'tags'            => array(),
+			'published_at'    => null,
+			'modified_at'     => null,
+			'seo_title'       => SeoFields::term_get( $term->term_id, $term->taxonomy, 'seo_title' ),
+			'seo_description' => SeoFields::term_get( $term->term_id, $term->taxonomy, 'seo_description' ),
+			'canonical'       => '',
+			'noindex'         => SeoFields::term_noindex( $term->term_id, $term->taxonomy ),
+			'images'          => array(),
+			'term_id'         => (int) $term->term_id,
+			'taxonomy'        => $term->taxonomy,
+		);
+	}
+
+	/** Terms with at least one post (an empty archive is not a page, like an unpublished post). */
+	public static function term_count( $taxonomies = null ) {
+		$taxonomies = null === $taxonomies ? self::taxonomies() : $taxonomies;
+		if ( ! $taxonomies ) {
+			return 0;
+		}
+		$n = wp_count_terms( array( 'taxonomy' => $taxonomies, 'hide_empty' => true ) );
+		return is_wp_error( $n ) ? 0 : (int) $n;
+	}
+
 	public static function item( \WP_Post $post ) {
 		$author = get_userdata( (int) $post->post_author );
 		$cats   = array();
@@ -88,8 +148,15 @@ class Content {
 		);
 	}
 
+	/**
+	 * One page of the content sync: published posts first, then the terms of archive taxonomies, in pages of $per_page.
+	 * Post pages are numbered as before; term pages follow the last post page. Terms have no modified date, so a sync
+	 * limited to recent changes ($modified_after) sends posts only.
+	 */
 	public static function page( $page, $per_page, $modified_after = null ) {
-		$args = array(
+		$page     = max( 1, (int) $page );
+		$per_page = max( 1, (int) $per_page );
+		$args     = array(
 			'post_type'      => self::post_types(),
 			'post_status'    => 'publish',
 			'has_password'   => false,
@@ -102,11 +169,39 @@ class Content {
 		if ( $modified_after ) {
 			$args['date_query'] = array( array( 'column' => 'post_modified_gmt', 'after' => $modified_after ) );
 		}
-		$query = new \WP_Query( $args );
+		$query      = new \WP_Query( $args );
+		$items      = array_map( array( __CLASS__, 'item' ), $query->posts );
+		$post_total = (int) $query->found_posts;
+		if ( ! $query->posts && $page > 1 ) {
+			// Past the last post page WP_Query reports no total, so count the posts on their own.
+			$count      = new \WP_Query( array_merge( $args, array( 'posts_per_page' => 1, 'paged' => 1, 'fields' => 'ids' ) ) );
+			$post_total = (int) $count->found_posts;
+		}
+		$post_pages = (int) ceil( $post_total / $per_page );
+		$taxonomies = $modified_after ? array() : self::taxonomies();
+		$term_total = self::term_count( $taxonomies );
+		if ( $term_total && $page > $post_pages ) {
+			$terms = get_terms(
+				array(
+					'taxonomy'   => $taxonomies,
+					'hide_empty' => true,
+					'orderby'    => 'term_id',
+					'order'      => 'ASC',
+					'number'     => $per_page,
+					'offset'     => ( $page - $post_pages - 1 ) * $per_page,
+				)
+			);
+			foreach ( is_array( $terms ) ? $terms : array() as $term ) {
+				$item = $term instanceof \WP_Term ? self::term_item( $term ) : null;
+				if ( $item ) {
+					$items[] = $item;
+				}
+			}
+		}
 		return array(
-			'items' => array_map( array( __CLASS__, 'item' ), $query->posts ),
-			'total' => (int) $query->found_posts,
-			'pages' => (int) $query->max_num_pages,
+			'items' => $items,
+			'total' => $post_total + $term_total,
+			'pages' => $post_pages + (int) ceil( $term_total / $per_page ),
 		);
 	}
 }

@@ -37,12 +37,51 @@ class Notifier {
 		self::$queue[ $post->ID ] = array( 'post_id' => $post->ID, 'url' => get_permalink( $post ), 'event' => $event );
 	}
 
+	/** created_term and edited_term: the term's archive page is sent again (or as gone when it has no posts left). */
+	public static function on_term( $term_id, $tt_id = 0, $taxonomy = '' ) {
+		if ( Writer::$applying || ! in_array( (string) $taxonomy, Content::taxonomies(), true ) ) {
+			return;
+		}
+		$key = Content::term_key( $taxonomy, $term_id );
+		if ( isset( self::$queue[ $key ] ) && 'unpublished' === self::$queue[ $key ]['event'] ) {
+			return;
+		}
+		$link               = get_term_link( (int) $term_id, (string) $taxonomy );
+		self::$queue[ $key ] = array( 'post_id' => $key, 'url' => is_string( $link ) ? $link : '', 'event' => 'updated', 'term' => array( (int) $term_id, (string) $taxonomy ) );
+	}
+
+	/** delete_term: the archive page is gone. The deleted term still knows its link. */
+	public static function on_term_delete( $term_id, $tt_id = 0, $taxonomy = '', $deleted = null ) {
+		if ( ! in_array( (string) $taxonomy, Content::taxonomies(), true ) ) {
+			return;
+		}
+		$key  = Content::term_key( $taxonomy, $term_id );
+		$link = $deleted instanceof \WP_Term ? get_term_link( $deleted ) : '';
+		self::$queue[ $key ] = array( 'post_id' => $key, 'url' => is_string( $link ) ? $link : '', 'event' => 'unpublished' );
+	}
+
 	public static function flush() {
 		if ( ! self::$queue || ! Connection::has_key() ) {
 			return;
 		}
 		$changes = array();
 		foreach ( self::$queue as $change ) {
+			if ( isset( $change['term'] ) ) {
+				$term = get_term( $change['term'][0], $change['term'][1] );
+				$item = $term instanceof \WP_Term && (int) $term->count > 0 ? Content::term_item( $term ) : null;
+				unset( $change['term'] );
+				if ( $item ) {
+					$change['item'] = $item;
+				} else {
+					$change['event'] = 'unpublished';
+				}
+				$changes[] = $change;
+				continue;
+			}
+			if ( is_string( $change['post_id'] ) ) {
+				$changes[] = $change; // A deleted term.
+				continue;
+			}
 			$post = get_post( $change['post_id'] );
 			if ( 'unpublished' !== $change['event'] && $post && 'publish' === $post->post_status && ! post_password_required( $post ) ) {
 				$change['item'] = Content::item( $post );

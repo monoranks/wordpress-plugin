@@ -91,6 +91,19 @@ class CachePurger {
 		return self::urls( array( $url ), $post_id );
 	}
 
+	/**
+	 * Purge a term's archive page (a category, tag or product category page). Only its first page is purged; later
+	 * pages of the archive show no SEO title or description of their own in most themes.
+	 *
+	 * @param int    $term_id  Term ID.
+	 * @param string $taxonomy Taxonomy name.
+	 * @return array{purged: string[], failed: string[], none: bool}
+	 */
+	public static function term( $term_id, $taxonomy ) {
+		$link = get_term_link( (int) $term_id, (string) $taxonomy );
+		return self::urls( is_string( $link ) && '' !== $link ? array( $link ) : array(), 0 );
+	}
+
 	/** Shared by post() and url(): the filter, the purge and the action. */
 	private static function urls( array $urls, $post_id ) {
 		/**

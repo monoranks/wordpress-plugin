@@ -100,6 +100,13 @@ class Rest {
 			$c               = wp_count_posts( $type );
 			$counts[ $type ] = isset( $c->publish ) ? (int) $c->publish : 0;
 		}
+		// Archive taxonomies and their terms with posts, the ones sent as content items.
+		$taxonomies = array();
+		foreach ( Content::taxonomies() as $taxonomy ) {
+			$taxonomies[ $taxonomy ] = Content::term_count( array( $taxonomy ) );
+		}
+		// "term_seo": SEO title and meta description of category, tag and other archive pages can be written.
+		$can_write = SeoFields::term_supported() ? array_merge( Writer::FIELDS, array( 'term_seo' ) ) : Writer::FIELDS;
 		return array(
 			'site_url'        => home_url(),
 			'name'            => get_bloginfo( 'name' ),
@@ -108,7 +115,8 @@ class Rest {
 			'seo_plugin'      => SeoFields::plugin(),
 			'seo_plugin_name' => SeoFields::plugin_name(),
 			'post_types'      => $counts,
-			'can_write'       => Writer::FIELDS,
+			'taxonomies'      => $taxonomies,
+			'can_write'       => $can_write,
 		);
 	}
 

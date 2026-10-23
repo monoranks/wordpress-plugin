@@ -98,6 +98,10 @@ class Writer {
 			}
 			return $result;
 		}
+		// A category, tag or other archive page: the change names the term instead of a post.
+		if ( empty( $c['post_id'] ) && ! empty( $c['term_id'] ) && ! empty( $c['taxonomy'] ) ) {
+			return self::term( $c, $id, $field, $value, $actor );
+		}
 		$post_id = isset( $c['post_id'] ) ? (int) $c['post_id'] : 0;
 		if ( ! $post_id && ! empty( $c['url'] ) ) {
 			$post_id = url_to_postid( (string) $c['url'] );
@@ -127,6 +131,43 @@ class Writer {
 		clean_post_cache( $post_id );
 		self::log( $actor, $field, 'post:' . $post_id, $previous, $clean );
 		return array( 'id' => $id, 'ok' => true, 'previous' => $previous, 'post_id' => $post_id, 'cache' => CachePurger::post( $post_id ) );
+	}
+
+	/**
+	 * SEO title or meta description of a term's archive page (monoranks/wordpress-plugin#25): Rank Math term meta, Yoast's
+	 * taxonomy meta, or without an SEO plugin the term's own description. Undo is a normal change back to `previous`.
+	 */
+	private static function term( array $c, $id, $field, $value, $actor ) {
+		if ( ! in_array( $field, SeoFields::TERM_FIELDS, true ) ) {
+			return array( 'id' => $id, 'ok' => false, 'error' => 'field_not_allowed' );
+		}
+		$taxonomy = sanitize_key( (string) $c['taxonomy'] );
+		$term_id  = (int) $c['term_id'];
+		$term     = in_array( $taxonomy, Content::taxonomies(), true ) ? get_term( $term_id, $taxonomy ) : null;
+		if ( ! $term instanceof \WP_Term ) {
+			return array( 'id' => $id, 'ok' => false, 'error' => 'term_not_found' );
+		}
+		$tax = get_taxonomy( $taxonomy );
+		$cap = $tax && isset( $tax->cap->edit_terms ) ? $tax->cap->edit_terms : 'manage_categories';
+		if ( ! current_user_can( 'manage_options' ) || ! current_user_can( $cap ) ) {
+			return array( 'id' => $id, 'ok' => false, 'error' => 'forbidden', 'reason' => 'This user cannot edit these terms.' );
+		}
+		$refused = SeoFields::term_refusal( $field );
+		if ( $refused ) {
+			return array( 'id' => $id, 'ok' => false, 'error' => $refused['error'], 'reason' => $refused['reason'] );
+		}
+		$previous = (string) SeoFields::term_get( $term_id, $taxonomy, $field );
+		if ( isset( $c['expected'] ) && null !== $c['expected'] && (string) $c['expected'] !== $previous ) {
+			return array( 'id' => $id, 'ok' => false, 'error' => 'changed_since_preview', 'current' => $previous );
+		}
+		// Without an SEO plugin the description is the term's own, which may hold HTML; SEO plugin fields are plain text.
+		$clean = 'none' === SeoFields::plugin() ? trim( wp_kses_post( $value ) ) : sanitize_text_field( $value );
+		if ( ! SeoFields::term_set( $term_id, $taxonomy, $field, $clean ) ) {
+			return array( 'id' => $id, 'ok' => false, 'error' => 'update_failed', 'reason' => 'WordPress did not save the term.' );
+		}
+		clean_term_cache( $term_id, $taxonomy );
+		self::log( $actor, $field, Content::term_key( $taxonomy, $term_id ), $previous, $clean );
+		return array( 'id' => $id, 'ok' => true, 'previous' => $previous, 'term_id' => $term_id, 'taxonomy' => $taxonomy, 'cache' => CachePurger::term( $term_id, $taxonomy ) );
 	}
 
 	/**
@@ -339,6 +380,9 @@ class Writer {
 			}
 		} elseif ( 0 === strpos( $target, 'post:' ) ) {
 			$c['post_id'] = (int) substr( $target, 5 );
+		} elseif ( preg_match( '/^term:([a-z0-9_-]+):(\d+)$/', $target, $m ) ) {
+			$c['taxonomy'] = $m[1];
+			$c['term_id']  = (int) $m[2];
 		} elseif ( 'site' !== $target ) {
 			return null;
 		}

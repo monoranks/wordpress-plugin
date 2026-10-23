@@ -104,6 +104,25 @@ Since 0.1.15 an SEO field (`seo_title`, `seo_description`, `canonical`, `noindex
 
 The plugin's status, sent after connecting, on "Send content now" and daily (the same object as `GET /wp-json/monoranks/v1/status` without the user fields). `seo_plugin` is `yoast`, `rankmath`, `aioseo`, `tsf` (The SEO Framework, since 0.1.15), `other` (an SEO plugin MonoRanks cannot write into, since 0.1.15) or `none`; `seo_plugin_name` (since 0.1.15) is its name, or `""`. If MonoRanks answers 400 to a status whose `seo_plugin` is `tsf` or `other`, the plugin sends it once more with `seo_plugin: "none"`.
 
+## Category, tag and other archive pages (since 0.1.24)
+
+Terms of every archive taxonomy (public, publicly queryable, with a rewrite: `category`, `post_tag`, `product_cat`, `product_tag` and the like; not `post_format`) are sent in `POST /api/connector/content` after the posts, in the same item shape. Terms with no posts are left out, like unpublished posts. The term pages follow the last post page, so `pages` and `total` count both.
+
+```json
+{ "id": "term:category:12", "type": "term:category", "type_label": "Category", "url": "https://example.com/category/privacy/", "title": "Privacy", "excerpt": "Plain-text description, 40 words", "seo_title": "", "seo_description": "Privacy guides…", "canonical": "", "noindex": false, "author": null, "author_avatar": null, "categories": [], "tags": [], "published_at": null, "modified_at": null, "images": [], "term_id": 12, "taxonomy": "category" }
+```
+
+- `seo_title` / `seo_description`: the stored values (not rendered templates), `""` when unset. Rank Math: term meta `rank_math_title` / `rank_math_description`. Yoast SEO: option `wpseo_taxonomy_meta[taxonomy][term_id]` keys `wpseo_title` / `wpseo_desc`. No SEO plugin: no title, and the term's own description as `seo_description`.
+- `noindex`: Rank Math's `rank_math_robots` or Yoast's `wpseo_noindex`; `false` otherwise.
+- Status adds `"term_seo"` to `can_write` when the SEO setup is Rank Math, Yoast or none, and `taxonomies: { "category": 6, "post_tag": 2 }` (terms with posts).
+- `POST /api/connector/changes`: a created or edited term is sent as `{ "post_id": "term:category:12", "url": "…", "event": "updated", "item": { … } }`; a deleted term, or one with no posts left, as `event: "unpublished"`.
+
+Writes go through `POST /wp-json/monoranks/v1/apply` with `term_id` and `taxonomy` instead of `post_id`: `{ "id": "chg_9", "field": "seo_description", "term_id": 12, "taxonomy": "category", "value": "…", "expected": "" }`. Only `seo_title` and `seo_description` (else `field_not_allowed`). The result has the usual shape plus `term_id` and `taxonomy`, and `cache` for the archive URL. Undo is a normal change back to `previous`, expecting the written value; `""` clears the field.
+
+- Rank Math: term meta. Yoast SEO: through `WPSEO_Taxonomy_Meta::set_values()` with the term's other values kept, then Yoast's indexable for the term is rebuilt. No SEO plugin: the description is the term description (HTML allowed as in core); a title is refused with `not_supported`, `"reason": "Titles of category pages need an SEO plugin."`.
+- Any other SEO plugin (All in One SEO, The SEO Framework, others): `not_supported` with a short reason.
+- `changed_since_preview` with `current` when `expected` differs from the stored value; `term_not_found` for an unknown term or a taxonomy without archive pages; `forbidden` when the user lacks `manage_options` or the taxonomy's `edit_terms` capability.
+
 ## What to do next and per-post data: API v1 reads
 
 The Overview's **What to do next** cards and the **MonoRanks** box in the post editor read MonoRanks API v1 with the same key: `GET {api_base}/api/v1/sites/{site_id}/<route>`, `Authorization: Bearer <connector key>`. `site_id` is the one stored at pairing (or the overview's `site_id` for a key pasted by hand). The full shapes are in MonoRanks' `/api/v1/openapi.json`; the plugin keeps only the fields below and ignores the rest.
