@@ -253,7 +253,7 @@ function Waiting({ data }: { data: OverviewData }) {
       <CardHeader><CardTitle>{__('Waiting for the first audit', 'monoranks')}</CardTitle><Badge variant="pill"><Dot tone="good" />{__('Connected', 'monoranks')}</Badge></CardHeader>
       <CardBody className="flex flex-col gap-4">
         <KV rows={[
-          [__('Content', 'monoranks'), data.last_sent ? sprintf(__('%1$s published items sent %2$s', 'monoranks'), fmt(data.items), data.last_sent) : __('Not sent yet. Use "Sync content now" above.', 'monoranks')],
+          [__('Content', 'monoranks'), data.last_sent ? sprintf(__('%1$s published items sent %2$s', 'monoranks'), fmt(data.items), data.last_sent) : data.send_failed && !data.sending ? __('Not sent. Use "Sync content now".', 'monoranks') : <span className="text-mute">{__('Sending…', 'monoranks')}</span>],
           [__('Audit results', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{short}<Tip text={data.fetched ? <>{results} · {sprintf(__('checked %s', 'monoranks'), data.fetched)}</> : results} /></span>],
         ]} />
         <div><Button size="sm" asChild><a href={out(data.app_url, 'open-audit')} target="_blank" rel="noopener">{__('Open the audit in MonoRanks', 'monoranks')}</a></Button></div>

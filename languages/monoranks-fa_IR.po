@@ -627,68 +627,68 @@ msgstr "دستی اضافه شده"
 
 #: dist/monoranks/src/Overview.php:41
 #: dist/monoranks/src/PostPanel.php:152
-#: src/Overview.php:41
+#: src/Overview.php:44
 #: src/PostPanel.php:152
 msgid "Title"
 msgstr "عنوان"
 
 #: dist/monoranks/src/Overview.php:42
 #: dist/monoranks/src/PostPanel.php:153
-#: src/Overview.php:42
+#: src/Overview.php:45
 #: src/PostPanel.php:153
 msgid "Meta description"
 msgstr "توضیح متا"
 
 #: dist/monoranks/src/Overview.php:43
 #: dist/monoranks/src/PostPanel.php:156
-#: src/Overview.php:43
+#: src/Overview.php:46
 #: src/PostPanel.php:156
 msgid "Canonical"
 msgstr "کانونیکال"
 
 #: dist/monoranks/src/Overview.php:44
 #: dist/monoranks/src/PostPanel.php:157
-#: src/Overview.php:44
+#: src/Overview.php:47
 #: src/PostPanel.php:157
 msgid "Noindex"
 msgstr "Noindex"
 
 #: dist/monoranks/src/Overview.php:45
-#: src/Overview.php:45
+#: src/Overview.php:48
 msgid "Image alt"
 msgstr "متن جایگزین تصویر"
 
 #: dist/monoranks/src/Overview.php:46
 #: dist/monoranks/src/PostPanel.php:151
-#: src/Overview.php:46
+#: src/Overview.php:49
 #: src/PostPanel.php:151
 msgid "Redirect"
 msgstr "تغییر مسیر"
 
 #: dist/monoranks/src/Overview.php:47
-#: src/Overview.php:47
+#: src/Overview.php:50
 msgid "Opening paragraph"
 msgstr "پاراگراف آغازین"
 
 #: dist/monoranks/src/Overview.php:48
-#: src/Overview.php:48
+#: src/Overview.php:51
 msgid "robots.txt"
 msgstr "robots.txt"
 
 #: dist/monoranks/src/Overview.php:49
-#: src/Overview.php:49
+#: src/Overview.php:52
 msgid "llms.txt"
 msgstr "llms.txt"
 
 #. translators: %d: attachment ID
 #, php-format
 #: dist/monoranks/src/Overview.php:68
-#: src/Overview.php:68
+#: src/Overview.php:71
 msgid "Image #%d"
 msgstr "تصویر #%d"
 
 #: dist/monoranks/src/Overview.php:70
-#: src/Overview.php:70
+#: src/Overview.php:73
 #: tmp/i18n/screens/Overview.js:30
 msgid "Site"
 msgstr "سایت"
@@ -1289,8 +1289,12 @@ msgid "%1$s published items sent %2$s"
 msgstr "%1$s مورد منتشرشده %2$s فرستاده شد"
 
 #: tmp/i18n/screens/Overview.js:202
-msgid "Not sent yet. Use \"Sync content now\" above."
-msgstr "هنوز فرستاده نشده. از «همگام‌سازی محتوا» در بالا استفاده کنید."
+msgid "Not sent. Use \"Sync content now\"."
+msgstr "ارسال نشد. «همگام‌سازی محتوا» را بزنید."
+
+#: tmp/i18n/screens/Overview.js:202
+msgid "Sending…"
+msgstr "در حال ارسال…"
 
 #: tmp/i18n/screens/Overview.js:203
 msgid "Audit results"

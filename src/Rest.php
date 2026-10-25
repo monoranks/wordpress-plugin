@@ -90,6 +90,8 @@ class Rest {
 			'version'       => MONORANKS_CONNECTOR_VERSION,
 			'app_passwords' => function_exists( 'wp_is_application_passwords_available' ) && wp_is_application_passwords_available(),
 			'https'         => is_ssl() || 0 === strpos( home_url(), 'https://' ),
+			// Whether the plugin holds a MonoRanks key: lets MonoRanks offer Connect again after a Disconnect here.
+			'connected'     => Connection::has_key(),
 		);
 	}
 
@@ -144,8 +146,9 @@ class Rest {
 			return new \WP_Error( 'monoranks_bad_pair', 'api_base (https) and a connector key are required', array( 'status' => 400 ) );
 		}
 		Connection::update( array( 'api_base' => $base, 'key' => $key, 'site_id' => $site_id, 'via' => 'pairing', 'key_state' => 'ok', 'paired_at' => gmdate( 'c' ), 'paired_by' => wp_get_current_user()->user_login, 'last_error' => null ) );
-		Sync::schedule_daily();
 		Grow::clear_all();
+		// Send the content right away, as a pasted key or a one-time code does, without waiting for MonoRanks to ask.
+		Sync::start_soon();
 		return self::status();
 	}
 

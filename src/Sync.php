@@ -22,6 +22,23 @@ class Sync {
 		return self::run( 20 );
 	}
 
+	/**
+	 * Starts a full sync in the background (WP-Cron, a few seconds from now), for when the request that connects the site
+	 * must answer quickly: MonoRanks pairing the plugin waits for the answer.
+	 */
+	public static function start_soon() {
+		if ( ! Connection::has_key() ) {
+			return false;
+		}
+		update_option( 'monoranks_sync', array( 'run_id' => str_replace( '-', '', wp_generate_uuid4() ), 'page' => 1, 'pages' => null, 'attempt' => 0 ), false );
+		self::schedule_daily();
+		if ( ! wp_next_scheduled( self::STEP_HOOK ) ) {
+			wp_schedule_single_event( time(), self::STEP_HOOK );
+		}
+		spawn_cron();
+		return true;
+	}
+
 	public static function run( $budget = 25 ) {
 		$state = get_option( 'monoranks_sync', array() );
 		if ( empty( $state['run_id'] ) ) {

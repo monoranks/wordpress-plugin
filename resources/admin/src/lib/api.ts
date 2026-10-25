@@ -27,6 +27,8 @@ export type OverviewData = {
     needs_review: { id: string; field: string; post_id: number; title: string; url?: string; image?: string; note?: string; before: string | null; after: string; page_url: string; from: string; op: string }[];
   };
   host: string; audited: string; next_audit: string; fetched: string; last_sent: string; items: number;
+  /** A send is running (the first one starts by itself after connecting); send_failed: nothing was sent and the last try failed. */
+  sending?: boolean; send_failed?: boolean;
   app_url: string; log: LogRow[]; labels: Record<string, string>;
 };
 

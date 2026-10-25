@@ -172,6 +172,8 @@ Please report security bugs found in the source code of the MonoRanks plugin thr
 * **Fix:** Settings shows "Fixes: Not set up" with an Allow link when no MonoRanks app password exists, instead of saying fixes are written with one.
 * **Fix:** The "What to do next" cards show "Checking…" after one slow answer and try again within minutes, not an hour.
 * **Fix:** No "Could not connect" message on a site that is already connected.
+* **Fix:** Content is sent right after connecting, on every way of connecting.
+* **Fix:** After Disconnect, Connect works again for the same website.
 * **Enhancement:** Connect opens MonoRanks in the same tab and comes back there.
 * **Enhancement:** The connector key button now reads "Save key".
 
