@@ -27,6 +27,8 @@ export type OverviewData = {
     needs_review: { id: string; field: string; post_id: number; title: string; url?: string; image?: string; note?: string; before: string | null; after: string; page_url: string; from: string; op: string }[];
   };
   host: string; audited: string; next_audit: string; fetched: string; last_sent: string; items: number;
+  /** A send is running (the first one starts by itself after connecting); send_failed: nothing was sent and the last try failed. */
+  sending?: boolean; send_failed?: boolean;
   app_url: string; log: LogRow[]; labels: Record<string, string>;
 };
 
@@ -35,6 +37,10 @@ export type SettingsData = {
   key_hint: string; key_via: string; api_base: string; last_sent: string; last_sent_short: string; last_sent_date: string; last_error: string;
   sending: null | { page: number; pages: number }; items: number; next_audit: string; seo_plugin: string; seo_supported: boolean;
   profile_url: string; show_address: boolean; app_url: string; connect_url: string; log: LogRow[]; labels: Record<string, string>;
+  /** The MonoRanks Application Password fixes are written with: whether any admin has one, and where to revoke it. */
+  app_password: { exists: boolean; revoke_url: string; available: boolean };
+  /** MonoRanks' approve step for this website, for "Allow" when fixes are not set up. */
+  allow_url: string;
 };
 
 /** One Grow section's state: ok, empty (no data yet), no_access (the key lacks the read scope), off, error, pending. */

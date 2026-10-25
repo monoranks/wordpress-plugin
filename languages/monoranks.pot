@@ -2,21 +2,24 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MonoRanks 0.1.23\n"
+"Project-Id-Version: MonoRanks 0.1.25\n"
 "Report-Msgid-Bugs-To: https://github.com/monoranks/wordpress-plugin/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-17T10:10:17+00:00\n"
+"POT-Creation-Date: 2026-10-25T13:25:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: monoranks\n"
 
 #. Plugin Name of the plugin
 #: monoranks.php
-#: src/Admin.php:46
+#: dist/monoranks/src/Admin.php:95
+#: dist/monoranks/src/Column.php:35
+#: dist/monoranks/src/PostPanel.php:34
+#: src/Admin.php:95
 #: src/Column.php:35
 #: src/PostPanel.php:34
 msgid "MonoRanks"
@@ -42,20 +45,27 @@ msgstr ""
 msgid "https://veronalabs.com/"
 msgstr ""
 
+#: dist/monoranks/resources/views/app.php:13
 #: resources/views/app.php:13
 msgid "The MonoRanks admin app is not built. Run npm install and npm run build in the plugin folder."
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:20
+#: dist/monoranks/resources/views/post-panel.php:25
 #: resources/views/column-cell.php:20
 #: resources/views/post-panel.php:25
 #: tmp/i18n/screens/Overview.js:181
 msgid "Connect MonoRanks"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:24
 #: resources/views/column-cell.php:24
 msgid "Drafts are not sent to MonoRanks. This page gets its scores after the first audit that follows publishing."
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:27
+#: dist/monoranks/resources/views/column-cell.php:38
+#: dist/monoranks/resources/views/post-panel.php:35
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
 #: resources/views/post-panel.php:35
@@ -63,6 +73,9 @@ msgstr ""
 msgid "Health"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:27
+#: dist/monoranks/resources/views/column-cell.php:38
+#: dist/monoranks/resources/views/post-panel.php:35
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
 #: resources/views/post-panel.php:35
@@ -70,48 +83,61 @@ msgstr ""
 msgid "AEO"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:30
 #: resources/views/column-cell.php:30
 msgid "Status"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:30
+#: dist/monoranks/src/Column.php:68
 #: resources/views/column-cell.php:30
 #: src/Column.php:68
 msgid "Not audited yet"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:31
+#: dist/monoranks/resources/views/column-cell.php:54
 #: resources/views/column-cell.php:31
 #: resources/views/column-cell.php:54
 #: tmp/i18n/screens/Settings.js:89
 msgid "Next audit"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:32
 #: resources/views/column-cell.php:32
 msgid "Published"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:35
 #: resources/views/column-cell.php:35
 msgid "Scores arrive after the next audit"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:35
 #: resources/views/column-cell.php:35
 #: tmp/i18n/shell/Shell.js:38
 msgid "Open MonoRanks"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:38
 #: resources/views/column-cell.php:38
 msgid "Not checked in this audit"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:38
 #: resources/views/column-cell.php:38
 msgid "Not checked: MonoRanks reads AEO on a sample of pages"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:41
 #: resources/views/column-cell.php:41
 #: tmp/i18n/screens/Overview.js:97
+#: tmp/i18n/screens/Settings.js:90
 msgid "Fixes"
 msgstr ""
 
 #. translators: %s: number
+#: dist/monoranks/resources/views/column-cell.php:43
 #: resources/views/column-cell.php:43
 #: tmp/i18n/screens/Overview.js:136
 #, php-format,js-format
@@ -120,15 +146,18 @@ msgid_plural "%s ready to apply"
 msgstr[0] ""
 msgstr[1] ""
 
+#: dist/monoranks/resources/views/column-cell.php:45
 #: resources/views/column-cell.php:45
 msgid "Nothing waiting"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:47
 #: resources/views/column-cell.php:47
 msgid "Issues"
 msgstr ""
 
 #. translators: %s: number
+#: dist/monoranks/resources/views/column-cell.php:49
 #: resources/views/column-cell.php:49
 #, php-format
 msgid "%s open"
@@ -136,23 +165,29 @@ msgid_plural "%s open"
 msgstr[0] ""
 msgstr[1] ""
 
+#: dist/monoranks/resources/views/column-cell.php:51
+#: dist/monoranks/src/Column.php:142
 #: resources/views/column-cell.php:51
 #: src/Column.php:142
 msgid "No open issues"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:53
 #: resources/views/column-cell.php:53
 msgid "Audited"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:58
 #: resources/views/column-cell.php:58
 msgid "Apply fixes"
 msgstr ""
 
+#: dist/monoranks/resources/views/column-cell.php:59
 #: resources/views/column-cell.php:59
 msgid "Open in MonoRanks"
 msgstr ""
 
+#: dist/monoranks/resources/views/partials/score-ring.php:16
 #: resources/views/partials/score-ring.php:16
 #: tmp/i18n/screens/Overview.js:197
 #: tmp/i18n/shell/Ring.js:14
@@ -160,6 +195,7 @@ msgid "Not scored yet"
 msgstr ""
 
 #. translators: %s: score out of 100
+#: dist/monoranks/resources/views/partials/score-ring.php:18
 #: resources/views/partials/score-ring.php:18
 #: tmp/i18n/shell/Ring.js:14
 #, php-format,js-format
@@ -167,54 +203,67 @@ msgid "%s of 100"
 msgstr ""
 
 #. translators: %s: link to the website's Integrations screen in MonoRanks
+#: dist/monoranks/resources/views/post-panel.php:19
 #: resources/views/post-panel.php:19
 #, php-format
 msgid "The MonoRanks key of this site cannot read this yet. Allow it under %s in MonoRanks, or connect again."
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:20
 #: resources/views/post-panel.php:20
 msgid "Integrations"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:27
+#: dist/monoranks/src/PostPanel.php:39
 #: resources/views/post-panel.php:27
 #: src/PostPanel.php:39
 msgid "MonoRanks reads published pages. Scores, clicks and changes appear here after the first audit that follows publishing."
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:38
 #: resources/views/post-panel.php:38
 msgid "Not audited yet. Scores arrive after the next audit."
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:43
 #: resources/views/post-panel.php:43
 msgid "Google search, 28 days"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:45
 #: resources/views/post-panel.php:45
 msgid "Search data arrives with the next refresh."
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:49
 #: resources/views/post-panel.php:49
 #: tmp/i18n/screens/Overview.js:94
 msgid "Connect Google Search Console in MonoRanks to see clicks here."
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:52
 #: resources/views/post-panel.php:52
 msgid "Clicks"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:53
 #: resources/views/post-panel.php:53
 msgid "Impressions"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:55
 #: resources/views/post-panel.php:55
 msgid "Average position"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:59
 #: resources/views/post-panel.php:59
 msgid "Top searches"
 msgstr ""
 
 #. translators: %s: number of clicks
+#: dist/monoranks/resources/views/post-panel.php:62
 #: resources/views/post-panel.php:62
 #, php-format
 msgid "%s click"
@@ -222,36 +271,45 @@ msgid_plural "%s clicks"
 msgstr[0] ""
 msgstr[1] ""
 
+#: dist/monoranks/resources/views/post-panel.php:71
 #: resources/views/post-panel.php:71
 msgid "Visits and revenue, 28 days"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:74
 #: resources/views/post-panel.php:74
 msgid "Visits from search"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:75
 #: resources/views/post-panel.php:75
 msgid "Key events"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:76
 #: resources/views/post-panel.php:76
 msgid "Revenue"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:81
 #: resources/views/post-panel.php:81
 msgid "Connect Google Analytics in MonoRanks to see what visits to this page are worth."
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:81
 #: resources/views/post-panel.php:81
 msgid "Open Analytics"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:83
+#: dist/monoranks/resources/views/post-panel.php:117
 #: resources/views/post-panel.php:83
 #: resources/views/post-panel.php:117
 msgid "Not available from MonoRanks right now."
 msgstr ""
 
 #. translators: %s: number of links
+#: dist/monoranks/resources/views/post-panel.php:90
 #: resources/views/post-panel.php:90
 #, php-format
 msgid "%s lost link to win back"
@@ -259,15 +317,18 @@ msgid_plural "%s lost links to win back"
 msgstr[0] ""
 msgstr[1] ""
 
+#: dist/monoranks/resources/views/post-panel.php:96
 #: resources/views/post-panel.php:96
 msgid "These sites used to link to this page. Fix the address if it moved, or ask them to update the link."
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:101
 #: resources/views/post-panel.php:101
 msgid "Last change MonoRanks saw"
 msgstr ""
 
 #. translators: %s: number of changes
+#: dist/monoranks/resources/views/post-panel.php:109
 #: resources/views/post-panel.php:109
 #, php-format
 msgid "and %s more"
@@ -275,58 +336,80 @@ msgid_plural "and %s more"
 msgstr[0] ""
 msgstr[1] ""
 
+#: dist/monoranks/resources/views/post-panel.php:113
 #: resources/views/post-panel.php:113
 msgid "Nothing changed between the recent checks."
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:115
 #: resources/views/post-panel.php:115
 msgid "No history yet. MonoRanks keeps one from the next audit on."
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:122
 #: resources/views/post-panel.php:122
 msgid "Open this page in MonoRanks"
 msgstr ""
 
+#: dist/monoranks/resources/views/post-panel.php:122
 #: resources/views/post-panel.php:122
-#: tmp/i18n/screens/Grow.js:55
-#: tmp/i18n/screens/Grow.js:66
-#: tmp/i18n/screens/Grow.js:161
+#: tmp/i18n/screens/Grow.js:63
+#: tmp/i18n/screens/Grow.js:74
+#: tmp/i18n/screens/Grow.js:169
 msgid "(opens in a new tab)"
 msgstr ""
 
-#: src/Admin.php:47
+#: dist/monoranks/src/Admin.php:77
+#: dist/monoranks/src/Admin.php:97
+#: src/Admin.php:77
+#: src/Admin.php:97
+#: tmp/i18n/screens/Settings.js:74
+#: tmp/i18n/shell/Shell.js:15
+msgid "Settings"
+msgstr ""
+
+#: dist/monoranks/src/Admin.php:77
+#: src/Admin.php:77
+#: tmp/i18n/screens/Overview.js:183
+#: tmp/i18n/screens/Settings.js:98
+msgid "Connect"
+msgstr ""
+
+#: dist/monoranks/src/Admin.php:96
+#: dist/monoranks/src/Assets.php:67
+#: src/Admin.php:96
 #: src/Assets.php:67
 #: tmp/i18n/screens/Overview.js:76
 #: tmp/i18n/shell/Shell.js:14
 msgid "Overview"
 msgstr ""
 
-#: src/Admin.php:48
+#: dist/monoranks/src/Admin.php:97
+#: dist/monoranks/src/Assets.php:67
+#: src/Admin.php:97
 #: src/Assets.php:67
 msgid "MonoRanks settings"
 msgstr ""
 
-#: src/Admin.php:48
-#: tmp/i18n/screens/Settings.js:74
-#: tmp/i18n/shell/Shell.js:15
-msgid "Settings"
-msgstr ""
-
 #. translators: 1: relative time, 2: date
-#: src/Admin.php:168
+#: dist/monoranks/src/Admin.php:217
+#: src/Admin.php:217
 #, php-format
 msgid "in %1$s (%2$s)"
 msgstr ""
 
 #. translators: 1: relative time, 2: date
-#: src/Admin.php:171
+#: dist/monoranks/src/Admin.php:220
+#: src/Admin.php:220
 #, php-format
 msgid "%1$s ago (%2$s)"
 msgstr ""
 
 #. translators: %s: relative time, e.g. 3 minutes
 #. translators: %s: relative time such as "5 days"
-#: src/Admin.php:181
+#: dist/monoranks/src/Admin.php:230
+#: dist/monoranks/src/Column.php:63
+#: src/Admin.php:230
 #: src/Column.php:63
 #, php-format
 msgid "in %s"
@@ -334,105 +417,131 @@ msgstr ""
 
 #. translators: %s: relative time, e.g. 3 minutes
 #. translators: %s: relative time such as "2 days"
-#: src/Admin.php:181
+#: dist/monoranks/src/Admin.php:230
+#: dist/monoranks/src/Column.php:78
+#: dist/monoranks/src/Column.php:92
+#: src/Admin.php:230
 #: src/Column.php:78
 #: src/Column.php:92
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: src/Admin.php:193
+#: dist/monoranks/src/Admin.php:242
+#: src/Admin.php:242
 msgid "Connected. Your published content is on its way to MonoRanks."
 msgstr ""
 
-#: src/Admin.php:194
+#: dist/monoranks/src/Admin.php:243
+#: src/Admin.php:243
 msgid "Content sent to MonoRanks."
 msgstr ""
 
-#: src/Admin.php:195
+#: dist/monoranks/src/Admin.php:244
+#: src/Admin.php:244
 msgid "Disconnected. Nothing is sent to MonoRanks any more."
 msgstr ""
 
-#: src/Admin.php:196
+#: dist/monoranks/src/Admin.php:245
+#: src/Admin.php:245
 msgid "Everything MonoRanks stored in WordPress is gone: the connection, the scores, the redirects and the change log."
 msgstr ""
 
-#: src/Admin.php:197
+#: dist/monoranks/src/Admin.php:246
+#: src/Admin.php:246
 msgid "Applied. The change is listed under Recent changes and can be undone."
 msgstr ""
 
-#: src/Admin.php:198
+#: dist/monoranks/src/Admin.php:247
+#: src/Admin.php:247
 msgid "Some fixes were applied; the rest could not be applied. Recent changes lists what was written."
 msgstr ""
 
-#: src/Admin.php:199
+#: dist/monoranks/src/Admin.php:248
+#: src/Admin.php:248
 msgid "That change has moved in the log since this screen loaded. Reload and try Undo again."
 msgstr ""
 
-#: src/Admin.php:200
+#: dist/monoranks/src/Admin.php:249
+#: src/Admin.php:249
 msgid "Undone. The previous value is back."
 msgstr ""
 
-#: src/Admin.php:201
+#: dist/monoranks/src/Admin.php:250
+#: src/Admin.php:250
 msgid "MonoRanks could not apply that change. Open it in MonoRanks to review it again."
 msgstr ""
 
-#: src/Admin.php:202
+#: dist/monoranks/src/Admin.php:251
+#: src/Admin.php:251
 msgid "Nothing was changed: the value in WordPress is not the one that was reviewed. It now needs review in MonoRanks."
 msgstr ""
 
-#: src/Admin.php:203
+#: dist/monoranks/src/Admin.php:252
+#: src/Admin.php:252
 msgid "Some changes were applied. The others no longer match WordPress and need review in MonoRanks."
 msgstr ""
 
-#: src/Admin.php:204
+#: dist/monoranks/src/Admin.php:253
+#: src/Admin.php:253
 msgid "That does not look like a MonoRanks connector key. Copy it again from MonoRanks → Settings → API and MCP."
 msgstr ""
 
-#: src/Admin.php:205
+#: dist/monoranks/src/Admin.php:254
+#: src/Admin.php:254
 msgid "The MonoRanks address must start with https://."
 msgstr ""
 
-#: src/Admin.php:206
+#: dist/monoranks/src/Admin.php:255
+#: src/Admin.php:255
 msgid "MonoRanks did not accept this key. It may have been revoked or replaced; create a new one in MonoRanks."
 msgstr ""
 
-#: src/Admin.php:207
+#: dist/monoranks/src/Admin.php:256
+#: src/Admin.php:256
 msgid "This key belongs to a different website in MonoRanks. Create the key on the website with this address."
 msgstr ""
 
-#: src/Admin.php:208
+#: dist/monoranks/src/Admin.php:257
+#: src/Admin.php:257
 msgid "MonoRanks could not be reached. Check the address and try again."
 msgstr ""
 
-#: src/Admin.php:209
+#: dist/monoranks/src/Admin.php:258
+#: src/Admin.php:258
 msgid "Could not connect. Please try again."
 msgstr ""
 
+#: dist/monoranks/src/AuthorizeScreen.php:39
 #: src/AuthorizeScreen.php:39
 msgid "Reads your content and applies only fixes you approve."
 msgstr ""
 
 #. translators: %s: relative time such as "in 5 days"
+#: dist/monoranks/src/Column.php:71
 #: src/Column.php:71
 #, php-format
 msgid "next audit %s"
 msgstr ""
 
+#: dist/monoranks/src/Column.php:121
 #: src/Column.php:121
 msgid "Clicks, 28 days"
 msgstr ""
 
+#: dist/monoranks/src/Column.php:124
 #: src/Column.php:124
 msgid "Revenue, 28 days"
 msgstr ""
 
 #. translators: %s: number of links
+#: dist/monoranks/src/Column.php:128
 #: src/Column.php:128
 msgid "Lost links"
 msgstr ""
 
 #. translators: %s: number of links
+#: dist/monoranks/src/Column.php:128
 #: src/Column.php:128
 #, php-format
 msgid "%s to win back"
@@ -441,6 +550,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: number of fixes
+#: dist/monoranks/src/Column.php:137
 #: src/Column.php:137
 #, php-format
 msgid "%s fix ready"
@@ -449,6 +559,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: number of issues
+#: dist/monoranks/src/Column.php:140
 #: src/Column.php:140
 #, php-format
 msgid "%s open issue"
@@ -457,39 +568,46 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: relative time such as "2 days"
+#: dist/monoranks/src/Column.php:146
 #: src/Column.php:146
 #, php-format
 msgid "audited %s ago"
 msgstr ""
 
+#: dist/monoranks/src/Column.php:186
 #: src/Column.php:186
 msgid "Needs attention"
 msgstr ""
 
 #. translators: %s: a question people ask
-#: src/Grow.php:221
+#: dist/monoranks/src/Grow.php:252
+#: src/Grow.php:252
 #, php-format
 msgid "AI answers quote this page for \"%s\""
 msgstr ""
 
 #. translators: %s: a question people ask
-#: src/Grow.php:221
+#: dist/monoranks/src/Grow.php:252
+#: src/Grow.php:252
 msgid "AI answers quote this page"
 msgstr ""
 
 #. translators: %s: a search keyword
-#: src/Grow.php:225
+#: dist/monoranks/src/Grow.php:256
+#: src/Grow.php:256
 #, php-format
 msgid "A \"best of\" list for \"%s\" that leaves you out"
 msgstr ""
 
 #. translators: %s: a search keyword
-#: src/Grow.php:225
+#: dist/monoranks/src/Grow.php:256
+#: src/Grow.php:256
 msgid "A \"best of\" list that leaves you out"
 msgstr ""
 
 #. translators: %s: number of competitors
-#: src/Grow.php:229
+#: dist/monoranks/src/Grow.php:260
+#: src/Grow.php:260
 #, php-format
 msgid "Links to %s competitor, not to you"
 msgid_plural "Links to %s of your competitors, not to you"
@@ -497,141 +615,177 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: number of competitors
-#: src/Grow.php:229
+#: dist/monoranks/src/Grow.php:260
+#: src/Grow.php:260
 msgid "Links to your competitors, not to you"
 msgstr ""
 
 #. translators: %s: a page address on this site, like /pricing
-#: src/Grow.php:233
+#: dist/monoranks/src/Grow.php:264
+#: src/Grow.php:264
 #, php-format
 msgid "Used to link to %s"
 msgstr ""
 
 #. translators: %s: a page address on this site, like /pricing
-#: src/Grow.php:233
+#: dist/monoranks/src/Grow.php:264
+#: src/Grow.php:264
 msgid "Used to link to you"
 msgstr ""
 
-#: src/Grow.php:235
+#: dist/monoranks/src/Grow.php:266
+#: src/Grow.php:266
 msgid "Added by hand"
 msgstr ""
 
-#: src/Overview.php:41
+#: dist/monoranks/src/Overview.php:41
+#: dist/monoranks/src/PostPanel.php:152
+#: src/Overview.php:44
 #: src/PostPanel.php:152
 msgid "Title"
 msgstr ""
 
-#: src/Overview.php:42
+#: dist/monoranks/src/Overview.php:42
+#: dist/monoranks/src/PostPanel.php:153
+#: src/Overview.php:45
 #: src/PostPanel.php:153
 msgid "Meta description"
 msgstr ""
 
-#: src/Overview.php:43
+#: dist/monoranks/src/Overview.php:43
+#: dist/monoranks/src/PostPanel.php:156
+#: src/Overview.php:46
 #: src/PostPanel.php:156
 msgid "Canonical"
 msgstr ""
 
-#: src/Overview.php:44
+#: dist/monoranks/src/Overview.php:44
+#: dist/monoranks/src/PostPanel.php:157
+#: src/Overview.php:47
 #: src/PostPanel.php:157
 msgid "Noindex"
 msgstr ""
 
-#: src/Overview.php:45
+#: dist/monoranks/src/Overview.php:45
+#: src/Overview.php:48
 msgid "Image alt"
 msgstr ""
 
-#: src/Overview.php:46
+#: dist/monoranks/src/Overview.php:46
+#: dist/monoranks/src/PostPanel.php:151
+#: src/Overview.php:49
 #: src/PostPanel.php:151
 msgid "Redirect"
 msgstr ""
 
-#: src/Overview.php:47
+#: dist/monoranks/src/Overview.php:47
+#: src/Overview.php:50
 msgid "Opening paragraph"
 msgstr ""
 
-#: src/Overview.php:48
+#: dist/monoranks/src/Overview.php:48
+#: src/Overview.php:51
 msgid "robots.txt"
 msgstr ""
 
-#: src/Overview.php:49
+#: dist/monoranks/src/Overview.php:49
+#: src/Overview.php:52
 msgid "llms.txt"
 msgstr ""
 
 #. translators: %d: attachment ID
-#: src/Overview.php:68
+#: dist/monoranks/src/Overview.php:68
+#: src/Overview.php:71
 #, php-format
 msgid "Image #%d"
 msgstr ""
 
-#: src/Overview.php:70
+#: dist/monoranks/src/Overview.php:70
+#: src/Overview.php:73
 #: tmp/i18n/screens/Overview.js:30
 msgid "Site"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:45
 #: src/PostPanel.php:45
 msgid "MonoRanks could not be reached. Reload the page to try again."
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:46
 #: src/PostPanel.php:46
 msgid "Loading MonoRanks data…"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:150
 #: src/PostPanel.php:150
 msgid "HTTP status"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:154
 #: src/PostPanel.php:154
 msgid "H1"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:155
 #: src/PostPanel.php:155
 msgid "Headings"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:158
 #: src/PostPanel.php:158
 msgid "Robots"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:159
 #: src/PostPanel.php:159
 msgid "Word count"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:160
 #: src/PostPanel.php:160
 msgid "Structured data"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:161
 #: src/PostPanel.php:161
 msgid "Internal links"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:162
 #: src/PostPanel.php:162
 #: tmp/i18n/screens/Overview.js:85
 msgid "Health score"
 msgstr ""
 
+#: dist/monoranks/src/PostPanel.php:163
 #: src/PostPanel.php:163
 #: tmp/i18n/screens/Overview.js:89
 msgid "AEO score"
 msgstr ""
 
 #. translators: 1: what changed, such as "Word count", 2: the number before, 3: the number after
+#: dist/monoranks/src/PostPanel.php:171
 #: src/PostPanel.php:171
 #, php-format
 msgid "%1$s %2$s → %3$s"
 msgstr ""
 
 #. translators: 1: user, 2: date
-#: src/Settings.php:44
+#: dist/monoranks/src/Settings.php:102
+#: src/Settings.php:102
 #, php-format
 msgid "set when %1$s connected MonoRanks on %2$s"
 msgstr ""
 
-#: src/Settings.php:45
+#: dist/monoranks/src/Settings.php:103
+#: src/Settings.php:103
 msgid "pasted by hand"
 msgstr ""
 
-#: src/Settings.php:47
-#: src/Settings.php:48
+#: dist/monoranks/src/Settings.php:105
+#: dist/monoranks/src/Settings.php:106
+#: src/Settings.php:105
+#: src/Settings.php:106
 msgid "Never"
 msgstr ""
 
@@ -639,227 +793,227 @@ msgstr ""
 msgid "More info"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:18
 #: tmp/i18n/screens/Grow.js:26
+#: tmp/i18n/screens/Grow.js:34
 msgid "What to do next"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:27
+#: tmp/i18n/screens/Grow.js:35
 #, js-format
 msgid "Updated %s"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:41
+#: tmp/i18n/screens/Grow.js:49
 msgid "The MonoRanks key of this site cannot read this yet. Allow it under Integrations in MonoRanks, or connect again."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:41
+#: tmp/i18n/screens/Grow.js:49
 msgid "Open Integrations"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:43
+#: tmp/i18n/screens/Grow.js:51
 msgid "Not available in your MonoRanks yet."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:45
-msgid "MonoRanks could not be reached. The plugin tries again within the hour."
+#: tmp/i18n/screens/Grow.js:53
+msgid "Could not reach MonoRanks. Retrying soon."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:47
-msgid "Still loading. Reload this screen in a minute."
+#: tmp/i18n/screens/Grow.js:55
+msgid "Checking…"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:62
+#: tmp/i18n/screens/Grow.js:70
 msgid "Outreach"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:62
+#: tmp/i18n/screens/Grow.js:70
 #, js-format
 msgid "%s to contact"
 msgid_plural "%s to contact"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:62
+#: tmp/i18n/screens/Grow.js:70
 msgid "All targets"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:69
+#: tmp/i18n/screens/Grow.js:77
 msgid "Every target is contacted. MonoRanks looks for new ones each week."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:70
+#: tmp/i18n/screens/Grow.js:78
 msgid "Sites worth asking for a link or a mention. MonoRanks never sends email; you reach out and set the status there."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:71
+#: tmp/i18n/screens/Grow.js:79
 msgid "No outreach targets yet. MonoRanks looks for pages worth a link each week."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:76
+#: tmp/i18n/screens/Grow.js:84
 msgid "Backlinks"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:76
+#: tmp/i18n/screens/Grow.js:84
 msgid "All backlinks"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:81
+#: tmp/i18n/screens/Grow.js:89
 msgid "websites linking to you, won and lost in 28 days"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:84
+#: tmp/i18n/screens/Grow.js:92
 #, js-format
 msgid "%s website links to you"
 msgid_plural "%s websites link to you"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:85
+#: tmp/i18n/screens/Grow.js:93
 #, js-format
 msgid "%s to review for spam"
 msgid_plural "%s to review for spam"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:88
+#: tmp/i18n/screens/Grow.js:96
 msgid "Newest strong links"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:90
+#: tmp/i18n/screens/Grow.js:98
 #, js-format
 msgid "strength %s"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:93
+#: tmp/i18n/screens/Grow.js:101
 msgid "No backlink data yet. MonoRanks refreshes it weekly."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:98
+#: tmp/i18n/screens/Grow.js:106
 msgid "Competitors"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:98
+#: tmp/i18n/screens/Grow.js:106
 #, js-format
 msgid "%s keyword gap"
 msgid_plural "%s keyword gaps"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:98
+#: tmp/i18n/screens/Grow.js:106
 msgid "All competitors"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:102
+#: tmp/i18n/screens/Grow.js:110
 msgid "suggested"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:103
+#: tmp/i18n/screens/Grow.js:111
 #, js-format
 msgid "%1$s shared keyword, %2$s where they rank higher"
 msgid_plural "%1$s shared keywords, %2$s where they rank higher"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:107
+#: tmp/i18n/screens/Grow.js:115
 msgid "They rank for these, you do not"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:109
+#: tmp/i18n/screens/Grow.js:117
 #, js-format
 msgid "%s/mo"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:112
+#: tmp/i18n/screens/Grow.js:120
 msgid "No competitors yet. Pick some in MonoRanks to see the keywords they win."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:120
+#: tmp/i18n/screens/Grow.js:128
 msgid "up"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:120
+#: tmp/i18n/screens/Grow.js:128
 msgid "down"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:121
+#: tmp/i18n/screens/Grow.js:129
 #, js-format
 msgid "%1$s → %2$s"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:124
+#: tmp/i18n/screens/Grow.js:132
 msgid "Keyword movers this week"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:124
+#: tmp/i18n/screens/Grow.js:132
 msgid "All keywords"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:127
+#: tmp/i18n/screens/Grow.js:135
 msgid "Up"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:131
+#: tmp/i18n/screens/Grow.js:139
 msgid "Down"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:134
+#: tmp/i18n/screens/Grow.js:142
 #, js-format
 msgid "Your %s tracked keyword held its place this week."
 msgid_plural "Your %s tracked keywords held their places this week."
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:134
+#: tmp/i18n/screens/Grow.js:142
 msgid "No tracked keywords yet. Track some in MonoRanks to see them move here."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:143
+#: tmp/i18n/screens/Grow.js:151
 msgid "No reports yet. Create a website report, a client report or a weekly email in MonoRanks to share progress."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:144
-#: tmp/i18n/screens/Grow.js:148
+#: tmp/i18n/screens/Grow.js:152
+#: tmp/i18n/screens/Grow.js:156
 msgid "Open reports"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:147
+#: tmp/i18n/screens/Grow.js:155
 msgid "Reports"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:152
+#: tmp/i18n/screens/Grow.js:160
 msgid "Weekly email"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:154
+#: tmp/i18n/screens/Grow.js:162
 #, js-format
 msgid "Next send %s"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:155
+#: tmp/i18n/screens/Grow.js:163
 #, js-format
 msgid "%s recipient"
 msgid_plural "%s recipients"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:156
+#: tmp/i18n/screens/Grow.js:164
 msgid "On"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:156
+#: tmp/i18n/screens/Grow.js:164
 msgid "Off"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:160
+#: tmp/i18n/screens/Grow.js:168
 msgid "Client report"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:160
+#: tmp/i18n/screens/Grow.js:168
 msgid "Report"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:161
+#: tmp/i18n/screens/Grow.js:169
 msgid "Open report"
 msgstr ""
 
@@ -1091,12 +1245,6 @@ msgstr ""
 msgid "Sign in and approve. Takes a minute."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:183
-#: tmp/i18n/screens/Settings.js:98
-#: tmp/i18n/screens/Settings.js:161
-msgid "Connect"
-msgstr ""
-
 #: tmp/i18n/screens/Overview.js:184
 #: tmp/i18n/screens/Settings.js:99
 msgid "Or paste a connector key"
@@ -1154,7 +1302,11 @@ msgid "%1$s published items sent %2$s"
 msgstr ""
 
 #: tmp/i18n/screens/Overview.js:202
-msgid "Not sent yet. Use \"Sync content now\" above."
+msgid "Not sent. Use \"Sync content now\"."
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:202
+msgid "Sending…"
 msgstr ""
 
 #: tmp/i18n/screens/Overview.js:203
@@ -1221,6 +1373,18 @@ msgstr ""
 
 #: tmp/i18n/screens/Settings.js:90
 msgid "Revoke"
+msgstr ""
+
+#: tmp/i18n/screens/Settings.js:90
+msgid "Not set up"
+msgstr ""
+
+#: tmp/i18n/screens/Settings.js:90
+msgid "Approve MonoRanks in WordPress so it can write the fixes you accept."
+msgstr ""
+
+#: tmp/i18n/screens/Settings.js:90
+msgid "Allow"
 msgstr ""
 
 #: tmp/i18n/screens/Settings.js:91
@@ -1336,6 +1500,10 @@ msgstr ""
 
 #: tmp/i18n/screens/Settings.js:160
 msgid "MonoRanks address (development sites only)"
+msgstr ""
+
+#: tmp/i18n/screens/Settings.js:161
+msgid "Save key"
 msgstr ""
 
 #: tmp/i18n/shell/ChangeLog.js:8

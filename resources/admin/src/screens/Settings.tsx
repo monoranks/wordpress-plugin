@@ -30,8 +30,8 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
     api.settings().then((d) => { setData(d); setKeyOpen(d.revoked); }).catch((e) => setError(errorText(e, __('Could not load the settings.', 'monoranks'))));
   }, []);
 
-  // After Connect opens MonoRanks in another tab, check every few seconds (while this tab is visible) so the page shows
-  // Connected by itself once the person approves there. Gives up after 10 minutes.
+  // Connect opens MonoRanks in this tab and comes back here. If the person opened it in another tab anyway (middle click),
+  // check every few seconds while this tab is visible, so the page shows Connected by itself. Gives up after 10 minutes.
   const [waitingSince, setWaitingSince] = useState<number | null>(null);
   useEffect(() => {
     if (waitingSince === null || data?.connected) return;
@@ -85,7 +85,9 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
                     [__('Connector key', 'monoranks'), <span className="flex flex-wrap items-center gap-2"><code>{data.key_hint}</code><Tip text={data.key_via} /></span>],
                     [__('Last sync', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{data.last_sent_date ? <Tip text={data.last_sent_date}><span className="tabular-nums">{data.last_sent_short}</span></Tip> : <span className="tabular-nums">{data.last_sent_short}</span>}{data.sending && <Badge>{sprintf(__('sending, batch %1$s of %2$s', 'monoranks'), fmt(data.sending.page), fmt(Math.max(1, data.sending.pages)))}</Badge>}{data.items > 0 && <Badge>{sprintf(_n('%s published item', '%s published items', data.items, 'monoranks'), fmt(data.items))}</Badge>}{data.last_error && <Badge variant="warn">{data.last_error}</Badge>}</span>],
                     ...(data.next_audit ? [[__('Next audit', 'monoranks'), data.next_audit] as [string, React.ReactNode]] : []),
-                    [__('Fixes written with', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{__('App password', 'monoranks')}<Tip text={__('Fixes are written with the "MonoRanks" Application Password. Revoke it in your profile to stop writes.', 'monoranks')} /><a href={data.profile_url}>{__('Revoke', 'monoranks')}</a></span>],
+                    data.app_password?.exists
+                      ? [__('Fixes written with', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{__('App password', 'monoranks')}<Tip text={__('Fixes are written with the "MonoRanks" Application Password. Revoke it in your profile to stop writes.', 'monoranks')} /><a href={data.app_password.revoke_url || data.profile_url}>{__('Revoke', 'monoranks')}</a></span>]
+                      : [__('Fixes', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{__('Not set up', 'monoranks')}<Tip text={__('Approve MonoRanks in WordPress so it can write the fixes you accept.', 'monoranks')} />{data.app_password?.available !== false && <a href={out(data.allow_url || data.connect_url, 'allow-fixes', 'settings')} target="_self">{__('Allow', 'monoranks')}</a>}</span>],
                     [__('Works with', 'monoranks'), data.seo_plugin && !data.seo_supported
                       ? <span className="flex flex-wrap items-center gap-2"><Badge variant="warn">{sprintf(__('%s detected', 'monoranks'), data.seo_plugin)}</Badge><Tip text={sprintf(__('MonoRanks cannot write titles, descriptions, canonicals or noindex into %s yet, so those fixes are refused', 'monoranks'), data.seo_plugin)} /></span>
                       : data.seo_plugin
@@ -99,7 +101,7 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
                 </>
               ) : (
                 <>
-                  <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect to MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Sign in and approve. Takes a minute.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(data.connect_url, 'connect-step', 'settings')} target="_blank" rel="noopener" onClick={() => setWaitingSince(Date.now())}>{__('Connect', 'monoranks')}</a></Button></div></Step>
+                  <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect to MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Sign in and approve. Takes a minute.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(data.connect_url, 'connect-step', 'settings')} target="_self" onClick={() => setWaitingSince(Date.now())}>{__('Connect', 'monoranks')}</a></Button></div></Step>
                   <Step n={2} later><span className="inline-flex items-center gap-1.5"><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><Tip text={__('Use this when your host blocks Application Passwords.', 'monoranks')} /></span><KeyForm data={data} busy={busy} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} /></Step>
                 </>
               )}
@@ -169,7 +171,7 @@ function KeyForm({ data, busy, hint, onSubmit }: { data: SettingsData; busy: str
     <form onSubmit={submit} className="flex flex-col gap-3 pt-1.5">
       <div className="flex flex-col gap-2"><span className="inline-flex items-center gap-1.5"><label htmlFor="monoranks-key" className="text-[12px] font-medium text-ink2">{__('Connector key', 'monoranks')}</label>{hint && <Tip align="start" text={hint} />}</span><Input id="monoranks-key" name="key" type="password" autoComplete="off" placeholder="mr_ws_… or mr_site_…" required value={key} onChange={(e) => setKey(e.target.value)} /></div>
       {data.show_address && <div className="flex flex-col gap-2"><label htmlFor="monoranks-address" className="text-[12px] font-medium text-ink2">{__('MonoRanks address (development sites only)', 'monoranks')}</label><Input id="monoranks-address" name="api_base" type="url" value={base} onChange={(e) => setBase(e.target.value)} /></div>}
-      <div><Button variant="primary" type="submit" disabled={busy !== null} aria-busy={busy === 'connect'}>{__('Connect', 'monoranks')}</Button></div>
+      <div><Button variant="primary" type="submit" disabled={busy !== null} aria-busy={busy === 'connect'}>{__('Save key', 'monoranks')}</Button></div>
     </form>
   );
 }

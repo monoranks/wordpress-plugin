@@ -229,7 +229,7 @@ export function ConnectSteps({ revoked, go }: { revoked: boolean; go: (next: Scr
     <Card>
       <CardHeader><CardTitle>{revoked ? __('Connect MonoRanks again', 'monoranks') : __('Connect MonoRanks', 'monoranks')}</CardTitle><Badge variant="pill"><Dot tone={revoked ? 'critical' : 'muted'} />{revoked ? __('Key revoked', 'monoranks') : __('Not connected', 'monoranks')}</Badge></CardHeader>
       <CardBody className="flex flex-col gap-4">
-        <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect to MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Sign in and approve. Takes a minute.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(s.urls.connect, 'connect-step')} target="_blank" rel="noopener">{__('Connect', 'monoranks')}</a></Button></div></Step>
+        <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect to MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Sign in and approve. Takes a minute.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(s.urls.connect, 'connect-step')} target="_self">{__('Connect', 'monoranks')}</a></Button></div></Step>
         <Step n={2} later><span className="inline-flex items-center gap-1.5"><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><Tip text={__('Use this when your host blocks Application Passwords.', 'monoranks')} /></span><div><Button size="sm" asChild><a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }}>{__('Open settings', 'monoranks')}</a></Button></div></Step>
         <Step n={3} later><b className="text-[13px] font-semibold text-ink">{__('See scores here and in your Posts list', 'monoranks')}</b></Step>
       </CardBody>
@@ -253,7 +253,7 @@ function Waiting({ data }: { data: OverviewData }) {
       <CardHeader><CardTitle>{__('Waiting for the first audit', 'monoranks')}</CardTitle><Badge variant="pill"><Dot tone="good" />{__('Connected', 'monoranks')}</Badge></CardHeader>
       <CardBody className="flex flex-col gap-4">
         <KV rows={[
-          [__('Content', 'monoranks'), data.last_sent ? sprintf(__('%1$s published items sent %2$s', 'monoranks'), fmt(data.items), data.last_sent) : __('Not sent yet. Use "Sync content now" above.', 'monoranks')],
+          [__('Content', 'monoranks'), data.last_sent ? sprintf(__('%1$s published items sent %2$s', 'monoranks'), fmt(data.items), data.last_sent) : data.send_failed && !data.sending ? __('Not sent. Use "Sync content now".', 'monoranks') : <span className="text-mute">{__('Sending…', 'monoranks')}</span>],
           [__('Audit results', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{short}<Tip text={data.fetched ? <>{results} · {sprintf(__('checked %s', 'monoranks'), data.fetched)}</> : results} /></span>],
         ]} />
         <div><Button size="sm" asChild><a href={out(data.app_url, 'open-audit')} target="_blank" rel="noopener">{__('Open the audit in MonoRanks', 'monoranks')}</a></Button></div>

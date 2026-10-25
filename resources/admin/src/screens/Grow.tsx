@@ -8,6 +8,7 @@ import { out } from '@/lib/links';
 import { fmt } from '@/lib/format';
 
 const ext = { target: '_blank', rel: 'noopener' } as const;
+const SECTIONS = ['outreach', 'backlinks', 'competitors', 'keywords', 'report'] as const;
 
 /**
  * "What to do next" on the Overview: outreach targets to contact, backlinks won and lost, competitors and the keywords
@@ -18,9 +19,18 @@ export function GrowCards() {
   const [data, setData] = useState<GrowData | null>(null);
   const [failed, setFailed] = useState(false);
 
+  // A card still "checking" (the first answer was slow, or MonoRanks finishes it in the background) is asked again a few
+  // times, a minute apart, so it fills in without a reload. The plugin itself decides when MonoRanks is really called.
+  const [tries, setTries] = useState(0);
   useEffect(() => {
     api.grow().then(setData).catch(() => setFailed(true));
-  }, []);
+  }, [tries]);
+  const checking = !!data?.connected && SECTIONS.some((k) => data[k]?.state === 'pending');
+  useEffect(() => {
+    if (!checking || tries >= 4) return;
+    const timer = window.setTimeout(() => setTries((n) => n + 1), 60 * 1000);
+    return () => window.clearTimeout(timer);
+  }, [checking, tries]);
 
   if (failed) return null;
   if (!data) {
@@ -58,9 +68,9 @@ function StateLine({ state, scope, empty }: { state: GrowState; scope: string; e
   } else if (state === 'off') {
     text = __('Not available in your MonoRanks yet.', 'monoranks');
   } else if (state === 'error') {
-    text = __('MonoRanks could not be reached. The plugin tries again within the hour.', 'monoranks');
+    text = __('Could not reach MonoRanks. Retrying soon.', 'monoranks');
   } else if (state === 'pending') {
-    text = __('Still loading. Reload this screen in a minute.', 'monoranks');
+    return <p className="m-0 animate-pulse text-[12px] text-mute" role="status">{__('Checking…', 'monoranks')}</p>;
   }
   return <p className="m-0 text-[12px] text-ink2">{text}</p>;
 }

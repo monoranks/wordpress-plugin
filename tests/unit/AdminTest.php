@@ -54,4 +54,83 @@ class AdminTest extends TestCase {
 		$this->assertSame( 'Never', Admin::ago_short( '', 'Never' ) );
 		$this->assertSame( '', Admin::date_of( '' ) );
 	}
+
+	private function activation_env( array $over = array() ) {
+		$o = array_merge( array( 'multisite' => false, 'ajax' => false, 'can' => true ), $over );
+		Functions\when( 'plugin_basename' )->justReturn( 'monoranks/monoranks.php' );
+		Functions\when( 'is_multisite' )->justReturn( $o['multisite'] );
+		Functions\when( 'wp_doing_ajax' )->justReturn( $o['ajax'] );
+		Functions\when( 'current_user_can' )->justReturn( $o['can'] );
+		Functions\when( 'get_current_user_id' )->justReturn( 3 );
+		Functions\when( 'sanitize_key' )->alias( static function ( $k ) { return strtolower( (string) $k ); } );
+		Functions\when( 'wp_unslash' )->returnArg();
+	}
+
+	public function test_activating_this_plugin_alone_sets_a_one_time_redirect() {
+		$this->activation_env();
+		Functions\expect( 'set_transient' )->once()->with( Admin::ACTIVATION_REDIRECT, 3, 60 );
+		Admin::activated( 'monoranks/monoranks.php', false );
+		$this->addToAssertionCount( 1 );
+	}
+
+	public function test_no_redirect_for_other_plugins_network_bulk_or_non_admins() {
+		Functions\expect( 'set_transient' )->never();
+		$this->activation_env();
+		Admin::activated( 'akismet/akismet.php', false );
+		Admin::activated( 'monoranks/monoranks.php', true );
+		$_REQUEST['action'] = 'activate-selected';
+		Admin::activated( 'monoranks/monoranks.php', false );
+		unset( $_REQUEST['action'] );
+		$this->activation_env( array( 'multisite' => true ) );
+		Admin::activated( 'monoranks/monoranks.php', false );
+		$this->activation_env( array( 'can' => false ) );
+		Admin::activated( 'monoranks/monoranks.php', false );
+		$this->activation_env( array( 'ajax' => true ) );
+		Admin::activated( 'monoranks/monoranks.php', false );
+		$this->addToAssertionCount( 1 );
+	}
+
+	public function test_the_redirect_is_used_once_and_only_by_the_same_user() {
+		$this->activation_env();
+		Functions\when( 'is_network_admin' )->justReturn( false );
+		Functions\when( 'wp_doing_cron' )->justReturn( false );
+		Functions\when( 'get_transient' )->justReturn( 9 );
+		Functions\expect( 'delete_transient' )->once()->with( Admin::ACTIVATION_REDIRECT );
+		Functions\expect( 'wp_safe_redirect' )->never();
+		Admin::after_activation();
+		$this->addToAssertionCount( 1 );
+	}
+
+	public function test_no_transient_no_redirect() {
+		Functions\when( 'get_transient' )->justReturn( false );
+		Functions\expect( 'wp_safe_redirect' )->never();
+		Functions\expect( 'delete_transient' )->never();
+		Admin::after_activation();
+		$this->addToAssertionCount( 1 );
+	}
+
+	public function test_plugin_row_says_connect_until_connected_then_settings() {
+		Functions\when( 'admin_url' )->alias( static function ( $p ) { return 'https://example.com/wp-admin/' . $p; } );
+		Functions\when( 'esc_url' )->returnArg();
+		Functions\when( 'esc_html' )->returnArg();
+		Functions\when( '__' )->returnArg();
+		Functions\when( 'get_option' )->justReturn( array() );
+		$links = Admin::action_links( array( 'deactivate' => '<a>Deactivate</a>' ) );
+		$this->assertSame( '<a href="https://example.com/wp-admin/admin.php?page=monoranks-settings">Connect</a>', $links[0] );
+		$this->assertCount( 2, $links );
+		Functions\when( 'get_option' )->justReturn( array( 'api_base' => 'https://app.monoranks.com', 'key' => 'mr_ws_' . str_repeat( 'a', 30 ) ) );
+		$this->assertStringContainsString( '>Settings</a>', Admin::action_links( array() )[0] );
+	}
+
+	public function test_a_failed_connect_notice_is_hidden_when_the_site_is_connected() {
+		Functions\when( 'sanitize_key' )->returnArg();
+		Functions\when( 'wp_unslash' )->returnArg();
+		Functions\when( '__' )->returnArg();
+		$_GET['monoranks'] = 'connect_failed';
+		Functions\when( 'get_option' )->justReturn( array() );
+		$this->assertSame( 'error', Admin::notice()['type'] );
+		Functions\when( 'get_option' )->justReturn( array( 'api_base' => 'https://app.monoranks.com', 'key' => 'mr_ws_' . str_repeat( 'a', 30 ) ) );
+		$this->assertNull( Admin::notice() );
+		unset( $_GET['monoranks'] );
+	}
 }

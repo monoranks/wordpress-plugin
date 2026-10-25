@@ -224,9 +224,60 @@ class GrowTest extends TestCase {
 		$this->assertSame( $cache, $this->transients[ Grow::CACHE ] );
 		// Outreach, backlinks, competitors and their gaps, keywords (stops at the first refusal), reports.
 		$this->assertCount( 6, $this->called );
-		// A section that failed is asked again within the hour, not after six.
-		$this->assertFalse( Grow::is_stale( $cache, time() + 30 * 60 ) );
+		// A section that failed is asked again within minutes after the first failure, not after an hour or six.
+		$this->assertSame( 1, $cache['fails'] );
+		$this->assertFalse( Grow::is_stale( $cache, time() + 60 ) );
+		$this->assertTrue( Grow::is_stale( $cache, time() + 3 * 60 ) );
+	}
+
+	public function test_retries_back_off_after_each_failed_pull() {
+		$this->assertSame( 120, Grow::retry_after( 1 ) );
+		$this->assertSame( 600, Grow::retry_after( 2 ) );
+		$this->assertSame( 3600, Grow::retry_after( 3 ) );
+		$this->assertSame( 3600, Grow::retry_after( 9 ) );
+		$cache = array( 'fetched_at' => gmdate( 'c' ), 'fails' => 3 );
+		foreach ( Grow::SECTIONS as $s ) {
+			$cache[ $s ] = array( 'state' => 'error' );
+		}
+		$this->assertFalse( Grow::is_stale( $cache, time() + 30 * 60 ), 'a MonoRanks that keeps failing is asked hourly' );
 		$this->assertTrue( Grow::is_stale( $cache, time() + 61 * 60 ) );
+	}
+
+	public function test_failed_pulls_count_up_and_a_good_one_resets() {
+		$this->connect();
+		$this->answer( array( '#/#' => array( 500, array( 'error' => array( 'code' => 'internal', 'message' => 'x' ) ) ) ) );
+		$this->assertSame( 1, Grow::refresh()['fails'] );
+		$this->assertSame( 2, Grow::refresh()['fails'] );
+		$this->answer( array( '#/#' => array( 200, array() ) ) );
+		$this->assertSame( 0, Grow::refresh()['fails'] );
+	}
+
+	public function test_a_failed_pull_schedules_its_own_retry() {
+		$this->connect();
+		$this->answer( array( '#/#' => array( 500, array( 'error' => array( 'code' => 'internal', 'message' => 'x' ) ) ) ) );
+		$at = null;
+		Functions\when( 'wp_schedule_single_event' )->alias( static function ( $time ) use ( &$at ) { $at = $time; return true; } );
+		Grow::refresh();
+		$this->assertNotNull( $at );
+		$this->assertEqualsWithDelta( time() + 120, $at, 5 );
+	}
+
+	public function test_first_failure_reads_as_checking_and_later_ones_as_errors() {
+		$this->connect();
+		$this->answer( array( '#/#' => array( 500, array( 'error' => array( 'code' => 'internal', 'message' => 'x' ) ) ) ) );
+		$data = Grow::data();
+		$this->assertSame( 'pending', $data['outreach']['state'], 'one slow or failed answer is not shown as an error' );
+		$this->transients[ Grow::CACHE ]['fetched_at'] = gmdate( 'c', time() - 5 * 60 );
+		$data = Grow::data();
+		$this->assertSame( 'error', $data['outreach']['state'] );
+	}
+
+	public function test_first_pull_gets_a_longer_timeout() {
+		$this->connect();
+		$timeouts = array();
+		Functions\when( 'wp_remote_get' )->alias( static function ( $url, $args ) use ( &$timeouts ) { $timeouts[] = $args['timeout']; return array( 'code' => 200, 'body' => '{}' ); } );
+		Grow::data();
+		$this->assertSame( 10, $timeouts[0] );
 	}
 
 	public function test_a_second_pull_while_one_runs_does_nothing() {

@@ -29,6 +29,9 @@ class Overview {
 			'next_audit' => $overview ? Admin::ago( $overview['next_audit_at'] ) : '',
 			'fetched'    => Admin::ago( Insights::fetched_at() ),
 			'last_sent'  => Admin::ago( isset( $conn['last_sent_at'] ) ? $conn['last_sent_at'] : '' ),
+			// The first send runs in the background right after connecting; only a failed send asks for "Sync content now".
+			'sending'    => $connected && ! empty( get_option( 'monoranks_sync', array() )['run_id'] ),
+			'send_failed' => $connected && empty( $conn['last_sent_at'] ) && ! empty( $conn['last_error'] ),
 			'items'      => $connected ? array_sum( Rest::status_payload()['post_types'] ) : 0,
 			'app_url'    => $site_url,
 			'log'        => self::log_rows( 10 ),

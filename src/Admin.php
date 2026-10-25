@@ -28,6 +28,55 @@ class Admin {
 		add_filter( 'admin_body_class', array( __CLASS__, 'body_class' ) );
 		add_filter( 'admin_footer_text', array( __CLASS__, 'footer_text' ), 100 );
 		add_filter( 'update_footer', array( __CLASS__, 'footer_text' ), 100 );
+		add_action( 'activated_plugin', array( __CLASS__, 'activated' ), 10, 2 );
+		add_action( 'admin_init', array( __CLASS__, 'after_activation' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( MONORANKS_CONNECTOR_FILE ), array( __CLASS__, 'action_links' ) );
+	}
+
+	/** Set on activation for the user who activated the plugin; read once on their next admin screen. */
+	const ACTIVATION_REDIRECT = 'monoranks_activation_redirect';
+
+	/**
+	 * Activating this plugin by itself, from the Plugins screen of a single site, opens the MonoRanks screen next. Bulk and
+	 * network activation, WP-CLI, and users who cannot manage options stay where they are.
+	 */
+	public static function activated( $plugin, $network_wide = false ) {
+		if ( plugin_basename( MONORANKS_CONNECTOR_FILE ) !== $plugin || $network_wide || is_multisite() ) {
+			return;
+		}
+		if ( ( defined( 'WP_CLI' ) && WP_CLI ) || wp_doing_ajax() || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		// phpcs:ignore WordPress.Security.NonceVerification -- reading which list action ran; WordPress checked its nonce
+		$action = isset( $_REQUEST['action'] ) ? sanitize_key( wp_unslash( $_REQUEST['action'] ) ) : '';
+		if ( 'activate-selected' === $action || isset( $_GET['activate-multi'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return;
+		}
+		set_transient( self::ACTIVATION_REDIRECT, get_current_user_id(), 60 );
+	}
+
+	/** The one redirect after activation: once, for the same user, on a normal admin page load. */
+	public static function after_activation() {
+		$user = get_transient( self::ACTIVATION_REDIRECT );
+		if ( false === $user ) {
+			return;
+		}
+		if ( wp_doing_ajax() || ( function_exists( 'wp_doing_cron' ) && wp_doing_cron() ) || is_network_admin() ) {
+			return;
+		}
+		delete_transient( self::ACTIVATION_REDIRECT );
+		if ( (int) $user !== get_current_user_id() || ! current_user_can( 'manage_options' ) || isset( $_GET['activate-multi'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return;
+		}
+		wp_safe_redirect( Connection::has_key() ? self::overview_url() : self::settings_url() );
+		exit;
+	}
+
+	/** The plugin's row on the Plugins screen: Connect while not connected, Settings after. */
+	public static function action_links( $links ) {
+		$label = Connection::has_key() ? __( 'Settings', 'monoranks' ) : __( 'Connect', 'monoranks' );
+		array_unshift( $links, '<a href="' . esc_url( self::settings_url() ) . '">' . esc_html( $label ) . '</a>' );
+		return $links;
 	}
 
 	/**
@@ -213,6 +262,10 @@ class Admin {
 
 	public static function notice() {
 		$code = isset( $_GET['monoranks'] ) ? sanitize_key( wp_unslash( $_GET['monoranks'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only
+		// An old or reused connect link fails its state check, but a site that is connected has nothing to try again.
+		if ( 'connect_failed' === $code && Connection::has_key() ) {
+			return null;
+		}
 		return $code ? self::notice_for( $code ) : null;
 	}
 
