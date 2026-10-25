@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-10-17T10:10:18+00:00",
+    "translation-revision-date": "2026-10-25T12:57:45+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -52,8 +52,14 @@
             "Next audit": [
                 "ممیزی بعدی"
             ],
+            "Fixes": [
+                "اصلاح‌ها"
+            ],
             "Settings": [
                 "تنظیمات"
+            ],
+            "Connect": [
+                "اتصال"
             ],
             "Something went wrong. Try again.": [
                 "مشکلی پیش آمد. دوباره تلاش کنید."
@@ -72,9 +78,6 @@
             ],
             "Sign in and approve. Takes a minute.": [
                 "وارد شوید و تأیید کنید. یک دقیقه طول می‌کشد."
-            ],
-            "Connect": [
-                "اتصال"
             ],
             "Or paste a connector key": [
                 "یا کلید اتصال را وارد کنید"
@@ -121,6 +124,15 @@
             ],
             "Revoke": [
                 "لغو"
+            ],
+            "Not set up": [
+                "تنظیم نشده"
+            ],
+            "Approve MonoRanks in WordPress so it can write the fixes you accept.": [
+                "MonoRanks را در وردپرس تأیید کنید تا اصلاح‌هایی که می‌پذیرید را بنویسد."
+            ],
+            "Allow": [
+                "اجازه دادن"
             ],
             "Works with": [
                 "سازگار با"
@@ -206,6 +218,9 @@
             "MonoRanks address (development sites only)": [
                 "نشانی مونورنکس (فقط سایت‌های توسعه)"
             ],
+            "Save key": [
+                "ذخیره کلید"
+            ],
             "(opens in a new tab)": [
                 "(در زبانهٔ تازه باز می‌شود)"
             ],
@@ -224,11 +239,11 @@
             "Not available in your MonoRanks yet.": [
                 "هنوز در مونورنکس شما در دسترس نیست."
             ],
-            "MonoRanks could not be reached. The plugin tries again within the hour.": [
-                "دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر دوباره تلاش می‌کند."
+            "Could not reach MonoRanks. Retrying soon.": [
+                "دسترسی به MonoRanks ممکن نشد. به‌زودی دوباره تلاش می‌شود."
             ],
-            "Still loading. Reload this screen in a minute.": [
-                "هنوز در حال بارگذاری است. یک دقیقهٔ دیگر این صفحه را بازخوانی کنید."
+            "Checking…": [
+                "در حال بررسی…"
             ],
             "Outreach": [
                 "جذب لینک"
@@ -370,9 +385,6 @@
             ],
             "AEO": [
                 "AEO"
-            ],
-            "Fixes": [
-                "اصلاح‌ها"
             ],
             "%s ready to apply": [
                 "%s آمادهٔ اعمال",

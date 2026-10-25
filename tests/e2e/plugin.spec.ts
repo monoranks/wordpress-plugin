@@ -17,7 +17,7 @@ test('settings page renders and rejects a malformed key', async ({ page }) => {
   await expect(page.getByRole('img', { name: 'MonoRanks' }).first()).toBeVisible();
   await expect(page.getByText('Not connected', { exact: true })).toBeVisible();
   await page.fill('#monoranks-key', 'not-a-key');
-  await page.getByRole('button', { name: 'Connect' }).click();
+  await page.getByRole('button', { name: 'Save key' }).click();
   await expect(page.locator('.notice-error')).toContainText('does not look like a MonoRanks connector key');
   await expect(page.getByText('Not connected', { exact: true })).toBeVisible();
 });
@@ -34,6 +34,14 @@ test('overview and settings are one app: switching screens changes the URL witho
   await expect(page.locator('#toplevel_page_monoranks .wp-submenu a.current')).toHaveAttribute('href', /monoranks-settings/);
   await page.goBack();
   await expect(page.getByRole('heading', { name: 'Overview', level: 1 })).toBeVisible();
+});
+
+test('the Plugins screen offers Connect while not connected, and Connect stays in this tab', async ({ page }) => {
+  await page.goto('/wp-admin/plugins.php');
+  const row = page.locator('tr[data-plugin$="/monoranks.php"]');
+  await expect(row.getByRole('link', { name: 'Connect', exact: true })).toHaveAttribute('href', /page=monoranks-settings/);
+  await page.goto('/wp-admin/admin.php?page=monoranks-settings');
+  await expect(page.getByRole('link', { name: 'Connect', exact: true })).toHaveAttribute('target', '_self');
 });
 
 test('the posts list has a MonoRanks column with a hover card', async ({ page }) => {

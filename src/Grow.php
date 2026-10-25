@@ -17,7 +17,8 @@ class Grow {
 	const LOCK         = 'monoranks_grow_lock';
 	const REFRESH_HOOK = 'monoranks_grow_refresh';
 	const FRESH_FOR    = 6 * HOUR_IN_SECONDS;
-	const RETRY_AFTER  = HOUR_IN_SECONDS;
+	/** A pull with a failed section is tried again after 2 minutes, then 10, then every hour (fails counts them). */
+	const RETRY_STEPS  = array( 2 * MINUTE_IN_SECONDS, 10 * MINUTE_IN_SECONDS, HOUR_IN_SECONDS );
 	const KEEP_FOR     = 3 * DAY_IN_SECONDS;
 	const SECTIONS     = array( 'outreach', 'backlinks', 'competitors', 'keywords', 'report' );
 
@@ -31,20 +32,35 @@ class Grow {
 		return is_array( $c ) ? $c : array();
 	}
 
-	/** True when the cache is missing, older than six hours, or has a section that failed more than an hour ago. */
+	/** True when a section of the cache failed or is still missing. */
+	public static function has_gaps( array $cache ) {
+		foreach ( self::SECTIONS as $s ) {
+			if ( ! isset( $cache[ $s ]['state'] ) || in_array( $cache[ $s ]['state'], array( 'error', 'pending' ), true ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** Seconds to wait before pulling again after $fails failed pulls in a row: 2 minutes, 10 minutes, then an hour. */
+	public static function retry_after( $fails ) {
+		$fails = max( 1, (int) $fails );
+		return self::RETRY_STEPS[ min( $fails, count( self::RETRY_STEPS ) ) - 1 ];
+	}
+
+	/**
+	 * True when the cache is missing, older than six hours, or has a failed section older than its retry delay (2 minutes
+	 * after the first failure, 10 after the second, an hour after that), so one slow answer does not hide a card for an hour
+	 * and a MonoRanks that is down is not asked on every screen load.
+	 */
 	public static function is_stale( array $cache, $now = null ) {
 		$now = null === $now ? time() : (int) $now;
 		$at  = isset( $cache['fetched_at'] ) ? strtotime( (string) $cache['fetched_at'] ) : 0;
 		if ( ! $at ) {
 			return true;
 		}
-		$failed = false;
-		foreach ( self::SECTIONS as $s ) {
-			if ( ! isset( $cache[ $s ]['state'] ) || in_array( $cache[ $s ]['state'], array( 'error', 'pending' ), true ) ) {
-				$failed = true;
-			}
-		}
-		return $now - $at >= ( $failed ? self::RETRY_AFTER : self::FRESH_FOR );
+		$wait = self::has_gaps( $cache ) ? self::retry_after( isset( $cache['fails'] ) ? $cache['fails'] : 1 ) : self::FRESH_FOR;
+		return $now - $at >= $wait;
 	}
 
 	/**
@@ -57,11 +73,17 @@ class Grow {
 		}
 		$cache = self::cached();
 		if ( self::is_stale( $cache ) ) {
-			$cache = self::refresh( 5, 12 );
+			// The first pull (nothing cached yet) gets more time: a MonoRanks that answers slowly once is not an error.
+			$cache = empty( $cache['fetched_at'] ) ? self::refresh( 10, 20 ) : self::refresh( 5, 12 );
 		}
 		$out = array( 'connected' => true );
+		// After one failed pull a section reads "checking", not "could not be reached": the next try is minutes away.
+		$first_fail = isset( $cache['fails'] ) && (int) $cache['fails'] <= 1;
 		foreach ( self::SECTIONS as $s ) {
 			$out[ $s ] = isset( $cache[ $s ] ) && is_array( $cache[ $s ] ) ? $cache[ $s ] : array( 'state' => 'pending' );
+			if ( $first_fail && 'error' === $out[ $s ]['state'] ) {
+				$out[ $s ] = array( 'state' => 'pending' );
+			}
 		}
 		if ( 'ok' === $out['report']['state'] ) {
 			$out['report']['when'] = Admin::ago( $out['report']['created_at'] );
@@ -110,11 +132,20 @@ class Grow {
 			}
 			$cache[ $s ] = call_user_func( array( __CLASS__, 'pull_' . $s ), $timeout );
 		}
+		$failed = false;
+		foreach ( self::SECTIONS as $s ) {
+			if ( isset( $cache[ $s ]['state'] ) && 'error' === $cache[ $s ]['state'] ) {
+				$failed = true;
+			}
+		}
+		$cache['fails']      = $failed ? ( isset( $cache['fails'] ) ? (int) $cache['fails'] : 0 ) + 1 : 0;
 		$cache['fetched_at'] = gmdate( 'c' );
 		set_transient( self::CACHE, $cache, self::KEEP_FOR );
 		delete_transient( self::LOCK );
-		if ( $left && ! wp_next_scheduled( self::REFRESH_HOOK ) ) {
-			wp_schedule_single_event( time() + 30, self::REFRESH_HOOK );
+		// Sections left for later are finished in 30 seconds; a failed one is tried again after its retry delay, so the card
+		// fills in without anyone reloading. One event at a time keeps MonoRanks from being asked more often.
+		if ( ( $left || $failed ) && ! wp_next_scheduled( self::REFRESH_HOOK ) ) {
+			wp_schedule_single_event( time() + ( $failed ? self::retry_after( $cache['fails'] ) : 30 ), self::REFRESH_HOOK );
 			spawn_cron();
 		}
 		return $cache;
