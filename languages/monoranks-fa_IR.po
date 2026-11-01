@@ -34,20 +34,20 @@ msgid "The MonoRanks admin app is not built. Run npm install and npm run build i
 msgstr "برنامهٔ مدیریت مونورنکس ساخته نشده است. در پوشهٔ افزونه npm install و سپس npm run build را اجرا کنید."
 
 #: resources/views/column-cell.php:20
-#: resources/views/post-panel.php:21
+#: resources/views/post-panel.php:17
 #: tmp/i18n/screens/Overview.js:220
 msgid "Connect MonoRanks"
 msgstr "اتصال مونورنکس"
 
 #: resources/views/column-cell.php:24
-#: resources/views/post-panel.php:23
+#: resources/views/post-panel.php:19
 #: src/PostPanel.php:39
 msgid "Scores appear after you publish."
 msgstr "امتیازها پس از انتشار نمایش داده می‌شوند."
 
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
-#: resources/views/post-panel.php:31
+#: resources/views/post-panel.php:27
 #: tmp/i18n/screens/Overview.js:137
 msgid "Health"
 msgstr "سلامت"
@@ -143,7 +143,7 @@ msgid "Apply fixes"
 msgstr "اعمال اصلاح‌ها"
 
 #: resources/views/column-cell.php:59
-#: resources/views/post-panel.php:117
+#: resources/views/post-panel.php:42
 msgid "Open in MonoRanks"
 msgstr "باز کردن در مونورنکس"
 
@@ -158,119 +158,31 @@ msgstr "هنوز امتیاز نگرفته"
 msgid "%s of 100"
 msgstr "%s از ۱۰۰"
 
-#: resources/views/post-panel.php:17
-#: tmp/i18n/screens/Grow.js:51
-msgid "No access yet."
-msgstr "هنوز دسترسی ندارد."
-
-#: resources/views/post-panel.php:17
-#: tmp/i18n/screens/Grow.js:51
-#: tmp/i18n/screens/Settings.js:99
-msgid "Allow"
-msgstr "اجازه دادن"
-
-#: resources/views/post-panel.php:31
+#: resources/views/post-panel.php:27
 msgid "AI answers"
 msgstr "پاسخ‌های هوش مصنوعی"
 
-#: resources/views/post-panel.php:34
+#: resources/views/post-panel.php:30
 msgid "Not checked yet."
 msgstr "هنوز بررسی نشده."
 
-#: resources/views/post-panel.php:39
+#: resources/views/post-panel.php:33
 msgid "Google, 28 days"
 msgstr "گوگل، ۲۸ روز"
 
-#: resources/views/post-panel.php:41
-msgid "Coming with the next refresh."
-msgstr "با به‌روزرسانی بعدی می‌آید."
-
-#: resources/views/post-panel.php:45
-msgid "Connect Search Console in MonoRanks."
-msgstr "سرچ کنسول را در مونورنکس وصل کنید."
-
-#: resources/views/post-panel.php:48
+#: resources/views/post-panel.php:34
 msgid "Clicks"
 msgstr "کلیک‌ها"
 
-#: resources/views/post-panel.php:49
+#: resources/views/post-panel.php:35
 msgid "Shown"
 msgstr "نمایش"
 
-#: resources/views/post-panel.php:51
+#: resources/views/post-panel.php:36
 msgid "Place"
 msgstr "رتبه"
 
-#: resources/views/post-panel.php:55
-msgid "Top searches"
-msgstr "جستجوهای برتر"
-
-#. translators: %s: number of clicks
-#, php-format
-#: resources/views/post-panel.php:58
-msgid "%s click"
-msgid_plural "%s clicks"
-msgstr[0] "%s کلیک"
-msgstr[1] "%s کلیک"
-
-#: resources/views/post-panel.php:67
-msgid "Visits, 28 days"
-msgstr "بازدید، ۲۸ روز"
-
-#: resources/views/post-panel.php:70
-msgid "Visits"
-msgstr "بازدید"
-
-#: resources/views/post-panel.php:71
-msgid "Goals"
-msgstr "هدف‌ها"
-
-#: resources/views/post-panel.php:72
-msgid "Sales"
-msgstr "فروش"
-
-#: resources/views/post-panel.php:77
-msgid "Connect Analytics"
-msgstr "اتصال آنالیتیکس"
-
-#: resources/views/post-panel.php:79
-#: resources/views/post-panel.php:112
-msgid "Not available right now."
-msgstr "اکنون در دسترس نیست."
-
-#: resources/views/post-panel.php:86
-msgid "These sites used to link to this page. Fix the address if it moved, or ask them to update the link."
-msgstr "این سایت‌ها قبلاً به این صفحه لینک می‌دادند. اگر نشانی صفحه عوض شده آن را درست کنید، یا از آن‌ها بخواهید لینک را به‌روز کنند."
-
-#. translators: %s: number of links
-#, php-format
-#: resources/views/post-panel.php:86
-msgid "%s lost link to win back"
-msgid_plural "%s lost links to win back"
-msgstr[0] "%s لینک ازدست‌رفته برای بازگرداندن"
-msgstr[1] "%s لینک ازدست‌رفته برای بازگرداندن"
-
-#: resources/views/post-panel.php:96
-msgid "Last change"
-msgstr "آخرین تغییر"
-
-#. translators: %s: number of changes
-#, php-format
-#: resources/views/post-panel.php:104
-msgid "and %s more"
-msgid_plural "and %s more"
-msgstr[0] "و %s مورد دیگر"
-msgstr[1] "و %s مورد دیگر"
-
-#: resources/views/post-panel.php:108
-msgid "No change lately."
-msgstr "اخیراً تغییری نبوده."
-
-#: resources/views/post-panel.php:110
-msgid "No history yet."
-msgstr "هنوز سابقه‌ای نیست."
-
-#: resources/views/post-panel.php:117
+#: resources/views/post-panel.php:42
 #: tmp/i18n/screens/Grow.js:65
 #: tmp/i18n/screens/Grow.js:76
 #: tmp/i18n/screens/Grow.js:163
@@ -399,7 +311,7 @@ msgstr "دسترسی به مونورنکس ممکن نشد. نشانی را بر
 msgid "Could not connect. Please try again."
 msgstr "اتصال ممکن نشد. دوباره تلاش کنید."
 
-#: src/AuthorizeScreen.php:38
+#: src/AuthorizeScreen.php:40
 msgid "Reads your content and applies only fixes you approve."
 msgstr "محتوای شما را می‌خواند و فقط اصلاحاتی را که تأیید کنید اعمال می‌کند."
 
@@ -653,8 +565,17 @@ msgid "Updated %s"
 msgstr "به‌روزشده %s"
 
 #: tmp/i18n/screens/Grow.js:51
+msgid "No access yet."
+msgstr "هنوز دسترسی ندارد."
+
+#: tmp/i18n/screens/Grow.js:51
 msgid "Allow it under Integrations in MonoRanks, or connect again."
 msgstr "در بخش یکپارچه‌سازی‌های مونورنکس اجازه دهید، یا دوباره وصل شوید."
+
+#: tmp/i18n/screens/Grow.js:51
+#: tmp/i18n/screens/Settings.js:99
+msgid "Allow"
+msgstr "اجازه دادن"
 
 #: tmp/i18n/screens/Grow.js:53
 msgid "Not available yet."

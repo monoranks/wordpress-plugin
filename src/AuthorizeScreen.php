@@ -30,7 +30,9 @@ class AuthorizeScreen {
 
 	public static function markup() {
 		// Only the MonoRanks box is styled; WordPress's own form and buttons keep the admin's look.
-		$css = '#monoranks-authorize{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin:18px 0;padding:18px 20px;border:0;border-radius:14px;background:#e8f0fc}'
+		$css = '#monoranks-authorize{box-sizing:border-box;width:95%;display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin:18px 0;padding:18px 20px;border:0;border-radius:14px;background:#e8f0fc}'
+			// The same width as WordPress's "New Application Password Name" field above it (95%, 99% on small screens).
+			. '@media only screen and (max-width:768px){#monoranks-authorize{width:99%}}'
 			. '#monoranks-authorize svg{display:block;width:140px;height:auto}'
 			. '#monoranks-authorize p{margin:0;color:#14181f;font-size:14px;font-weight:600}';
 		return '<style id="monoranks-authorize-css">' . $css . '</style>'

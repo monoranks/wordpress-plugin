@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-01T16:45:16+00:00\n"
+"POT-Creation-Date: 2026-11-01T17:00:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: monoranks\n"
@@ -47,20 +47,20 @@ msgid "The MonoRanks admin app is not built. Run npm install and npm run build i
 msgstr ""
 
 #: resources/views/column-cell.php:20
-#: resources/views/post-panel.php:21
+#: resources/views/post-panel.php:17
 #: tmp/i18n/screens/Overview.js:220
 msgid "Connect MonoRanks"
 msgstr ""
 
 #: resources/views/column-cell.php:24
-#: resources/views/post-panel.php:23
+#: resources/views/post-panel.php:19
 #: src/PostPanel.php:39
 msgid "Scores appear after you publish."
 msgstr ""
 
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
-#: resources/views/post-panel.php:31
+#: resources/views/post-panel.php:27
 #: tmp/i18n/screens/Overview.js:137
 msgid "Health"
 msgstr ""
@@ -156,7 +156,7 @@ msgid "Apply fixes"
 msgstr ""
 
 #: resources/views/column-cell.php:59
-#: resources/views/post-panel.php:117
+#: resources/views/post-panel.php:42
 msgid "Open in MonoRanks"
 msgstr ""
 
@@ -171,119 +171,31 @@ msgstr ""
 msgid "%s of 100"
 msgstr ""
 
-#: resources/views/post-panel.php:17
-#: tmp/i18n/screens/Grow.js:51
-msgid "No access yet."
-msgstr ""
-
-#: resources/views/post-panel.php:17
-#: tmp/i18n/screens/Grow.js:51
-#: tmp/i18n/screens/Settings.js:99
-msgid "Allow"
-msgstr ""
-
-#: resources/views/post-panel.php:31
+#: resources/views/post-panel.php:27
 msgid "AI answers"
 msgstr ""
 
-#: resources/views/post-panel.php:34
+#: resources/views/post-panel.php:30
 msgid "Not checked yet."
 msgstr ""
 
-#: resources/views/post-panel.php:39
+#: resources/views/post-panel.php:33
 msgid "Google, 28 days"
 msgstr ""
 
-#: resources/views/post-panel.php:41
-msgid "Coming with the next refresh."
-msgstr ""
-
-#: resources/views/post-panel.php:45
-msgid "Connect Search Console in MonoRanks."
-msgstr ""
-
-#: resources/views/post-panel.php:48
+#: resources/views/post-panel.php:34
 msgid "Clicks"
 msgstr ""
 
-#: resources/views/post-panel.php:49
+#: resources/views/post-panel.php:35
 msgid "Shown"
 msgstr ""
 
-#: resources/views/post-panel.php:51
+#: resources/views/post-panel.php:36
 msgid "Place"
 msgstr ""
 
-#: resources/views/post-panel.php:55
-msgid "Top searches"
-msgstr ""
-
-#. translators: %s: number of clicks
-#: resources/views/post-panel.php:58
-#, php-format
-msgid "%s click"
-msgid_plural "%s clicks"
-msgstr[0] ""
-msgstr[1] ""
-
-#: resources/views/post-panel.php:67
-msgid "Visits, 28 days"
-msgstr ""
-
-#: resources/views/post-panel.php:70
-msgid "Visits"
-msgstr ""
-
-#: resources/views/post-panel.php:71
-msgid "Goals"
-msgstr ""
-
-#: resources/views/post-panel.php:72
-msgid "Sales"
-msgstr ""
-
-#: resources/views/post-panel.php:77
-msgid "Connect Analytics"
-msgstr ""
-
-#: resources/views/post-panel.php:79
-#: resources/views/post-panel.php:112
-msgid "Not available right now."
-msgstr ""
-
-#: resources/views/post-panel.php:86
-msgid "These sites used to link to this page. Fix the address if it moved, or ask them to update the link."
-msgstr ""
-
-#. translators: %s: number of links
-#: resources/views/post-panel.php:86
-#, php-format
-msgid "%s lost link to win back"
-msgid_plural "%s lost links to win back"
-msgstr[0] ""
-msgstr[1] ""
-
-#: resources/views/post-panel.php:96
-msgid "Last change"
-msgstr ""
-
-#. translators: %s: number of changes
-#: resources/views/post-panel.php:104
-#, php-format
-msgid "and %s more"
-msgid_plural "and %s more"
-msgstr[0] ""
-msgstr[1] ""
-
-#: resources/views/post-panel.php:108
-msgid "No change lately."
-msgstr ""
-
-#: resources/views/post-panel.php:110
-msgid "No history yet."
-msgstr ""
-
-#: resources/views/post-panel.php:117
+#: resources/views/post-panel.php:42
 #: tmp/i18n/screens/Grow.js:65
 #: tmp/i18n/screens/Grow.js:76
 #: tmp/i18n/screens/Grow.js:163
@@ -412,7 +324,7 @@ msgstr ""
 msgid "Could not connect. Please try again."
 msgstr ""
 
-#: src/AuthorizeScreen.php:38
+#: src/AuthorizeScreen.php:40
 msgid "Reads your content and applies only fixes you approve."
 msgstr ""
 
@@ -666,7 +578,16 @@ msgid "Updated %s"
 msgstr ""
 
 #: tmp/i18n/screens/Grow.js:51
+msgid "No access yet."
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:51
 msgid "Allow it under Integrations in MonoRanks, or connect again."
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:51
+#: tmp/i18n/screens/Settings.js:99
+msgid "Allow"
 msgstr ""
 
 #: tmp/i18n/screens/Grow.js:53

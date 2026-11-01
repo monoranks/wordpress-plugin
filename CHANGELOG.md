@@ -9,8 +9,8 @@ All notable changes to the MonoRanks WordPress plugin. The format follows [Keep 
 - **New:** Pages to fix show how urgent each one is. Click a row to see the biggest problem.
 - **Enhancement:** Fixes and recent changes take one line each. Click a row to see the old and new value.
 - **Enhancement:** Shorter, plainer words everywhere, such as "Send content", "Next check" and "+3 since Oct 23". Details moved into (i) tips.
-- **Enhancement:** The Posts list card and the post editor box use the new look, with numbers on small tiles.
-- **Enhancement:** The WordPress approve screen keeps WordPress's own buttons.
+- **Enhancement:** The Posts list card uses the new look. The post editor box is simpler: two scores, one line, the Google numbers and one button.
+- **Enhancement:** The WordPress approve screen keeps WordPress's own buttons, and the MonoRanks box lines up with the name field.
 - **Update:** Persian translation updated.
 
 ## v0.1.25 - 2026-10-25
