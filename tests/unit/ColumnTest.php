@@ -29,9 +29,9 @@ class ColumnTest extends TestCase {
 
 	public function test_the_line_under_the_scores_prefers_fixes_over_issues() {
 		$base = array( 'fixes_ready' => 0, 'open_issues' => 0, 'audited_at' => '2026-09-20T04:10:00Z' );
-		$this->assertSame( '3 fixes ready · audited 2 days ago', Column::cell_line( array_merge( $base, array( 'fixes_ready' => 3, 'open_issues' => 5 ) ) ) );
-		$this->assertSame( '1 open issue · audited 2 days ago', Column::cell_line( array_merge( $base, array( 'open_issues' => 1 ) ) ) );
-		$this->assertSame( 'No open issues · audited 2 days ago', Column::cell_line( $base ) );
+		$this->assertSame( '3 fixes ready · checked 2 days ago', Column::cell_line( array_merge( $base, array( 'fixes_ready' => 3, 'open_issues' => 5 ) ) ) );
+		$this->assertSame( '1 open issue · checked 2 days ago', Column::cell_line( array_merge( $base, array( 'open_issues' => 1 ) ) ) );
+		$this->assertSame( 'No open issues · checked 2 days ago', Column::cell_line( $base ) );
 		$this->assertSame( 'No open issues', Column::cell_line( array_merge( $base, array( 'audited_at' => '' ) ) ) );
 	}
 

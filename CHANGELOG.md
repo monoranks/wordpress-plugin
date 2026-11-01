@@ -2,6 +2,17 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## v0.2.0 - 2026-11-01
+
+- **New:** The plugin's screens take the new MonoRanks look: a light top bar, soft cards, big numbers and score rings, and blue buttons.
+- **New:** The Overview opens with one score card: site health in words, AI answers, search clicks and fixes applied.
+- **New:** Pages to fix show how urgent each one is. Click a row to see the biggest problem.
+- **Enhancement:** Fixes and recent changes take one line each. Click a row to see the old and new value.
+- **Enhancement:** Shorter, plainer words everywhere, such as "Send content", "Next check" and "+3 since Oct 23". Details moved into (i) tips.
+- **Enhancement:** The Posts list card uses the new look. The post editor box is simpler: two scores, one line, the Google numbers and one button.
+- **Enhancement:** The WordPress approve screen keeps WordPress's own buttons, and the MonoRanks box lines up with the name field.
+- **Update:** Persian translation updated.
+
 ## v0.1.25 - 2026-10-25
 
 - **New:** After activation, the plugin opens its MonoRanks screen, and the Plugins list shows a Connect link.

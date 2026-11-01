@@ -42,14 +42,14 @@ class Overview {
 	public static function field_labels() {
 		return array(
 			'seo_title'       => __( 'Title', 'monoranks' ),
-			'seo_description' => __( 'Meta description', 'monoranks' ),
-			'canonical'       => __( 'Canonical', 'monoranks' ),
-			'noindex'         => __( 'Noindex', 'monoranks' ),
-			'alt'             => __( 'Image alt', 'monoranks' ),
+			'seo_description' => __( 'Description', 'monoranks' ),
+			'canonical'       => __( 'Main version', 'monoranks' ),
+			'noindex'         => __( 'Hidden from Google', 'monoranks' ),
+			'alt'             => __( 'Image text', 'monoranks' ),
 			'redirect'        => __( 'Redirect', 'monoranks' ),
 			'content'         => __( 'Opening paragraph', 'monoranks' ),
-			'ai_bots'         => __( 'robots.txt', 'monoranks' ),
-			'llms_txt'        => __( 'llms.txt', 'monoranks' ),
+			'ai_bots'         => __( 'AI tool rules', 'monoranks' ),
+			'llms_txt'        => __( 'AI site summary', 'monoranks' ),
 		);
 	}
 

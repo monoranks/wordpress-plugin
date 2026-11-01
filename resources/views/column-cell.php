@@ -21,21 +21,21 @@ $monoranks_arrow = '<span class="mr-arrow" aria-hidden="true">&#8599;</span>';
 <?php elseif ( 'draft' === $state ) : ?>
 	<span class="mr-row" tabindex="0"><span class="mr-xs">&mdash;</span></span>
 	<div class="mr-tip" role="tooltip">
-		<div class="mr-empty"><?php esc_html_e( 'Drafts are not sent to MonoRanks. This page gets its scores after the first audit that follows publishing.', 'monoranks' ); ?></div>
+		<div class="mr-empty"><?php esc_html_e( 'Scores appear after you publish.', 'monoranks' ); ?></div>
 	</div>
 <?php elseif ( 'none' === $state ) : ?>
-	<span class="mr-row" tabindex="0" aria-label="<?php echo esc_attr( $hint ); ?>"><?php echo Admin::ring( null, 'sm', __( 'Health', 'monoranks' ), 'under' ) . Admin::ring( null, 'sm', __( 'AEO', 'monoranks' ), 'under' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></span>
+	<span class="mr-row" tabindex="0" aria-label="<?php echo esc_attr( $hint ); ?>"><?php echo Admin::ring( null, 'sm', __( 'Health', 'monoranks' ), 'under' ) . Admin::ring( null, 'sm', __( 'AI', 'monoranks' ), 'under' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></span>
 	<div class="mr-tip" role="tooltip">
 		<div class="mr-kv">
-			<div><?php esc_html_e( 'Status', 'monoranks' ); ?></div><div><?php esc_html_e( 'Not audited yet', 'monoranks' ); ?></div>
-			<?php if ( $next_in ) : ?><div><?php esc_html_e( 'Next audit', 'monoranks' ); ?></div><div><?php echo esc_html( $next_in ); ?></div><?php endif; ?>
+			<div><?php esc_html_e( 'Status', 'monoranks' ); ?></div><div><?php esc_html_e( 'Not checked yet', 'monoranks' ); ?></div>
+			<?php if ( $next_in ) : ?><div><?php esc_html_e( 'Next check', 'monoranks' ); ?></div><div><?php echo esc_html( $next_in ); ?></div><?php endif; ?>
 			<div><?php esc_html_e( 'Published', 'monoranks' ); ?></div><div><?php echo esc_html( $published ); ?></div>
 			<?php foreach ( $values as $monoranks_v ) : ?><div><?php echo esc_html( $monoranks_v[0] ); ?></div><div><?php echo esc_html( $monoranks_v[1] ); ?></div><?php endforeach; ?>
 		</div>
-		<div class="mr-foot"><span class="mr-empty"><?php esc_html_e( 'Scores arrive after the next audit', 'monoranks' ); ?></span><a href="<?php echo esc_url( $app_url ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Open MonoRanks', 'monoranks' ); ?> <?php echo $monoranks_arrow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static markup ?></a></div>
+		<div class="mr-foot"><span class="mr-empty"><?php esc_html_e( 'Scores after the next check', 'monoranks' ); ?></span><a href="<?php echo esc_url( $app_url ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Open MonoRanks', 'monoranks' ); ?> <?php echo $monoranks_arrow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static markup ?></a></div>
 	</div>
 <?php else : ?>
-	<span class="mr-row" tabindex="0" aria-label="<?php echo esc_attr( $line ); ?>"><?php echo Admin::ring( $health, 'sm', __( 'Health', 'monoranks' ), 'under', __( 'Not checked in this audit', 'monoranks' ) ) . Admin::ring( $aeo, 'sm', __( 'AEO', 'monoranks' ), 'under', __( 'Not checked: MonoRanks reads AEO on a sample of pages', 'monoranks' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></span>
+	<span class="mr-row" tabindex="0" aria-label="<?php echo esc_attr( $line ); ?>"><?php echo Admin::ring( $health, 'sm', __( 'Health', 'monoranks' ), 'under', __( 'Not checked this time', 'monoranks' ) ) . Admin::ring( $aeo, 'sm', __( 'AI', 'monoranks' ), 'under', __( 'Not checked: MonoRanks checks AI answers on a sample of pages', 'monoranks' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the partial escapes ?></span>
 	<div class="mr-tip" role="tooltip">
 		<div class="mr-kv">
 			<div><?php esc_html_e( 'Fixes', 'monoranks' ); ?></div>
@@ -50,12 +50,12 @@ $monoranks_arrow = '<span class="mr-arrow" aria-hidden="true">&#8599;</span>';
 			<?php else : ?>
 				<div class="mr-ok"><?php esc_html_e( 'No open issues', 'monoranks' ); ?></div>
 			<?php endif; ?>
-			<?php if ( $audited ) : ?><div><?php esc_html_e( 'Audited', 'monoranks' ); ?></div><div><?php echo esc_html( $audited ); ?></div><?php endif; ?>
-			<?php if ( $next_in ) : ?><div><?php esc_html_e( 'Next audit', 'monoranks' ); ?></div><div><?php echo esc_html( $next_in ); ?></div><?php endif; ?>
+			<?php if ( $audited ) : ?><div><?php esc_html_e( 'Checked', 'monoranks' ); ?></div><div><?php echo esc_html( $audited ); ?></div><?php endif; ?>
+			<?php if ( $next_in ) : ?><div><?php esc_html_e( 'Next check', 'monoranks' ); ?></div><div><?php echo esc_html( $next_in ); ?></div><?php endif; ?>
 			<?php foreach ( $values as $monoranks_v ) : ?><div><?php echo esc_html( $monoranks_v[0] ); ?></div><div><?php echo esc_html( $monoranks_v[1] ); ?></div><?php endforeach; ?>
 		</div>
 		<div class="mr-foot">
-			<?php if ( $fixes_ready > 0 ) : ?><a href="<?php echo esc_url( $overview_url ); ?>"><?php esc_html_e( 'Apply fixes', 'monoranks' ); ?></a><?php else : ?><span></span><?php endif; ?>
+			<?php if ( $fixes_ready > 0 ) : ?><a class="mr-btn" href="<?php echo esc_url( $overview_url ); ?>"><?php esc_html_e( 'Apply fixes', 'monoranks' ); ?></a><?php else : ?><span></span><?php endif; ?>
 			<?php if ( $page_url ) : ?><a href="<?php echo esc_url( $page_url ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Open in MonoRanks', 'monoranks' ); ?> <?php echo $monoranks_arrow; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static markup ?></a><?php endif; ?>
 		</div>
 	</div>

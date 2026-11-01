@@ -65,10 +65,10 @@ class Column {
 		$app     = $overview && ! empty( $overview['site_url'] ) ? $overview['site_url'] : $conn['api_base'];
 		$score   = Insights::post_score( $post_id );
 		if ( ! $score || ( null === $score['health'] && null === $score['aeo'] ) ) {
-			$hint = __( 'Not audited yet', 'monoranks' );
+			$hint = __( 'Not checked yet', 'monoranks' );
 			if ( $next_in ) {
 				/* translators: %s: relative time such as "in 5 days" */
-				$hint .= ' · ' . sprintf( __( 'next audit %s', 'monoranks' ), $next_in );
+				$hint .= ' · ' . sprintf( __( 'next check %s', 'monoranks' ), $next_in );
 			}
 			return array(
 				'state'     => 'none',
@@ -130,7 +130,7 @@ class Column {
 		return $rows;
 	}
 
-	/** "3 fixes ready · audited 2 days ago", "No open issues · audited …", "2 open issues · audited …". */
+	/** "3 fixes ready · checked 2 days ago", "No open issues · checked …", "2 open issues · checked …". */
 	public static function cell_line( array $score ) {
 		if ( $score['fixes_ready'] > 0 ) {
 			/* translators: %s: number of fixes */
@@ -143,7 +143,7 @@ class Column {
 		}
 		$ts = $score['audited_at'] ? strtotime( $score['audited_at'] ) : 0;
 		/* translators: %s: relative time such as "2 days" */
-		$when = $ts ? sprintf( __( 'audited %s ago', 'monoranks' ), human_time_diff( $ts, time() ) ) : '';
+		$when = $ts ? sprintf( __( 'checked %s ago', 'monoranks' ), human_time_diff( $ts, time() ) ) : '';
 		return Admin::digits( $when ? $first . ' · ' . $when : $first );
 	}
 

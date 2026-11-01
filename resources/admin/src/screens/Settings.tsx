@@ -6,7 +6,7 @@ import { api, errorText, type SettingsData } from '@/lib/api';
 import { Shell, NoticeBox, KV, Logo } from '@/shell/Shell';
 import { ChangeLog } from '@/shell/ChangeLog';
 import { Step } from '@/screens/Overview';
-import { Card, CardHeader, CardTitle, CardBody } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardBody, Tile, TileLabel } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge, Dot } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -73,36 +73,50 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
         <>
           <Card>
             <CardHeader>
-              <div className="flex items-center gap-3"><span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[9px] bg-surface2 [&_svg]:h-5 [&_svg]:w-5" aria-hidden="true"><Logo which="mark" /></span><CardTitle>{__('Connection', 'monoranks')}</CardTitle></div>
+              <div className="flex items-center gap-3"><span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-tint [&_svg]:h-5 [&_svg]:w-5" aria-hidden="true"><Logo which="mark" /></span><CardTitle>{__('Connection', 'monoranks')}</CardTitle></div>
               {connected
                 ? <Tip align="end" text={revoked ? __('MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below.', 'monoranks') : __('Sending published content to MonoRanks. Nothing else leaves this site.', 'monoranks')}><Badge variant="pill"><Dot tone={revoked ? 'critical' : 'good'} />{revoked ? __('Key revoked', 'monoranks') : __('Connected', 'monoranks')}</Badge></Tip>
                 : <Badge variant="pill"><Dot tone="muted" />{__('Not connected', 'monoranks')}</Badge>}
             </CardHeader>
-            <CardBody className="flex flex-col gap-4">
+            <CardBody className="flex flex-col gap-5">
               {connected ? (
                 <>
-                  <KV rows={[
-                    [__('Connector key', 'monoranks'), <span className="flex flex-wrap items-center gap-2"><code>{data.key_hint}</code><Tip text={data.key_via} /></span>],
-                    [__('Last sync', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{data.last_sent_date ? <Tip text={data.last_sent_date}><span className="tabular-nums">{data.last_sent_short}</span></Tip> : <span className="tabular-nums">{data.last_sent_short}</span>}{data.sending && <Badge>{sprintf(__('sending, batch %1$s of %2$s', 'monoranks'), fmt(data.sending.page), fmt(Math.max(1, data.sending.pages)))}</Badge>}{data.items > 0 && <Badge>{sprintf(_n('%s published item', '%s published items', data.items, 'monoranks'), fmt(data.items))}</Badge>}{data.last_error && <Badge variant="warn">{data.last_error}</Badge>}</span>],
-                    ...(data.next_audit ? [[__('Next audit', 'monoranks'), data.next_audit] as [string, React.ReactNode]] : []),
-                    data.app_password?.exists
-                      ? [__('Fixes written with', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{__('App password', 'monoranks')}<Tip text={__('Fixes are written with the "MonoRanks" Application Password. Revoke it in your profile to stop writes.', 'monoranks')} /><a href={data.app_password.revoke_url || data.profile_url}>{__('Revoke', 'monoranks')}</a></span>]
-                      : [__('Fixes', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{__('Not set up', 'monoranks')}<Tip text={__('Approve MonoRanks in WordPress so it can write the fixes you accept.', 'monoranks')} />{data.app_password?.available !== false && <a href={out(data.allow_url || data.connect_url, 'allow-fixes', 'settings')} target="_self">{__('Allow', 'monoranks')}</a>}</span>],
-                    [__('Works with', 'monoranks'), data.seo_plugin && !data.seo_supported
-                      ? <span className="flex flex-wrap items-center gap-2"><Badge variant="warn">{sprintf(__('%s detected', 'monoranks'), data.seo_plugin)}</Badge><Tip text={sprintf(__('MonoRanks cannot write titles, descriptions, canonicals or noindex into %s yet, so those fixes are refused', 'monoranks'), data.seo_plugin)} /></span>
-                      : data.seo_plugin
-                      ? <span className="flex flex-wrap items-center gap-2"><Badge>{sprintf(__('%s detected', 'monoranks'), data.seo_plugin)}</Badge><Tip text={sprintf(__('titles and descriptions go into the fields %s reads', 'monoranks'), data.seo_plugin)} /></span>
-                      : <span className="flex flex-wrap items-center gap-2"><Badge>{__('No SEO plugin', 'monoranks')}</Badge><Tip text={__('MonoRanks prints the approved title, description, canonical and noindex tags itself', 'monoranks')} /></span>],
-                  ]} />
+                  <div className="grid grid-cols-4 gap-3 max-[1100px]:grid-cols-2 max-[600px]:grid-cols-1">
+                    <Tile>
+                      <TileLabel>{__('Last sent', 'monoranks')}<Tip text={[data.last_sent_date, data.items > 0 ? sprintf(_n('%s published item', '%s published items', data.items, 'monoranks'), fmt(data.items)) : ''].filter(Boolean).join(' · ') || data.last_sent_short} /></TileLabel>
+                      <span className="text-[20px] font-bold leading-tight tabular-nums">{data.last_sent_short}</span>
+                      {data.sending && <Badge>{sprintf(__('sending, batch %1$s of %2$s', 'monoranks'), fmt(data.sending.page), fmt(Math.max(1, data.sending.pages)))}</Badge>}
+                      {data.last_error && <Badge variant="warn" className="max-w-full overflow-hidden text-ellipsis" title={data.last_error}>{data.last_error}</Badge>}
+                    </Tile>
+                    <Tile>
+                      <TileLabel>{__('Next check', 'monoranks')}</TileLabel>
+                      <span className="text-[20px] font-bold leading-tight">{data.next_audit ? data.next_audit.replace(/\s*\(.*\)$/, '') : '—'}</span>
+                    </Tile>
+                    <Tile>
+                      <TileLabel>{__('Fixes', 'monoranks')}<Tip text={data.app_password?.exists ? __('Written with the "MonoRanks" Application Password. Revoke it to stop writes.', 'monoranks') : __('Approve MonoRanks in WordPress so it can write the fixes you accept.', 'monoranks')} /></TileLabel>
+                      {data.app_password?.exists
+                        ? <span className="flex flex-wrap items-baseline gap-x-2.5"><span className="text-[20px] font-bold leading-tight text-good-ink">{__('Allowed', 'monoranks')}</span><a className="text-[13px] font-semibold" href={data.app_password.revoke_url || data.profile_url}>{__('Revoke', 'monoranks')}</a></span>
+                        : <span className="flex flex-wrap items-baseline gap-x-2.5"><span className="text-[20px] font-bold leading-tight text-ink2">{__('Not set up', 'monoranks')}</span>{data.app_password?.available !== false && <a className="text-[13px] font-semibold" href={out(data.allow_url || data.connect_url, 'allow-fixes', 'settings')} target="_self">{__('Allow', 'monoranks')}</a>}</span>}
+                    </Tile>
+                    <Tile>
+                      <TileLabel>{__('SEO plugin', 'monoranks')}<Tip text={data.seo_plugin && !data.seo_supported
+                        ? sprintf(__('MonoRanks cannot write titles, descriptions, main versions or hiding from Google into %s yet, so those fixes are refused', 'monoranks'), data.seo_plugin)
+                        : data.seo_plugin
+                        ? sprintf(__('titles and descriptions go into the fields %s reads', 'monoranks'), data.seo_plugin)
+                        : __('MonoRanks adds the approved title, description, main version and hiding from Google itself', 'monoranks')} /></TileLabel>
+                      <span className={`text-[20px] font-bold leading-tight ${data.seo_plugin && !data.seo_supported ? 'text-critical' : ''}`}>{data.seo_plugin || __('None', 'monoranks')}</span>
+                    </Tile>
+                  </div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <Button variant="primary" disabled={busy !== null} aria-busy={busy === 'sync'} onClick={() => run('sync', () => api.sync('settings'))}>{__('Send content now', 'monoranks')}</Button>
-                    <Tip text={__('Disconnect stops sending. Fixes already applied stay.', 'monoranks')}><Button disabled={busy !== null} aria-busy={busy === 'disconnect'} onClick={() => run('disconnect', () => api.disconnect())}>{__('Disconnect', 'monoranks')}</Button></Tip>
+                    <Button variant="primary" disabled={busy !== null} aria-busy={busy === 'sync'} onClick={() => run('sync', () => api.sync('settings'))}>{__('Send content', 'monoranks')}</Button>
+                    <span className="inline-flex items-center gap-1.5 text-[13px] text-mute"><code className="!bg-transparent !p-0 !text-[13px] !text-mute">{data.key_hint}</code><Tip text={data.key_via} /></span>
+                    <Tip className="ms-auto" align="end" text={__('Disconnect stops sending. Fixes already applied stay.', 'monoranks')}><Button variant="ghost" disabled={busy !== null} aria-busy={busy === 'disconnect'} onClick={() => run('disconnect', () => api.disconnect())}>{__('Disconnect', 'monoranks')}</Button></Tip>
                   </div>
                 </>
               ) : (
                 <>
-                  <Step n={1}><b className="text-[13px] font-semibold text-ink">{__('Connect to MonoRanks', 'monoranks')}</b><span className="text-[12px] text-ink2">{__('Sign in and approve. Takes a minute.', 'monoranks')}</span><div><Button variant="primary" size="sm" asChild><a href={out(data.connect_url, 'connect-step', 'settings')} target="_self" onClick={() => setWaitingSince(Date.now())}>{__('Connect', 'monoranks')}</a></Button></div></Step>
-                  <Step n={2} later><span className="inline-flex items-center gap-1.5"><b className="text-[13px] font-semibold text-ink">{__('Or paste a connector key', 'monoranks')}</b><Tip text={__('Use this when your host blocks Application Passwords.', 'monoranks')} /></span><KeyForm data={data} busy={busy} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} /></Step>
+                  <Step n={1}><b className="text-[15px] font-bold text-ink">{__('Connect to MonoRanks', 'monoranks')}</b><span className="text-[14px] text-mute">{__('Sign in and approve. Takes a minute.', 'monoranks')}</span><div className="pt-1.5"><Button variant="primary" asChild><a href={out(data.connect_url, 'connect-step', 'settings')} target="_self" onClick={() => setWaitingSince(Date.now())}>{__('Connect', 'monoranks')}</a></Button></div></Step>
+                  <Step n={2} later><span className="inline-flex items-center gap-1.5"><b className="text-[15px] font-bold text-ink">{__('Or paste a connector key', 'monoranks')}</b><Tip text={__('Use this when your host blocks Application Passwords.', 'monoranks')} /></span><KeyForm data={data} busy={busy} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} /></Step>
                 </>
               )}
             </CardBody>
@@ -111,8 +125,8 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
           {connected && (
             <Card>
               <details open={keyOpen} onToggle={(e) => setKeyOpen(e.currentTarget.open)} className="group">
-                <summary className="flex cursor-pointer list-none items-center gap-2 px-[22px] py-4 font-medium text-ink2 hover:text-ink [&::-webkit-details-marker]:hidden"><ChevronRight size={14} className="mr-flip transition-transform group-open:rotate-90" />{__('Use a different key', 'monoranks')}</summary>
-                <div className="border-t border-grid px-[22px] pb-[22px] pt-4">
+                <summary className="flex min-h-[60px] cursor-pointer list-none items-center gap-2.5 px-7 py-4 text-[15px] font-bold text-ink hover:text-brand-ink max-[782px]:px-[18px] [&::-webkit-details-marker]:hidden"><ChevronRight size={16} className="mr-flip transition-transform group-open:rotate-90" />{__('Use a different key', 'monoranks')}</summary>
+                <div className="border-t border-grid px-7 pb-7 pt-5 max-[782px]:px-[18px]">
                   <KeyForm data={data} busy={busy} hint={__('In MonoRanks: Settings → API and MCP → New credential, content:write, this website.', 'monoranks')} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} />
                 </div>
               </details>
@@ -121,35 +135,35 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
 
           <Card>
             <details className="group">
-              <summary className="flex cursor-pointer list-none items-center gap-2 px-[22px] py-4 font-medium text-ink2 hover:text-ink [&::-webkit-details-marker]:hidden"><ChevronRight size={14} className="mr-flip transition-transform group-open:rotate-90" />{__('What is sent', 'monoranks')}</summary>
-              <div className="border-t border-grid px-[22px] pb-[22px] pt-4">
+              <summary className="flex min-h-[60px] cursor-pointer list-none items-center gap-2.5 px-7 py-4 text-[15px] font-bold text-ink hover:text-brand-ink max-[782px]:px-[18px] [&::-webkit-details-marker]:hidden"><ChevronRight size={16} className="mr-flip transition-transform group-open:rotate-90" />{__('What is sent', 'monoranks')}</summary>
+              <div className="border-t border-grid px-7 pb-7 pt-5 max-[782px]:px-[18px]">
               <KV rows={[
                 [__('Sent', 'monoranks'), __('Published titles, a 40-word excerpt, dates, authors, categories, tags, SEO fields, image alt text and plugin status.', 'monoranks')],
                 [__('Read back', 'monoranks'), __("This website's audit results: scores, issues and the fixes you approved, shown here and in the Posts list.", 'monoranks')],
                 [__('Never sent', 'monoranks'), __('Drafts, private posts, comments, emails, passwords, plugin or theme settings.', 'monoranks')],
-                [__('Can change', 'monoranks'), __('SEO title, meta description, canonical, noindex, image alt text, redirects, one opening paragraph, AI crawler rules, llms.txt. Only after you approve each one.', 'monoranks')],
+                [__('Can change', 'monoranks'), __('Title, description, main version, hiding from Google, image text, redirects, one opening paragraph, AI tool rules, AI site summary. Only after you approve each one.', 'monoranks')],
               ]} />
               </div>
             </details>
           </Card>
 
           <Card>
-            <CardHeader><CardTitle>{__('Recent changes', 'monoranks')}</CardTitle><span className="text-[12px] text-mute">{__('Last 50 · undo for 30 days', 'monoranks')}</span></CardHeader>
-            <div className="pt-2"><ChangeLog rows={data.log} busy={undoing} onUndo={(row) => { setUndoing(row.index); run('undo', () => api.undo(row, 'settings')); }} /></div>
+            <CardHeader><CardTitle>{__('Recent changes', 'monoranks')}<Tip text={__('Last 50 · undo for 30 days', 'monoranks')} /></CardTitle></CardHeader>
+            <div className="pt-3.5"><ChangeLog rows={data.log} busy={undoing} onUndo={(row) => { setUndoing(row.index); run('undo', () => api.undo(row, 'settings')); }} /></div>
           </Card>
 
           {!connected && data.has_data && (
-            <Card className="border-critical/40">
+            <Card className="shadow-[inset_0_0_0_1.5px_color-mix(in_srgb,var(--critical)_40%,transparent)]">
               <CardHeader><CardTitle className="text-critical">{__('Danger zone', 'monoranks')}<Tip text={__('Erases the connection, scores, redirects, AI files and change log. Written fixes stay.', 'monoranks')} /></CardTitle></CardHeader>
               <CardBody className="flex flex-col gap-3">
                 {confirmDelete ? (
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-[12px] font-medium text-critical">{__('This cannot be undone. Delete everything?', 'monoranks')}</span>
+                    <span className="text-[14px] font-semibold text-critical">{__('This cannot be undone. Delete everything?', 'monoranks')}</span>
                     <Button variant="dangerSolid" disabled={busy !== null} aria-busy={busy === 'delete'} onClick={() => { setConfirmDelete(false); run('delete', () => api.deleteEverything()); }}>{__('Yes, delete all data', 'monoranks')}</Button>
                     <Button variant="ghost" disabled={busy !== null} onClick={() => setConfirmDelete(false)}>{__('Cancel', 'monoranks')}</Button>
                   </div>
                 ) : (
-                  <div><Button variant="danger" onClick={() => setConfirmDelete(true)}>{__('Delete all MonoRanks data', 'monoranks')}</Button></div>
+                  <div><Button variant="danger" onClick={() => setConfirmDelete(true)}>{__('Delete all data', 'monoranks')}</Button></div>
                 )}
               </CardBody>
             </Card>
@@ -169,8 +183,8 @@ function KeyForm({ data, busy, hint, onSubmit }: { data: SettingsData; busy: str
   }
   return (
     <form onSubmit={submit} className="flex flex-col gap-3 pt-1.5">
-      <div className="flex flex-col gap-2"><span className="inline-flex items-center gap-1.5"><label htmlFor="monoranks-key" className="text-[12px] font-medium text-ink2">{__('Connector key', 'monoranks')}</label>{hint && <Tip align="start" text={hint} />}</span><Input id="monoranks-key" name="key" type="password" autoComplete="off" placeholder="mr_ws_… or mr_site_…" required value={key} onChange={(e) => setKey(e.target.value)} /></div>
-      {data.show_address && <div className="flex flex-col gap-2"><label htmlFor="monoranks-address" className="text-[12px] font-medium text-ink2">{__('MonoRanks address (development sites only)', 'monoranks')}</label><Input id="monoranks-address" name="api_base" type="url" value={base} onChange={(e) => setBase(e.target.value)} /></div>}
+      <div className="flex flex-col gap-2"><span className="inline-flex items-center gap-1.5"><label htmlFor="monoranks-key" className="text-[13px] font-bold text-ink">{__('Connector key', 'monoranks')}</label>{hint && <Tip align="start" text={hint} />}</span><Input id="monoranks-key" name="key" type="password" autoComplete="off" placeholder="mr_ws_… or mr_site_…" required value={key} onChange={(e) => setKey(e.target.value)} /></div>
+      {data.show_address && <div className="flex flex-col gap-2"><label htmlFor="monoranks-address" className="text-[13px] font-bold text-ink">{__('MonoRanks address (development sites only)', 'monoranks')}</label><Input id="monoranks-address" name="api_base" type="url" value={base} onChange={(e) => setBase(e.target.value)} /></div>}
       <div><Button variant="primary" type="submit" disabled={busy !== null} aria-busy={busy === 'connect'}>{__('Save key', 'monoranks')}</Button></div>
     </form>
   );
