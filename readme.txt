@@ -4,7 +4,7 @@ Tags: seo, ai-seo, seo-audit, aeo, geo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.25
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,6 +166,16 @@ Please report security bugs found in the source code of the MonoRanks plugin thr
 4. Before you connect: the steps to link your site to MonoRanks.
 
 == Changelog ==
+
+= 0.2.0 - 2026-11-01 =
+* **New:** The plugin's screens take the new MonoRanks look: a light top bar, soft cards, big numbers and score rings, and blue buttons.
+* **New:** The Overview opens with one score card: site health in words, AI answers, search clicks and fixes applied.
+* **New:** Pages to fix show how urgent each one is. Click a row to see the biggest problem.
+* **Enhancement:** Fixes and recent changes take one line each. Click a row to see the old and new value.
+* **Enhancement:** Shorter, plainer words everywhere, such as "Send content", "Next check" and "+3 since Oct 23". Details moved into (i) tips.
+* **Enhancement:** The Posts list card uses the new look. The post editor box is simpler: two scores, one line, the Google numbers and one button.
+* **Enhancement:** The WordPress approve screen keeps WordPress's own buttons, and the MonoRanks box lines up with the name field.
+* **Update:** Persian translation updated.
 
 = 0.1.25 - 2026-10-25 =
 * **New:** After activation, the plugin opens its MonoRanks screen, and the Plugins list shows a Connect link.
