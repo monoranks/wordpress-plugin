@@ -36,14 +36,14 @@ class PostPanel {
 
 	public static function render( $post ) {
 		if ( ! $post || 'publish' !== $post->post_status ) {
-			echo '<p class="mr-panel-note">' . esc_html__( 'MonoRanks reads published pages. Scores, clicks and changes appear here after the first audit that follows publishing.', 'monoranks' ) . '</p>';
+			echo '<p class="mr-panel-note">' . esc_html__( 'Scores appear after you publish.', 'monoranks' ) . '</p>';
 			return;
 		}
 		printf(
 			'<div class="mr-panel" data-post="%1$d" data-error="%2$s" aria-live="polite" aria-busy="true"><p class="mr-panel-note">%3$s</p></div>',
 			(int) $post->ID,
 			esc_attr__( 'MonoRanks could not be reached. Reload the page to try again.', 'monoranks' ),
-			esc_html__( 'Loading MonoRanks data…', 'monoranks' )
+			esc_html__( 'Loading…', 'monoranks' )
 		);
 	}
 
@@ -147,20 +147,20 @@ class PostPanel {
 	/** "Title", "Word count 812 → 1,040", "Health score 64 → 71". Numbers are shown for the fields where they help. */
 	public static function change_text( $field, $before, $after ) {
 		$labels = array(
-			'status'        => __( 'HTTP status', 'monoranks' ),
+			'status'        => __( 'Page status', 'monoranks' ),
 			'redirect'      => __( 'Redirect', 'monoranks' ),
 			'title'         => __( 'Title', 'monoranks' ),
-			'description'   => __( 'Meta description', 'monoranks' ),
-			'h1'            => __( 'H1', 'monoranks' ),
+			'description'   => __( 'Description', 'monoranks' ),
+			'h1'            => __( 'Main heading', 'monoranks' ),
 			'headings'      => __( 'Headings', 'monoranks' ),
-			'canonical'     => __( 'Canonical', 'monoranks' ),
-			'noindex'       => __( 'Noindex', 'monoranks' ),
-			'robots'        => __( 'Robots', 'monoranks' ),
+			'canonical'     => __( 'Main version', 'monoranks' ),
+			'noindex'       => __( 'Hidden from Google', 'monoranks' ),
+			'robots'        => __( 'Search rules', 'monoranks' ),
 			'wordCount'     => __( 'Word count', 'monoranks' ),
-			'schemaTypes'   => __( 'Structured data', 'monoranks' ),
+			'schemaTypes'   => __( 'Page details for Google', 'monoranks' ),
 			'internalLinks' => __( 'Internal links', 'monoranks' ),
 			'pageScore'     => __( 'Health score', 'monoranks' ),
-			'aeoScore'      => __( 'AEO score', 'monoranks' ),
+			'aeoScore'      => __( 'AI answers score', 'monoranks' ),
 		);
 		if ( ! isset( $labels[ $field ] ) ) {
 			return '';

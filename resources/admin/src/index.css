@@ -12,7 +12,9 @@
 #monoranks-admin, .mr-scope, body.monoranks-screen {
   --page: #f5f6f8; --surface: #ffffff; --surface2: #f1f3f6; --surface3: #e9ecf1; --ink: #14181f; --ink2: #4c5563; --muted: #8a929e;
   --grid: #e6e9ee; --line: #cbd2db; --border: #e3e7ec; --accent: #2a6fdb; --accentInk: #1d5bbf; --accentSoft: #e8f0fc;
-  --good: #0ca30c; --goodInk: #0a7a0a; --warn: #e6a100; --critical: #d03b3b; --grayTrack: #e6e9ee; --primaryBtn: #14181f; --primaryBtnInk: #ffffff;
+  --good: #0ca30c; --goodInk: #0a7a0a; --warn: #e6a100; --serious: #ec835a; --critical: #d03b3b; --grayTrack: #e6e9ee; --primaryBtn: #2a6fdb; --primaryBtnInk: #ffffff;
+  --tint: var(--accentSoft); --tint2: color-mix(in srgb, var(--accent) 18%, var(--surface)); --hover: color-mix(in srgb, var(--ink) 4%, transparent);
+  --shadow: 0 1px 2px rgba(20, 24, 31, .04), 0 4px 16px rgba(20, 24, 31, .04); --shadowPop: 0 12px 40px rgba(20, 24, 31, .16), 0 2px 6px rgba(20, 24, 31, .06);
   --band: #14181f; --bandInk: #f3f4f6; --bandMuted: #b8bec8; --bandEdge: #2c313a;
   --tintGood: rgba(12, 163, 12, .07); --tintGoodEdge: rgba(12, 163, 12, .35);
   --tintWarn: rgba(230, 161, 0, .10); --tintWarnEdge: rgba(230, 161, 0, .40);
@@ -22,12 +24,14 @@
   --popover: var(--surface); --popover-foreground: var(--ink); --primary: var(--primaryBtn); --primary-foreground: var(--primaryBtnInk);
   --secondary: var(--surface2); --secondary-foreground: var(--ink); --muted-token: var(--surface2); --muted-foreground: var(--muted);
   --accent-token: var(--surface2); --accent-foreground: var(--ink); --destructive: var(--critical); --input: var(--line); --ring: var(--accent);
-  --radius: 0.5rem;
+  --radius: 0;
 }
 #monoranks-admin[data-theme="dark"] {
   --page: #0f1115; --surface: #171a20; --surface2: #1e2229; --surface3: #262b33; --ink: #f3f4f6; --ink2: #b8bec8; --muted: #7d8590;
   --grid: #262b33; --line: #3a404a; --border: #262b33; --accent: #3987e5; --accentInk: #86b6ef; --accentSoft: #1a2a44;
-  --good: #0ca30c; --goodInk: #3ccf3c; --warn: #fab219; --critical: #e05656; --grayTrack: #2c313a; --primaryBtn: #f3f4f6; --primaryBtnInk: #14181f;
+  --good: #0ca30c; --goodInk: #3ccf3c; --warn: #fab219; --serious: #ec835a; --critical: #e05656; --grayTrack: #2c313a; --primaryBtn: #3987e5; --primaryBtnInk: #ffffff;
+  --surface2: #22262e; --surface3: #2b3038; --tint2: color-mix(in srgb, var(--accent) 30%, var(--surface)); --hover: color-mix(in srgb, var(--ink) 6%, transparent);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3); --shadowPop: 0 14px 44px rgba(0, 0, 0, .55);
   --band: #0b0d11; --bandEdge: #262b33;
   --tintGood: rgba(60, 207, 60, .12); --tintGoodEdge: rgba(60, 207, 60, .38);
   --tintWarn: rgba(250, 178, 25, .14); --tintWarnEdge: rgba(250, 178, 25, .42);
@@ -76,9 +80,13 @@
   --color-band-ink: var(--bandInk);
   --color-band-muted: var(--bandMuted);
   --color-band-edge: var(--bandEdge);
-  --radius-sm: 5px; --radius-md: 7px; --radius-lg: 8px; --radius-xl: 12px;
-  --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
-  --text-xs: 11px; --text-sm: 12px; --text-base: 13px; --text-lg: 15px; --text-xl: 22px; --text-2xl: 26px;
+  --color-tint: var(--tint);
+  --color-tint2: var(--tint2);
+  --color-hover: var(--hover);
+  --color-serious: var(--serious);
+  --radius-sm: 3px; --radius-md: 4px; --radius-lg: 10px; --radius-xl: 14px; --radius-2xl: 16px;
+  --shadow-sm: none; --shadow-md: none; --shadow-lg: none; --shadow-card: var(--shadow); --shadow-pop: var(--shadowPop);
+  --text-xs: 12px; --text-sm: 13px; --text-base: 14px; --text-lg: 16px; --text-xl: 24px; --text-2xl: 30px;
 }
 
 /* The mount takes the admin content area edge to edge: WordPress's .wrap margins and footer reservation are taken back. */
@@ -102,20 +110,20 @@ body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .err
 /* Notices that landed in the page: WordPress's relocation puts some before .wp-header-end, the rest are collected in
    the slot under it. Both read as the app's cards. */
 #monoranks-admin :is(.notice, .update-nag, .updated, .error, #message) {
-	width: 100%; margin: 0; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px;
-	background: var(--surface); color: var(--ink); box-shadow: none; font-size: 13px; line-height: 1.45; display: block;
+	width: 100%; margin: 0; padding: 14px 18px; border: 0; border-inline-start: 4px solid var(--line); border-radius: 14px;
+	background: var(--surface); color: var(--ink); box-shadow: var(--shadow); font-size: 14px; line-height: 1.45; display: block;
 }
 #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: 1180px; margin: 0 auto 4px; }
 /* The tone is a translucent tint over the card's own surface, so it reads the same in both themes. The tint is forced:
    WordPress's own admin stylesheets, loaded after this one, set a background on .notice and would win otherwise. */
-#monoranks-admin div.notice-success { background-image: linear-gradient(var(--tintGood), var(--tintGood)) !important; border-color: var(--tintGoodEdge) !important; }
-#monoranks-admin div.notice-error { background-image: linear-gradient(var(--tintBad), var(--tintBad)) !important; border-color: var(--tintBadEdge) !important; }
-#monoranks-admin div.notice-warning, #monoranks-admin div.update-nag { background-image: linear-gradient(var(--tintWarn), var(--tintWarn)) !important; border-color: var(--tintWarnEdge) !important; }
+#monoranks-admin div.notice-success { background-image: linear-gradient(var(--tintGood), var(--tintGood)) !important; border-color: var(--good) !important; }
+#monoranks-admin div.notice-error { background-image: linear-gradient(var(--tintBad), var(--tintBad)) !important; border-color: var(--critical) !important; }
+#monoranks-admin div.notice-warning, #monoranks-admin div.update-nag { background-image: linear-gradient(var(--tintWarn), var(--tintWarn)) !important; border-color: var(--warn) !important; }
 @media (max-width: 1340px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 80px); } }
 @media (max-width: 960px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 48px); } }
 @media (max-width: 782px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 32px); } }
 body.monoranks-screen #wpbody-content > .update-nag { display: block; }
-#monoranks-admin { margin: 0; margin-inline: -20px 0; flex: 1 0 auto; display: flex; flex-direction: column; background: var(--page); color: var(--ink); font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+#monoranks-admin { margin: 0; margin-inline: -20px 0; flex: 1 0 auto; display: flex; flex-direction: column; background: var(--page); color: var(--ink); font-size: 14px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
 @media (max-width: 782px) {
 	#monoranks-admin { margin-inline: -10px 0; }
 	body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .error, #message) { margin-inline: 10px; }
@@ -127,16 +135,20 @@ body.monoranks-screen #wpbody-content > .update-nag { display: block; }
 #monoranks-admin h1, #monoranks-admin h2, #monoranks-admin h3, #monoranks-admin p { margin: 0; padding: 0; color: inherit; }
 #monoranks-admin :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; box-shadow: none; }
 #monoranks-admin input[type="password"], #monoranks-admin input[type="url"] { box-shadow: none; margin: 0; min-height: 0; line-height: normal; }
-#monoranks-admin .notice p { margin: 0; padding: 0; font-size: 13px; }
+#monoranks-admin .notice p { margin: 0; padding: 0; font-size: 14px; }
 /* Score ring: the app's ScoreBox. */
 .mr-score { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); vertical-align: middle; }
 .mr-score .mr-ring { position: relative; display: inline-block; line-height: 0; }
 .mr-score .mr-ring > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1; color: var(--ink); }
 .mr-score.mr-none .mr-ring > span { color: var(--muted); }
 .mr-score.mr-sm .mr-ring { width: 30px; height: 30px; }
-.mr-score.mr-sm .mr-ring > span { font-size: 11px; }
+.mr-score.mr-sm .mr-ring > span { font-size: 11px; font-weight: 700; }
+.mr-score.mr-md .mr-ring { width: 44px; height: 44px; }
+.mr-score.mr-md .mr-ring > span { font-size: 14px; font-weight: 700; }
 .mr-score.mr-lg .mr-ring { width: 64px; height: 64px; }
-.mr-score.mr-lg .mr-ring > span { font-size: 20px; }
+.mr-score.mr-lg .mr-ring > span { font-size: 20px; font-weight: 700; }
+.mr-score.mr-xl .mr-ring { width: 104px; height: 104px; }
+.mr-score.mr-xl .mr-ring > span { font-size: 34px; font-weight: 750; letter-spacing: -0.03em; }
 .mr-score .mr-lbl { font-size: 11px; color: var(--muted); font-weight: 500; }
 .mr-score.mr-good { color: var(--good); }
 .mr-score.mr-warn { color: var(--warn); }

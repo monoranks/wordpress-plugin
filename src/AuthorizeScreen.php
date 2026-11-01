@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * WordPress's own "Authorize Application" screen (wp-admin/authorize-application.php): when MonoRanks is the app asking,
- * the logo and one short line go above WordPress's buttons. Core's text, Yes and No stay as they are. Other apps: nothing.
+ * the logo and one short line go above WordPress's buttons. Core's text, Yes and No keep WordPress's own look. Other apps: nothing.
  */
 class AuthorizeScreen {
 
@@ -29,11 +29,10 @@ class AuthorizeScreen {
 	}
 
 	public static function markup() {
-		$css = '#monoranks-authorize{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:16px 0;padding:14px 16px;border:1px solid #e3e5e8;border-radius:8px;background:#f7f8f9}'
-			. '#monoranks-authorize svg{display:block;width:132px;height:auto}'
-			. '#monoranks-authorize p{margin:0;color:#3c434a;font-size:13px}'
-			. '.form-wrap #approve.button-primary{background:#14181f;border-color:#14181f;border-radius:6px}'
-			. '.form-wrap #approve.button-primary:hover,.form-wrap #approve.button-primary:focus{background:#2a2f38;border-color:#2a2f38}';
+		// Only the MonoRanks box is styled; WordPress's own form and buttons keep the admin's look.
+		$css = '#monoranks-authorize{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin:18px 0;padding:18px 20px;border:0;border-radius:14px;background:#e8f0fc}'
+			. '#monoranks-authorize svg{display:block;width:140px;height:auto}'
+			. '#monoranks-authorize p{margin:0;color:#14181f;font-size:14px;font-weight:600}';
 		return '<style id="monoranks-authorize-css">' . $css . '</style>'
 			. '<div id="monoranks-authorize">' . Admin::asset( 'logo.svg' )
 			. '<p>' . esc_html__( 'Reads your content and applies only fixes you approve.', 'monoranks' ) . '</p></div>';

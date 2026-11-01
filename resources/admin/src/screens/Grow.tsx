@@ -1,7 +1,9 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { __, _n, sprintf } from '@wordpress/i18n';
 import { api, type GrowData, type GrowState } from '@/lib/api';
-import { Card, CardHeader, CardTitle, CardBody } from '@/components/ui/card';
+import { ArrowUpRight } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardBody, Tile, TileLabel } from '@/components/ui/card';
+import { Tip } from '@/components/ui/tip';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { out } from '@/lib/links';
@@ -35,7 +37,7 @@ export function GrowCards() {
   if (failed) return null;
   if (!data) {
     return (
-      <section aria-label={__('What to do next', 'monoranks')} aria-busy="true" className="grid grid-cols-2 gap-5 max-[960px]:grid-cols-1">
+      <section aria-label={__('What to do next', 'monoranks')} aria-busy="true" className="grid grid-cols-2 gap-6 max-[960px]:grid-cols-1">
         {[0, 1, 2, 3].map((i) => <Card key={i} className="h-[180px] animate-pulse bg-surface2" />)}
       </section>
     );
@@ -44,12 +46,12 @@ export function GrowCards() {
   const scope = data.scope_url ?? '';
 
   return (
-    <section aria-labelledby="mr-grow-title" className="flex flex-col gap-3">
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 id="mr-grow-title" className="text-[15px] font-semibold text-ink">{__('What to do next', 'monoranks')}</h2>
-        {data.fetched && <span className="text-[11px] text-mute">{sprintf(__('Updated %s', 'monoranks'), data.fetched)}</span>}
+    <section aria-labelledby="mr-grow-title" className="flex flex-col gap-4">
+      <div className="flex flex-wrap items-center gap-2">
+        <h2 id="mr-grow-title" className="text-[20px] font-bold tracking-[-0.01em] text-ink">{__('What to do next', 'monoranks')}</h2>
+        {data.fetched && <Tip text={sprintf(__('Updated %s', 'monoranks'), data.fetched)} />}
       </div>
-      <div className="grid grid-cols-2 items-start gap-5 max-[960px]:grid-cols-1">
+      <div className="grid grid-cols-2 items-stretch gap-6 max-[960px]:grid-cols-1">
         <Outreach d={data.outreach} scope={scope} />
         <Backlinks d={data.backlinks} scope={scope} />
         <Competitors d={data.competitors} scope={scope} />
@@ -64,25 +66,25 @@ export function GrowCards() {
 function StateLine({ state, scope, empty }: { state: GrowState; scope: string; empty: string }) {
   let text: ReactNode = empty;
   if (state === 'no_access') {
-    text = <>{__('The MonoRanks key of this site cannot read this yet. Allow it under Integrations in MonoRanks, or connect again.', 'monoranks')} {scope && <a className="font-medium text-brand-ink hover:underline" href={out(scope, 'grow-scope')} {...ext}>{__('Open Integrations', 'monoranks')}</a>}</>;
+    text = <span className="inline-flex flex-wrap items-center gap-1.5">{__('No access yet.', 'monoranks')}<Tip text={__('Allow it under Integrations in MonoRanks, or connect again.', 'monoranks')} />{scope && <a className="font-semibold text-brand-ink hover:underline" href={out(scope, 'grow-scope')} {...ext}>{__('Allow', 'monoranks')}</a>}</span>;
   } else if (state === 'off') {
-    text = __('Not available in your MonoRanks yet.', 'monoranks');
+    text = __('Not available yet.', 'monoranks');
   } else if (state === 'error') {
     text = __('Could not reach MonoRanks. Retrying soon.', 'monoranks');
   } else if (state === 'pending') {
-    return <p className="m-0 animate-pulse text-[12px] text-mute" role="status">{__('Checking…', 'monoranks')}</p>;
+    return <p className="m-0 animate-pulse text-[14px] text-mute" role="status">{__('Checking…', 'monoranks')}</p>;
   }
-  return <p className="m-0 text-[12px] text-ink2">{text}</p>;
+  return <p className="m-0 text-[14px] text-ink2">{text}</p>;
 }
 
 function GrowCard({ title, badge, link, linkText, children }: { title: string; badge?: ReactNode; link?: string; linkText: string; children: ReactNode }) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle>{title}{badge}</CardTitle>
-        {link && <Button variant="ghost" size="sm" asChild><a href={out(link, 'grow-card')} {...ext}>{linkText}<span className="sr-only"> {__('(opens in a new tab)', 'monoranks')}</span></a></Button>}
+        {link && <Button variant="ghost" size="sm" asChild><a href={out(link, 'grow-card')} {...ext}>{linkText}<ArrowUpRight size={14} className="mr-flip" /><span className="sr-only"> {__('(opens in a new tab)', 'monoranks')}</span></a></Button>}
       </CardHeader>
-      <CardBody className="flex flex-col gap-3 pt-3">{children}</CardBody>
+      <CardBody className="flex flex-col gap-4 pt-4">{children}</CardBody>
     </Card>
   );
 }
@@ -90,20 +92,20 @@ function GrowCard({ title, badge, link, linkText, children }: { title: string; b
 function Outreach({ d, scope }: { d: GrowData['outreach']; scope: string }) {
   const ok = d?.state === 'ok' ? d : null;
   return (
-    <GrowCard title={__('Outreach', 'monoranks')} badge={ok && ok.to_contact > 0 ? <Badge>{sprintf(_n('%s to contact', '%s to contact', ok.to_contact, 'monoranks'), fmt(ok.to_contact))}</Badge> : undefined} link={ok?.link || d?.link} linkText={__('All targets', 'monoranks')}>
+    <GrowCard title={__('Ask for links', 'monoranks')} badge={ok && ok.to_contact > 0 ? <Badge>{sprintf(_n('%s to contact', '%s to contact', ok.to_contact, 'monoranks'), fmt(ok.to_contact))}</Badge> : undefined} link={ok?.link || d?.link} linkText={__('All', 'monoranks')}>
       {ok ? (
         <>
           {ok.top.length > 0 ? (
-            <ol className="m-0 flex list-none flex-col gap-2.5 p-0">
+            <ol className="m-0 flex list-none flex-col p-0">
               {ok.top.map((t) => (
-                <li key={t.url} className="grid gap-0.5">
-                  <a className="truncate text-[13px] font-semibold text-ink hover:underline" href={t.url} {...ext}><bdi>{t.title}</bdi><span className="sr-only"> {__('(opens in a new tab)', 'monoranks')}</span></a>
-                  <span className="text-[12px] text-ink2">{t.why}{t.domain && <> · <bdi className="text-mute">{t.domain}</bdi></>}</span>
+                <li key={t.url} className="flex min-h-[48px] min-w-0 items-center gap-2 border-b border-grid py-2 last:border-b-0">
+                  <a className="min-w-0 truncate text-[14px] font-semibold text-ink hover:text-brand-ink" href={t.url} {...ext}><bdi>{t.title}</bdi><span className="sr-only"> {__('(opens in a new tab)', 'monoranks')}</span></a>
+                  {t.why && <Tip text={t.why} />}
+                  {t.domain && <bdi className="ms-auto shrink-0 text-[13px] text-mute">{t.domain}</bdi>}
                 </li>
               ))}
             </ol>
           ) : <StateLine state="empty" scope={scope} empty={__('Every target is contacted. MonoRanks looks for new ones each week.', 'monoranks')} />}
-          <p className="m-0 text-[11px] text-mute">{__('Sites worth asking for a link or a mention. MonoRanks never sends email; you reach out and set the status there.', 'monoranks')}</p>
         </>
       ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No outreach targets yet. MonoRanks looks for pages worth a link each week.', 'monoranks')} />}
     </GrowCard>
@@ -113,26 +115,15 @@ function Outreach({ d, scope }: { d: GrowData['outreach']; scope: string }) {
 function Backlinks({ d, scope }: { d: GrowData['backlinks']; scope: string }) {
   const ok = d?.state === 'ok' ? d : null;
   return (
-    <GrowCard title={__('Backlinks', 'monoranks')} link={ok?.link || d?.link} linkText={__('All backlinks', 'monoranks')}>
+    <GrowCard title={__('Backlinks', 'monoranks')} link={ok?.link || d?.link} linkText={__('All', 'monoranks')}>
       {ok ? (
         <>
-          <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-            <span className="text-2xl font-semibold leading-none tabular-nums text-good-ink">+{fmt(ok.new)}</span>
-            <span className="text-2xl font-semibold leading-none tabular-nums text-critical">−{fmt(ok.lost)}</span>
-            <span className="text-[12px] text-ink2">{__('websites linking to you, won and lost in 28 days', 'monoranks')}</span>
+          <div className="grid grid-cols-3 gap-2.5 max-[600px]:grid-cols-1">
+            <Tile><TileLabel>{__('Won', 'monoranks')}<Tip text={__('New websites linking to you, last 28 days.', 'monoranks')} /></TileLabel><span className="text-[32px] font-[750] leading-none tracking-[-0.03em] tabular-nums text-good-ink">+{fmt(ok.new)}</span></Tile>
+            <Tile><TileLabel>{__('Lost', 'monoranks')}</TileLabel><span className="text-[32px] font-[750] leading-none tracking-[-0.03em] tabular-nums text-critical">−{fmt(ok.lost)}</span></Tile>
+            <Tile><TileLabel>{__('Linking sites', 'monoranks')}</TileLabel><span className="text-[32px] font-[750] leading-none tracking-[-0.03em] tabular-nums">{fmt(ok.domains)}</span></Tile>
           </div>
-          <div className="flex flex-wrap gap-1.5">
-            <Badge variant="pill">{sprintf(_n('%s website links to you', '%s websites link to you', ok.domains, 'monoranks'), fmt(ok.domains))}</Badge>
-            {ok.review > 0 && <Badge variant="pill">{sprintf(_n('%s to review for spam', '%s to review for spam', ok.review, 'monoranks'), fmt(ok.review))}</Badge>}
-          </div>
-          {ok.top.length > 0 && (
-            <div className="grid gap-1">
-              <span className="text-[12px] text-mute">{__('Newest strong links', 'monoranks')}</span>
-              <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0 text-[12px]">
-                {ok.top.map((b) => <li key={b.domain}><bdi>{b.domain}</bdi>{b.rank !== null && <span className="text-mute"> · {sprintf(__('strength %s', 'monoranks'), fmt(b.rank))}</span>}</li>)}
-              </ul>
-            </div>
-          )}
+          {ok.review > 0 && <div><Badge variant="warn">{sprintf(_n('%s to check for spam', '%s to check for spam', ok.review, 'monoranks'), fmt(ok.review))}</Badge></div>}
         </>
       ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No backlink data yet. MonoRanks refreshes it weekly.', 'monoranks')} />}
     </GrowCard>
@@ -142,20 +133,22 @@ function Backlinks({ d, scope }: { d: GrowData['backlinks']; scope: string }) {
 function Competitors({ d, scope }: { d: GrowData['competitors']; scope: string }) {
   const ok = d?.state === 'ok' ? d : null;
   return (
-    <GrowCard title={__('Competitors', 'monoranks')} badge={ok && ok.gaps ? <Badge>{sprintf(_n('%s keyword gap', '%s keyword gaps', ok.gaps, 'monoranks'), fmt(ok.gaps))}</Badge> : undefined} link={ok?.link || d?.link} linkText={__('All competitors', 'monoranks')}>
+    <GrowCard title={__('Competitors', 'monoranks')} badge={ok && ok.gaps ? <Badge>{sprintf(_n('%s gap', '%s gaps', ok.gaps, 'monoranks'), fmt(ok.gaps))}</Badge> : undefined} link={ok?.link || d?.link} linkText={__('All', 'monoranks')}>
       {ok ? (
         <>
-          <ul className="m-0 flex list-none flex-col gap-2 p-0">
+          <ul className="m-0 flex list-none flex-col p-0">
             {ok.top.map((c) => (
-              <li key={c.domain} className="grid gap-0.5">
-                <span className="text-[13px] font-semibold"><bdi>{c.domain}</bdi>{!c.picked && <span className="ms-1.5 text-[11px] font-normal text-mute">{__('suggested', 'monoranks')}</span>}</span>
-                <span className="text-[12px] text-ink2">{c.reason || sprintf(_n('%1$s shared keyword, %2$s where they rank higher', '%1$s shared keywords, %2$s where they rank higher', c.shared, 'monoranks'), fmt(c.shared), fmt(c.above_us))}</span>
+              <li key={c.domain} className="flex min-h-[48px] min-w-0 items-center gap-2 border-b border-grid py-2 last:border-b-0">
+                <span className="min-w-0 truncate text-[14px] font-semibold"><bdi>{c.domain}</bdi></span>
+                {!c.picked && <Badge>{__('Suggested', 'monoranks')}</Badge>}
+                <Tip text={c.reason || sprintf(_n('%1$s shared keyword, %2$s where they rank higher', '%1$s shared keywords, %2$s where they rank higher', c.shared, 'monoranks'), fmt(c.shared), fmt(c.above_us))} />
+                <span className="ms-auto shrink-0 text-[13px] text-mute">{sprintf(__('%s ahead of you', 'monoranks'), fmt(c.above_us))}</span>
               </li>
             ))}
           </ul>
           {ok.keywords.length > 0 && (
-            <div className="grid gap-1">
-              <span className="text-[12px] text-mute">{__('They rank for these, you do not', 'monoranks')}</span>
+            <div className="grid gap-2">
+              <TileLabel>{__('Words you miss', 'monoranks')}<Tip text={__('They rank for these, you do not', 'monoranks')} /></TileLabel>
               <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
                 {ok.keywords.map((k) => <li key={k.keyword}><Badge variant="pill"><bdi>{k.keyword}</bdi>{k.volume !== null && <span className="tabular-nums text-ink2">{sprintf(__('%s/mo', 'monoranks'), fmt(k.volume))}</span>}</Badge></li>)}
               </ul>
@@ -170,29 +163,29 @@ function Competitors({ d, scope }: { d: GrowData['competitors']; scope: string }
 function Keywords({ d, scope }: { d: GrowData['keywords']; scope: string }) {
   const ok = d?.state === 'ok' ? d : null;
   const Move = ({ k, up }: { k: { keyword: string; from: number; to: number }; up: boolean }) => (
-    <li className="flex items-baseline justify-between gap-3 text-[12px]">
-      <bdi className="min-w-0 truncate">{k.keyword}</bdi>
-      <span className={`shrink-0 tabular-nums ${up ? 'text-good-ink' : 'text-critical'}`}>
+    <li className="flex min-h-[40px] items-center justify-between gap-3 border-b border-grid text-[14px] last:border-b-0">
+      <bdi className="min-w-0 truncate font-semibold">{k.keyword}</bdi>
+      <span className={`shrink-0 rounded-md px-2 py-0.5 text-[13px] font-bold tabular-nums ${up ? 'bg-[color-mix(in_srgb,var(--good)_12%,transparent)] text-good-ink' : 'bg-[color-mix(in_srgb,var(--critical)_12%,transparent)] text-critical'}`}>
         <span className="sr-only">{up ? __('up', 'monoranks') : __('down', 'monoranks')} </span>
         {sprintf(__('%1$s → %2$s', 'monoranks'), fmt(k.from), fmt(k.to))}
       </span>
     </li>
   );
   return (
-    <GrowCard title={__('Keyword movers this week', 'monoranks')} link={ok?.link || d?.link} linkText={__('All keywords', 'monoranks')}>
+    <GrowCard title={__('Keyword moves', 'monoranks')} link={ok?.link || d?.link} linkText={__('All', 'monoranks')}>
       {ok ? (
         ok.up.length || ok.down.length ? (
-          <div className="grid grid-cols-2 gap-4 max-[600px]:grid-cols-1">
+          <div className="grid grid-cols-2 gap-6 max-[600px]:grid-cols-1">
             <div className="grid content-start gap-1">
-              <span className="text-[12px] font-medium text-ink2">{__('Up', 'monoranks')}</span>
-              {ok.up.length ? <ul className="m-0 flex list-none flex-col gap-1 p-0">{ok.up.map((k) => <Move key={k.keyword} k={k} up />)}</ul> : <span className="text-[12px] text-mute">—</span>}
+              <TileLabel>{__('Up', 'monoranks')}</TileLabel>
+              {ok.up.length ? <ul className="m-0 flex list-none flex-col p-0">{ok.up.map((k) => <Move key={k.keyword} k={k} up />)}</ul> : <span className="text-[14px] text-mute">—</span>}
             </div>
             <div className="grid content-start gap-1">
-              <span className="text-[12px] font-medium text-ink2">{__('Down', 'monoranks')}</span>
-              {ok.down.length ? <ul className="m-0 flex list-none flex-col gap-1 p-0">{ok.down.map((k) => <Move key={k.keyword} k={k} up={false} />)}</ul> : <span className="text-[12px] text-mute">—</span>}
+              <TileLabel>{__('Down', 'monoranks')}</TileLabel>
+              {ok.down.length ? <ul className="m-0 flex list-none flex-col p-0">{ok.down.map((k) => <Move key={k.keyword} k={k} up={false} />)}</ul> : <span className="text-[14px] text-mute">—</span>}
             </div>
           </div>
-        ) : <p className="m-0 text-[12px] text-ink2">{sprintf(_n('Your %s tracked keyword held its place this week.', 'Your %s tracked keywords held their places this week.', ok.tracked, 'monoranks'), fmt(ok.tracked))}</p>
+        ) : <p className="m-0 text-[14px] text-ink2">{sprintf(_n('Your %s tracked keyword held its place this week.', 'Your %s tracked keywords held their places this week.', ok.tracked, 'monoranks'), fmt(ok.tracked))}</p>
       ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No tracked keywords yet. Track some in MonoRanks to see them move here.', 'monoranks')} />}
     </GrowCard>
   );
@@ -203,33 +196,32 @@ function Report({ d }: { d: GrowData['report'] }) {
   const emails = d.state === 'ok' ? d.emails ?? [] : [];
   const reports = d.state === 'ok' ? d.reports ?? [] : [];
   return (
-    <Card className="grid gap-3 px-5 py-3.5">
+    <Card className="grid gap-2 px-7 py-5 max-[782px]:px-[18px]">
       {d.state === 'empty' ? (
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-[13px] text-ink2">{__('No reports yet. Create a website report, a client report or a weekly email in MonoRanks to share progress.', 'monoranks')}</span>
-          {d.all_link && <Button size="sm" variant="ghost" asChild><a href={out(d.all_link, 'reports')} {...ext}>{__('Open reports', 'monoranks')}</a></Button>}
+          <span className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-ink2">{__('No reports yet', 'monoranks')}<Tip text={__('Create a report or a weekly email in MonoRanks to share progress.', 'monoranks')} /></span>
+          {d.all_link && <Button size="sm" variant="ghost" asChild><a href={out(d.all_link, 'reports')} {...ext}>{__('All', 'monoranks')}<ArrowUpRight size={14} className="mr-flip" /></a></Button>}
         </div>
       ) : (
         <>
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <b className="text-[13px] font-semibold">{__('Reports', 'monoranks')}</b>
-            {d.all_link && <Button size="sm" variant="ghost" asChild><a href={out(d.all_link, 'reports')} {...ext}>{__('Open reports', 'monoranks')}</a></Button>}
+            <h2 className="text-[18px] font-bold tracking-[-0.01em]">{__('Reports', 'monoranks')}</h2>
+            {d.all_link && <Button size="sm" variant="ghost" asChild><a href={out(d.all_link, 'reports')} {...ext}>{__('All', 'monoranks')}<ArrowUpRight size={14} className="mr-flip" /></a></Button>}
           </div>
           <ul className="m-0 flex list-none flex-col p-0">
             {emails.map((m, i) => (
-              <li key={`e${i}`} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-grid py-2 last:border-b-0">
-                <span className="text-[13px]"><b className="font-semibold"><bdi>{m.name}</bdi></b> <span className="text-mute">· {__('Weekly email', 'monoranks')}</span></span>
-                <span className="flex flex-wrap items-center gap-2 text-[12px] text-ink2">
-                  {m.enabled && m.next_label ? <span>{sprintf(__('Next send %s', 'monoranks'), m.next_label)}</span> : null}
+              <li key={`e${i}`} className="flex min-h-[52px] flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-grid py-2 last:border-b-0">
+                <span className="inline-flex items-center gap-2 text-[14px]"><b className="font-semibold"><bdi>{m.name}</bdi></b><Badge>{__('Weekly email', 'monoranks')}</Badge>{m.enabled && m.next_label ? <Tip text={sprintf(__('Next send %s', 'monoranks'), m.next_label)} /> : null}</span>
+                <span className="flex flex-wrap items-center gap-2 text-[13px] text-ink2">
                   <span>{sprintf(_n('%s recipient', '%s recipients', m.recipients, 'monoranks'), fmt(m.recipients))}</span>
-                  <Badge>{m.enabled ? __('On', 'monoranks') : __('Off', 'monoranks')}</Badge>
+                  <Badge variant="pill"><span className={`inline-block h-2 w-2 rounded-full ${m.enabled ? 'bg-good' : 'bg-mute'}`} />{m.enabled ? __('On', 'monoranks') : __('Off', 'monoranks')}</Badge>
                 </span>
               </li>
             ))}
             {reports.map((r, i) => (
-              <li key={`r${i}`} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-grid py-2 last:border-b-0">
-                <span className="text-[13px]"><b className="font-semibold"><bdi>{r.scope || r.title}</bdi></b> <span className="text-mute">· {r.client ? __('Client report', 'monoranks') : __('Report', 'monoranks')}{r.when ? ` · ${r.when}` : ''}</span></span>
-                {r.link && <Button size="sm" asChild><a href={out(r.link, 'latest-report')} {...ext}>{__('Open report', 'monoranks')}<span className="sr-only"> {__('(opens in a new tab)', 'monoranks')}</span></a></Button>}
+              <li key={`r${i}`} className="flex min-h-[52px] flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-grid py-2 last:border-b-0">
+                <span className="inline-flex items-center gap-2 text-[14px]"><b className="font-semibold"><bdi>{r.scope || r.title}</bdi></b><Badge>{r.client ? __('Client report', 'monoranks') : __('Report', 'monoranks')}</Badge>{r.when && <Tip text={r.when} />}</span>
+                {r.link && <Button size="sm" asChild><a href={out(r.link, 'latest-report')} {...ext}>{__('Open', 'monoranks')}<ArrowUpRight size={14} className="mr-flip" /><span className="sr-only"> {__('(opens in a new tab)', 'monoranks')}</span></a></Button>}
               </li>
             ))}
           </ul>

@@ -3,22 +3,25 @@ import { Slot } from 'radix-ui';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-/** shadcn's Button with the MonoRanks app's variants: default (bordered), primary (ink), accent (blue), ghost. */
+/**
+ * shadcn's Button with the MonoRanks app's redesign (1.29): square, bold, no border. Default is a soft accent tint,
+ * primary a solid accent fill with white text (never black), ghost text only.
+ */
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-[7px] whitespace-nowrap rounded-md border text-[13px] font-medium leading-none transition-[background-color,border-color,color,opacity] duration-100 disabled:pointer-events-none disabled:opacity-55 [&_svg]:pointer-events-none [&_svg]:shrink-0 cursor-pointer',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-none border-0 font-bold leading-none no-underline transition-[background-color,color,opacity] duration-100 disabled:pointer-events-none disabled:opacity-55 [&_svg]:pointer-events-none [&_svg]:shrink-0 cursor-pointer',
   {
     variants: {
       variant: {
-        default: 'border-border bg-surface text-ink hover:bg-surface2 hover:border-line',
-        primary: 'border-primary bg-primary text-primary-foreground hover:opacity-85',
-        accent: 'border-brand bg-brand text-white hover:opacity-85',
-        ghost: 'border-transparent bg-transparent text-ink2 hover:bg-surface3 hover:text-ink',
-        danger: 'border-critical/50 bg-surface text-critical hover:border-critical hover:bg-critical hover:text-white',
-        dangerSolid: 'border-critical bg-critical text-white hover:opacity-85',
+        default: 'bg-tint text-brand-ink hover:bg-tint2 hover:text-brand-ink',
+        primary: 'bg-brand text-white hover:opacity-90 hover:text-white',
+        accent: 'bg-brand text-white hover:opacity-90 hover:text-white',
+        ghost: 'bg-transparent text-ink2 hover:bg-tint hover:text-brand-ink',
+        danger: 'bg-[color-mix(in_srgb,var(--critical)_10%,var(--surface))] text-critical hover:bg-critical hover:text-white',
+        dangerSolid: 'bg-critical text-white hover:opacity-90 hover:text-white',
       },
       size: {
-        default: 'h-[34px] px-3',
-        sm: 'h-7 px-[10px] text-[12px]',
+        default: 'h-10 px-[18px] text-[14px]',
+        sm: 'h-8 px-3 text-[13px]',
         icon: 'h-8 w-8 px-0',
       },
     },

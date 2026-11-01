@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-10-25T13:25:53+00:00",
+    "translation-revision-date": "2026-11-01T16:45:16+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -10,50 +10,62 @@
                 "lang": "fa_IR",
                 "plural-forms": "nplurals=2; plural=(n > 1);"
             },
+            "After": [
+                "بعد"
+            ],
+            "Page": [
+                "صفحه"
+            ],
             "No changes yet": [
                 "هنوز تغییری نیست"
             ],
             "Fixes you approve in MonoRanks show up here, each with Undo.": [
                 "اصلاح‌هایی که در مونورنکس تأیید می‌کنید اینجا دیده می‌شوند، هرکدام با گزینهٔ بازگردانی."
             ],
+            "Change": [
+                "تغییر"
+            ],
             "When": [
                 "زمان"
-            ],
-            "Who": [
-                "چه کسی"
-            ],
-            "Field": [
-                "فیلد"
-            ],
-            "Where": [
-                "کجا"
-            ],
-            "Before": [
-                "قبل"
-            ],
-            "After": [
-                "بعد"
             ],
             "Undo": [
                 "بازگردانی"
             ],
-            "Not scored yet": [
-                "هنوز امتیاز نگرفته"
+            "Before": [
+                "قبل"
+            ],
+            "By": [
+                "توسط"
+            ],
+            "Not checked yet": [
+                "هنوز بررسی نشده"
             ],
             "%s of 100": [
                 "%s از ۱۰۰"
             ],
-            "%s vs previous 28 days": [
+            "Good": [
+                "خوب"
+            ],
+            "Needs work": [
+                "نیاز به کار"
+            ],
+            "Poor": [
+                "ضعیف"
+            ],
+            "%s vs last 28 days": [
                 "%s نسبت به ۲۸ روز قبل"
             ],
-            "%s this week": [
-                "%s این هفته"
+            "%1$s since %2$s": [
+                "%1$s از %2$s"
             ],
-            "Next audit": [
-                "ممیزی بعدی"
+            "Next check": [
+                "بررسی بعدی"
             ],
             "Fixes": [
                 "اصلاح‌ها"
+            ],
+            "Allow": [
+                "اجازه دادن"
             ],
             "Settings": [
                 "تنظیمات"
@@ -63,6 +75,9 @@
             ],
             "Something went wrong. Try again.": [
                 "مشکلی پیش آمد. دوباره تلاش کنید."
+            ],
+            "Send content": [
+                "ارسال محتوا"
             ],
             "Recent changes": [
                 "تغییرات اخیر"
@@ -100,27 +115,24 @@
             "Sending published content to MonoRanks. Nothing else leaves this site.": [
                 "محتوای منتشرشده به مونورنکس فرستاده می‌شود. چیز دیگری از این سایت خارج نمی‌شود."
             ],
-            "Connector key": [
-                "کلید اتصال"
-            ],
-            "Last sync": [
-                "آخرین همگام‌سازی"
-            ],
-            "sending, batch %1$s of %2$s": [
-                "در حال ارسال، دستهٔ %1$s از %2$s"
+            "Last sent": [
+                "آخرین ارسال"
             ],
             "%s published item": [
                 "%s مورد منتشرشده",
                 "%s مورد منتشرشده"
             ],
-            "Fixes written with": [
-                "اصلاح‌ها نوشته می‌شوند با"
+            "sending, batch %1$s of %2$s": [
+                "در حال ارسال، دستهٔ %1$s از %2$s"
             ],
-            "App password": [
-                "گذرواژهٔ برنامه"
+            "Written with the \"MonoRanks\" Application Password. Revoke it to stop writes.": [
+                "با گذرواژه برنامه «MonoRanks» نوشته می‌شود. برای توقف نوشتن، آن را لغو کنید."
             ],
-            "Fixes are written with the \"MonoRanks\" Application Password. Revoke it in your profile to stop writes.": [
-                "اصلاح‌ها با گذرواژهٔ برنامهٔ «MonoRanks» نوشته می‌شوند. برای توقف نوشتن، آن را در نمایه‌تان لغو کنید."
+            "Approve MonoRanks in WordPress so it can write the fixes you accept.": [
+                "MonoRanks را در وردپرس تأیید کنید تا اصلاح‌هایی که می‌پذیرید را بنویسد."
+            ],
+            "Allowed": [
+                "مجاز"
             ],
             "Revoke": [
                 "لغو"
@@ -128,32 +140,20 @@
             "Not set up": [
                 "تنظیم نشده"
             ],
-            "Approve MonoRanks in WordPress so it can write the fixes you accept.": [
-                "MonoRanks را در وردپرس تأیید کنید تا اصلاح‌هایی که می‌پذیرید را بنویسد."
+            "SEO plugin": [
+                "افزونه سئو"
             ],
-            "Allow": [
-                "اجازه دادن"
-            ],
-            "Works with": [
-                "سازگار با"
-            ],
-            "%s detected": [
-                "%s شناسایی شد"
-            ],
-            "MonoRanks cannot write titles, descriptions, canonicals or noindex into %s yet, so those fixes are refused": [
-                "مونورنکس هنوز نمی‌تواند عنوان، توضیحات، canonical یا noindex را در %s بنویسد، پس این اصلاح‌ها رد می‌شوند"
+            "MonoRanks cannot write titles, descriptions, main versions or hiding from Google into %s yet, so those fixes are refused": [
+                "مونورنکس هنوز نمی‌تواند عنوان، توضیحات، نسخه اصلی یا پنهان‌سازی از گوگل را در %s بنویسد، پس این اصلاح‌ها رد می‌شوند"
             ],
             "titles and descriptions go into the fields %s reads": [
                 "عنوان‌ها و توضیح‌ها در فیلدهایی نوشته می‌شوند که %s می‌خواند"
             ],
-            "No SEO plugin": [
-                "بدون افزونهٔ سئو"
+            "MonoRanks adds the approved title, description, main version and hiding from Google itself": [
+                "مونورنکس عنوان، توضیحات، نسخه اصلی و پنهان‌سازی از گوگلِ تأییدشده را خودش اضافه می‌کند"
             ],
-            "MonoRanks prints the approved title, description, canonical and noindex tags itself": [
-                "مونورنکس خودش تگ‌های تأییدشدهٔ عنوان، توضیح، کانونیکال و noindex را چاپ می‌کند"
-            ],
-            "Send content now": [
-                "ارسال محتوا"
+            "None": [
+                "هیچ"
             ],
             "Disconnect stops sending. Fixes already applied stay.": [
                 "قطع اتصال ارسال را متوقف می‌کند. اصلاح‌های اعمال‌شده می‌مانند."
@@ -191,8 +191,8 @@
             "Can change": [
                 "می‌تواند تغییر دهد"
             ],
-            "SEO title, meta description, canonical, noindex, image alt text, redirects, one opening paragraph, AI crawler rules, llms.txt. Only after you approve each one.": [
-                "عنوان سئو، توضیح متا، کانونیکال، noindex، متن جایگزین تصویر، تغییر مسیرها، یک پاراگراف آغازین، قوانین خزنده‌های هوش مصنوعی، llms.txt. فقط پس از آنکه هرکدام را تأیید کنید."
+            "Title, description, main version, hiding from Google, image text, redirects, one opening paragraph, AI tool rules, AI site summary. Only after you approve each one.": [
+                "عنوان، توضیحات، نسخه اصلی، پنهان‌سازی از گوگل، متن تصویر، تغییر مسیرها، یک پاراگراف آغازین، قوانین ابزارهای هوش مصنوعی، خلاصه سایت برای هوش مصنوعی. فقط پس از تأیید هر کدام."
             ],
             "Last 50 · undo for 30 days": [
                 "۵۰ مورد آخر · بازگردانی تا ۳۰ روز"
@@ -212,14 +212,20 @@
             "Cancel": [
                 "انصراف"
             ],
-            "Delete all MonoRanks data": [
-                "پاک کردن همهٔ داده‌های مونورنکس"
+            "Delete all data": [
+                "پاک کردن همه داده‌ها"
+            ],
+            "Connector key": [
+                "کلید اتصال"
             ],
             "MonoRanks address (development sites only)": [
                 "نشانی مونورنکس (فقط سایت‌های توسعه)"
             ],
             "Save key": [
                 "ذخیره کلید"
+            ],
+            "No access yet.": [
+                "هنوز دسترسی ندارد."
             ],
             "(opens in a new tab)": [
                 "(در زبانهٔ تازه باز می‌شود)"
@@ -230,14 +236,11 @@
             "Updated %s": [
                 "به‌روزشده %s"
             ],
-            "The MonoRanks key of this site cannot read this yet. Allow it under Integrations in MonoRanks, or connect again.": [
-                "کلید مونورنکس این سایت هنوز اجازهٔ خواندن این را ندارد. در مونورنکس از بخش یکپارچه‌سازی‌ها اجازه دهید، یا دوباره متصل کنید."
+            "Allow it under Integrations in MonoRanks, or connect again.": [
+                "در بخش یکپارچه‌سازی‌های مونورنکس اجازه دهید، یا دوباره وصل شوید."
             ],
-            "Open Integrations": [
-                "باز کردن یکپارچه‌سازی‌ها"
-            ],
-            "Not available in your MonoRanks yet.": [
-                "هنوز در مونورنکس شما در دسترس نیست."
+            "Not available yet.": [
+                "هنوز در دسترس نیست."
             ],
             "Could not reach MonoRanks. Retrying soon.": [
                 "دسترسی به MonoRanks ممکن نشد. به‌زودی دوباره تلاش می‌شود."
@@ -245,21 +248,18 @@
             "Checking…": [
                 "در حال بررسی…"
             ],
-            "Outreach": [
-                "جذب لینک"
+            "Ask for links": [
+                "درخواست لینک"
             ],
             "%s to contact": [
                 "%s برای تماس",
                 "%s برای تماس"
             ],
-            "All targets": [
-                "همهٔ هدف‌ها"
+            "All": [
+                "همه"
             ],
             "Every target is contacted. MonoRanks looks for new ones each week.": [
                 "با همهٔ هدف‌ها تماس گرفته شده. مونورنکس هر هفته هدف‌های تازه پیدا می‌کند."
-            ],
-            "Sites worth asking for a link or a mention. MonoRanks never sends email; you reach out and set the status there.": [
-                "سایت‌هایی که ارزش دارد از آن‌ها لینک یا نام‌بردن بخواهید. مونورنکس هرگز ایمیل نمی‌فرستد؛ تماس با شماست و وضعیت را در مونورنکس ثبت می‌کنید."
             ],
             "No outreach targets yet. MonoRanks looks for pages worth a link each week.": [
                 "هنوز هدفی برای جذب لینک نیست. مونورنکس هر هفته صفحه‌هایی را پیدا می‌کند که ارزش لینک‌گرفتن دارند."
@@ -267,25 +267,21 @@
             "Backlinks": [
                 "بک‌لینک‌ها"
             ],
-            "All backlinks": [
-                "همهٔ بک‌لینک‌ها"
+            "Won": [
+                "به‌دست‌آمده"
             ],
-            "websites linking to you, won and lost in 28 days": [
-                "سایت‌هایی که به شما لینک می‌دهند، به‌دست‌آمده و ازدست‌رفته در ۲۸ روز"
+            "New websites linking to you, last 28 days.": [
+                "وب‌سایت‌های تازه‌ای که در ۲۸ روز گذشته به شما لینک داده‌اند."
             ],
-            "%s website links to you": [
-                "%s سایت به شما لینک می‌دهد",
-                "%s سایت به شما لینک می‌دهند"
+            "Lost": [
+                "از دست‌رفته"
             ],
-            "%s to review for spam": [
-                "%s مورد برای بررسی اسپم",
-                "%s مورد برای بررسی اسپم"
+            "Linking sites": [
+                "سایت‌های لینک‌دهنده"
             ],
-            "Newest strong links": [
-                "تازه‌ترین لینک‌های قوی"
-            ],
-            "strength %s": [
-                "قدرت %s"
+            "%s to check for spam": [
+                "%s برای بررسی هرزنامه",
+                "%s برای بررسی هرزنامه"
             ],
             "No backlink data yet. MonoRanks refreshes it weekly.": [
                 "هنوز داده‌ای از بک‌لینک‌ها نیست. مونورنکس آن را هر هفته به‌روز می‌کند."
@@ -293,19 +289,22 @@
             "Competitors": [
                 "رقیبان"
             ],
-            "%s keyword gap": [
-                "%s شکاف کلیدواژه",
-                "%s شکاف کلیدواژه"
+            "%s gap": [
+                "%s شکاف",
+                "%s شکاف"
             ],
-            "All competitors": [
-                "همهٔ رقیبان"
-            ],
-            "suggested": [
+            "Suggested": [
                 "پیشنهادی"
             ],
             "%1$s shared keyword, %2$s where they rank higher": [
                 "%1$s کلیدواژهٔ مشترک، در %2$s مورد بالاتر از شما",
                 "%1$s کلیدواژهٔ مشترک، در %2$s مورد بالاتر از شما"
+            ],
+            "%s ahead of you": [
+                "%s جلوتر از شما"
+            ],
+            "Words you miss": [
+                "کلمه‌هایی که ندارید"
             ],
             "They rank for these, you do not": [
                 "آن‌ها برای این‌ها رتبه دارند، شما نه"
@@ -325,11 +324,8 @@
             "%1$s → %2$s": [
                 "%1$s ← %2$s"
             ],
-            "Keyword movers this week": [
-                "جابه‌جایی کلیدواژه‌ها در این هفته"
-            ],
-            "All keywords": [
-                "همهٔ کلیدواژه‌ها"
+            "Keyword moves": [
+                "جابه‌جایی کلمات کلیدی"
             ],
             "Up": [
                 "بالا رفته"
@@ -344,38 +340,39 @@
             "No tracked keywords yet. Track some in MonoRanks to see them move here.": [
                 "هنوز کلیدواژهٔ پیگیری‌شده‌ای نیست. در مونورنکس چند کلیدواژه را پیگیری کنید تا جابه‌جایی‌شان را اینجا ببینید."
             ],
-            "No reports yet. Create a website report, a client report or a weekly email in MonoRanks to share progress.": [
-                ""
+            "No reports yet": [
+                "هنوز گزارشی نیست"
             ],
-            "Open reports": [
-                "باز کردن گزارش‌ها"
+            "Create a report or a weekly email in MonoRanks to share progress.": [
+                "برای اشتراک پیشرفت، در مونورنکس یک گزارش یا ایمیل هفتگی بسازید."
             ],
             "Reports": [
-                ""
+                "گزارش‌ها"
             ],
             "Weekly email": [
-                ""
+                "ایمیل هفتگی"
             ],
             "Next send %s": [
-                ""
+                "ارسال بعدی %s"
             ],
             "%s recipient": [
-                ""
+                "%s گیرنده",
+                "%s گیرنده"
             ],
             "On": [
-                ""
+                "روشن"
             ],
             "Off": [
-                ""
+                "خاموش"
             ],
             "Client report": [
-                ""
+                "گزارش مشتری"
             ],
             "Report": [
-                ""
+                "گزارش"
             ],
-            "Open report": [
-                "باز کردن گزارش"
+            "Open": [
+                "باز کردن"
             ],
             "Connect MonoRanks": [
                 "اتصال مونورنکس"
@@ -383,134 +380,121 @@
             "Health": [
                 "سلامت"
             ],
-            "AEO": [
-                "AEO"
+            "AI": [
+                "هوش مصنوعی"
+            ],
+            "Open MonoRanks": [
+                "باز کردن مونورنکس"
             ],
             "%s ready to apply": [
                 "%s آمادهٔ اعمال",
                 "%s آمادهٔ اعمال"
             ],
-            "Connect Google Search Console in MonoRanks to see clicks here.": [
-                "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
+            "Nothing waiting": [
+                "چیزی در انتظار نیست"
             ],
             "Overview": [
                 "نمای کلی"
             ],
-            "Site": [
-                "سایت"
+            "Whole site": [
+                "کل سایت"
             ],
-            "Health score": [
-                "امتیاز سلامت"
+            "Adds one short answer at the top of the page. See it first in MonoRanks.": [
+                "یک پاسخ کوتاه به بالای صفحه اضافه می‌کند. اول آن را در مونورنکس ببینید."
             ],
-            "AEO score": [
-                "امتیاز AEO"
-            ],
-            "on %s": [
-                ""
-            ],
-            "Image: %s": [
-                ""
-            ],
-            "Adds one answer-first paragraph at the top. Review the before/after in MonoRanks first.": [
-                "یک پاراگراف پاسخ‌محور به بالای نوشته اضافه می‌کند. ابتدا قبل/بعد را در مونورنکس بررسی کنید."
+            "Now": [
+                "اکنون"
             ],
             "(empty)": [
-                ""
+                "(خالی)"
             ],
-            "changes to": [
-                ""
+            "Image: %s": [
+                "تصویر: %s"
             ],
             "Could not load the overview.": [
                 "بارگذاری نمای کلی ممکن نشد."
             ],
-            "Weekly SEO, AEO and GEO audit of": [
-                "ممیزی هفتگی SEO، AEO و GEO برای"
+            "Checked %s": [
+                "بررسی‌شده %s"
             ],
-            "last audit %s": [
-                "آخرین ممیزی %s"
+            "Sends your published pages to MonoRanks now. It also happens by itself.": [
+                "صفحه‌های منتشرشده را همین حالا به مونورنکس می‌فرستد. این کار خودکار هم انجام می‌شود."
             ],
-            "%1$s of %2$s published pages scored": [
-                "%1$s از %2$s صفحهٔ منتشرشده امتیاز گرفته"
+            "Site health": [
+                "سلامت سایت"
             ],
-            "Sync content now": [
-                "همگام‌سازی محتوا"
+            "Average of %1$s page out of %2$s published.": [
+                "میانگین %1$s صفحه از %2$s صفحه منتشرشده.",
+                "میانگین %1$s صفحه از %2$s صفحه منتشرشده."
             ],
-            "Technical, on-page, links, speed": [
-                "فنی، درون‌صفحه، پیوندها، سرعت"
+            "AI answers ready": [
+                "آماده برای پاسخ‌های هوش مصنوعی"
             ],
-            "Site average, %s page": [
-                "میانگین سایت، %s صفحه",
-                "میانگین سایت، %s صفحه"
+            "How easily AI answers can quote your pages.": [
+                "پاسخ‌های هوش مصنوعی چقدر راحت می‌توانند از صفحه‌های شما نقل کنند."
             ],
-            "Answer-first, structure, entities": [
-                "پاسخ‌محوری، ساختار، موجودیت‌ها"
+            "Search clicks": [
+                "کلیک‌های جستجو"
             ],
-            "How well AI answers can use your pages": [
-                "پاسخ‌های هوش مصنوعی چقدر می‌توانند از صفحه‌های شما استفاده کنند"
+            "Clicks from Google in the last 28 days.": [
+                "کلیک‌ها از گوگل در ۲۸ روز گذشته."
             ],
-            "Search clicks, 28 days": [
-                "کلیک‌های جستجو، ۲۸ روز"
+            "Connect Google Search Console in MonoRanks to see clicks here.": [
+                "برای دیدن کلیک‌ها، گوگل سرچ کنسول را در مونورنکس متصل کنید."
             ],
-            "From Google Search Console, through MonoRanks": [
-                "از گوگل سرچ کنسول، از طریق مونورنکس"
+            "Fixes applied": [
+                "اصلاح‌های اعمال‌شده"
+            ],
+            "AI tool rules on": [
+                "قوانین ابزارهای هوش مصنوعی فعال است"
+            ],
+            "No AI tool rules": [
+                "بدون قوانین ابزارهای هوش مصنوعی"
+            ],
+            "AI site summary published": [
+                "خلاصه سایت برای هوش مصنوعی منتشر شده"
+            ],
+            "No AI site summary": [
+                "بدون خلاصه سایت برای هوش مصنوعی"
+            ],
+            "30 days": [
+                "۳۰ روز"
             ],
             "%s ready": [
+                "%s آماده",
                 "%s آماده"
             ],
-            "applied in 30 days": [
-                "اعمال‌شده در ۳۰ روز"
+            "Pages to fix": [
+                "صفحه‌های نیازمند اصلاح"
             ],
-            "%s waiting for your approval in MonoRanks": [
-                "%s مورد در مونورنکس منتظر تأیید شماست"
+            "All pages": [
+                "همه صفحه‌ها"
             ],
-            "AI crawler rules on": [
-                "قوانین خزنده‌های هوش مصنوعی فعال"
+            "Fix": [
+                "اصلاح"
             ],
-            "No AI crawler rules": [
-                "بدون قوانین خزندهٔ هوش مصنوعی"
+            "Nothing to fix right now": [
+                "فعلاً چیزی برای اصلاح نیست"
             ],
-            "llms.txt published": [
-                "llms.txt منتشر شده"
-            ],
-            "No llms.txt": [
-                "بدون llms.txt"
-            ],
-            "Pages needing attention": [
-                "صفحه‌های نیازمند توجه"
-            ],
-            "All pages in MonoRanks": [
-                "همهٔ صفحه‌ها در مونورنکس"
-            ],
-            "Page": [
-                "صفحه"
-            ],
-            "Biggest issue": [
-                "بزرگ‌ترین مشکل"
-            ],
-            "Fix in MonoRanks": [
-                "اصلاح در مونورنکس"
-            ],
-            "Nothing needs attention": [
-                "چیزی نیازمند توجه نیست"
-            ],
-            "Every scored page is above 60. The next audit may change that.": [
-                "همهٔ صفحه‌های امتیازگرفته بالای ۶۰ هستند. ممیزی بعدی ممکن است این را تغییر دهد."
+            "Every checked page scores 60 or more.": [
+                "همه صفحه‌های بررسی‌شده امتیاز ۶۰ یا بیشتر دارند."
             ],
             "Ready to apply": [
                 "آمادهٔ اعمال"
             ],
-            "Approved in MonoRanks. Each write is logged under Settings and can be undone for 30 days.": [
-                "در مونورنکس تأیید شده. هر نوشتن در تنظیمات ثبت می‌شود و تا ۳۰ روز قابل بازگردانی است."
+            "Approved in MonoRanks. Each one can be undone for 30 days.": [
+                "در مونورنکس تأیید شده. هر کدام تا ۳۰ روز قابل بازگردانی است."
             ],
             "Apply all": [
                 "اعمال همه"
             ],
-            "%s fixes are ready for your approval": [
-                "%s اصلاح آماده‌ی تأیید شماست"
+            "%s fix to approve": [
+                "%s اصلاح برای تأیید",
+                "%s اصلاح برای تأیید"
             ],
-            "%s needs a value in MonoRanks": [
-                "%s نیاز به مقدار در مونورنکس",
-                "%s نیاز به مقدار در مونورنکس"
+            "%s needs a value": [
+                "%s نیاز به مقدار دارد",
+                "%s نیاز به مقدار دارند"
             ],
             "Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo.": [
                 "در مونورنکس مقدار را بنویسید یا با هوش مصنوعی پیش‌نویس کنید و تأیید کنید تا این‌جا نوشته شود، با امکان بازگردانی."
@@ -518,8 +502,8 @@
             "Approve them in MonoRanks and they are written here, with undo.": [
                 "در مونورنکس تأییدشان کنید تا این‌جا نوشته شوند، با امکان بازگردانی."
             ],
-            "Review in MonoRanks": [
-                "بررسی در مونورنکس"
+            "Review fixes": [
+                "بررسی اصلاح‌ها"
             ],
             "No fixes waiting": [
                 "اصلاحی در انتظار نیست"
@@ -533,14 +517,17 @@
             "Apply": [
                 "اعمال"
             ],
-            "Needs review in MonoRanks": [
-                ""
+            "Check in MonoRanks": [
+                "بررسی در مونورنکس"
             ],
-            "These changed in WordPress after they were reviewed, so they are not applied from here. Review them again in MonoRanks.": [
-                ""
+            "Changed in WordPress after you approved them, so they are not applied from here.": [
+                "پس از تأیید شما در وردپرس تغییر کرده‌اند، پس از اینجا اعمال نمی‌شوند."
             ],
             "All changes": [
                 "همهٔ تغییرات"
+            ],
+            "Biggest problem": [
+                "بزرگ‌ترین مشکل"
             ],
             "Connect MonoRanks again": [
                 "مونورنکس را دوباره متصل کنید"
@@ -554,20 +541,20 @@
             "Not shared yet": [
                 "هنوز به اشتراک گذاشته نشده"
             ],
-            "This MonoRanks does not share audit results with the plugin yet. Scores stay in MonoRanks for now; the plugin asks again tomorrow.": [
-                "این مونورنکس هنوز نتایج ممیزی را با افزونه به اشتراک نمی‌گذارد. فعلاً امتیازها در مونورنکس می‌مانند؛ افزونه فردا دوباره می‌پرسد."
+            "This MonoRanks does not share results with the plugin yet. It asks again tomorrow.": [
+                "این نسخه مونورنکس هنوز نتایج را با افزونه به اشتراک نمی‌گذارد. فردا دوباره می‌پرسد."
             ],
             "MonoRanks not reached": [
                 "دسترسی به مونورنکس ممکن نشد"
             ],
-            "MonoRanks could not be reached for the audit results. The plugin tries again within the hour, or when you reload this screen.": [
-                "برای دریافت نتایج ممیزی دسترسی به مونورنکس ممکن نشد. افزونه تا یک ساعت دیگر یا با بارگذاری دوباره این صفحه، دوباره تلاش می‌کند."
+            "Tried again within the hour, or when you reload this screen.": [
+                "تا یک ساعت دیگر یا با بارگذاری دوباره این صفحه، دوباره تلاش می‌شود."
             ],
-            "MonoRanks has not scored this site yet. Scores appear here and in the Posts list after the first weekly audit.": [
-                "مونورنکس هنوز به این سایت امتیاز نداده است. امتیازها پس از نخستین ممیزی هفتگی اینجا و در فهرست نوشته‌ها دیده می‌شوند."
+            "Scores appear here and in the Posts list after the first weekly check.": [
+                "امتیازها پس از نخستین بررسی هفتگی، اینجا و در فهرست نوشته‌ها نمایش داده می‌شوند."
             ],
-            "Waiting for the first audit": [
-                "در انتظار نخستین ممیزی"
+            "Waiting for the first check": [
+                "در انتظار نخستین بررسی"
             ],
             "Content": [
                 "محتوا"
@@ -575,26 +562,32 @@
             "%1$s published items sent %2$s": [
                 "%1$s مورد منتشرشده %2$s فرستاده شد"
             ],
-            "Not sent. Use \"Sync content now\".": [
-                "ارسال نشد. «همگام‌سازی محتوا» را بزنید."
+            "Not sent. Use \"Send content\".": [
+                "ارسال نشد. از «ارسال محتوا» استفاده کنید."
             ],
             "Sending…": [
                 "در حال ارسال…"
             ],
-            "Audit results": [
-                "نتایج ممیزی"
+            "Results": [
+                "نتایج"
             ],
             "checked %s": [
                 "بررسی‌شده %s"
             ],
-            "Open the audit in MonoRanks": [
-                "باز کردن ممیزی در مونورنکس"
+            "Urgent": [
+                "فوری"
+            ],
+            "High": [
+                "زیاد"
+            ],
+            "Medium": [
+                "متوسط"
+            ],
+            "Low": [
+                "کم"
             ],
             "More info": [
                 "اطلاعات بیشتر"
-            ],
-            "Open MonoRanks": [
-                "باز کردن مونورنکس"
             ],
             "MonoRanks sections": [
                 "بخش‌های مونورنکس"
@@ -602,17 +595,8 @@
             "Help": [
                 "راهنما"
             ],
-            "Your data": [
-                "داده‌های شما"
-            ],
-            "What is sent and what can change": [
-                "چه چیزی فرستاده می‌شود و چه چیزی می‌تواند تغییر کند"
-            ],
-            "Need a hand?": [
-                "کمک لازم دارید؟"
-            ],
-            "Help and resources": [
-                "راهنما و منابع"
+            "A product by VeronaLabs": [
+                "محصولی از ورونا لبز"
             ],
             "A product by": [
                 "محصولی از"

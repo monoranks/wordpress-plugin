@@ -1,10 +1,12 @@
 import type { ReactNode } from 'react';
 import { __ } from '@wordpress/i18n';
-import { ArrowUpRight, ArrowRight, CheckCircle2, AlertCircle, AlertTriangle } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, AlertCircle, AlertTriangle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { adminSettings, type Notice } from '@/settings';
 import { Notices } from '@/shell/Notices';
 import { cn } from '@/lib/utils';
 import { out } from '@/lib/links';
+import { Tip } from '@/components/ui/tip';
 import type { Screen } from '@/lib/screen';
 
 /** The plugin's own SVG (assets/*.svg), inlined so currentColor applies. Static files shipped with the plugin. */
@@ -15,8 +17,8 @@ export function Logo({ which, className }: { which: 'wordmark' | 'mark' | 'veron
 const measure = 'mx-auto w-full max-w-[1260px] px-10 max-[960px]:px-6 max-[782px]:px-4';
 
 /**
- * The frame: a dark brand band (logo, section links, help, a way into MonoRanks), the light title area, the work area,
- * and the service footer with the publisher credit.
+ * The frame, in the app's redesign: a light top bar (logo, section tabs with an accent line under the chosen one, help,
+ * a way into MonoRanks), the title, the work area on the grey page, and one quiet footer line.
  */
 export function Shell({ section, go, title, description, actions, children }: { section: Screen; go: (next: Screen) => void; title: string; description?: ReactNode; actions?: ReactNode; children: ReactNode }) {
   const s = adminSettings();
@@ -26,32 +28,32 @@ export function Shell({ section, go, title, description, actions, children }: { 
   ];
   return (
     <>
-      <header className="bg-band text-band-ink">
-        <div className={cn(measure, 'flex min-h-16 items-center gap-7 max-[782px]:gap-3')}>
-          <a href={s.urls.overview} onClick={(e) => { e.preventDefault(); go('overview'); }} className="inline-flex items-center text-band-ink hover:text-white"><Logo which="wordmark" className="[&>svg]:h-7 [&>svg]:w-[138px]" /></a>
-          <nav className="flex self-stretch gap-[22px] max-[782px]:gap-3" aria-label={__('MonoRanks sections', 'monoranks')}>
+      <header className="bg-surface shadow-[inset_0_-1px_0_var(--border)]">
+        <div className={cn(measure, 'flex min-h-[68px] items-center gap-8 max-[782px]:gap-3')}>
+          <a href={s.urls.overview} onClick={(e) => { e.preventDefault(); go('overview'); }} className="inline-flex items-center text-ink hover:text-ink"><Logo which="wordmark" className="[&>svg]:h-7 [&>svg]:w-[138px]" /></a>
+          <nav className="flex self-stretch gap-2 max-[782px]:gap-0" aria-label={__('MonoRanks sections', 'monoranks')}>
             {sections.map((e) => (
               <a key={e.id} href={e.href} onClick={(ev) => { ev.preventDefault(); go(e.id); }} aria-current={section === e.id ? 'page' : undefined}
-                className={cn('inline-flex items-center border-b-2 pt-[2px] text-[13px] font-medium', section === e.id ? 'border-brand text-band-ink' : 'border-transparent text-band-muted hover:text-white')}>{e.label}</a>
+                className={cn('inline-flex items-center border-b-[3px] px-3 pt-[3px] text-[15px]', section === e.id ? 'border-brand font-bold text-ink hover:text-ink' : 'border-transparent font-semibold text-ink2 hover:text-ink')}>{e.label}</a>
             ))}
           </nav>
-          <div className="ms-auto flex items-center gap-1.5">
-            <a href={out(s.urls.docs, 'header-help', section)} target="_blank" rel="noopener" className="inline-flex h-8 items-center gap-1.5 rounded-md px-3 text-[12.5px] font-medium text-band-muted hover:bg-band-edge hover:text-white">{__('Help', 'monoranks')}</a>
-            <a href={out(s.urls.app, 'header-open', section)} target="_blank" rel="noopener" className="inline-flex h-8 items-center gap-1.5 rounded-md border border-band-edge px-3 text-[12.5px] font-medium text-band-ink hover:bg-band-edge hover:text-white max-[782px]:hidden">{__('Open MonoRanks', 'monoranks')}<ArrowUpRight size={14} className="mr-flip" /></a>
+          <div className="ms-auto flex items-center gap-1">
+            <Button variant="ghost" size="sm" asChild><a href={out(s.urls.docs, 'header-help', section)} target="_blank" rel="noopener">{__('Help', 'monoranks')}</a></Button>
+            <Button size="sm" asChild className="max-[782px]:hidden"><a href={out(s.urls.app, 'header-open', section)} target="_blank" rel="noopener">{__('Open MonoRanks', 'monoranks')}<ArrowUpRight size={15} className="mr-flip" /></a></Button>
           </div>
         </div>
       </header>
-      <div className={cn(measure, 'flex flex-wrap items-start justify-between gap-x-6 gap-y-3 pb-1.5 pt-[30px]')}>
+      <div className={cn(measure, 'flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pt-9')}>
         <div className="flex min-w-0 flex-[1_1_420px] flex-col gap-1.5">
-          <h1 className="text-[26px] font-semibold tracking-[-0.02em] leading-tight text-ink">{title}</h1>
-          {description && <p className="max-w-[72ch] text-ink2">{description}</p>}
+          <h1 className="text-[30px] font-bold leading-tight tracking-[-0.025em] text-ink">{title}</h1>
+          {description && <p className="text-[14px] text-mute">{description}</p>}
         </div>
-        {actions && <div className="flex flex-wrap items-center gap-2 pt-1">{actions}</div>}
+        {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
       </div>
       {/* WordPress moves its own notices to just before this marker; anything it leaves behind is collected below. */}
       <div className="wp-header-end" />
-      <Notices className={cn(measure, 'flex flex-col gap-2.5 pt-3')} />
-      <main className={cn(measure, 'flex flex-[1_0_auto] flex-col gap-5 pb-10 pt-[22px]')}>{children}</main>
+      <Notices className={cn(measure, 'flex flex-col gap-2.5 pt-4')} />
+      <main className={cn(measure, 'flex flex-[1_0_auto] flex-col gap-7 pb-12 pt-7')}>{children}</main>
       <Footer section={section} go={go} />
     </>
   );
@@ -59,24 +61,14 @@ export function Shell({ section, go, title, description, actions, children }: { 
 
 function Footer({ section, go }: { section: Screen; go: (next: Screen) => void }) {
   const s = adminSettings();
+  const link = 'inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink2 hover:text-brand-ink';
   return (
-    <footer className="mt-auto bg-band text-band-ink">
-      <div className={cn(measure, 'grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] items-center gap-8 py-7 max-[960px]:grid-cols-[minmax(0,1fr)_auto] max-[960px]:gap-5 max-[782px]:grid-cols-1')}>
-        <div className="inline-flex items-center gap-2.5"><Logo which="wordmark" className="[&>svg]:h-[26px] [&>svg]:w-[128px]" /><span className="rounded-md border border-band-edge px-[7px] py-[2px] text-[11px] font-medium text-band-muted">v{s.version}</span></div>
-        <div className="min-w-0 border-s border-band-edge ps-7 max-[960px]:col-start-1 max-[960px]:border-0 max-[960px]:ps-0">
-          <span className="mb-1.5 block text-[11px] uppercase tracking-[.08em] text-band-muted">{__('Your data', 'monoranks')}</span>
-          <a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }} className="inline-flex items-center gap-[7px] text-[13px] text-band-ink hover:text-white hover:underline hover:underline-offset-4">{__('What is sent and what can change', 'monoranks')}<ArrowUpRight size={14} className="mr-flip" /></a>
-        </div>
-        <a href={out(s.urls.docs, 'footer-help', section)} target="_blank" rel="noopener" className="block rounded-[9px] border border-band-edge px-[18px] py-3 text-start text-band-ink hover:bg-band-edge hover:text-white max-[960px]:col-start-2 max-[960px]:row-span-2 max-[960px]:row-start-1 max-[782px]:col-auto max-[782px]:row-auto">
-          <span className="mb-1.5 block text-[11px] text-band-muted">{__('Need a hand?', 'monoranks')}</span>
-          <strong className="flex items-center justify-between gap-5 text-[13px] font-medium">{__('Help and resources', 'monoranks')}<ArrowRight size={14} className="mr-flip" /></strong>
-        </a>
-      </div>
-      <div className={cn(measure)}>
-        <div className="flex items-center justify-center gap-3 border-t border-band-edge pb-[18px] pt-4 text-[11px] text-band-muted">
-          <span>{__('A product by', 'monoranks')}</span>
-          <a href={out('https://veronalabs.com/', 'footer-publisher', section)} target="_blank" rel="noopener" aria-label="VeronaLabs" className="inline-flex min-h-7 items-center text-band-muted opacity-75 hover:opacity-100 hover:text-band-muted"><Logo which="veronalabs" className="[&>svg]:h-auto [&>svg]:w-28" /></a>
-        </div>
+    <footer className="mt-auto">
+      <div className={cn(measure, 'flex flex-wrap items-center gap-x-7 gap-y-3 border-t border-border py-6 text-mute')}>
+        <span className="inline-flex items-center gap-2.5 text-ink"><Logo which="wordmark" className="[&>svg]:h-[22px] [&>svg]:w-[108px]" /><span className="text-[12px] font-semibold text-mute">v{s.version}</span></span>
+        <a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }} className={link}>{__('What is sent', 'monoranks')}</a>
+        <a href={out(s.urls.docs, 'footer-help', section)} target="_blank" rel="noopener" className={link}>{__('Help', 'monoranks')}<ArrowUpRight size={14} className="mr-flip" /></a>
+        <a href={out('https://veronalabs.com/', 'footer-publisher', section)} target="_blank" rel="noopener" aria-label={__('A product by VeronaLabs', 'monoranks')} className="ms-auto inline-flex min-h-7 items-center gap-2 text-[12px] text-mute opacity-80 hover:text-mute hover:opacity-100">{__('A product by', 'monoranks')}<Logo which="veronalabs" className="[&>svg]:h-auto [&>svg]:w-24" /></a>
       </div>
     </footer>
   );
@@ -88,9 +80,9 @@ export function NoticeBox({ notice }: { notice: Notice | null }) {
   const tone = { success: 'text-good-ink', error: 'text-critical', warning: 'text-warn' }[notice.type];
   const Icon = { success: CheckCircle2, error: AlertCircle, warning: AlertTriangle }[notice.type];
   return (
-    <div className={cn('notice', `notice-${notice.type}`, 'flex items-start gap-2.5')} role="status">
-      <Icon size={16} className={cn('mt-[1px] shrink-0', tone)} aria-hidden="true" />
-      <p className="text-ink">{notice.text}</p>
+    <div className={cn('notice', `notice-${notice.type}`, 'flex items-start gap-3')} role="status">
+      <Icon size={18} className={cn('mt-[1px] shrink-0', tone)} aria-hidden="true" />
+      <p className="font-semibold text-ink">{notice.text}</p>
     </div>
   );
 }
@@ -98,14 +90,15 @@ export function NoticeBox({ notice }: { notice: Notice | null }) {
 /** Label / value pairs, 150px label column. */
 export function KV({ rows }: { rows: [string, ReactNode][] }) {
   return (
-    <div className="grid grid-cols-[150px_minmax(0,1fr)] gap-x-3 gap-y-2 text-[12px] max-[960px]:grid-cols-1">
+    <div className="grid grid-cols-[150px_minmax(0,1fr)] gap-x-4 gap-y-2.5 text-[14px] max-[960px]:grid-cols-1">
       {rows.map(([k, v], i) => (
-        <div key={i} className="contents"><div className="text-mute max-[960px]:mt-1">{k}</div><div className="min-w-0 [overflow-wrap:anywhere]">{v}</div></div>
+        <div key={i} className="contents"><div className="font-semibold text-mute max-[960px]:mt-1">{k}</div><div className="min-w-0 [overflow-wrap:anywhere]">{v}</div></div>
       ))}
     </div>
   );
 }
 
-export function Empty({ title, text }: { title: string; text: string }) {
-  return <div className="flex flex-col items-center gap-2 px-6 py-9 text-center text-ink2"><span className="text-[13px] font-semibold text-ink">{title}</span><span className="text-[12px]">{text}</span></div>;
+/** An empty state: one bold line and, behind an (i), what fills it. */
+export function Empty({ title, text }: { title: string; text?: string }) {
+  return <div className="flex items-center justify-center gap-1.5 px-6 py-12 text-center"><span className="text-[15px] font-semibold text-ink2">{title}</span>{text && <Tip text={text} />}</div>;
 }
