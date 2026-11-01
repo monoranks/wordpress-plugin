@@ -137,18 +137,17 @@ class GrowPanelTest extends TestCase {
 		$this->assertCount( $n, $this->calls );
 	}
 
-	public function test_the_post_box_shows_clicks_revenue_lost_links_and_the_last_change_escaped() {
+	public function test_the_post_box_shows_scores_google_numbers_and_one_link_escaped() {
 		$id = $this->post();
 		wp_set_current_user( $this->user( 'administrator' ) );
 		$res = rest_do_request( new \WP_REST_Request( 'GET', '/monoranks/v1/admin/post/' . $id ) );
 		$this->assertSame( 200, $res->get_status() );
 		$html = $res->get_data()['html'];
-		$this->assertStringContainsString( 'Google search, 28 days', $html );
+		$this->assertStringContainsString( 'title="Google, 28 days"', $html );
 		$this->assertMatchesRegularExpression( '#<dd>75</dd>#', $html );
-		$this->assertStringContainsString( '340', $html );
-		$this->assertStringContainsString( '1 lost link to win back', $html );
-		$this->assertStringContainsString( 'Last change MonoRanks saw', $html );
-		$this->assertStringContainsString( '<li>Title</li>', $html );
+		// The simpler box (0.2.0) leaves visits, lost links and the last change to MonoRanks.
+		$this->assertStringNotContainsString( 'lost link', $html );
+		$this->assertStringNotContainsString( 'Last change MonoRanks saw', $html );
 		$this->assertStringNotContainsString( '<script>', $html );
 		$this->assertStringNotContainsString( '<b>test</b>', $html );
 		$this->assertStringContainsString( 'https://app.monoranks.test/sites/site_1/pages/p1#history', $html );
