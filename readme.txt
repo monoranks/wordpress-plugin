@@ -4,7 +4,7 @@ Tags: seo, ai-seo, seo-audit, aeo, geo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -172,6 +172,13 @@ Please report security bugs found in the source code of the MonoRanks plugin thr
 4. Before you connect: the steps to link your site to MonoRanks.
 
 == Changelog ==
+
+= 0.2.1 - 2026-11-03 =
+* **New:** A Video button in the top bar opens a short how-to video.
+* **New:** German and Spanish translations.
+* **Enhancement:** Other plugins' notices no longer show on MonoRanks screens.
+* **Enhancement:** The Connect card and old data now say the same thing when a key stops working.
+* **Fix:** Large backlink numbers no longer get cut off on small screens.
 
 = 0.2.0 - 2026-11-01 =
 * **New:** The plugin's screens take the new MonoRanks look: a light top bar, soft cards, big numbers and score rings, and blue buttons.

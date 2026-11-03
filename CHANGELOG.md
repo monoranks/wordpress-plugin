@@ -2,6 +2,13 @@
 
 All notable changes to the MonoRanks WordPress plugin. The format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [Semantic Versioning](https://semver.org/).
 
+## v0.2.1 - 2026-11-03
+- **New:** A Video button in the top bar opens a short how-to video.
+- **New:** German and Spanish translations.
+- **Enhancement:** Other plugins' notices no longer show on MonoRanks screens.
+- **Enhancement:** The Connect card and old data now say the same thing when a key stops working.
+- **Fix:** Large backlink numbers no longer get cut off on small screens.
+
 ## v0.2.0 - 2026-11-01
 
 - **New:** The plugin's screens take the new MonoRanks look: a light top bar, soft cards, big numbers and score rings, and blue buttons.
