@@ -34,7 +34,7 @@ if ( ! defined( 'MONORANKS_API_BASE' ) ) {
 }
 // The YouTube id of the "Watch how it works" card on the Overview (src/Video.php). While it is empty the card does not show.
 if ( ! defined( 'MONORANKS_VIDEO_ID' ) ) {
-	define( 'MONORANKS_VIDEO_ID', '' );
+	define( 'MONORANKS_VIDEO_ID', 'g6UjllC0wew' );
 }
 
 
