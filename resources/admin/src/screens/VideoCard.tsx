@@ -12,35 +12,48 @@ import type { VideoData } from '@/lib/api';
 export function VideoCard({ video, onDismiss }: { video: VideoData; onDismiss: () => void }) {
   const [playing, setPlaying] = useState(false);
   const title = __('Watch how it works', 'monoranks');
+  const dismiss = <Button variant="ghost" size="sm" aria-label={__('Dismiss', 'monoranks')} title={__('Dismiss', 'monoranks')} onClick={onDismiss}><X size={15} /></Button>;
+  if (playing) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+          {dismiss}
+        </CardHeader>
+        <CardBody>
+          <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-surface2">
+            <iframe className="absolute inset-0 h-full w-full border-0" src={video.embed} title={title} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
+          </div>
+        </CardBody>
+      </Card>
+    );
+  }
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <Button variant="ghost" size="sm" aria-label={__('Dismiss', 'monoranks')} title={__('Dismiss', 'monoranks')} onClick={onDismiss}><X size={15} aria-hidden="true" /></Button>
-      </CardHeader>
-      <CardBody>
-        <div className="relative aspect-video w-full max-w-[640px] overflow-hidden rounded-xl bg-surface2">
-          {playing ? (
-            <iframe className="absolute inset-0 h-full w-full border-0" src={video.embed} title={title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
-          ) : (
-            <a
-              href={video.watch}
-              target="_blank"
-              rel="noopener"
-              aria-label={__('Play video', 'monoranks')}
-              onClick={(e) => {
-                if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-                e.preventDefault();
-                setPlaying(true);
-              }}
-              className="group absolute inset-0 flex items-center justify-center"
-            >
-              <img src={video.poster} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-              <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-brand text-white shadow-pop transition-transform group-hover:scale-110 group-focus-visible:scale-110"><Play size={26} fill="currentColor" className="ml-1" aria-hidden="true" /></span>
-            </a>
-          )}
+      <div className="flex items-center gap-5 p-4 max-sm:flex-col max-sm:items-stretch">
+        <a
+          href={video.watch}
+          target="_blank"
+          rel="noopener"
+          aria-label={__('Play video', 'monoranks')}
+          onClick={(e) => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+            e.preventDefault();
+            setPlaying(true);
+          }}
+          className="group relative block aspect-video w-[200px] shrink-0 overflow-hidden rounded-lg bg-surface2 max-sm:w-full"
+        >
+          <img src={video.poster} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+          <span className="absolute bottom-2 start-2 flex h-8 w-8 items-center justify-center rounded-full bg-brand text-white transition-transform group-hover:scale-105"><Play size={14} fill="currentColor" /></span>
+        </a>
+        <div className="flex min-w-0 flex-1 items-center justify-between gap-3">
+          <div className="min-w-0 text-[15px] font-semibold text-ink">{title}</div>
+          <div className="flex shrink-0 items-center gap-2">
+            <Button onClick={() => setPlaying(true)}><Play size={14} fill="currentColor" />{__('Watch', 'monoranks')}</Button>
+            {dismiss}
+          </div>
         </div>
-      </CardBody>
+      </div>
     </Card>
   );
 }

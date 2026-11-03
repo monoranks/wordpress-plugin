@@ -30,7 +30,7 @@ class VideoTest extends TestCase {
 		Functions\when( 'get_user_meta' )->justReturn( '' );
 		$card = Video::card();
 		$this->assertSame( 'https://www.youtube.com/watch?v=aqz-KE-bpKQ', $card['watch'] );
-		$this->assertStringStartsWith( 'https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ', $card['embed'] );
+		$this->assertStringStartsWith( 'https://www.youtube.com/embed/aqz-KE-bpKQ', $card['embed'] );
 		$this->assertSame( 'https://site.test/resources/assets/video-poster.jpg', $card['poster'] );
 		Functions\when( 'get_user_meta' )->justReturn( 'aqz-KE-bpKQ' );
 		$this->assertNull( Video::card() );

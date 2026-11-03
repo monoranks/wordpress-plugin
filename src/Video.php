@@ -27,7 +27,7 @@ class Video {
 		}
 		return array(
 			'watch'  => 'https://www.youtube.com/watch?v=' . $id,
-			'embed'  => 'https://www.youtube-nocookie.com/embed/' . $id . '?autoplay=1&rel=0',
+			'embed'  => 'https://www.youtube.com/embed/' . $id . '?autoplay=1&rel=0',
 			'poster' => plugins_url( 'resources/assets/video-poster.jpg', MONORANKS_CONNECTOR_FILE ),
 		);
 	}
