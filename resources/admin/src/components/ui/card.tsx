@@ -37,7 +37,9 @@ function TileLabel({ className, ...props }: React.ComponentProps<'span'>) {
 function TileNumber({ n, sign = '', className }: { n: number; sign?: '' | '+' | '−'; className?: string }) {
   const short = sign + fmtCompact(n);
   const whole = sign + fmt(n);
-  const big = <span dir="ltr" className={cn('min-w-0 text-[32px] font-[750] leading-none tracking-[-0.03em] tabular-nums [overflow-wrap:anywhere]', className)}>{short}</span>;
+  // Some languages have no short form for thousands (German keeps 10.556), so a longer number takes a smaller size, not a line break.
+  const size = short.length <= 6 ? 'text-[32px]' : short.length <= 8 ? 'text-[26px]' : 'text-[22px]';
+  const big = <span dir="ltr" className={cn('min-w-0 font-[750] leading-none tracking-[-0.03em] tabular-nums [overflow-wrap:anywhere]', size, className)}>{short}</span>;
   return short === whole ? big : <Tip text={whole} align="start" className="min-w-0 self-start">{big}</Tip>;
 }
 

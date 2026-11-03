@@ -131,20 +131,20 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
         <>
           <Card className="@container flex flex-col gap-5 px-7 py-7 max-[782px]:px-[18px] max-[782px]:py-5">
             {/* A key that no longer works: the scores are the last ones received, and the screen says so. */}
-            {data.revoked && <div><Badge variant="warn">{data.updated ? sprintf(__('Old data · Updated %s', 'monoranks'), data.updated) : __('Old data', 'monoranks')}</Badge></div>}
+            {data.revoked && <div><Badge variant="warn" className="h-auto whitespace-normal py-1 leading-snug">{data.updated ? sprintf(__('Old data · Updated %s', 'monoranks'), data.updated) : __('Old data', 'monoranks')}</Badge></div>}
             <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-8 @max-[1000px]:grid-cols-1 @max-[1000px]:gap-6">
               <div className="flex min-w-0 items-center gap-6">
                 <Ring score={o.health} size="xl" label={undefined} />
                 <div className="flex min-w-0 flex-col items-start gap-1">
                   <TileLabel>{__('Site health', 'monoranks')}<Tip text={sprintf(_n('Average of %1$s page out of %2$s published.', 'Average of %1$s pages out of %2$s published.', o.pages_scored, 'monoranks'), fmt(o.pages_scored), fmt(o.pages_total))} /></TileLabel>
-                  <span className={`text-[30px] font-bold leading-tight tracking-[-0.02em] ${{ good: 'text-good-ink', warn: 'text-ink', critical: 'text-critical', none: 'text-mute' }[tone(o.health)]}`}>{scoreWord(o.health)}</span>
+                  <span className={`text-[30px] font-bold leading-tight tracking-[-0.02em] [overflow-wrap:anywhere] max-[480px]:text-[24px] ${{ good: 'text-good-ink', warn: 'text-ink', critical: 'text-critical', none: 'text-mute' }[tone(o.health)]}`}>{scoreWord(o.health)}</span>
                   <Delta n={o.deltas.health} since={since} />
                 </div>
               </div>
               <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,190px),1fr))] gap-3">
                 <Tile className="justify-between">
                   <TileLabel>{__('AI answers ready', 'monoranks')}<Tip text={__('How easily AI answers can quote your pages.', 'monoranks')} /></TileLabel>
-                  <div className="flex items-center gap-3"><Ring score={o.aeo} size="lg" /><Delta n={o.deltas.aeo} since={since} /></div>
+                  <div className="flex flex-wrap items-center gap-3"><Ring score={o.aeo} size="lg" /><Delta n={o.deltas.aeo} since={since} /></div>
                 </Tile>
                 <Tile className="justify-between">
                   <TileLabel>{__('Search clicks', 'monoranks')}<Tip text={o.traffic ? __('Clicks from Google in the last 28 days.', 'monoranks') : __('Connect Google Search Console in MonoRanks to see clicks here.', 'monoranks')} /></TileLabel>
@@ -172,7 +172,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
               {o.attention.length ? (
                 <div className="mt-3.5 overflow-x-auto rounded-b-2xl">
                   <table className="w-full table-fixed border-collapse">
-                    <colgroup><col /><col className="w-[84px] max-[600px]:w-[52px]" /><col className="w-[92px] max-[600px]:w-[52px]" /><col className="w-[104px] max-[600px]:w-[98px]" /></colgroup>
+                    <colgroup><col /><col className="w-[84px] max-[600px]:w-[52px]" /><col className="w-[92px] max-[600px]:w-[52px]" /><col className="w-[124px] max-[600px]:w-[116px]" /></colgroup>
                     <thead><tr><th className={th}>{__('Page', 'monoranks')}</th><th className={`${th} max-[600px]:px-1 max-[600px]:text-[0px]`}><span className="max-[600px]:hidden">{__('Health', 'monoranks')}</span><Tip text={__('Health', 'monoranks')} className="min-[601px]:hidden" /></th><th className={`${th} whitespace-normal max-[600px]:px-1`}><span className="inline-flex flex-wrap items-center gap-1"><span className="max-[600px]:hidden">{__('AI', 'monoranks')}</span><Tip text={__('AI answers ready', 'monoranks')} /></span></th><th className={th}><span className="sr-only">{__('Fix', 'monoranks')}</span></th></tr></thead>
                     <tbody>
                       {o.attention.map((row) => (

@@ -38,7 +38,7 @@ td.column-monoranks { vertical-align: middle; }
 .monoranks-cell { position: relative; width: max-content; max-width: 100%; }
 .monoranks-cell .mr-row { outline: none; }
 .monoranks-cell .mr-row:focus-visible { box-shadow: 0 0 0 2px var(--accent); border-radius: 4px; }
-.monoranks-cell .mr-tip { position: absolute; inset-inline-end: 0; top: calc(100% + 6px); z-index: 100001; width: 248px; background: #fff; border: 0; border-radius: 14px; box-shadow: 0 12px 40px rgba(20, 24, 31, .16), 0 2px 6px rgba(20, 24, 31, .06); padding: 16px 18px; color: var(--ink); text-align: start; font-size: 13px; line-height: 1.45; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .14s ease .2s, transform .14s ease .2s; }
+.monoranks-cell .mr-tip { position: absolute; inset-inline-end: 0; top: calc(100% + 6px); z-index: 100001; width: 300px; background: #fff; border: 0; border-radius: 14px; box-shadow: 0 12px 40px rgba(20, 24, 31, .16), 0 2px 6px rgba(20, 24, 31, .06); padding: 16px 18px; color: var(--ink); text-align: start; font-size: 13px; line-height: 1.45; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .14s ease .2s, transform .14s ease .2s; }
 .monoranks-cell .mr-tip::before { content: ""; position: absolute; inset-inline: 0; bottom: 100%; height: 14px; }
 .monoranks-cell:hover .mr-tip, .monoranks-cell:focus-within .mr-tip { opacity: 1; transform: none; pointer-events: auto; transition-delay: 0s; }
 .monoranks-cell .mr-tip .mr-kv { display: grid; grid-template-columns: auto 1fr; gap: 7px 14px; align-items: baseline; }
@@ -46,7 +46,7 @@ td.column-monoranks { vertical-align: middle; }
 .monoranks-cell .mr-tip .mr-kv div:nth-child(even) { font-weight: 600; }
 .monoranks-cell .mr-tip .mr-kv .mr-ok { color: var(--goodInk); }
 .monoranks-cell .mr-tip .mr-kv .mr-bad { color: var(--critical); font-weight: 700; }
-.monoranks-cell .mr-tip .mr-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #e6e9ee; }
+.monoranks-cell .mr-tip .mr-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #e6e9ee; }
 .monoranks-cell .mr-tip .mr-foot a { color: var(--accentInk); text-decoration: none; font-weight: 700; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
 .monoranks-cell .mr-tip .mr-foot a:hover { text-decoration: underline; }
 .monoranks-cell .mr-tip .mr-arrow { display: inline-block; }

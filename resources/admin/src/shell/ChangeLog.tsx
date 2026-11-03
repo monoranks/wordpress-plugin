@@ -25,7 +25,7 @@ export function ChangeLog({ rows, onUndo, busy }: { rows: LogRow[]; onUndo: (row
   return (
     <div className="overflow-x-auto rounded-b-2xl">
       <table className="w-full table-fixed border-collapse">
-        <colgroup><col /><col className="w-[24%]" /><col className="w-[16%]" /><col className="w-[120px]" /></colgroup>
+        <colgroup><col /><col className="w-[24%] max-[480px]:w-[36%]" /><col className="w-[16%] max-[480px]:w-[24%]" /><col className="w-[160px] max-[480px]:w-[64px]" /></colgroup>
         <thead><tr><th className={th}>{__('Page', 'monoranks')}</th><th className={th}>{__('Change', 'monoranks')}</th><th className={th}>{__('When', 'monoranks')}</th><th className={th}><span className="sr-only">{__('Undo', 'monoranks')}</span></th></tr></thead>
         <tbody>
           {rows.map((r) => {
@@ -40,9 +40,9 @@ export function ChangeLog({ rows, onUndo, busy }: { rows: LogRow[]; onUndo: (row
                       <span className={cell} dir="auto" title={r.where}>{r.where}</span>
                     </button>
                   </td>
-                  <td className={td}><Badge className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap" title={r.fieldLabel}>{r.fieldLabel}</Badge></td>
+                  <td className={`${td} max-[480px]:px-1`}><Badge className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap" title={r.fieldLabel}>{r.fieldLabel}</Badge></td>
                   <td className={`${td} tabular-nums text-ink2`}><div className={cell} title={r.when}>{shortDate(r.at) || r.when}</div></td>
-                  <td className={`${td} text-end`}><Button variant="ghost" size="sm" disabled={busy !== null} aria-busy={busy === r.index} onClick={() => onUndo(r)}>{busy !== r.index && <Undo2 size={14} className="mr-flip" />}{__('Undo', 'monoranks')}</Button></td>
+                  <td className={`${td} text-end`}><Button variant="ghost" size="sm" disabled={busy !== null} aria-busy={busy === r.index} onClick={() => onUndo(r)}>{busy !== r.index && <Undo2 size={14} className="mr-flip" />}<span className="max-[480px]:sr-only">{__('Undo', 'monoranks')}</span></Button></td>
                 </tr>
                 {isOpen && (
                   <tr id={id}>
