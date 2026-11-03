@@ -14,7 +14,7 @@ Find what keeps your pages out of Google and AI answers. A weekly AI SEO audit w
 
 **See why your pages miss page one and AI answers. Approve a fix, and it is done.**
 
-https://www.youtube.com/watch?v=g6UjllC0wew
+https://www.youtube.com/watch?v=Fe4T0jIMUiw
 
 [MonoRanks](https://monoranks.com) audits every page of your site each week and tells you what to fix first, in plain words. This plugin connects your site, so the fixes you approve are **written into WordPress for you**, and every one can be undone.
 
@@ -92,6 +92,8 @@ The plugin talks to [MonoRanks](https://monoranks.com). **Nothing is sent until 
 The admin screens are built with React. `build/main.js` and `build/main.css` are compiled from `resources/admin/src`, published with the build tools in the [plugin's GitHub repository](https://github.com/monoranks/wordpress-plugin). Run `npm ci && npm run build` to rebuild them.
 
 == Installation ==
+
+https://www.youtube.com/watch?v=g6UjllC0wew
 
 = Install the plugin =
 
