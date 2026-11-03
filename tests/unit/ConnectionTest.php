@@ -43,4 +43,19 @@ class ConnectionTest extends TestCase {
 		Functions\when( 'wp_get_environment_type' )->justReturn( 'local' );
 		$this->assertSame( 'http://localhost:3000', Connection::valid_base( 'http://localhost:3000/' ) );
 	}
+
+	public function test_update_never_brings_back_a_connection_that_was_removed() {
+		$saved = false;
+		Functions\when( 'get_option' )->justReturn( array() );
+		Functions\when( 'update_option' )->alias( static function () use ( &$saved ) { $saved = true; return true; } );
+		Connection::update( array( 'last_error' => 'late answer' ) );
+		$this->assertFalse( $saved );
+	}
+
+	public function test_is_revoked_needs_a_stored_key() {
+		Functions\when( 'get_option' )->justReturn( array( 'key_state' => 'revoked' ) );
+		$this->assertFalse( Connection::is_revoked() );
+		Functions\when( 'get_option' )->justReturn( array( 'key_state' => 'revoked', 'key' => 'k', 'api_base' => 'https://x' ) );
+		$this->assertTrue( Connection::is_revoked() );
+	}
 }

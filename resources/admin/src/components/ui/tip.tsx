@@ -22,7 +22,7 @@ export function Tip({ text, children, className, align = 'center' }: { text: Rea
   return (
     <span className={cn('relative inline-flex items-center', className)} onMouseEnter={show} onMouseLeave={hide} onFocus={show} onBlur={hide} onKeyDown={(e) => { if (e.key === 'Escape') hide(); }}>
       {trigger}
-      <span id={id} role="tooltip" className={cn('pointer-events-none absolute bottom-[calc(100%+6px)] z-50 w-max max-w-[260px] rounded-lg bg-ink px-3.5 py-2.5 text-start text-[13px] font-normal normal-case tracking-normal leading-snug text-page shadow-pop whitespace-normal', { center: 'left-1/2 -translate-x-1/2', start: 'start-0', end: 'end-0' }[align], open ? 'visible opacity-100' : 'invisible opacity-0')}>{text}</span>
+      <span id={id} role="tooltip" className={cn('pointer-events-none absolute bottom-[calc(100%+6px)] z-50 w-max max-w-[min(260px,70vw)] rounded-lg bg-ink px-3.5 py-2.5 text-start text-[13px] font-normal normal-case tracking-normal leading-snug text-page shadow-pop whitespace-normal', { center: 'left-1/2 -translate-x-1/2', start: 'start-0', end: 'end-0' }[align], open ? 'block' : 'hidden')}>{text}</span>
     </span>
   );
 }

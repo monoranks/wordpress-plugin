@@ -105,7 +105,7 @@ body.monoranks-screen #wpbody-content { display: flex; flex-direction: column; m
 /* WordPress wraps the screen in a .wrap div; it passes the height on so the frame inside it can take the rest. */
 body.monoranks-screen #wpbody-content > .wrap { display: flex; flex-direction: column; flex: 1 0 auto; margin: 0; padding: 0; min-height: 0; }
 /* WordPress's own notices are moved into the page (shell/Notices.tsx) and take the app's look there. One that has not
-   been moved yet stays hidden for the moment rather than flashing above the band. */
+   been moved yet stays hidden for the moment rather than flashing above the band, and another plugin's stays hidden. */
 body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .error, #message) { display: none; }
 /* Notices that landed in the page: WordPress's relocation puts some before .wp-header-end, the rest are collected in
    the slot under it. Both read as the app's cards. */
@@ -114,6 +114,8 @@ body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .err
 	background: var(--surface); color: var(--ink); box-shadow: var(--shadow); font-size: 14px; line-height: 1.45; display: block;
 }
 #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: 1180px; margin: 0 auto 4px; }
+/* WordPress's script moves every notice to just after this marker, also one printed outside the notice hooks (src/Notices.php). */
+#monoranks-admin .wp-header-end ~ :is(.notice, .update-nag, .updated, .error, #message):not([data-mr-core]) { display: none; }
 /* The tone is a translucent tint over the card's own surface, so it reads the same in both themes. The tint is forced:
    WordPress's own admin stylesheets, loaded after this one, set a background on .notice and would win otherwise. */
 #monoranks-admin div.notice-success { background-image: linear-gradient(var(--tintGood), var(--tintGood)) !important; border-color: var(--good) !important; }
@@ -122,7 +124,7 @@ body.monoranks-screen #wpbody-content > :is(.notice, .update-nag, .updated, .err
 @media (max-width: 1340px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 80px); } }
 @media (max-width: 960px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 48px); } }
 @media (max-width: 782px) { #monoranks-admin > :is(.notice, .updated, .error, #message) { max-width: calc(100% - 32px); } }
-body.monoranks-screen #wpbody-content > .update-nag { display: block; }
+body.monoranks-screen #wpbody-content > .update-nag[data-mr-core] { display: block; }
 #monoranks-admin { margin: 0; margin-inline: -20px 0; flex: 1 0 auto; display: flex; flex-direction: column; background: var(--page); color: var(--ink); font-size: 14px; line-height: 1.45; -webkit-font-smoothing: antialiased; }
 @media (max-width: 782px) {
 	#monoranks-admin { margin-inline: -10px 0; }

@@ -33,7 +33,7 @@ class Actions {
 		$res = Api::send_status();
 		if ( 200 !== $res['code'] ) {
 			$previous ? update_option( 'monoranks_connection', $previous, false ) : Connection::clear();
-			return 401 === $res['code'] ? 'rejected' : ( 403 === $res['code'] ? 'other_site' : 'unreachable' );
+			return self::refusal_code( $res['code'] );
 		}
 		if ( isset( $res['body']['site_id'] ) ) {
 			Connection::update( array( 'site_id' => sanitize_text_field( (string) $res['body']['site_id'] ) ) );
@@ -44,11 +44,21 @@ class Actions {
 		return 'connected';
 	}
 
+	/** The result code for a status MonoRanks did not take. */
+	private static function refusal_code( $code ) {
+		return 401 === $code ? 'rejected' : ( 403 === $code ? 'other_site' : 'unreachable' );
+	}
+
+	/** "Content sent" only when it was: a key MonoRanks refuses and a send that failed say so. */
 	public static function send_now() {
-		Api::send_status();
-		Sync::start();
+		$res = Api::send_status();
+		if ( 401 === $res['code'] || 403 === $res['code'] ) {
+			Insights::refresh_soon();
+			return self::refusal_code( $res['code'] );
+		}
+		$sync = Sync::start();
 		Insights::refresh_soon();
-		return 'sent';
+		return empty( $sync['error'] ) ? 'sent' : self::refusal_code( 'key_revoked' === $sync['error'] ? 401 : 0 );
 	}
 
 	public static function disconnect() {
@@ -75,6 +85,7 @@ class Actions {
 		}
 		delete_transient( 'monoranks_sync_lock' );
 		delete_transient( 'monoranks_refreshing' );
+		delete_metadata( 'user', 0, Video::DISMISSED, '', true );
 		return 'deleted';
 	}
 
@@ -83,6 +94,10 @@ class Actions {
 	 * is never part of 'all': it is reviewed as a before/after in MonoRanks and applied one at a time from there.
 	 */
 	public static function apply( $which ) {
+		// The list on screen is old and MonoRanks would never hear the result.
+		if ( Connection::is_revoked() ) {
+			return 'rejected';
+		}
 		$overview = Insights::overview();
 		$changes  = array();
 		foreach ( $overview ? $overview['ready'] : array() as $fix ) {

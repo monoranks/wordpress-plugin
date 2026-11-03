@@ -37,6 +37,7 @@ class Rest {
 				'args'                => array( 'id' => array( 'validate_callback' => static function ( $v ) { return is_numeric( $v ) && (int) $v > 0; } ) ),
 			)
 		);
+		register_rest_route( self::NS, '/admin/video-dismiss', array( 'methods' => 'POST', 'callback' => array( 'MonoRanks\\Video', 'dismiss' ), 'permission_callback' => $admin ) );
 		foreach ( array( 'apply', 'undo', 'sync', 'connect', 'disconnect', 'delete' ) as $action ) {
 			register_rest_route( self::NS, '/admin/' . $action, array( 'methods' => 'POST', 'callback' => array( __CLASS__, 'admin_' . $action ), 'permission_callback' => $admin ) );
 		}
@@ -155,6 +156,8 @@ class Rest {
 	public static function unpair() {
 		Sync::unschedule();
 		Connection::clear();
+		// As Disconnect in WordPress does: results of a connection that is gone are not kept.
+		Insights::clear();
 		return array( 'paired' => false );
 	}
 

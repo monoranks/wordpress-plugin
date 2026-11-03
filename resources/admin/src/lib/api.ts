@@ -30,7 +30,13 @@ export type OverviewData = {
   /** A send is running (the first one starts by itself after connecting); send_failed: nothing was sent and the last try failed. */
   sending?: boolean; send_failed?: boolean;
   app_url: string; log: LogRow[]; labels: Record<string, string>;
+  /** How long ago the data on screen came from MonoRanks. */
+  updated: string;
+  /** The "Watch how it works" card, null when it does not show (src/Video.php). */
+  video: null | VideoData;
 };
+
+export type VideoData = { watch: string; embed: string; poster: string };
 
 export type SettingsData = {
   connected: boolean; revoked: boolean; state: 'connected' | 'revoked' | 'none'; has_data: boolean;
@@ -69,6 +75,7 @@ export const api = {
   sync: (screen: 'overview' | 'settings') => apiFetch<ActionResult<OverviewData | SettingsData>>({ path: `${NS}/sync`, method: 'POST', data: { screen } }),
   connect: (key: string, api_base?: string) => apiFetch<ActionResult<SettingsData>>({ path: `${NS}/connect`, method: 'POST', data: { key, api_base } }),
   disconnect: () => apiFetch<ActionResult<SettingsData>>({ path: `${NS}/disconnect`, method: 'POST' }),
+  dismissVideo: () => apiFetch<{ ok: boolean }>({ path: `${NS}/video-dismiss`, method: 'POST' }),
   deleteEverything: () => apiFetch<ActionResult<SettingsData>>({ path: `${NS}/delete`, method: 'POST' }),
 };
 

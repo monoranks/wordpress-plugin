@@ -32,6 +32,10 @@ define( 'MONORANKS_CONNECTOR_FILE', __FILE__ );
 if ( ! defined( 'MONORANKS_API_BASE' ) ) {
 	define( 'MONORANKS_API_BASE', 'https://app.monoranks.com' );
 }
+// The YouTube id of the "Watch how it works" card on the Overview (src/Video.php). While it is empty the card does not show.
+if ( ! defined( 'MONORANKS_VIDEO_ID' ) ) {
+	define( 'MONORANKS_VIDEO_ID', '' );
+}
 
 
 add_action( 'rest_api_init', array( 'MonoRanks\\Rest', 'register' ) );
@@ -48,6 +52,7 @@ add_action( \MonoRanks\Sync::STEP_HOOK, array( 'MonoRanks\\Sync', 'run' ) );
 add_action( \MonoRanks\Sync::DAILY_HOOK, array( 'MonoRanks\\Sync', 'daily' ) );
 \MonoRanks\SeoFields::register_output();
 \MonoRanks\Admin::register();
+\MonoRanks\Notices::register();
 \MonoRanks\Handoff::register();
 \MonoRanks\AuthorizeScreen::register();
 \MonoRanks\Assets::register();

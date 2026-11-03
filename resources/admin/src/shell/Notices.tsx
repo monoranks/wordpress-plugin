@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
-const SELECTOR = '.notice, .update-nag, .updated, .error, #message';
+/** What src/Notices.php tagged: the output of the notice hooks, which on these screens only WordPress and this plugin use. */
+const SELECTOR = '[data-mr-core]';
 
 /**
- * WordPress prints its own notices (and other plugins') at the top of the content area, which on these screens means
- * above the MonoRanks band. They are not hidden — a core update warning matters — they are moved into the page, under
- * the title, where they read as part of it. WordPress does the same thing for the screens it draws itself.
+ * WordPress prints its notices at the top of the content area, which on these screens means above the MonoRanks band. They
+ * are not hidden — a core update warning matters — they are moved into the page, under the title, where they read as part
+ * of it. WordPress does the same thing for the screens it draws itself. Anything else stays hidden by the stylesheet.
  */
 export function Notices({ className }: { className?: string }) {
   const slot = useRef<HTMLDivElement>(null);

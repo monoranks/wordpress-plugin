@@ -183,7 +183,7 @@ class Column {
 		}
 		$on   = isset( $_GET['monoranks'] ) && 'attention' === $_GET['monoranks']; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- list filter
 		$url  = add_query_arg( array( 'post_type' => $type, 'monoranks' => 'attention', 'orderby' => self::KEY, 'order' => 'asc' ), admin_url( 'edit.php' ) );
-		$html = sprintf( '<a href="%s"%s>%s <span class="count">(%s)</span></a>', esc_url( $url ), $on ? ' class="current" aria-current="page"' : '', esc_html__( 'Needs attention', 'monoranks' ), esc_html( number_format_i18n( $count ) ) );
+		$html = sprintf( '<a href="%s"%s>%s <span class="count">(%s)</span></a>', esc_url( $url ), $on ? ' class="current" aria-current="page"' : '', esc_html__( 'Needs attention', 'monoranks' ), esc_html( Admin::n( $count ) ) );
 		$views[ self::KEY ] = $html;
 		return $views;
 	}

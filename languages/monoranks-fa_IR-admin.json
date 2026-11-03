@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-11-01T17:00:29+00:00",
+    "translation-revision-date": "2026-11-03T06:23:42+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -125,6 +125,9 @@
             "sending, batch %1$s of %2$s": [
                 "در حال ارسال، دستهٔ %1$s از %2$s"
             ],
+            "Last try failed": [
+                "آخرین تلاش ناموفق بود"
+            ],
             "Written with the \"MonoRanks\" Application Password. Revoke it to stop writes.": [
                 "با گذرواژه برنامه «MonoRanks» نوشته می‌شود. برای توقف نوشتن، آن را لغو کنید."
             ],
@@ -164,8 +167,8 @@
             "Use a different key": [
                 "استفاده از کلید دیگر"
             ],
-            "In MonoRanks: Settings → API and MCP → New credential, content:write, this website.": [
-                "در مونورنکس: تنظیمات ← API و MCP ← اعتبارنامهٔ جدید، content:write، همین وب‌سایت."
+            "In MonoRanks: Settings → API and MCP → New credential. Tick content:write, sites:read and pages:read, for this website.": [
+                "در مونورنکس: تنظیمات ← API و MCP ← کلید جدید. گزینه‌های content:write، sites:read و pages:read را برای این وب‌سایت بزنید."
             ],
             "What is sent": [
                 "چه چیزی فرستاده می‌شود"
@@ -258,11 +261,11 @@
             "All": [
                 "همه"
             ],
-            "Every target is contacted. MonoRanks looks for new ones each week.": [
-                "با همهٔ هدف‌ها تماس گرفته شده. مونورنکس هر هفته هدف‌های تازه پیدا می‌کند."
+            "Every target is contacted.": [
+                "با همهٔ هدف‌ها تماس گرفته شده."
             ],
-            "No outreach targets yet. MonoRanks looks for pages worth a link each week.": [
-                "هنوز هدفی برای جذب لینک نیست. مونورنکس هر هفته صفحه‌هایی را پیدا می‌کند که ارزش لینک‌گرفتن دارند."
+            "No outreach targets yet.": [
+                "هنوز هدفی برای تماس نیست."
             ],
             "Backlinks": [
                 "بک‌لینک‌ها"
@@ -283,8 +286,8 @@
                 "%s برای بررسی هرزنامه",
                 "%s برای بررسی هرزنامه"
             ],
-            "No backlink data yet. MonoRanks refreshes it weekly.": [
-                "هنوز داده‌ای از بک‌لینک‌ها نیست. مونورنکس آن را هر هفته به‌روز می‌کند."
+            "No backlink data yet.": [
+                "هنوز دادهٔ بک‌لینک نیست."
             ],
             "Competitors": [
                 "رقیبان"
@@ -312,8 +315,8 @@
             "%s/mo": [
                 "%s در ماه"
             ],
-            "No competitors yet. Pick some in MonoRanks to see the keywords they win.": [
-                "هنوز رقیبی نیست. در مونورنکس چند رقیب انتخاب کنید تا کلیدواژه‌هایی را که می‌برند ببینید."
+            "No competitors yet.": [
+                "هنوز رقیبی نیست."
             ],
             "up": [
                 "بالا"
@@ -337,8 +340,8 @@
                 "%s کلیدواژهٔ پیگیری‌شدهٔ شما این هفته جایگاهش را حفظ کرد.",
                 "%s کلیدواژهٔ پیگیری‌شدهٔ شما این هفته جایگاهشان را حفظ کردند."
             ],
-            "No tracked keywords yet. Track some in MonoRanks to see them move here.": [
-                "هنوز کلیدواژهٔ پیگیری‌شده‌ای نیست. در مونورنکس چند کلیدواژه را پیگیری کنید تا جابه‌جایی‌شان را اینجا ببینید."
+            "No tracked keywords yet.": [
+                "هنوز کلیدواژه‌ای دنبال نمی‌شود."
             ],
             "No reports yet": [
                 "هنوز گزارشی نیست"
@@ -419,6 +422,12 @@
             ],
             "Sends your published pages to MonoRanks now. It also happens by itself.": [
                 "صفحه‌های منتشرشده را همین حالا به مونورنکس می‌فرستد. این کار خودکار هم انجام می‌شود."
+            ],
+            "Old data · Updated %s": [
+                "داده قدیمی · به‌روزرسانی: %s"
+            ],
+            "Old data": [
+                "داده قدیمی"
             ],
             "Site health": [
                 "سلامت سایت"
@@ -559,8 +568,8 @@
             "Content": [
                 "محتوا"
             ],
-            "%1$s published items sent %2$s": [
-                "%1$s مورد منتشرشده %2$s فرستاده شد"
+            "%1$s published item sent %2$s": [
+                "%1$s مورد منتشرشده %2$s ارسال شد"
             ],
             "Not sent. Use \"Send content\".": [
                 "ارسال نشد. از «ارسال محتوا» استفاده کنید."
@@ -573,6 +582,15 @@
             ],
             "checked %s": [
                 "بررسی‌شده %s"
+            ],
+            "Watch how it works": [
+                "ببینید چطور کار می‌کند"
+            ],
+            "Dismiss": [
+                "بستن"
+            ],
+            "Play video": [
+                "پخش ویدیو"
             ],
             "Urgent": [
                 "فوری"

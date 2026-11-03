@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { __, _n, sprintf } from '@wordpress/i18n';
 import { api, type GrowData, type GrowState } from '@/lib/api';
 import { ArrowUpRight } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardBody, Tile, TileLabel } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardBody, Tile, TileLabel, TileNumber } from '@/components/ui/card';
 import { Tip } from '@/components/ui/tip';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -11,6 +11,8 @@ import { fmt } from '@/lib/format';
 
 const ext = { target: '_blank', rel: 'noopener' } as const;
 const SECTIONS = ['outreach', 'backlinks', 'competitors', 'keywords', 'report'] as const;
+/** Two cards side by side only where two really fit, with the WordPress menu open or not. */
+const cards = 'grid grid-cols-[repeat(auto-fit,minmax(min(100%,400px),1fr))] gap-6';
 
 /**
  * "What to do next" on the Overview: outreach targets to contact, backlinks won and lost, competitors and the keywords
@@ -37,7 +39,7 @@ export function GrowCards() {
   if (failed) return null;
   if (!data) {
     return (
-      <section aria-label={__('What to do next', 'monoranks')} aria-busy="true" className="grid grid-cols-2 gap-6 max-[960px]:grid-cols-1">
+      <section aria-label={__('What to do next', 'monoranks')} aria-busy="true" className={cards}>
         {[0, 1, 2, 3].map((i) => <Card key={i} className="h-[180px] animate-pulse bg-surface2" />)}
       </section>
     );
@@ -51,7 +53,7 @@ export function GrowCards() {
         <h2 id="mr-grow-title" className="text-[20px] font-bold tracking-[-0.01em] text-ink">{__('What to do next', 'monoranks')}</h2>
         {data.fetched && <Tip text={sprintf(__('Updated %s', 'monoranks'), data.fetched)} />}
       </div>
-      <div className="grid grid-cols-2 items-stretch gap-6 max-[960px]:grid-cols-1">
+      <div className={`${cards} items-stretch`}>
         <Outreach d={data.outreach} scope={scope} />
         <Backlinks d={data.backlinks} scope={scope} />
         <Competitors d={data.competitors} scope={scope} />
@@ -105,9 +107,9 @@ function Outreach({ d, scope }: { d: GrowData['outreach']; scope: string }) {
                 </li>
               ))}
             </ol>
-          ) : <StateLine state="empty" scope={scope} empty={__('Every target is contacted. MonoRanks looks for new ones each week.', 'monoranks')} />}
+          ) : <StateLine state="empty" scope={scope} empty={__('Every target is contacted.', 'monoranks')} />}
         </>
-      ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No outreach targets yet. MonoRanks looks for pages worth a link each week.', 'monoranks')} />}
+      ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No outreach targets yet.', 'monoranks')} />}
     </GrowCard>
   );
 }
@@ -118,14 +120,14 @@ function Backlinks({ d, scope }: { d: GrowData['backlinks']; scope: string }) {
     <GrowCard title={__('Backlinks', 'monoranks')} link={ok?.link || d?.link} linkText={__('All', 'monoranks')}>
       {ok ? (
         <>
-          <div className="grid grid-cols-3 gap-2.5 max-[600px]:grid-cols-1">
-            <Tile><TileLabel>{__('Won', 'monoranks')}<Tip text={__('New websites linking to you, last 28 days.', 'monoranks')} /></TileLabel><span className="text-[32px] font-[750] leading-none tracking-[-0.03em] tabular-nums text-good-ink">+{fmt(ok.new)}</span></Tile>
-            <Tile><TileLabel>{__('Lost', 'monoranks')}</TileLabel><span className="text-[32px] font-[750] leading-none tracking-[-0.03em] tabular-nums text-critical">−{fmt(ok.lost)}</span></Tile>
-            <Tile><TileLabel>{__('Linking sites', 'monoranks')}</TileLabel><span className="text-[32px] font-[750] leading-none tracking-[-0.03em] tabular-nums">{fmt(ok.domains)}</span></Tile>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,140px),1fr))] gap-2.5">
+            <Tile className="px-4"><TileLabel>{__('Won', 'monoranks')}<Tip text={__('New websites linking to you, last 28 days.', 'monoranks')} /></TileLabel><TileNumber n={ok.new} sign="+" className="text-good-ink" /></Tile>
+            <Tile className="px-4"><TileLabel>{__('Lost', 'monoranks')}</TileLabel><TileNumber n={ok.lost} sign="−" className="text-critical" /></Tile>
+            <Tile className="px-4"><TileLabel>{__('Linking sites', 'monoranks')}</TileLabel><TileNumber n={ok.domains} /></Tile>
           </div>
           {ok.review > 0 && <div><Badge variant="warn">{sprintf(_n('%s to check for spam', '%s to check for spam', ok.review, 'monoranks'), fmt(ok.review))}</Badge></div>}
         </>
-      ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No backlink data yet. MonoRanks refreshes it weekly.', 'monoranks')} />}
+      ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No backlink data yet.', 'monoranks')} />}
     </GrowCard>
   );
 }
@@ -155,7 +157,7 @@ function Competitors({ d, scope }: { d: GrowData['competitors']; scope: string }
             </div>
           )}
         </>
-      ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No competitors yet. Pick some in MonoRanks to see the keywords they win.', 'monoranks')} />}
+      ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No competitors yet.', 'monoranks')} />}
     </GrowCard>
   );
 }
@@ -175,7 +177,7 @@ function Keywords({ d, scope }: { d: GrowData['keywords']; scope: string }) {
     <GrowCard title={__('Keyword moves', 'monoranks')} link={ok?.link || d?.link} linkText={__('All', 'monoranks')}>
       {ok ? (
         ok.up.length || ok.down.length ? (
-          <div className="grid grid-cols-2 gap-6 max-[600px]:grid-cols-1">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-6">
             <div className="grid content-start gap-1">
               <TileLabel>{__('Up', 'monoranks')}</TileLabel>
               {ok.up.length ? <ul className="m-0 flex list-none flex-col p-0">{ok.up.map((k) => <Move key={k.keyword} k={k} up />)}</ul> : <span className="text-[14px] text-mute">—</span>}
@@ -186,7 +188,7 @@ function Keywords({ d, scope }: { d: GrowData['keywords']; scope: string }) {
             </div>
           </div>
         ) : <p className="m-0 text-[14px] text-ink2">{sprintf(_n('Your %s tracked keyword held its place this week.', 'Your %s tracked keywords held their places this week.', ok.tracked, 'monoranks'), fmt(ok.tracked))}</p>
-      ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No tracked keywords yet. Track some in MonoRanks to see them move here.', 'monoranks')} />}
+      ) : <StateLine state={d?.state ?? 'pending'} scope={scope} empty={__('No tracked keywords yet.', 'monoranks')} />}
     </GrowCard>
   );
 }

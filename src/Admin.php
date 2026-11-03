@@ -109,7 +109,9 @@ class Admin {
 
 	/** Where the app renders. Without a build (a checkout that skipped `npm run build`) it says what to run. */
 	public static function mount() {
-		echo self::view( 'app', array( 'theme' => self::theme(), 'built' => file_exists( dirname( MONORANKS_CONNECTOR_FILE ) . '/build/main.js' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the view escapes
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		$video  = $screen && 'overview' === self::screen_for_hook( $screen->id ) ? Video::card() : null;
+		echo self::view( 'app', array( 'theme' => self::theme(), 'built' => file_exists( dirname( MONORANKS_CONNECTOR_FILE ) . '/build/main.js' ), 'video' => $video ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the view escapes
 	}
 
 	/** The MonoRanks mark (resources/assets/mark.svg) as a data URI; WordPress repaints its fill in the admin colour scheme. */
@@ -254,7 +256,7 @@ class Admin {
 			'bad_address'  => array( 'error', __( 'The MonoRanks address must start with https://.', 'monoranks' ) ),
 			'rejected'     => array( 'error', __( 'MonoRanks did not accept this key. Create a new one.', 'monoranks' ) ),
 			'other_site'   => array( 'error', __( 'This key is for another website.', 'monoranks' ) ),
-			'unreachable'  => array( 'error', __( 'MonoRanks could not be reached. Check the address and try again.', 'monoranks' ) ),
+			'unreachable'  => array( 'error', __( 'MonoRanks could not be reached. Try again.', 'monoranks' ) ),
 			'connect_failed' => array( 'error', __( 'Could not connect. Please try again.', 'monoranks' ) ),
 		);
 		return isset( $map[ $code ] ) ? array( 'type' => $map[ $code ][0], 'text' => $map[ $code ][1] ) : null;

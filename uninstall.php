@@ -16,6 +16,7 @@ wp_clear_scheduled_hook( 'monoranks_grow_refresh' );
 wp_clear_scheduled_hook( 'monoranks_page_values_refresh' );
 delete_post_meta_by_key( '_monoranks_score' );
 delete_post_meta_by_key( '_monoranks_health' );
+delete_metadata( 'user', 0, 'monoranks_video_dismissed', '', true );
 delete_transient( 'monoranks_sync_lock' );
 delete_transient( 'monoranks_refreshing' );
 foreach ( array( 'monoranks_grow', 'monoranks_grow_lock', 'monoranks_page_values', 'monoranks_page_values_lock' ) as $monoranks_transient ) {

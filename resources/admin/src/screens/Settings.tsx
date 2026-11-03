@@ -34,17 +34,17 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
   // check every few seconds while this tab is visible, so the page shows Connected by itself. Gives up after 10 minutes.
   const [waitingSince, setWaitingSince] = useState<number | null>(null);
   useEffect(() => {
-    if (waitingSince === null || data?.connected) return;
+    if (waitingSince === null || (data?.connected && !data.revoked)) return;
     let stopped = false;
     const check = () => {
       if (stopped || document.visibilityState !== 'visible') return;
       if (Date.now() - waitingSince > 10 * 60 * 1000) { setWaitingSince(null); return; }
-      api.settings().then((d) => { if (!stopped && d.connected) { setData(d); setKeyOpen(false); setWaitingSince(null); } }).catch(() => {});
+      api.settings().then((d) => { if (!stopped && d.connected && !d.revoked) { setData(d); setKeyOpen(false); setWaitingSince(null); } }).catch(() => {});
     };
     const timer = window.setInterval(check, 4000);
     document.addEventListener('visibilitychange', check);
     return () => { stopped = true; window.clearInterval(timer); document.removeEventListener('visibilitychange', check); };
-  }, [waitingSince, data?.connected]);
+  }, [waitingSince, data?.connected, data?.revoked]);
 
   async function run(key: string, call: () => Promise<{ ok: boolean; notice: Notice; data: unknown }>) {
     setBusy(key);
@@ -81,12 +81,12 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
             <CardBody className="flex flex-col gap-5">
               {connected ? (
                 <>
-                  <div className="grid grid-cols-4 gap-3 max-[1100px]:grid-cols-2 max-[600px]:grid-cols-1">
+                  <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,180px),1fr))] gap-3">
                     <Tile>
                       <TileLabel>{__('Last sent', 'monoranks')}<Tip text={[data.last_sent_date, data.items > 0 ? sprintf(_n('%s published item', '%s published items', data.items, 'monoranks'), fmt(data.items)) : ''].filter(Boolean).join(' · ') || data.last_sent_short} /></TileLabel>
                       <span className="text-[20px] font-bold leading-tight tabular-nums">{data.last_sent_short}</span>
                       {data.sending && <Badge>{sprintf(__('sending, batch %1$s of %2$s', 'monoranks'), fmt(data.sending.page), fmt(Math.max(1, data.sending.pages)))}</Badge>}
-                      {data.last_error && <Badge variant="warn" className="max-w-full overflow-hidden text-ellipsis" title={data.last_error}>{data.last_error}</Badge>}
+                      {data.last_error && <Badge variant="warn" className="max-w-full overflow-hidden text-ellipsis" title={data.last_error}>{__('Last try failed', 'monoranks')}</Badge>}
                     </Tile>
                     <Tile>
                       <TileLabel>{__('Next check', 'monoranks')}</TileLabel>
@@ -108,7 +108,9 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
                     </Tile>
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <Button variant="primary" disabled={busy !== null} aria-busy={busy === 'sync'} onClick={() => run('sync', () => api.sync('settings'))}>{__('Send content', 'monoranks')}</Button>
+                    {revoked
+                      ? <Button variant="primary" asChild><a href={out(data.connect_url, 'reconnect', 'settings')} target="_self" onClick={() => setWaitingSince(Date.now())}>{__('Connect', 'monoranks')}</a></Button>
+                      : <Button variant="primary" disabled={busy !== null} aria-busy={busy === 'sync'} onClick={() => run('sync', () => api.sync('settings'))}>{__('Send content', 'monoranks')}</Button>}
                     <span className="inline-flex items-center gap-1.5 text-[13px] text-mute"><code className="!bg-transparent !p-0 !text-[13px] !text-mute">{data.key_hint}</code><Tip text={data.key_via} /></span>
                     <Tip className="ms-auto" align="end" text={__('Disconnect stops sending. Fixes already applied stay.', 'monoranks')}><Button variant="ghost" disabled={busy !== null} aria-busy={busy === 'disconnect'} onClick={() => run('disconnect', () => api.disconnect())}>{__('Disconnect', 'monoranks')}</Button></Tip>
                   </div>
@@ -127,7 +129,7 @@ export function Settings({ go }: { go: (next: Screen) => void }) {
               <details open={keyOpen} onToggle={(e) => setKeyOpen(e.currentTarget.open)} className="group">
                 <summary className="flex min-h-[60px] cursor-pointer list-none items-center gap-2.5 px-7 py-4 text-[15px] font-bold text-ink hover:text-brand-ink max-[782px]:px-[18px] [&::-webkit-details-marker]:hidden"><ChevronRight size={16} className="mr-flip transition-transform group-open:rotate-90" />{__('Use a different key', 'monoranks')}</summary>
                 <div className="border-t border-grid px-7 pb-7 pt-5 max-[782px]:px-[18px]">
-                  <KeyForm data={data} busy={busy} hint={__('In MonoRanks: Settings → API and MCP → New credential, content:write, this website.', 'monoranks')} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} />
+                  <KeyForm data={data} busy={busy} hint={__('In MonoRanks: Settings → API and MCP → New credential. Tick content:write, sites:read and pages:read, for this website.', 'monoranks')} onSubmit={(key, base) => run('connect', () => api.connect(key, base))} />
                 </div>
               </details>
             </Card>

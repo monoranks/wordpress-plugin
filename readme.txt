@@ -61,7 +61,7 @@ It checks four things:
 
 The plugin is free. A free MonoRanks account covers 3 websites with weekly audits. Paid plans with more websites, pages and keywords are on [monoranks.com](https://monoranks.com/pricing/).
 
-= This plugin uses an external service =
+= External services =
 
 The plugin talks to [MonoRanks](https://monoranks.com). **Nothing is sent until you connect your site**, either by approving MonoRanks in WordPress or by pasting a connector key under **MonoRanks → Settings**.
 
@@ -82,6 +82,8 @@ The plugin talks to [MonoRanks](https://monoranks.com). **Nothing is sent until 
 **What is read back:** this site's audit results (scores, open issues, the fixes you approved, and search clicks if you connected Google Search Console in MonoRanks), and this site's backlinks, outreach targets, competitors, keyword positions, reports, page history, and visits and revenue per page if you connected Google Analytics in MonoRanks. They are cached in WordPress and shown to admins only, never on the public site.
 
 **Legal:** [Terms of service](https://monoranks.com/legal/terms/) · [Privacy policy](https://monoranks.com/legal/privacy/)
+
+**YouTube (only when you play a video).** The MonoRanks screen can show a short "Watch how it works" video hosted on YouTube, a service of Google. The poster image ships with the plugin, so nothing is requested from YouTube when the screen opens. When you click play, your browser loads the player from youtube-nocookie.com, and YouTube receives your IP address, browser details and the address of the page, like any embedded video. Nothing is sent if you never click play, or if you dismiss the card. [YouTube terms of service](https://www.youtube.com/t/terms) · [Google privacy policy](https://policies.google.com/privacy)
 
 = Source code =
 
@@ -140,7 +142,7 @@ Step-by-step guide: [MonoRanks WordPress plugin docs](https://monoranks.com/docs
 
 = What is sent, and is my data safe? =
 
-Only published content details and plugin status, over HTTPS, and only after you connect. Never drafts, private posts, comments, user emails or passwords. See **This plugin uses an external service** above.
+Only published content details and plugin status, over HTTPS, and only after you connect. Never drafts, private posts, comments, user emails or passwords. See **External services** above.
 
 = My site is local or behind a firewall. Does it work? =
 

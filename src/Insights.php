@@ -17,6 +17,8 @@ class Insights {
 	const REFRESH_HOOK = 'monoranks_refresh';
 	const FRESH_FOR    = HOUR_IN_SECONDS;
 	const RETRY_AFTER  = HOUR_IN_SECONDS;
+	/** A key marked revoked is asked about again this often, so the mark never outlives the truth by long. */
+	const RECHECK_KEY  = 5 * MINUTE_IN_SECONDS;
 	const PAGE_LIMIT   = 25;
 	const LOCK         = 'monoranks_refreshing';
 	const VERSION      = 'monoranks_version';
@@ -70,6 +72,25 @@ class Insights {
 		return isset( $s['fetched_at'] ) ? (string) $s['fetched_at'] : '';
 	}
 
+	/** When the data on screen last came from MonoRanks: a failed pull moves fetched_at, not this. */
+	public static function updated_at() {
+		$s = self::state();
+		if ( ! empty( $s['overview_at'] ) ) {
+			return (string) $s['overview_at'];
+		}
+		return isset( $s['overview']['audited_at'] ) ? (string) $s['overview']['audited_at'] : '';
+	}
+
+	/** True when the key is marked revoked and was not checked in the last few minutes. */
+	public static function recheck_key( array $state, $now = null ) {
+		if ( ! Connection::is_revoked() ) {
+			return false;
+		}
+		$now = null === $now ? time() : (int) $now;
+		$at  = isset( $state['fetched_at'] ) ? strtotime( (string) $state['fetched_at'] ) : 0;
+		return ! $at || $now - $at >= self::RECHECK_KEY;
+	}
+
 	/** True when the cache is older than an hour (also after MonoRanks said it does not support the routes yet, so a MonoRanks update is picked up the same hour). */
 	public static function is_stale( array $state, $now = null ) {
 		$now  = null === $now ? time() : (int) $now;
@@ -86,7 +107,8 @@ class Insights {
 		}
 		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- screen check only
 		$ours = 'edit.php' === $pagenow || ( 'admin.php' === $pagenow && in_array( $page, array( Admin::MENU, Admin::SETTINGS ), true ) );
-		if ( ! $ours || ! self::is_stale( self::state() ) ) {
+		$state = self::state();
+		if ( ! $ours || ! ( self::is_stale( $state ) || self::recheck_key( $state ) ) ) {
 			return;
 		}
 		// Pull the scores in this request, with a short deadline: many sites turn WP-Cron off (DISABLE_WP_CRON) or block
@@ -150,7 +172,7 @@ class Insights {
 			return $state;
 		}
 		if ( 200 !== $res['code'] || ! is_array( $res['body'] ) ) {
-			$state['status']     = 401 === $res['code'] ? 'revoked' : 'error';
+			$state['status']     = 401 === $res['code'] && Connection::is_revoked() ? 'revoked' : 'error';
 			$state['fetched_at'] = gmdate( 'c' );
 			$state['error']      = (string) $res['error'];
 			update_option( self::OPTION, $state, false );
@@ -162,6 +184,7 @@ class Insights {
 		$state['status']     = $overview ? 'ok' : 'none';
 		$state['overview']   = $overview;
 		$state['fetched_at'] = gmdate( 'c' );
+		$state['overview_at'] = $state['fetched_at'];
 		unset( $state['error'] );
 		update_option( self::OPTION, $state, false );
 		self::refresh_pages( $state, $timeout, $budget );

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-01T17:00:28+00:00\n"
+"POT-Creation-Date: 2026-11-03T06:23:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: monoranks\n"
@@ -46,9 +46,14 @@ msgstr ""
 msgid "The MonoRanks admin app is not built. Run npm install and npm run build in the plugin folder."
 msgstr ""
 
+#: resources/views/app.php:16
+#: tmp/i18n/screens/VideoCard.js:8
+msgid "Watch how it works"
+msgstr ""
+
 #: resources/views/column-cell.php:20
 #: resources/views/post-panel.php:17
-#: tmp/i18n/screens/Overview.js:220
+#: tmp/i18n/screens/Overview.js:231
 msgid "Connect MonoRanks"
 msgstr ""
 
@@ -61,13 +66,13 @@ msgstr ""
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
 #: resources/views/post-panel.php:27
-#: tmp/i18n/screens/Overview.js:137
+#: tmp/i18n/screens/Overview.js:148
 msgid "Health"
 msgstr ""
 
 #: resources/views/column-cell.php:27
 #: resources/views/column-cell.php:38
-#: tmp/i18n/screens/Overview.js:137
+#: tmp/i18n/screens/Overview.js:148
 msgid "AI"
 msgstr ""
 
@@ -77,7 +82,7 @@ msgstr ""
 
 #: resources/views/column-cell.php:30
 #: src/Column.php:68
-#: tmp/i18n/screens/Overview.js:236
+#: tmp/i18n/screens/Overview.js:247
 #: tmp/i18n/shell/Ring.js:10
 #: tmp/i18n/shell/Ring.js:19
 msgid "Not checked yet"
@@ -98,7 +103,7 @@ msgid "Scores after the next check"
 msgstr ""
 
 #: resources/views/column-cell.php:35
-#: tmp/i18n/screens/Overview.js:244
+#: tmp/i18n/screens/Overview.js:255
 #: tmp/i18n/shell/Shell.js:40
 msgid "Open MonoRanks"
 msgstr ""
@@ -118,7 +123,7 @@ msgstr ""
 
 #. translators: %s: number
 #: resources/views/column-cell.php:43
-#: tmp/i18n/screens/Overview.js:154
+#: tmp/i18n/screens/Overview.js:165
 #, php-format,js-format
 msgid "%s ready to apply"
 msgid_plural "%s ready to apply"
@@ -126,7 +131,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: resources/views/column-cell.php:45
-#: tmp/i18n/screens/Overview.js:123
+#: tmp/i18n/screens/Overview.js:132
 msgid "Nothing waiting"
 msgstr ""
 
@@ -196,9 +201,9 @@ msgid "Place"
 msgstr ""
 
 #: resources/views/post-panel.php:42
-#: tmp/i18n/screens/Grow.js:65
-#: tmp/i18n/screens/Grow.js:76
-#: tmp/i18n/screens/Grow.js:163
+#: tmp/i18n/screens/Grow.js:66
+#: tmp/i18n/screens/Grow.js:77
+#: tmp/i18n/screens/Grow.js:164
 msgid "(opens in a new tab)"
 msgstr ""
 
@@ -210,14 +215,15 @@ msgid "Settings"
 msgstr ""
 
 #: src/Admin.php:77
-#: tmp/i18n/screens/Overview.js:222
+#: tmp/i18n/screens/Overview.js:233
+#: tmp/i18n/screens/Settings.js:107
 #: tmp/i18n/screens/Settings.js:112
 msgid "Connect"
 msgstr ""
 
 #: src/Admin.php:96
 #: src/Assets.php:67
-#: tmp/i18n/screens/Overview.js:91
+#: tmp/i18n/screens/Overview.js:96
 #: tmp/i18n/shell/Shell.js:16
 msgid "Overview"
 msgstr ""
@@ -228,20 +234,20 @@ msgid "MonoRanks settings"
 msgstr ""
 
 #. translators: 1: relative time, 2: date
-#: src/Admin.php:217
+#: src/Admin.php:219
 #, php-format
 msgid "in %1$s (%2$s)"
 msgstr ""
 
 #. translators: 1: relative time, 2: date
-#: src/Admin.php:220
+#: src/Admin.php:222
 #, php-format
 msgid "%1$s ago (%2$s)"
 msgstr ""
 
 #. translators: %s: relative time, e.g. 3 minutes
 #. translators: %s: relative time such as "5 days"
-#: src/Admin.php:230
+#: src/Admin.php:232
 #: src/Column.php:63
 #, php-format
 msgid "in %s"
@@ -249,78 +255,78 @@ msgstr ""
 
 #. translators: %s: relative time, e.g. 3 minutes
 #. translators: %s: relative time such as "2 days"
-#: src/Admin.php:230
+#: src/Admin.php:232
 #: src/Column.php:78
 #: src/Column.php:92
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: src/Admin.php:242
+#: src/Admin.php:244
 msgid "Connected. Sending your pages to MonoRanks."
 msgstr ""
 
-#: src/Admin.php:243
+#: src/Admin.php:245
 msgid "Content sent to MonoRanks."
 msgstr ""
 
-#: src/Admin.php:244
+#: src/Admin.php:246
 msgid "Disconnected. Nothing is sent any more."
 msgstr ""
 
-#: src/Admin.php:245
+#: src/Admin.php:247
 msgid "All MonoRanks data is deleted."
 msgstr ""
 
-#: src/Admin.php:246
+#: src/Admin.php:248
 msgid "Applied. You can undo it under Recent changes."
 msgstr ""
 
-#: src/Admin.php:247
+#: src/Admin.php:249
 msgid "Some fixes could not be applied."
 msgstr ""
 
-#: src/Admin.php:248
+#: src/Admin.php:250
 msgid "The list changed. Reload and try again."
 msgstr ""
 
-#: src/Admin.php:249
+#: src/Admin.php:251
 msgid "Undone. The previous value is back."
 msgstr ""
 
-#: src/Admin.php:250
+#: src/Admin.php:252
 msgid "Could not apply. Check it in MonoRanks."
 msgstr ""
 
-#: src/Admin.php:251
+#: src/Admin.php:253
 msgid "Not applied: the page changed. Check it in MonoRanks."
 msgstr ""
 
-#: src/Admin.php:252
+#: src/Admin.php:254
 msgid "Some fixes changed in WordPress. Check them in MonoRanks."
 msgstr ""
 
-#: src/Admin.php:253
+#: src/Admin.php:255
 msgid "That does not look like a MonoRanks connector key."
 msgstr ""
 
-#: src/Admin.php:254
+#: src/Admin.php:256
 msgid "The MonoRanks address must start with https://."
 msgstr ""
 
-#: src/Admin.php:255
+#: src/Admin.php:257
 msgid "MonoRanks did not accept this key. Create a new one."
 msgstr ""
 
-#: src/Admin.php:256
+#: src/Admin.php:258
 msgid "This key is for another website."
 msgstr ""
 
-#: src/Admin.php:257
-msgid "MonoRanks could not be reached. Check the address and try again."
+#: src/Admin.php:259
+msgid "MonoRanks could not be reached. Try again."
 msgstr ""
 
-#: src/Admin.php:258
+#: src/Admin.php:260
 msgid "Could not connect. Please try again."
 msgstr ""
 
@@ -431,55 +437,67 @@ msgstr ""
 msgid "Added by hand"
 msgstr ""
 
-#: src/Overview.php:44
+#: src/Overview.php:47
 #: src/PostPanel.php:152
 msgid "Title"
 msgstr ""
 
-#: src/Overview.php:45
+#: src/Overview.php:48
 #: src/PostPanel.php:153
 msgid "Description"
 msgstr ""
 
-#: src/Overview.php:46
+#: src/Overview.php:49
 #: src/PostPanel.php:156
 msgid "Main version"
 msgstr ""
 
-#: src/Overview.php:47
+#: src/Overview.php:50
 #: src/PostPanel.php:157
 msgid "Hidden from Google"
 msgstr ""
 
-#: src/Overview.php:48
+#: src/Overview.php:51
 msgid "Image text"
 msgstr ""
 
-#: src/Overview.php:49
+#: src/Overview.php:52
 #: src/PostPanel.php:151
 msgid "Redirect"
 msgstr ""
 
-#: src/Overview.php:50
+#: src/Overview.php:53
 msgid "Opening paragraph"
 msgstr ""
 
-#: src/Overview.php:51
+#: src/Overview.php:54
 msgid "AI tool rules"
 msgstr ""
 
-#: src/Overview.php:52
+#: src/Overview.php:55
 msgid "AI site summary"
 msgstr ""
 
+#. translators: %d: post ID, for a post that no longer has a title
+#: src/Overview.php:73
+#, php-format
+msgid "Page #%d"
+msgstr ""
+
 #. translators: %d: attachment ID
-#: src/Overview.php:71
+#: src/Overview.php:76
 #, php-format
 msgid "Image #%d"
 msgstr ""
 
-#: src/Overview.php:73
+#: src/Overview.php:78
 msgid "Site"
+msgstr ""
+
+#. translators: %d: term ID, for a category or tag that no longer exists
+#: src/Overview.php:83
+#, php-format
+msgid "Category #%d"
 msgstr ""
 
 #: src/PostPanel.php:45
@@ -567,535 +585,546 @@ msgstr ""
 msgid "More info"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:28
-#: tmp/i18n/screens/Grow.js:36
+#: tmp/i18n/screens/Grow.js:29
+#: tmp/i18n/screens/Grow.js:37
 msgid "What to do next"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:37
+#: tmp/i18n/screens/Grow.js:38
 #, js-format
 msgid "Updated %s"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:51
+#: tmp/i18n/screens/Grow.js:52
 msgid "No access yet."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:51
+#: tmp/i18n/screens/Grow.js:52
 msgid "Allow it under Integrations in MonoRanks, or connect again."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:51
+#: tmp/i18n/screens/Grow.js:52
 #: tmp/i18n/screens/Settings.js:99
 msgid "Allow"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:53
+#: tmp/i18n/screens/Grow.js:54
 msgid "Not available yet."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:55
+#: tmp/i18n/screens/Grow.js:56
 msgid "Could not reach MonoRanks. Retrying soon."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:57
+#: tmp/i18n/screens/Grow.js:58
 msgid "Checking…"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:72
+#: tmp/i18n/screens/Grow.js:73
 msgid "Ask for links"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:72
+#: tmp/i18n/screens/Grow.js:73
 #, js-format
 msgid "%s to contact"
 msgid_plural "%s to contact"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:72
-#: tmp/i18n/screens/Grow.js:86
-#: tmp/i18n/screens/Grow.js:99
-#: tmp/i18n/screens/Grow.js:127
-#: tmp/i18n/screens/Grow.js:147
-#: tmp/i18n/screens/Grow.js:151
+#: tmp/i18n/screens/Grow.js:73
+#: tmp/i18n/screens/Grow.js:87
+#: tmp/i18n/screens/Grow.js:100
+#: tmp/i18n/screens/Grow.js:128
+#: tmp/i18n/screens/Grow.js:148
+#: tmp/i18n/screens/Grow.js:152
 msgid "All"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:80
-msgid "Every target is contacted. MonoRanks looks for new ones each week."
-msgstr ""
-
 #: tmp/i18n/screens/Grow.js:81
-msgid "No outreach targets yet. MonoRanks looks for pages worth a link each week."
+msgid "Every target is contacted."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:86
+#: tmp/i18n/screens/Grow.js:82
+msgid "No outreach targets yet."
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:87
 msgid "Backlinks"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:89
+#: tmp/i18n/screens/Grow.js:90
 msgid "Won"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:89
+#: tmp/i18n/screens/Grow.js:90
 msgid "New websites linking to you, last 28 days."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:90
+#: tmp/i18n/screens/Grow.js:91
 msgid "Lost"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:91
+#: tmp/i18n/screens/Grow.js:92
 msgid "Linking sites"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:93
+#: tmp/i18n/screens/Grow.js:94
 #, js-format
 msgid "%s to check for spam"
 msgid_plural "%s to check for spam"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:94
-msgid "No backlink data yet. MonoRanks refreshes it weekly."
+#: tmp/i18n/screens/Grow.js:95
+msgid "No backlink data yet."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:99
+#: tmp/i18n/screens/Grow.js:100
 msgid "Competitors"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:99
+#: tmp/i18n/screens/Grow.js:100
 #, js-format
 msgid "%s gap"
 msgid_plural "%s gaps"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:104
+#: tmp/i18n/screens/Grow.js:105
 msgid "Suggested"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:105
+#: tmp/i18n/screens/Grow.js:106
 #, js-format
 msgid "%1$s shared keyword, %2$s where they rank higher"
 msgid_plural "%1$s shared keywords, %2$s where they rank higher"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:106
+#: tmp/i18n/screens/Grow.js:107
 #, js-format
 msgid "%s ahead of you"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:110
+#: tmp/i18n/screens/Grow.js:111
 msgid "Words you miss"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:110
+#: tmp/i18n/screens/Grow.js:111
 msgid "They rank for these, you do not"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:112
+#: tmp/i18n/screens/Grow.js:113
 #, js-format
 msgid "%s/mo"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:115
-msgid "No competitors yet. Pick some in MonoRanks to see the keywords they win."
-msgstr ""
-
-#: tmp/i18n/screens/Grow.js:123
-msgid "up"
-msgstr ""
-
-#: tmp/i18n/screens/Grow.js:123
-msgid "down"
+#: tmp/i18n/screens/Grow.js:116
+msgid "No competitors yet."
 msgstr ""
 
 #: tmp/i18n/screens/Grow.js:124
+msgid "up"
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:124
+msgid "down"
+msgstr ""
+
+#: tmp/i18n/screens/Grow.js:125
 #, js-format
 msgid "%1$s → %2$s"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:127
+#: tmp/i18n/screens/Grow.js:128
 msgid "Keyword moves"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:130
+#: tmp/i18n/screens/Grow.js:131
 msgid "Up"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:134
+#: tmp/i18n/screens/Grow.js:135
 msgid "Down"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:137
+#: tmp/i18n/screens/Grow.js:138
 #, js-format
 msgid "Your %s tracked keyword held its place this week."
 msgid_plural "Your %s tracked keywords held their places this week."
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:137
-msgid "No tracked keywords yet. Track some in MonoRanks to see them move here."
+#: tmp/i18n/screens/Grow.js:138
+msgid "No tracked keywords yet."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:146
+#: tmp/i18n/screens/Grow.js:147
 msgid "No reports yet"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:146
+#: tmp/i18n/screens/Grow.js:147
 msgid "Create a report or a weekly email in MonoRanks to share progress."
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:150
+#: tmp/i18n/screens/Grow.js:151
 msgid "Reports"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:155
+#: tmp/i18n/screens/Grow.js:156
 msgid "Weekly email"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:155
+#: tmp/i18n/screens/Grow.js:156
 #, js-format
 msgid "Next send %s"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:157
+#: tmp/i18n/screens/Grow.js:158
 #, js-format
 msgid "%s recipient"
 msgid_plural "%s recipients"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Grow.js:158
+#: tmp/i18n/screens/Grow.js:159
 msgid "On"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:158
+#: tmp/i18n/screens/Grow.js:159
 msgid "Off"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:162
+#: tmp/i18n/screens/Grow.js:163
 msgid "Client report"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:162
+#: tmp/i18n/screens/Grow.js:163
 msgid "Report"
 msgstr ""
 
-#: tmp/i18n/screens/Grow.js:163
+#: tmp/i18n/screens/Grow.js:164
 msgid "Open"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:21
+#: tmp/i18n/screens/Overview.js:22
 msgid "Whole site"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:25
+#: tmp/i18n/screens/Overview.js:26
 msgid "Adds one short answer at the top of the page. See it first in MonoRanks."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:29
+#: tmp/i18n/screens/Overview.js:30
 msgid "Now"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:30
+#: tmp/i18n/screens/Overview.js:31
 msgid "(empty)"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:33
+#: tmp/i18n/screens/Overview.js:34
 #: tmp/i18n/shell/ChangeLog.js:40
 msgid "After"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:36
+#: tmp/i18n/screens/Overview.js:37
 #, js-format
 msgid "Image: %s"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:67
+#: tmp/i18n/screens/Overview.js:68
 msgid "Could not load the overview."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:77
+#: tmp/i18n/screens/Overview.js:78
 #: tmp/i18n/screens/Settings.js:66
 msgid "Something went wrong. Try again."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:87
+#: tmp/i18n/screens/Overview.js:88
 #, js-format
 msgid "Checked %s"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:88
+#: tmp/i18n/screens/Overview.js:93
 msgid "Sends your published pages to MonoRanks now. It also happens by itself."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:89
+#: tmp/i18n/screens/Overview.js:94
 #: tmp/i18n/screens/Settings.js:107
 msgid "Send content"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:103
+#: tmp/i18n/screens/Overview.js:107
+#, js-format
+msgid "Old data · Updated %s"
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:107
+msgid "Old data"
+msgstr ""
+
+#: tmp/i18n/screens/Overview.js:112
 msgid "Site health"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:103
+#: tmp/i18n/screens/Overview.js:112
 #, js-format
 msgid "Average of %1$s page out of %2$s published."
 msgid_plural "Average of %1$s pages out of %2$s published."
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Overview.js:110
-#: tmp/i18n/screens/Overview.js:137
+#: tmp/i18n/screens/Overview.js:119
+#: tmp/i18n/screens/Overview.js:148
 msgid "AI answers ready"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:110
+#: tmp/i18n/screens/Overview.js:119
 msgid "How easily AI answers can quote your pages."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:114
+#: tmp/i18n/screens/Overview.js:123
 msgid "Search clicks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:114
+#: tmp/i18n/screens/Overview.js:123
 msgid "Clicks from Google in the last 28 days."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:114
+#: tmp/i18n/screens/Overview.js:123
 msgid "Connect Google Search Console in MonoRanks to see clicks here."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:121
+#: tmp/i18n/screens/Overview.js:130
 msgid "Fixes applied"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:121
+#: tmp/i18n/screens/Overview.js:130
 msgid "AI tool rules on"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:121
+#: tmp/i18n/screens/Overview.js:130
 msgid "No AI tool rules"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:121
+#: tmp/i18n/screens/Overview.js:130
 msgid "AI site summary published"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:121
+#: tmp/i18n/screens/Overview.js:130
 msgid "No AI site summary"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:122
+#: tmp/i18n/screens/Overview.js:131
 msgid "30 days"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:123
+#: tmp/i18n/screens/Overview.js:132
 #, js-format
 msgid "%s ready"
 msgid_plural "%s ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Overview.js:133
+#: tmp/i18n/screens/Overview.js:144
 msgid "Pages to fix"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:133
+#: tmp/i18n/screens/Overview.js:144
 msgid "All pages"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:137
+#: tmp/i18n/screens/Overview.js:148
 #: tmp/i18n/shell/ChangeLog.js:19
 msgid "Page"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:137
-#: tmp/i18n/screens/Overview.js:202
+#: tmp/i18n/screens/Overview.js:148
+#: tmp/i18n/screens/Overview.js:213
 msgid "Fix"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:142
+#: tmp/i18n/screens/Overview.js:153
 msgid "Nothing to fix right now"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:142
+#: tmp/i18n/screens/Overview.js:153
 msgid "Every checked page scores 60 or more."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:148
+#: tmp/i18n/screens/Overview.js:159
 msgid "Ready to apply"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:148
+#: tmp/i18n/screens/Overview.js:159
 msgid "Approved in MonoRanks. Each one can be undone for 30 days."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:149
+#: tmp/i18n/screens/Overview.js:160
 msgid "Apply all"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:154
+#: tmp/i18n/screens/Overview.js:165
 #, js-format
 msgid "%s fix to approve"
 msgid_plural "%s fixes to approve"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Overview.js:154
+#: tmp/i18n/screens/Overview.js:165
 #, js-format
 msgid "%s needs a value"
 msgid_plural "%s need a value"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tmp/i18n/screens/Overview.js:155
+#: tmp/i18n/screens/Overview.js:166
 msgid "Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:155
+#: tmp/i18n/screens/Overview.js:166
 msgid "Approve them in MonoRanks and they are written here, with undo."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:160
+#: tmp/i18n/screens/Overview.js:171
 msgid "Review fixes"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:162
+#: tmp/i18n/screens/Overview.js:173
 msgid "No fixes waiting"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:162
+#: tmp/i18n/screens/Overview.js:173
 msgid "Fixes you approve in MonoRanks appear here, ready to write into WordPress."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:163
-#: tmp/i18n/screens/Overview.js:169
+#: tmp/i18n/screens/Overview.js:174
+#: tmp/i18n/screens/Overview.js:180
 msgid "Review"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:163
+#: tmp/i18n/screens/Overview.js:174
 msgid "Apply"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:167
+#: tmp/i18n/screens/Overview.js:178
 msgid "Check in MonoRanks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:167
+#: tmp/i18n/screens/Overview.js:178
 msgid "Changed in WordPress after you approved them, so they are not applied from here."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:176
+#: tmp/i18n/screens/Overview.js:187
 #: tmp/i18n/screens/Settings.js:142
 msgid "Recent changes"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:179
+#: tmp/i18n/screens/Overview.js:190
 msgid "All changes"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:207
+#: tmp/i18n/screens/Overview.js:218
 msgid "Biggest problem"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:220
+#: tmp/i18n/screens/Overview.js:231
 msgid "Connect MonoRanks again"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:220
+#: tmp/i18n/screens/Overview.js:231
 #: tmp/i18n/screens/Settings.js:82
 msgid "Key revoked"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:220
+#: tmp/i18n/screens/Overview.js:231
 #: tmp/i18n/screens/Settings.js:82
 msgid "Not connected"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:222
+#: tmp/i18n/screens/Overview.js:233
 #: tmp/i18n/screens/Settings.js:112
 msgid "Connect to MonoRanks"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:222
+#: tmp/i18n/screens/Overview.js:233
 #: tmp/i18n/screens/Settings.js:112
 msgid "Sign in and approve. Takes a minute."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:223
+#: tmp/i18n/screens/Overview.js:234
 #: tmp/i18n/screens/Settings.js:113
 msgid "Or paste a connector key"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:223
+#: tmp/i18n/screens/Overview.js:234
 #: tmp/i18n/screens/Settings.js:113
 msgid "Use this when your host blocks Application Passwords."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:226
+#: tmp/i18n/screens/Overview.js:237
 msgid "Open settings"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:227
+#: tmp/i18n/screens/Overview.js:238
 msgid "See scores here and in your Posts list"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:236
+#: tmp/i18n/screens/Overview.js:247
 msgid "Not shared yet"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:236
+#: tmp/i18n/screens/Overview.js:247
 msgid "This MonoRanks does not share results with the plugin yet. It asks again tomorrow."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:236
+#: tmp/i18n/screens/Overview.js:247
 msgid "MonoRanks not reached"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:236
+#: tmp/i18n/screens/Overview.js:247
 msgid "Tried again within the hour, or when you reload this screen."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:236
+#: tmp/i18n/screens/Overview.js:247
 msgid "Scores appear here and in the Posts list after the first weekly check."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:238
+#: tmp/i18n/screens/Overview.js:249
 msgid "Waiting for the first check"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:238
+#: tmp/i18n/screens/Overview.js:249
 #: tmp/i18n/screens/Settings.js:82
 msgid "Connected"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:241
+#: tmp/i18n/screens/Overview.js:252
 msgid "Content"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:241
+#: tmp/i18n/screens/Overview.js:252
 #, js-format
-msgid "%1$s published items sent %2$s"
-msgstr ""
+msgid "%1$s published item sent %2$s"
+msgid_plural "%1$s published items sent %2$s"
+msgstr[0] ""
+msgstr[1] ""
 
-#: tmp/i18n/screens/Overview.js:241
+#: tmp/i18n/screens/Overview.js:252
 msgid "Not sent. Use \"Send content\"."
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:241
+#: tmp/i18n/screens/Overview.js:252
 msgid "Sending…"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:242
+#: tmp/i18n/screens/Overview.js:253
 msgid "Results"
 msgstr ""
 
-#: tmp/i18n/screens/Overview.js:242
+#: tmp/i18n/screens/Overview.js:253
 #, js-format
 msgid "checked %s"
 msgstr ""
@@ -1130,6 +1159,10 @@ msgstr[1] ""
 #: tmp/i18n/screens/Settings.js:90
 #, js-format
 msgid "sending, batch %1$s of %2$s"
+msgstr ""
+
+#: tmp/i18n/screens/Settings.js:91
+msgid "Last try failed"
 msgstr ""
 
 #: tmp/i18n/screens/Settings.js:98
@@ -1187,7 +1220,7 @@ msgid "Use a different key"
 msgstr ""
 
 #: tmp/i18n/screens/Settings.js:122
-msgid "In MonoRanks: Settings → API and MCP → New credential, content:write, this website."
+msgid "In MonoRanks: Settings → API and MCP → New credential. Tick content:write, sites:read and pages:read, for this website."
 msgstr ""
 
 #: tmp/i18n/screens/Settings.js:129
@@ -1265,6 +1298,14 @@ msgstr ""
 
 #: tmp/i18n/screens/Settings.js:175
 msgid "Save key"
+msgstr ""
+
+#: tmp/i18n/screens/VideoCard.js:12
+msgid "Dismiss"
+msgstr ""
+
+#: tmp/i18n/screens/VideoCard.js:20
+msgid "Play video"
 msgstr ""
 
 #: tmp/i18n/shell/ChangeLog.js:13
