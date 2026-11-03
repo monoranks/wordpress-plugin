@@ -14,7 +14,6 @@ import { Button } from '@/components/ui/button';
 import { Badge, Dot, SeverityPill, severityOf } from '@/components/ui/badge';
 import { Tip } from '@/components/ui/tip';
 import { GrowCards } from '@/screens/Grow';
-import { VideoCard } from '@/screens/VideoCard';
 
 function excerpt(s: string, n: number) {
   const t = s.replace(/<[^>]+>/g, '').trim();
@@ -115,8 +114,6 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
       : undefined
     : ' ';
 
-  const video = data?.video ? <VideoCard video={data.video} onDismiss={() => { setData({ ...data, video: null }); api.dismissVideo().catch(() => undefined); }} /> : null;
-
   const actions = data?.connected && !data.revoked ? (
     <Tip align="end" text={__('Sends your published pages to MonoRanks now. It also happens by itself.', 'monoranks')}>
       <Button variant="primary" disabled={busy !== null} aria-busy={busy === 'sync'} onClick={() => run('sync', () => api.sync('overview'))}>{__('Send content', 'monoranks')}</Button>
@@ -128,8 +125,8 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
       <NoticeBox notice={notice} />
       {error && <NoticeBox notice={{ type: 'error', text: error }} />}
       {!data && !error && <Skeleton />}
-      {data && (!data.connected || data.revoked) && <><ConnectSteps revoked={data.revoked} go={go} />{!o && video}</>}
-      {data && data.connected && !data.revoked && !o && <><Waiting data={data} />{video}<GrowCards /></>}
+      {data && (!data.connected || data.revoked) && <><ConnectSteps revoked={data.revoked} go={go} /></>}
+      {data && data.connected && !data.revoked && !o && <><Waiting data={data} /><GrowCards /></>}
       {data && o && (
         <>
           <Card className="@container flex flex-col gap-5 px-7 py-7 max-[782px]:px-[18px] max-[782px]:py-5">
@@ -166,8 +163,6 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
               </div>
             </div>
           </Card>
-
-          {video}
 
           {!data.revoked && <GrowCards />}
 

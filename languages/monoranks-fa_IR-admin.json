@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2026-11-03T06:23:42+00:00",
+    "translation-revision-date": "2026-11-03T09:52:06+00:00",
     "generator": "WP-CLI/2.12.0",
     "source": "resources/admin",
     "domain": "messages",
@@ -583,15 +583,6 @@
             "checked %s": [
                 "بررسی‌شده %s"
             ],
-            "Watch how it works": [
-                "ببینید چطور کار می‌کند"
-            ],
-            "Dismiss": [
-                "بستن"
-            ],
-            "Play video": [
-                "پخش ویدیو"
-            ],
             "Urgent": [
                 "فوری"
             ],
@@ -603,6 +594,12 @@
             ],
             "Low": [
                 "کم"
+            ],
+            "Video": [
+                "ویدیو"
+            ],
+            "Close": [
+                "بستن"
             ],
             "More info": [
                 "اطلاعات بیشتر"

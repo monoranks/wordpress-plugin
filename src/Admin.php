@@ -109,9 +109,7 @@ class Admin {
 
 	/** Where the app renders. Without a build (a checkout that skipped `npm run build`) it says what to run. */
 	public static function mount() {
-		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		$video  = $screen && 'overview' === self::screen_for_hook( $screen->id ) ? Video::card() : null;
-		echo self::view( 'app', array( 'theme' => self::theme(), 'built' => file_exists( dirname( MONORANKS_CONNECTOR_FILE ) . '/build/main.js' ), 'video' => $video ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the view escapes
+		echo self::view( 'app', array( 'theme' => self::theme(), 'built' => file_exists( dirname( MONORANKS_CONNECTOR_FILE ) . '/build/main.js' ), 'video' => Video::links() ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the view escapes
 	}
 
 	/** The MonoRanks mark (resources/assets/mark.svg) as a data URI; WordPress repaints its fill in the admin colour scheme. */

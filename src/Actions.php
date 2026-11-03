@@ -85,7 +85,6 @@ class Actions {
 		}
 		delete_transient( 'monoranks_sync_lock' );
 		delete_transient( 'monoranks_refreshing' );
-		delete_metadata( 'user', 0, Video::DISMISSED, '', true );
 		return 'deleted';
 	}
 

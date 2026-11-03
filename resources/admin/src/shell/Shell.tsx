@@ -7,6 +7,7 @@ import { Notices } from '@/shell/Notices';
 import { cn } from '@/lib/utils';
 import { out } from '@/lib/links';
 import { Tip } from '@/components/ui/tip';
+import { VideoButton } from '@/shell/VideoButton';
 import type { Screen } from '@/lib/screen';
 
 /** The plugin's own SVG (assets/*.svg), inlined so currentColor applies. Static files shipped with the plugin. */
@@ -38,6 +39,7 @@ export function Shell({ section, go, title, description, actions, children }: { 
             ))}
           </nav>
           <div className="ms-auto flex items-center gap-1">
+            <VideoButton />
             <Button variant="ghost" size="sm" asChild><a href={out(s.urls.docs, 'header-help', section)} target="_blank" rel="noopener">{__('Help', 'monoranks')}</a></Button>
             <Button size="sm" asChild className="max-[782px]:hidden"><a href={out(s.urls.app, 'header-open', section)} target="_blank" rel="noopener">{__('Open MonoRanks', 'monoranks')}<ArrowUpRight size={15} className="mr-flip" /></a></Button>
           </div>

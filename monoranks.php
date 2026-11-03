@@ -32,7 +32,7 @@ define( 'MONORANKS_CONNECTOR_FILE', __FILE__ );
 if ( ! defined( 'MONORANKS_API_BASE' ) ) {
 	define( 'MONORANKS_API_BASE', 'https://app.monoranks.com' );
 }
-// The YouTube id of the "Watch how it works" card on the Overview (src/Video.php). While it is empty the card does not show.
+// The YouTube id behind the "Video" button in the top bar (src/Video.php). While it is empty the button does not show.
 if ( ! defined( 'MONORANKS_VIDEO_ID' ) ) {
 	define( 'MONORANKS_VIDEO_ID', 'g6UjllC0wew' );
 }

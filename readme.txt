@@ -14,6 +14,8 @@ Find what keeps your pages out of Google and AI answers. A weekly AI SEO audit w
 
 **See why your pages miss page one and AI answers. Approve a fix, and it is done.**
 
+https://www.youtube.com/watch?v=g6UjllC0wew
+
 [MonoRanks](https://monoranks.com) audits every page of your site each week and tells you what to fix first, in plain words. This plugin connects your site, so the fixes you approve are **written into WordPress for you**, and every one can be undone.
 
 It checks four things:
@@ -83,7 +85,7 @@ The plugin talks to [MonoRanks](https://monoranks.com). **Nothing is sent until 
 
 **Legal:** [Terms of service](https://monoranks.com/legal/terms/) · [Privacy policy](https://monoranks.com/legal/privacy/)
 
-**YouTube (only when you play a video).** The MonoRanks screen can show a short "Watch how it works" video hosted on YouTube, a service of Google. The poster image ships with the plugin, so nothing is requested from YouTube when the screen opens. When you click play, your browser loads the player from youtube.com, which may set cookies, and YouTube receives your IP address, browser details and the address of the page, like any embedded video. Nothing is sent if you never click play, or if you dismiss the card. [YouTube terms of service](https://www.youtube.com/t/terms) · [Google privacy policy](https://policies.google.com/privacy)
+**YouTube (only when you press Video).** The **Video** button on the MonoRanks screens plays a short video hosted on YouTube, a service of Google. Nothing is requested from YouTube until you press Video. Then your browser loads the player from youtube.com, and YouTube receives your IP address, browser details and the address of the page, and may set cookies, like any embedded video. [YouTube terms of service](https://www.youtube.com/t/terms) · [Google privacy policy](https://policies.google.com/privacy)
 
 = Source code =
 

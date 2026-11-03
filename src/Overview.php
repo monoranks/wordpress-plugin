@@ -38,7 +38,6 @@ class Overview {
 			'app_url'    => $site_url,
 			'log'        => self::log_rows( 10 ),
 			'labels'     => self::field_labels(),
-			'video'      => Video::card(),
 		);
 	}
 
