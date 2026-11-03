@@ -88,9 +88,9 @@ class Settings {
 	public static function data() {
 		$conn      = Connection::get();
 		$connected = Connection::has_key();
-		$revoked   = $connected && isset( $conn['key_state'] ) && 'revoked' === $conn['key_state'];
+		$revoked   = Connection::is_revoked();
 		$sync      = get_option( 'monoranks_sync', array() );
-		$overview  = Insights::overview();
+		$overview  = $connected ? Insights::overview() : null;
 		return array(
 			'connected'    => $connected,
 			'revoked'      => $revoked,

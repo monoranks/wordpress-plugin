@@ -155,6 +155,8 @@ class Rest {
 	public static function unpair() {
 		Sync::unschedule();
 		Connection::clear();
+		// As Disconnect in WordPress does: results of a connection that is gone are not kept.
+		Insights::clear();
 		return array( 'paired' => false );
 	}
 

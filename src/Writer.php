@@ -50,7 +50,8 @@ class Writer {
 			if ( ! $ok ) {
 				return array( 'id' => $id, 'ok' => false, 'error' => 'invalid_value' );
 			}
-			self::log( $actor, $field, 'site', $previous, $value );
+			// What was stored, not what was sent: Undo compares against this row, and both setters clean the value.
+			self::log( $actor, $field, 'site', $previous, 'ai_bots' === $field ? AiAccess::get_bots() : AiAccess::get_llms() );
 			// Page caches may still hold the old file (often a 404 from before it existed): ask them to drop it (#87).
 			$cache = CachePurger::file( 'llms_txt' === $field ? '/llms.txt' : '/robots.txt' );
 			return array( 'id' => $id, 'ok' => true, 'previous' => $previous, 'cache' => $cache );
@@ -68,7 +69,7 @@ class Writer {
 				return array( 'id' => $id, 'ok' => false, 'error' => 'changed_since_preview', 'current' => $previous );
 			}
 			Redirects::set( $from, $value );
-			self::log( $actor, $field, $from, $previous, $value );
+			self::log( $actor, $field, $from, $previous, Redirects::get( $from ) );
 			// A cached copy of the old page at the source would keep hiding the redirect (#11).
 			return array( 'id' => $id, 'ok' => true, 'previous' => $previous, 'cache' => CachePurger::url( $from ) );
 		}
@@ -89,7 +90,7 @@ class Writer {
 			if ( null !== $state['body'] && $state['body'] !== $clean ) {
 				self::restore( $page, ImageAlt::set_body_alt( $state['content'], $attachment, $clean ) );
 			}
-			self::log( $actor, $field, 'attachment:' . $attachment, $previous, $value, null !== $state['body'] ? $page : 0 );
+			self::log( $actor, $field, 'attachment:' . $attachment, $previous, $clean, null !== $state['body'] ? $page : 0 );
 			$result = array( 'id' => $id, 'ok' => true, 'previous' => $previous );
 			// The page that shows the image: the post the change names, else the post the image was uploaded to (#11).
 			$page = $page ? $page : (int) wp_get_post_parent_id( $attachment );

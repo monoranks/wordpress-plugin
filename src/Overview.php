@@ -21,13 +21,15 @@ class Overview {
 		$site_url  = $overview && ! empty( $overview['site_url'] ) ? $overview['site_url'] : ( $site_id ? $app . '/sites/' . rawurlencode( $site_id ) . '/overview' : $app );
 		return array(
 			'connected'  => $connected,
-			'revoked'    => $connected && isset( $conn['key_state'] ) && 'revoked' === $conn['key_state'],
+			'revoked'    => Connection::is_revoked(),
 			'status'     => Insights::status(),
 			'overview'   => $overview,
 			'host'       => (string) wp_parse_url( home_url(), PHP_URL_HOST ),
 			'audited'    => $overview ? Admin::ago( $overview['audited_at'] ) : '',
 			'next_audit' => $overview ? Admin::ago( $overview['next_audit_at'] ) : '',
 			'fetched'    => Admin::ago( Insights::fetched_at() ),
+			// How old the data on screen is, for a key that no longer works.
+			'updated'    => Admin::ago_short( Insights::updated_at() ),
 			'last_sent'  => Admin::ago( isset( $conn['last_sent_at'] ) ? $conn['last_sent_at'] : '' ),
 			// The first send runs in the background right after connecting; only a failed send asks for "Sync content now".
 			'sending'    => $connected && ! empty( get_option( 'monoranks_sync', array() )['run_id'] ),
@@ -66,11 +68,18 @@ class Overview {
 			$where  = $target;
 			if ( 0 === strpos( $target, 'post:' ) ) {
 				$where = get_the_title( (int) substr( $target, 5 ) );
+				/* translators: %d: post ID, for a post that no longer has a title */
+				$where = '' !== $where ? $where : sprintf( __( 'Page #%d', 'monoranks' ), (int) substr( $target, 5 ) );
 			} elseif ( 0 === strpos( $target, 'attachment:' ) ) {
 				/* translators: %d: attachment ID */
 				$where = sprintf( __( 'Image #%d', 'monoranks' ), (int) substr( $target, 11 ) );
 			} elseif ( 'site' === $target ) {
 				$where = __( 'Site', 'monoranks' );
+			} elseif ( preg_match( '/^term:([a-z0-9_-]+):(\d+)$/', $target, $m ) ) {
+				// A category or tag page: its name, never the internal "term:category:12".
+				$term = get_term( (int) $m[2], $m[1] );
+				/* translators: %d: term ID, for a category or tag that no longer exists */
+				$where = $term instanceof \WP_Term ? $term->name : sprintf( __( 'Category #%d', 'monoranks' ), (int) $m[2] );
 			}
 			$ts     = isset( $row['at'] ) ? strtotime( $row['at'] ) : 0;
 			$rows[] = array(

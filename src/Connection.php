@@ -20,10 +20,30 @@ class Connection {
 		return ! empty( $c['key'] ) && ! empty( $c['api_base'] );
 	}
 
+	/**
+	 * The connection as the database holds it now. A long request (a content sync in WP-Cron) keeps its first read in memory,
+	 * and the site may have been connected again since.
+	 */
+	public static function fresh() {
+		wp_cache_delete( 'monoranks_connection', 'options' );
+		return self::get();
+	}
+
+	/** Saves on top of the stored connection, so a request that started earlier never brings an old key back or a removed one. */
 	public static function update( array $patch ) {
-		$c = array_merge( self::get(), $patch );
+		$now = self::fresh();
+		if ( empty( $now['key'] ) && empty( $patch['key'] ) ) {
+			return $now;
+		}
+		$c = array_merge( $now, $patch );
 		update_option( 'monoranks_connection', $c, false );
 		return $c;
+	}
+
+	/** MonoRanks no longer accepts the stored key. */
+	public static function is_revoked() {
+		$c = self::get();
+		return self::has_key() && isset( $c['key_state'] ) && 'revoked' === $c['key_state'];
 	}
 
 	public static function clear() {

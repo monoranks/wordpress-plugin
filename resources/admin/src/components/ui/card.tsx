@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
+import { fmt, fmtCompact } from '@/lib/format';
+import { Tip } from '@/components/ui/tip';
 
 /** The app's card after the 1.29 redesign: a borderless white block with a soft shadow and 16px corners. */
 function Card({ className, ...props }: React.ComponentProps<'div'>) {
@@ -25,7 +27,20 @@ function Tile({ className, ...props }: React.ComponentProps<'div'>) {
 
 /** The short uppercase label over a big number. */
 function TileLabel({ className, ...props }: React.ComponentProps<'span'>) {
-  return <span className={cn('inline-flex min-w-0 items-center gap-1.5 whitespace-nowrap text-[12px] font-bold uppercase tracking-[.06em] text-mute', className)} {...props} />;
+  return <span className={cn('inline-flex min-w-0 items-center gap-1.5 text-[12px] font-bold uppercase tracking-[.06em] text-mute', className)} {...props} />;
 }
 
-export { Card, CardHeader, CardTitle, CardBody, Tile, TileLabel };
+/**
+ * The big number of a tile. From 10,000 it is compact (30.9K) with the whole number in a tooltip, it wraps rather than
+ * clips in a narrow tile, and a sign stays in front of the digits in a right-to-left admin.
+ */
+function TileNumber({ n, sign = '', className }: { n: number; sign?: '' | '+' | '−'; className?: string }) {
+  const short = sign + fmtCompact(n);
+  const whole = sign + fmt(n);
+  // Some languages have no short form for thousands (German keeps 10.556), so a longer number takes a smaller size, not a line break.
+  const size = short.length <= 6 ? 'text-[32px]' : short.length <= 8 ? 'text-[26px]' : 'text-[22px]';
+  const big = <span dir="ltr" className={cn('min-w-0 font-[750] leading-none tracking-[-0.03em] tabular-nums [overflow-wrap:anywhere]', size, className)}>{short}</span>;
+  return short === whole ? big : <Tip text={whole} align="start" className="min-w-0 self-start">{big}</Tip>;
+}
+
+export { Card, CardHeader, CardTitle, CardBody, Tile, TileLabel, TileNumber };

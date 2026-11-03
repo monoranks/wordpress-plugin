@@ -7,6 +7,7 @@ import { Notices } from '@/shell/Notices';
 import { cn } from '@/lib/utils';
 import { out } from '@/lib/links';
 import { Tip } from '@/components/ui/tip';
+import { VideoButton } from '@/shell/VideoButton';
 import type { Screen } from '@/lib/screen';
 
 /** The plugin's own SVG (assets/*.svg), inlined so currentColor applies. Static files shipped with the plugin. */
@@ -29,15 +30,16 @@ export function Shell({ section, go, title, description, actions, children }: { 
   return (
     <>
       <header className="bg-surface shadow-[inset_0_-1px_0_var(--border)]">
-        <div className={cn(measure, 'flex min-h-[68px] items-center gap-8 max-[782px]:gap-3')}>
-          <a href={s.urls.overview} onClick={(e) => { e.preventDefault(); go('overview'); }} className="inline-flex items-center text-ink hover:text-ink"><Logo which="wordmark" className="[&>svg]:h-7 [&>svg]:w-[138px]" /></a>
-          <nav className="flex self-stretch gap-2 max-[782px]:gap-0" aria-label={__('MonoRanks sections', 'monoranks')}>
+        <div className={cn(measure, 'flex min-h-[68px] items-center gap-8 max-[782px]:gap-3 max-[480px]:flex-wrap max-[480px]:gap-1.5 max-[480px]:py-1.5')}>
+          <a href={s.urls.overview} onClick={(e) => { e.preventDefault(); go('overview'); }} className="inline-flex items-center text-ink hover:text-ink"><Logo which="wordmark" className="[&>svg]:h-7 [&>svg]:w-[138px] max-[480px]:[&>svg]:w-[104px]" /></a>
+          <nav className="flex self-stretch gap-2 max-[782px]:gap-0 max-[480px]:min-h-11" aria-label={__('MonoRanks sections', 'monoranks')}>
             {sections.map((e) => (
               <a key={e.id} href={e.href} onClick={(ev) => { ev.preventDefault(); go(e.id); }} aria-current={section === e.id ? 'page' : undefined}
-                className={cn('inline-flex items-center border-b-[3px] px-3 pt-[3px] text-[15px]', section === e.id ? 'border-brand font-bold text-ink hover:text-ink' : 'border-transparent font-semibold text-ink2 hover:text-ink')}>{e.label}</a>
+                className={cn('inline-flex items-center border-b-[3px] px-3 pt-[3px] text-[15px] max-[480px]:px-2 max-[480px]:text-[14px]', section === e.id ? 'border-brand font-bold text-ink hover:text-ink' : 'border-transparent font-semibold text-ink2 hover:text-ink')}>{e.label}</a>
             ))}
           </nav>
           <div className="ms-auto flex items-center gap-1">
+            <VideoButton />
             <Button variant="ghost" size="sm" asChild><a href={out(s.urls.docs, 'header-help', section)} target="_blank" rel="noopener">{__('Help', 'monoranks')}</a></Button>
             <Button size="sm" asChild className="max-[782px]:hidden"><a href={out(s.urls.app, 'header-open', section)} target="_blank" rel="noopener">{__('Open MonoRanks', 'monoranks')}<ArrowUpRight size={15} className="mr-flip" /></a></Button>
           </div>

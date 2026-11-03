@@ -4,7 +4,7 @@
  * Description:       Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo.
  * Plugin URI:        https://monoranks.com/product/wordpress/
  * Author URI:        https://veronalabs.com/
- * Version:           0.2.0
+ * Version:           0.2.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            VeronaLabs
@@ -26,11 +26,15 @@ if ( file_exists( __DIR__ . '/packages/autoload.php' ) ) {
 	return;
 }
 
-define( 'MONORANKS_CONNECTOR_VERSION', '0.2.0' );
+define( 'MONORANKS_CONNECTOR_VERSION', '0.2.1' );
 define( 'MONORANKS_CONNECTOR_FILE', __FILE__ );
 // MonoRanks address used when a key is pasted by hand. The download build sets it; wp-config.php may override it.
 if ( ! defined( 'MONORANKS_API_BASE' ) ) {
 	define( 'MONORANKS_API_BASE', 'https://app.monoranks.com' );
+}
+// The YouTube id behind the "Video" button in the top bar (src/Video.php). While it is empty the button does not show.
+if ( ! defined( 'MONORANKS_VIDEO_ID' ) ) {
+	define( 'MONORANKS_VIDEO_ID', 'g6UjllC0wew' );
 }
 
 
@@ -48,6 +52,7 @@ add_action( \MonoRanks\Sync::STEP_HOOK, array( 'MonoRanks\\Sync', 'run' ) );
 add_action( \MonoRanks\Sync::DAILY_HOOK, array( 'MonoRanks\\Sync', 'daily' ) );
 \MonoRanks\SeoFields::register_output();
 \MonoRanks\Admin::register();
+\MonoRanks\Notices::register();
 \MonoRanks\Handoff::register();
 \MonoRanks\AuthorizeScreen::register();
 \MonoRanks\Assets::register();

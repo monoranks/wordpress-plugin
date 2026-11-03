@@ -71,7 +71,7 @@ export function Delta({ n, unit = '', since, period }: { n: number | null | unde
       /* translators: 1: signed change, for example "+3", 2: a short date, for example "Oct 25". */
       ? sprintf(__('%1$s since %2$s', 'monoranks'), txt, since)
       : txt;
-  return <span className={cn('whitespace-nowrap text-[13px] font-semibold', dir)}>{label}</span>;
+  return <span className={cn('min-w-0 text-[13px] font-semibold', dir)}>{label}</span>;
 }
 
 /** A 28-day sparkline: area, line, emphasised end point. */

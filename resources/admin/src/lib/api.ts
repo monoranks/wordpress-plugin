@@ -30,6 +30,8 @@ export type OverviewData = {
   /** A send is running (the first one starts by itself after connecting); send_failed: nothing was sent and the last try failed. */
   sending?: boolean; send_failed?: boolean;
   app_url: string; log: LogRow[]; labels: Record<string, string>;
+  /** How long ago the data on screen came from MonoRanks. */
+  updated: string;
 };
 
 export type SettingsData = {

@@ -1,0 +1,622 @@
+{
+    "translation-revision-date": "2026-11-03T10:56:11+00:00",
+    "generator": "WP-CLI/2.12.0",
+    "source": "resources/admin",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "de_DE",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "After": [
+                "Nachher"
+            ],
+            "Page": [
+                "Seite"
+            ],
+            "No changes yet": [
+                "Noch keine Änderungen"
+            ],
+            "Fixes you approve in MonoRanks show up here, each with Undo.": [
+                "In MonoRanks freigegebene Korrekturen erscheinen hier, jeweils mit Rückgängig."
+            ],
+            "Change": [
+                "Änderung"
+            ],
+            "When": [
+                "Wann"
+            ],
+            "Undo": [
+                "Rückgängig"
+            ],
+            "Before": [
+                "Vorher"
+            ],
+            "By": [
+                "Von"
+            ],
+            "Not checked yet": [
+                "Noch nicht geprüft"
+            ],
+            "%s of 100": [
+                "%s von 100"
+            ],
+            "Good": [
+                "Gut"
+            ],
+            "Needs work": [
+                "Handlungsbedarf"
+            ],
+            "Poor": [
+                "Schlecht"
+            ],
+            "%s vs last 28 days": [
+                "%s ggü. letzten 28 Tagen"
+            ],
+            "%1$s since %2$s": [
+                "%1$s seit %2$s"
+            ],
+            "Next check": [
+                "Nächste Prüfung"
+            ],
+            "Fixes": [
+                "Korrekturen"
+            ],
+            "Settings": [
+                "Einstellungen"
+            ],
+            "Connect": [
+                "Verbinden"
+            ],
+            "Allow": [
+                "Erlauben"
+            ],
+            "Something went wrong. Try again.": [
+                "Etwas ist schiefgelaufen. Erneut versuchen."
+            ],
+            "Send content": [
+                "Inhalte senden"
+            ],
+            "Recent changes": [
+                "Letzte Änderungen"
+            ],
+            "Key revoked": [
+                "Schlüssel widerrufen"
+            ],
+            "Not connected": [
+                "Nicht verbunden"
+            ],
+            "Connect to MonoRanks": [
+                "Mit MonoRanks verbinden"
+            ],
+            "Sign in and approve. Takes a minute.": [
+                "Anmelden und freigeben. Dauert eine Minute."
+            ],
+            "Or paste a connector key": [
+                "Oder Connector-Schlüssel einfügen"
+            ],
+            "Use this when your host blocks Application Passwords.": [
+                "Nutzen Sie das, wenn Ihr Hoster Anwendungspasswörter blockiert."
+            ],
+            "Connected": [
+                "Verbunden"
+            ],
+            "Could not load the settings.": [
+                "Einstellungen konnten nicht geladen werden."
+            ],
+            "Connection": [
+                "Verbindung"
+            ],
+            "MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below.": [
+                "MonoRanks akzeptiert diesen Schlüssel nicht mehr. Verbinden Sie neu oder fügen Sie unten einen neuen Schlüssel ein."
+            ],
+            "Sending published content to MonoRanks. Nothing else leaves this site.": [
+                "Veröffentlichte Inhalte werden an MonoRanks gesendet. Sonst verlässt nichts diese Website."
+            ],
+            "Last sent": [
+                "Zuletzt gesendet"
+            ],
+            "%s published item": [
+                "%s veröffentlichter Eintrag",
+                "%s veröffentlichte Einträge"
+            ],
+            "sending, batch %1$s of %2$s": [
+                "wird gesendet, Paket %1$s von %2$s"
+            ],
+            "Last try failed": [
+                "Fehlgeschlagen"
+            ],
+            "Written with the \"MonoRanks\" Application Password. Revoke it to stop writes.": [
+                "Geschrieben mit dem Anwendungspasswort „MonoRanks“. Widerrufen Sie es, um das Schreiben zu stoppen."
+            ],
+            "Approve MonoRanks in WordPress so it can write the fixes you accept.": [
+                "Geben Sie MonoRanks in WordPress frei, damit es die Korrekturen schreiben kann, die Sie annehmen."
+            ],
+            "Allowed": [
+                "Erlaubt"
+            ],
+            "Revoke": [
+                "Widerrufen"
+            ],
+            "Not set up": [
+                "Nicht eingerichtet"
+            ],
+            "SEO plugin": [
+                "SEO-Plugin"
+            ],
+            "MonoRanks cannot write titles, descriptions, main versions or hiding from Google into %s yet, so those fixes are refused": [
+                "MonoRanks kann Titel, Beschreibungen, Hauptversionen und das Verbergen vor Google noch nicht in %s schreiben, daher werden diese Korrekturen abgelehnt"
+            ],
+            "titles and descriptions go into the fields %s reads": [
+                "Titel und Beschreibungen kommen in die Felder, die %s liest"
+            ],
+            "MonoRanks adds the approved title, description, main version and hiding from Google itself": [
+                "MonoRanks fügt freigegebene Titel, Beschreibungen, Hauptversionen und das Verbergen vor Google selbst hinzu"
+            ],
+            "None": [
+                "Keines"
+            ],
+            "Disconnect stops sending. Fixes already applied stay.": [
+                "Trennen stoppt das Senden. Angewendete Korrekturen bleiben."
+            ],
+            "Disconnect": [
+                "Trennen"
+            ],
+            "Use a different key": [
+                "Anderen Schlüssel nutzen"
+            ],
+            "In MonoRanks: Settings → API and MCP → New credential. Tick content:write, sites:read and pages:read, for this website.": [
+                "In MonoRanks: Einstellungen → API und MCP → Neue Zugangsdaten. Wählen Sie content:write, sites:read und pages:read für diese Website."
+            ],
+            "What is sent": [
+                "Was gesendet wird"
+            ],
+            "Sent": [
+                "Gesendet"
+            ],
+            "Published titles, a 40-word excerpt, dates, authors, categories, tags, SEO fields, image alt text and plugin status.": [
+                "Veröffentlichte Titel, ein Auszug von 40 Wörtern, Datum, Autoren, Kategorien, Schlagwörter, SEO-Felder, Alt-Texte und Plugin-Status."
+            ],
+            "Read back": [
+                "Zurückgelesen"
+            ],
+            "This website's audit results: scores, issues and the fixes you approved, shown here and in the Posts list.": [
+                "Prüfergebnisse dieser Website: Scores, Probleme und freigegebene Korrekturen, angezeigt hier und in der Beitragsliste."
+            ],
+            "Never sent": [
+                "Nie gesendet"
+            ],
+            "Drafts, private posts, comments, emails, passwords, plugin or theme settings.": [
+                "Entwürfe, private Beiträge, Kommentare, E-Mails, Passwörter, Plugin- oder Theme-Einstellungen."
+            ],
+            "Can change": [
+                "Kann ändern"
+            ],
+            "Title, description, main version, hiding from Google, image text, redirects, one opening paragraph, AI tool rules, AI site summary. Only after you approve each one.": [
+                "Titel, Beschreibung, Hauptversion, Verbergen vor Google, Bildtext, Weiterleitungen, ein Einleitungsabsatz, KI-Tool-Regeln, KI-Website-Übersicht. Nur nach Ihrer Freigabe, jeweils einzeln."
+            ],
+            "Last 50 · undo for 30 days": [
+                "Letzte 50 · 30 Tage rückgängig"
+            ],
+            "Danger zone": [
+                "Gefahrenbereich"
+            ],
+            "Erases the connection, scores, redirects, AI files and change log. Written fixes stay.": [
+                "Löscht Verbindung, Scores, Weiterleitungen, KI-Dateien und Änderungsprotokoll. Geschriebene Korrekturen bleiben."
+            ],
+            "This cannot be undone. Delete everything?": [
+                "Das lässt sich nicht rückgängig machen. Alles löschen?"
+            ],
+            "Yes, delete all data": [
+                "Ja, alles löschen"
+            ],
+            "Cancel": [
+                "Abbrechen"
+            ],
+            "Delete all data": [
+                "Alle Daten löschen"
+            ],
+            "Connector key": [
+                "Connector-Schlüssel"
+            ],
+            "MonoRanks address (development sites only)": [
+                "MonoRanks-Adresse (nur Entwicklungs-Websites)"
+            ],
+            "Save key": [
+                "Schlüssel speichern"
+            ],
+            "(opens in a new tab)": [
+                "(öffnet in neuem Tab)"
+            ],
+            "What to do next": [
+                "Nächste Schritte"
+            ],
+            "Updated %s": [
+                "Aktualisiert: %s"
+            ],
+            "No access yet.": [
+                "Noch kein Zugriff."
+            ],
+            "Allow it under Integrations in MonoRanks, or connect again.": [
+                "Erlauben Sie es in MonoRanks unter „Integrationen“ oder verbinden Sie neu."
+            ],
+            "Not available yet.": [
+                "Noch nicht verfügbar."
+            ],
+            "Could not reach MonoRanks. Retrying soon.": [
+                "MonoRanks nicht erreichbar. Neuer Versuch folgt."
+            ],
+            "Checking…": [
+                "Wird geprüft…"
+            ],
+            "Ask for links": [
+                "Links anfragen"
+            ],
+            "%s to contact": [
+                "%s zu kontaktieren",
+                "%s zu kontaktieren"
+            ],
+            "All": [
+                "Alle"
+            ],
+            "Every target is contacted.": [
+                "Alle Ziele sind kontaktiert."
+            ],
+            "No outreach targets yet.": [
+                "Noch keine Outreach-Ziele."
+            ],
+            "Backlinks": [
+                "Backlinks"
+            ],
+            "Won": [
+                "Gewonnen"
+            ],
+            "New websites linking to you, last 28 days.": [
+                "Neue Websites, die auf Sie verlinken, letzte 28 Tage."
+            ],
+            "Lost": [
+                "Verloren"
+            ],
+            "Linking sites": [
+                "Verlinkende Websites"
+            ],
+            "%s to check for spam": [
+                "%s auf Spam zu prüfen",
+                "%s auf Spam zu prüfen"
+            ],
+            "No backlink data yet.": [
+                "Noch keine Backlink-Daten."
+            ],
+            "Competitors": [
+                "Wettbewerber"
+            ],
+            "%s gap": [
+                "%s Lücke",
+                "%s Lücken"
+            ],
+            "Suggested": [
+                "Vorgeschlagen"
+            ],
+            "%1$s shared keyword, %2$s where they rank higher": [
+                "%1$s gemeinsames Keyword, bei %2$s stehen sie höher",
+                "%1$s gemeinsame Keywords, bei %2$s stehen sie höher"
+            ],
+            "%s ahead of you": [
+                "%s vor Ihnen"
+            ],
+            "Words you miss": [
+                "Fehlende Keywords"
+            ],
+            "They rank for these, you do not": [
+                "Die anderen ranken dafür, Sie nicht"
+            ],
+            "%s/mo": [
+                "%s/Monat"
+            ],
+            "No competitors yet.": [
+                "Noch keine Wettbewerber."
+            ],
+            "up": [
+                "hoch"
+            ],
+            "down": [
+                "runter"
+            ],
+            "%1$s → %2$s": [
+                "%1$s → %2$s"
+            ],
+            "Keyword moves": [
+                "Keyword-Bewegungen"
+            ],
+            "Up": [
+                "Hoch"
+            ],
+            "Down": [
+                "Runter"
+            ],
+            "Your %s tracked keyword held its place this week.": [
+                "Ihr %s beobachtetes Keyword hielt diese Woche seinen Platz.",
+                "Ihre %s beobachteten Keywords hielten diese Woche ihren Platz."
+            ],
+            "No tracked keywords yet.": [
+                "Noch keine beobachteten Keywords."
+            ],
+            "No reports yet": [
+                "Noch keine Berichte"
+            ],
+            "Create a report or a weekly email in MonoRanks to share progress.": [
+                "Erstellen Sie in MonoRanks einen Bericht oder eine wöchentliche E-Mail, um Fortschritte zu teilen."
+            ],
+            "Reports": [
+                "Berichte"
+            ],
+            "Weekly email": [
+                "Wöchentliche E-Mail"
+            ],
+            "Next send %s": [
+                "Nächster Versand %s"
+            ],
+            "%s recipient": [
+                "%s Empfänger",
+                "%s Empfänger"
+            ],
+            "On": [
+                "An"
+            ],
+            "Off": [
+                "Aus"
+            ],
+            "Client report": [
+                "Kundenbericht"
+            ],
+            "Report": [
+                "Bericht"
+            ],
+            "Open": [
+                "Öffnen"
+            ],
+            "Connect MonoRanks": [
+                "MonoRanks verbinden"
+            ],
+            "Health": [
+                "Zustand"
+            ],
+            "AI": [
+                "KI"
+            ],
+            "Open MonoRanks": [
+                "MonoRanks öffnen"
+            ],
+            "%s ready to apply": [
+                "%s bereit zum Anwenden",
+                "%s bereit zum Anwenden"
+            ],
+            "Nothing waiting": [
+                "Nichts wartet"
+            ],
+            "Overview": [
+                "Übersicht"
+            ],
+            "Whole site": [
+                "Ganze Website"
+            ],
+            "Adds one short answer at the top of the page. See it first in MonoRanks.": [
+                "Fügt oben auf der Seite eine kurze Antwort ein. Zuerst in MonoRanks ansehen."
+            ],
+            "Now": [
+                "Jetzt"
+            ],
+            "(empty)": [
+                "(leer)"
+            ],
+            "Image: %s": [
+                "Bild: %s"
+            ],
+            "Could not load the overview.": [
+                "Übersicht konnte nicht geladen werden."
+            ],
+            "Checked %s": [
+                "Geprüft %s"
+            ],
+            "Sends your published pages to MonoRanks now. It also happens by itself.": [
+                "Sendet Ihre veröffentlichten Seiten jetzt an MonoRanks. Das passiert auch automatisch."
+            ],
+            "Old data · Updated %s": [
+                "Alte Daten · Aktualisiert: %s"
+            ],
+            "Old data": [
+                "Alte Daten"
+            ],
+            "Site health": [
+                "Website-Zustand"
+            ],
+            "Average of %1$s page out of %2$s published.": [
+                "Durchschnitt aus %1$s Seite von %2$s veröffentlichten.",
+                "Durchschnitt aus %1$s Seiten von %2$s veröffentlichten."
+            ],
+            "AI answers ready": [
+                "Bereit für KI-Antworten"
+            ],
+            "How easily AI answers can quote your pages.": [
+                "Wie leicht KI-Antworten Ihre Seiten zitieren können."
+            ],
+            "Search clicks": [
+                "Such-Klicks"
+            ],
+            "Clicks from Google in the last 28 days.": [
+                "Klicks von Google in den letzten 28 Tagen."
+            ],
+            "Connect Google Search Console in MonoRanks to see clicks here.": [
+                "Verbinden Sie die Google Search Console in MonoRanks, um hier Klicks zu sehen."
+            ],
+            "Fixes applied": [
+                "Angewendete Korrekturen"
+            ],
+            "AI tool rules on": [
+                "KI-Tool-Regeln an"
+            ],
+            "No AI tool rules": [
+                "Keine KI-Tool-Regeln"
+            ],
+            "AI site summary published": [
+                "KI-Website-Übersicht veröffentlicht"
+            ],
+            "No AI site summary": [
+                "Keine KI-Website-Übersicht"
+            ],
+            "30 days": [
+                "30 Tage"
+            ],
+            "%s ready": [
+                "%s bereit",
+                "%s bereit"
+            ],
+            "Pages to fix": [
+                "Seiten zu beheben"
+            ],
+            "All pages": [
+                "Alle Seiten"
+            ],
+            "Fix": [
+                "Beheben"
+            ],
+            "Nothing to fix right now": [
+                "Gerade nichts zu beheben"
+            ],
+            "Every checked page scores 60 or more.": [
+                "Jede geprüfte Seite hat 60 oder mehr."
+            ],
+            "Ready to apply": [
+                "Bereit zum Anwenden"
+            ],
+            "Approved in MonoRanks. Each one can be undone for 30 days.": [
+                "In MonoRanks freigegeben. Jede kann 30 Tage lang rückgängig gemacht werden."
+            ],
+            "Apply all": [
+                "Alle anwenden"
+            ],
+            "%s fix to approve": [
+                "%s Korrektur freizugeben",
+                "%s Korrekturen freizugeben"
+            ],
+            "%s needs a value": [
+                "%s braucht einen Wert",
+                "%s brauchen einen Wert"
+            ],
+            "Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo.": [
+                "Geben Sie in MonoRanks einen Wert ein oder lassen Sie ihn mit KI entwerfen und geben Sie ihn frei. Dann wird er hier geschrieben, mit Rückgängig."
+            ],
+            "Approve them in MonoRanks and they are written here, with undo.": [
+                "Geben Sie sie in MonoRanks frei, dann werden sie hier geschrieben, mit Rückgängig."
+            ],
+            "Review fixes": [
+                "Korrekturen prüfen"
+            ],
+            "No fixes waiting": [
+                "Keine Korrekturen offen"
+            ],
+            "Fixes you approve in MonoRanks appear here, ready to write into WordPress.": [
+                "In MonoRanks freigegebene Korrekturen erscheinen hier, bereit für WordPress."
+            ],
+            "Review": [
+                "Prüfen"
+            ],
+            "Apply": [
+                "Anwenden"
+            ],
+            "Check in MonoRanks": [
+                "In MonoRanks prüfen"
+            ],
+            "Changed in WordPress after you approved them, so they are not applied from here.": [
+                "Nach Ihrer Freigabe in WordPress geändert, daher werden sie hier nicht angewendet."
+            ],
+            "All changes": [
+                "Alle Änderungen"
+            ],
+            "Biggest problem": [
+                "Größtes Problem"
+            ],
+            "Connect MonoRanks again": [
+                "MonoRanks neu verbinden"
+            ],
+            "Open settings": [
+                "Einstellungen öffnen"
+            ],
+            "See scores here and in your Posts list": [
+                "Scores hier und in Ihrer Beitragsliste sehen"
+            ],
+            "Not shared yet": [
+                "Noch nicht geteilt"
+            ],
+            "This MonoRanks does not share results with the plugin yet. It asks again tomorrow.": [
+                "Dieses MonoRanks teilt noch keine Ergebnisse mit dem Plugin. Morgen wird erneut gefragt."
+            ],
+            "MonoRanks not reached": [
+                "MonoRanks nicht erreicht"
+            ],
+            "Tried again within the hour, or when you reload this screen.": [
+                "Neuer Versuch innerhalb einer Stunde oder beim Neuladen dieser Seite."
+            ],
+            "Scores appear here and in the Posts list after the first weekly check.": [
+                "Scores erscheinen hier und in der Beitragsliste nach der ersten wöchentlichen Prüfung."
+            ],
+            "Waiting for the first check": [
+                "Warten auf die erste Prüfung"
+            ],
+            "Content": [
+                "Inhalte"
+            ],
+            "%1$s published item sent %2$s": [
+                "%1$s veröffentlichter Eintrag gesendet: %2$s",
+                "%1$s veröffentlichte Einträge gesendet: %2$s"
+            ],
+            "Not sent. Use \"Send content\".": [
+                "Nicht gesendet. Nutzen Sie „Inhalte senden“."
+            ],
+            "Sending…": [
+                "Wird gesendet…"
+            ],
+            "Results": [
+                "Ergebnisse"
+            ],
+            "checked %s": [
+                "geprüft: %s"
+            ],
+            "Urgent": [
+                "Dringend"
+            ],
+            "High": [
+                "Hoch"
+            ],
+            "Medium": [
+                "Mittel"
+            ],
+            "Low": [
+                "Niedrig"
+            ],
+            "Video": [
+                "Video"
+            ],
+            "Close": [
+                "Schließen"
+            ],
+            "More info": [
+                "Mehr Infos"
+            ],
+            "MonoRanks sections": [
+                "MonoRanks-Bereiche"
+            ],
+            "Help": [
+                "Hilfe"
+            ],
+            "A product by VeronaLabs": [
+                "Ein Produkt von VeronaLabs"
+            ],
+            "A product by": [
+                "Ein Produkt von"
+            ]
+        }
+    }
+}

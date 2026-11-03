@@ -1,0 +1,1361 @@
+msgid ""
+msgstr "Project-Id-Version: MonoRanks 1.0.0\nLanguage: de_DE\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Domain: monoranks\n"
+
+#. Plugin Name of the plugin
+#: monoranks.php
+#: src/Admin.php:95
+#: src/Column.php:35
+#: src/PostPanel.php:34
+msgid "MonoRanks"
+msgstr "MonoRanks"
+
+#. Plugin URI of the plugin
+#: monoranks.php
+msgid "https://monoranks.com/product/wordpress/"
+msgstr ""
+
+#. Description of the plugin
+#: monoranks.php
+msgid "Connects this site to MonoRanks (SEO, AEO and GEO audits): sends published content metadata and applies the fixes you approve there, with undo."
+msgstr "Verbindet diese Website mit MonoRanks (SEO-, AEO- und GEO-Prüfungen): sendet Metadaten veröffentlichter Inhalte und wendet die dort freigegebenen Korrekturen an, mit Rückgängig."
+
+#. Author of the plugin
+#: monoranks.php
+msgid "VeronaLabs"
+msgstr ""
+
+#. Author URI of the plugin
+#: monoranks.php
+msgid "https://veronalabs.com/"
+msgstr ""
+
+#: resources/views/app.php:13
+msgid "The MonoRanks admin app is not built. Run npm install and npm run build in the plugin folder."
+msgstr "Die MonoRanks-Admin-App ist nicht gebaut. Führen Sie im Plugin-Ordner npm install und npm run build aus."
+
+#: resources/views/app.php:16
+#: tmp/i18n/shell/VideoButton.js:27
+#: tmp/i18n/shell/VideoButton.js:52
+msgid "Video"
+msgstr "Video"
+
+#: resources/views/column-cell.php:20
+#: resources/views/post-panel.php:17
+#: tmp/i18n/screens/Overview.js:224
+msgid "Connect MonoRanks"
+msgstr "MonoRanks verbinden"
+
+#: resources/views/column-cell.php:24
+#: resources/views/post-panel.php:19
+#: src/PostPanel.php:39
+msgid "Scores appear after you publish."
+msgstr "Scores erscheinen nach der Veröffentlichung."
+
+#: resources/views/column-cell.php:27
+#: resources/views/column-cell.php:38
+#: resources/views/post-panel.php:27
+#: tmp/i18n/screens/Overview.js:141
+msgid "Health"
+msgstr "Zustand"
+
+#: resources/views/column-cell.php:27
+#: resources/views/column-cell.php:38
+#: tmp/i18n/screens/Overview.js:141
+msgid "AI"
+msgstr "KI"
+
+#: resources/views/column-cell.php:30
+msgid "Status"
+msgstr "Status"
+
+#: resources/views/column-cell.php:30
+#: src/Column.php:68
+#: tmp/i18n/screens/Overview.js:240
+#: tmp/i18n/shell/Ring.js:10
+#: tmp/i18n/shell/Ring.js:19
+msgid "Not checked yet"
+msgstr "Noch nicht geprüft"
+
+#: resources/views/column-cell.php:31
+#: resources/views/column-cell.php:54
+#: tmp/i18n/screens/Settings.js:94
+msgid "Next check"
+msgstr "Nächste Prüfung"
+
+#: resources/views/column-cell.php:32
+msgid "Published"
+msgstr "Veröffentlicht"
+
+#: resources/views/column-cell.php:35
+msgid "Scores after the next check"
+msgstr "Scores nach der nächsten Prüfung"
+
+#: resources/views/column-cell.php:35
+#: tmp/i18n/screens/Overview.js:248
+#: tmp/i18n/shell/Shell.js:42
+msgid "Open MonoRanks"
+msgstr "MonoRanks öffnen"
+
+#: resources/views/column-cell.php:38
+msgid "Not checked this time"
+msgstr "Diesmal nicht geprüft"
+
+#: resources/views/column-cell.php:38
+msgid "Not checked: MonoRanks checks AI answers on a sample of pages"
+msgstr "Nicht geprüft: MonoRanks prüft KI-Antworten an einer Auswahl von Seiten"
+
+#: resources/views/column-cell.php:41
+#: tmp/i18n/screens/Settings.js:98
+msgid "Fixes"
+msgstr "Korrekturen"
+
+#. translators: %s: number
+#, php-format,js-format
+#: resources/views/column-cell.php:43
+#: tmp/i18n/screens/Overview.js:158
+msgid "%s ready to apply"
+msgid_plural "%s ready to apply"
+msgstr[0] "%s bereit zum Anwenden"
+msgstr[1] "%s bereit zum Anwenden"
+
+#: resources/views/column-cell.php:45
+#: tmp/i18n/screens/Overview.js:127
+msgid "Nothing waiting"
+msgstr "Nichts wartet"
+
+#: resources/views/column-cell.php:47
+msgid "Issues"
+msgstr "Probleme"
+
+#. translators: %s: number
+#, php-format
+#: resources/views/column-cell.php:49
+msgid "%s open"
+msgid_plural "%s open"
+msgstr[0] "%s offen"
+msgstr[1] "%s offen"
+
+#: resources/views/column-cell.php:51
+#: src/Column.php:142
+msgid "No open issues"
+msgstr "Keine offenen Probleme"
+
+#: resources/views/column-cell.php:53
+msgid "Checked"
+msgstr "Geprüft"
+
+#: resources/views/column-cell.php:58
+msgid "Apply fixes"
+msgstr "Korrekturen anwenden"
+
+#: resources/views/column-cell.php:59
+#: resources/views/post-panel.php:42
+msgid "Open in MonoRanks"
+msgstr "In MonoRanks öffnen"
+
+#: resources/views/partials/score-ring.php:16
+msgid "Not scored yet"
+msgstr "Noch kein Score"
+
+#. translators: %s: score out of 100
+#, php-format,js-format
+#: resources/views/partials/score-ring.php:18
+#: tmp/i18n/shell/Ring.js:19
+msgid "%s of 100"
+msgstr "%s von 100"
+
+#: resources/views/post-panel.php:27
+msgid "AI answers"
+msgstr "KI-Antworten"
+
+#: resources/views/post-panel.php:30
+msgid "Not checked yet."
+msgstr "Noch nicht geprüft."
+
+#: resources/views/post-panel.php:33
+msgid "Google, 28 days"
+msgstr "Google, 28 Tage"
+
+#: resources/views/post-panel.php:34
+msgid "Clicks"
+msgstr "Klicks"
+
+#: resources/views/post-panel.php:35
+msgid "Shown"
+msgstr "Angezeigt"
+
+#: resources/views/post-panel.php:36
+msgid "Place"
+msgstr "Position"
+
+#: resources/views/post-panel.php:42
+#: tmp/i18n/screens/Grow.js:66
+#: tmp/i18n/screens/Grow.js:77
+#: tmp/i18n/screens/Grow.js:164
+msgid "(opens in a new tab)"
+msgstr "(öffnet in neuem Tab)"
+
+#: src/Admin.php:77
+#: src/Admin.php:97
+#: tmp/i18n/screens/Settings.js:74
+#: tmp/i18n/shell/Shell.js:18
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: src/Admin.php:77
+#: tmp/i18n/screens/Overview.js:226
+#: tmp/i18n/screens/Settings.js:107
+#: tmp/i18n/screens/Settings.js:112
+msgid "Connect"
+msgstr "Verbinden"
+
+#: src/Admin.php:96
+#: src/Assets.php:67
+#: tmp/i18n/screens/Overview.js:91
+#: tmp/i18n/shell/Shell.js:17
+msgid "Overview"
+msgstr "Übersicht"
+
+#: src/Admin.php:97
+#: src/Assets.php:67
+msgid "MonoRanks settings"
+msgstr "MonoRanks-Einstellungen"
+
+#. translators: 1: relative time, 2: date
+#, php-format
+#: src/Admin.php:217
+msgid "in %1$s (%2$s)"
+msgstr "in %1$s (%2$s)"
+
+#. translators: 1: relative time, 2: date
+#, php-format
+#: src/Admin.php:220
+msgid "%1$s ago (%2$s)"
+msgstr "vor %1$s (%2$s)"
+
+#. translators: %s: relative time, e.g. 3 minutes
+#. translators: %s: relative time such as "5 days"
+#, php-format
+#: src/Admin.php:230
+#: src/Column.php:63
+msgid "in %s"
+msgstr "in %s"
+
+#. translators: %s: relative time, e.g. 3 minutes
+#. translators: %s: relative time such as "2 days"
+#, php-format
+#: src/Admin.php:230
+#: src/Column.php:78
+#: src/Column.php:92
+msgid "%s ago"
+msgstr "vor %s"
+
+#: src/Admin.php:242
+msgid "Connected. Sending your pages to MonoRanks."
+msgstr "Verbunden. Ihre Seiten werden an MonoRanks gesendet."
+
+#: src/Admin.php:243
+msgid "Content sent to MonoRanks."
+msgstr "Inhalte an MonoRanks gesendet."
+
+#: src/Admin.php:244
+msgid "Disconnected. Nothing is sent any more."
+msgstr "Getrennt. Es wird nichts mehr gesendet."
+
+#: src/Admin.php:245
+msgid "All MonoRanks data is deleted."
+msgstr "Alle MonoRanks-Daten sind gelöscht."
+
+#: src/Admin.php:246
+msgid "Applied. You can undo it under Recent changes."
+msgstr "Angewendet. Unter „Letzte Änderungen“ können Sie es rückgängig machen."
+
+#: src/Admin.php:247
+msgid "Some fixes could not be applied."
+msgstr "Einige Korrekturen konnten nicht angewendet werden."
+
+#: src/Admin.php:248
+msgid "The list changed. Reload and try again."
+msgstr "Die Liste hat sich geändert. Neu laden und erneut versuchen."
+
+#: src/Admin.php:249
+msgid "Undone. The previous value is back."
+msgstr "Rückgängig gemacht. Der vorige Wert ist zurück."
+
+#: src/Admin.php:250
+msgid "Could not apply. Check it in MonoRanks."
+msgstr "Nicht angewendet. Prüfen Sie es in MonoRanks."
+
+#: src/Admin.php:251
+msgid "Not applied: the page changed. Check it in MonoRanks."
+msgstr "Nicht angewendet: Die Seite hat sich geändert. Prüfen Sie es in MonoRanks."
+
+#: src/Admin.php:252
+msgid "Some fixes changed in WordPress. Check them in MonoRanks."
+msgstr "Einige Korrekturen wurden in WordPress geändert. Prüfen Sie sie in MonoRanks."
+
+#: src/Admin.php:253
+msgid "That does not look like a MonoRanks connector key."
+msgstr "Das sieht nicht nach einem MonoRanks-Connector-Schlüssel aus."
+
+#: src/Admin.php:254
+msgid "The MonoRanks address must start with https://."
+msgstr "Die MonoRanks-Adresse muss mit https:// beginnen."
+
+#: src/Admin.php:255
+msgid "MonoRanks did not accept this key. Create a new one."
+msgstr "MonoRanks hat diesen Schlüssel nicht akzeptiert. Erstellen Sie einen neuen."
+
+#: src/Admin.php:256
+msgid "This key is for another website."
+msgstr "Dieser Schlüssel gehört zu einer anderen Website."
+
+#: src/Admin.php:257
+msgid "MonoRanks could not be reached. Try again."
+msgstr "MonoRanks ist nicht erreichbar. Erneut versuchen."
+
+#: src/Admin.php:258
+msgid "Could not connect. Please try again."
+msgstr "Verbindung fehlgeschlagen. Bitte erneut versuchen."
+
+#: src/AuthorizeScreen.php:40
+msgid "Reads your content and applies only fixes you approve."
+msgstr "Liest Ihre Inhalte und wendet nur Korrekturen an, die Sie freigeben."
+
+#. translators: %s: relative time such as "in 5 days"
+#, php-format
+#: src/Column.php:71
+msgid "next check %s"
+msgstr "nächste Prüfung %s"
+
+#: src/Column.php:121
+msgid "Clicks, 28 days"
+msgstr "Klicks, 28 Tage"
+
+#: src/Column.php:124
+msgid "Revenue, 28 days"
+msgstr "Umsatz, 28 Tage"
+
+#. translators: %s: number of links
+#: src/Column.php:128
+msgid "Lost links"
+msgstr "Verlorene Links"
+
+#. translators: %s: number of links
+#, php-format
+#: src/Column.php:128
+msgid "%s to win back"
+msgid_plural "%s to win back"
+msgstr[0] "%s zurückzugewinnen"
+msgstr[1] "%s zurückzugewinnen"
+
+#. translators: %s: number of fixes
+#, php-format
+#: src/Column.php:137
+msgid "%s fix ready"
+msgid_plural "%s fixes ready"
+msgstr[0] "%s Korrektur bereit"
+msgstr[1] "%s Korrekturen bereit"
+
+#. translators: %s: number of issues
+#, php-format
+#: src/Column.php:140
+msgid "%s open issue"
+msgid_plural "%s open issues"
+msgstr[0] "%s offenes Problem"
+msgstr[1] "%s offene Probleme"
+
+#. translators: %s: relative time such as "2 days"
+#, php-format
+#: src/Column.php:146
+msgid "checked %s ago"
+msgstr "vor %s geprüft"
+
+#: src/Column.php:186
+msgid "Needs attention"
+msgstr "Braucht Aufmerksamkeit"
+
+#. translators: %s: a question people ask
+#, php-format
+#: src/Grow.php:252
+msgid "AI answers quote this page for \"%s\""
+msgstr "KI-Antworten zitieren diese Seite bei „%s“"
+
+#. translators: %s: a question people ask
+#: src/Grow.php:252
+msgid "AI answers quote this page"
+msgstr "KI-Antworten zitieren diese Seite"
+
+#. translators: %s: a search keyword
+#, php-format
+#: src/Grow.php:256
+msgid "A \"best of\" list for \"%s\" that leaves you out"
+msgstr "Eine Bestenliste für „%s“ ohne Sie"
+
+#. translators: %s: a search keyword
+#: src/Grow.php:256
+msgid "A \"best of\" list that leaves you out"
+msgstr "Eine Bestenliste ohne Sie"
+
+#. translators: %s: number of competitors
+#, php-format
+#: src/Grow.php:260
+msgid "Links to %s competitor, not to you"
+msgid_plural "Links to %s of your competitors, not to you"
+msgstr[0] "Verlinkt %s Wettbewerber, nicht Sie"
+msgstr[1] "Verlinkt %s Ihrer Wettbewerber, nicht Sie"
+
+#. translators: %s: number of competitors
+#: src/Grow.php:260
+msgid "Links to your competitors, not to you"
+msgstr "Verlinkt Ihre Wettbewerber, nicht Sie"
+
+#. translators: %s: a page address on this site, like /pricing
+#, php-format
+#: src/Grow.php:264
+msgid "Used to link to %s"
+msgstr "Verlinkte früher auf %s"
+
+#. translators: %s: a page address on this site, like /pricing
+#: src/Grow.php:264
+msgid "Used to link to you"
+msgstr "Verlinkte früher auf Sie"
+
+#: src/Grow.php:266
+msgid "Added by hand"
+msgstr "Von Hand hinzugefügt"
+
+#: src/Overview.php:46
+#: src/PostPanel.php:152
+msgid "Title"
+msgstr "Titel"
+
+#: src/Overview.php:47
+#: src/PostPanel.php:153
+msgid "Description"
+msgstr "Beschreibung"
+
+#: src/Overview.php:48
+#: src/PostPanel.php:156
+msgid "Main version"
+msgstr "Hauptversion"
+
+#: src/Overview.php:49
+#: src/PostPanel.php:157
+msgid "Hidden from Google"
+msgstr "Vor Google verborgen"
+
+#: src/Overview.php:50
+msgid "Image text"
+msgstr "Bildtext"
+
+#: src/Overview.php:51
+#: src/PostPanel.php:151
+msgid "Redirect"
+msgstr "Weiterleitung"
+
+#: src/Overview.php:52
+msgid "Opening paragraph"
+msgstr "Einleitungsabsatz"
+
+#: src/Overview.php:53
+msgid "AI tool rules"
+msgstr "KI-Tool-Regeln"
+
+#: src/Overview.php:54
+msgid "AI site summary"
+msgstr "KI-Website-Übersicht"
+
+#. translators: %d: post ID, for a post that no longer has a title
+#, php-format
+#: src/Overview.php:72
+msgid "Page #%d"
+msgstr "Seite #%d"
+
+#. translators: %d: attachment ID
+#, php-format
+#: src/Overview.php:75
+msgid "Image #%d"
+msgstr "Bild #%d"
+
+#: src/Overview.php:77
+msgid "Site"
+msgstr "Website"
+
+#. translators: %d: term ID, for a category or tag that no longer exists
+#, php-format
+#: src/Overview.php:82
+msgid "Category #%d"
+msgstr "Kategorie #%d"
+
+#: src/PostPanel.php:45
+msgid "MonoRanks could not be reached. Reload the page to try again."
+msgstr "MonoRanks ist nicht erreichbar. Laden Sie die Seite neu."
+
+#: src/PostPanel.php:46
+msgid "Loading…"
+msgstr "Lädt…"
+
+#: src/PostPanel.php:150
+msgid "Page status"
+msgstr "Seitenstatus"
+
+#: src/PostPanel.php:154
+msgid "Main heading"
+msgstr "Hauptüberschrift"
+
+#: src/PostPanel.php:155
+msgid "Headings"
+msgstr "Überschriften"
+
+#: src/PostPanel.php:158
+msgid "Search rules"
+msgstr "Suchregeln"
+
+#: src/PostPanel.php:159
+msgid "Word count"
+msgstr "Wortanzahl"
+
+#: src/PostPanel.php:160
+msgid "Page details for Google"
+msgstr "Seitenangaben für Google"
+
+#: src/PostPanel.php:161
+msgid "Internal links"
+msgstr "Interne Links"
+
+#: src/PostPanel.php:162
+msgid "Health score"
+msgstr "Zustands-Score"
+
+#: src/PostPanel.php:163
+msgid "AI answers score"
+msgstr "KI-Antworten-Score"
+
+#. translators: 1: what changed, such as "Word count", 2: the number before, 3: the number after
+#, php-format
+#: src/PostPanel.php:171
+msgid "%1$s %2$s → %3$s"
+msgstr "%1$s %2$s → %3$s"
+
+#. translators: 1: user, 2: date
+#, php-format
+#: src/Settings.php:102
+msgid "set when %1$s connected MonoRanks on %2$s"
+msgstr "gesetzt, als %1$s MonoRanks am %2$s verband"
+
+#: src/Settings.php:103
+msgid "pasted by hand"
+msgstr "von Hand eingefügt"
+
+#: src/Settings.php:105
+#: src/Settings.php:106
+msgid "Never"
+msgstr "Nie"
+
+#: tmp/i18n/components/ui/badge.js:28
+msgid "Urgent"
+msgstr "Dringend"
+
+#: tmp/i18n/components/ui/badge.js:28
+msgid "High"
+msgstr "Hoch"
+
+#: tmp/i18n/components/ui/badge.js:28
+msgid "Medium"
+msgstr "Mittel"
+
+#: tmp/i18n/components/ui/badge.js:28
+msgid "Low"
+msgstr "Niedrig"
+
+#: tmp/i18n/components/ui/tip.js:10
+msgid "More info"
+msgstr "Mehr Infos"
+
+#: tmp/i18n/screens/Grow.js:29
+#: tmp/i18n/screens/Grow.js:37
+msgid "What to do next"
+msgstr "Nächste Schritte"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:38
+msgid "Updated %s"
+msgstr "Aktualisiert: %s"
+
+#: tmp/i18n/screens/Grow.js:52
+msgid "No access yet."
+msgstr "Noch kein Zugriff."
+
+#: tmp/i18n/screens/Grow.js:52
+msgid "Allow it under Integrations in MonoRanks, or connect again."
+msgstr "Erlauben Sie es in MonoRanks unter „Integrationen“ oder verbinden Sie neu."
+
+#: tmp/i18n/screens/Grow.js:52
+#: tmp/i18n/screens/Settings.js:99
+msgid "Allow"
+msgstr "Erlauben"
+
+#: tmp/i18n/screens/Grow.js:54
+msgid "Not available yet."
+msgstr "Noch nicht verfügbar."
+
+#: tmp/i18n/screens/Grow.js:56
+msgid "Could not reach MonoRanks. Retrying soon."
+msgstr "MonoRanks nicht erreichbar. Neuer Versuch folgt."
+
+#: tmp/i18n/screens/Grow.js:58
+msgid "Checking…"
+msgstr "Wird geprüft…"
+
+#: tmp/i18n/screens/Grow.js:73
+msgid "Ask for links"
+msgstr "Links anfragen"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:73
+msgid "%s to contact"
+msgid_plural "%s to contact"
+msgstr[0] "%s zu kontaktieren"
+msgstr[1] "%s zu kontaktieren"
+
+#: tmp/i18n/screens/Grow.js:73
+#: tmp/i18n/screens/Grow.js:87
+#: tmp/i18n/screens/Grow.js:100
+#: tmp/i18n/screens/Grow.js:128
+#: tmp/i18n/screens/Grow.js:148
+#: tmp/i18n/screens/Grow.js:152
+msgid "All"
+msgstr "Alle"
+
+#: tmp/i18n/screens/Grow.js:81
+msgid "Every target is contacted."
+msgstr "Alle Ziele sind kontaktiert."
+
+#: tmp/i18n/screens/Grow.js:82
+msgid "No outreach targets yet."
+msgstr "Noch keine Outreach-Ziele."
+
+#: tmp/i18n/screens/Grow.js:87
+msgid "Backlinks"
+msgstr "Backlinks"
+
+#: tmp/i18n/screens/Grow.js:90
+msgid "Won"
+msgstr "Gewonnen"
+
+#: tmp/i18n/screens/Grow.js:90
+msgid "New websites linking to you, last 28 days."
+msgstr "Neue Websites, die auf Sie verlinken, letzte 28 Tage."
+
+#: tmp/i18n/screens/Grow.js:91
+msgid "Lost"
+msgstr "Verloren"
+
+#: tmp/i18n/screens/Grow.js:92
+msgid "Linking sites"
+msgstr "Verlinkende Websites"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:94
+msgid "%s to check for spam"
+msgid_plural "%s to check for spam"
+msgstr[0] "%s auf Spam zu prüfen"
+msgstr[1] "%s auf Spam zu prüfen"
+
+#: tmp/i18n/screens/Grow.js:95
+msgid "No backlink data yet."
+msgstr "Noch keine Backlink-Daten."
+
+#: tmp/i18n/screens/Grow.js:100
+msgid "Competitors"
+msgstr "Wettbewerber"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:100
+msgid "%s gap"
+msgid_plural "%s gaps"
+msgstr[0] "%s Lücke"
+msgstr[1] "%s Lücken"
+
+#: tmp/i18n/screens/Grow.js:105
+msgid "Suggested"
+msgstr "Vorgeschlagen"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:106
+msgid "%1$s shared keyword, %2$s where they rank higher"
+msgid_plural "%1$s shared keywords, %2$s where they rank higher"
+msgstr[0] "%1$s gemeinsames Keyword, bei %2$s stehen sie höher"
+msgstr[1] "%1$s gemeinsame Keywords, bei %2$s stehen sie höher"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:107
+msgid "%s ahead of you"
+msgstr "%s vor Ihnen"
+
+#: tmp/i18n/screens/Grow.js:111
+msgid "Words you miss"
+msgstr "Fehlende Keywords"
+
+#: tmp/i18n/screens/Grow.js:111
+msgid "They rank for these, you do not"
+msgstr "Die anderen ranken dafür, Sie nicht"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:113
+msgid "%s/mo"
+msgstr "%s/Monat"
+
+#: tmp/i18n/screens/Grow.js:116
+msgid "No competitors yet."
+msgstr "Noch keine Wettbewerber."
+
+#: tmp/i18n/screens/Grow.js:124
+msgid "up"
+msgstr "hoch"
+
+#: tmp/i18n/screens/Grow.js:124
+msgid "down"
+msgstr "runter"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:125
+msgid "%1$s → %2$s"
+msgstr "%1$s → %2$s"
+
+#: tmp/i18n/screens/Grow.js:128
+msgid "Keyword moves"
+msgstr "Keyword-Bewegungen"
+
+#: tmp/i18n/screens/Grow.js:131
+msgid "Up"
+msgstr "Hoch"
+
+#: tmp/i18n/screens/Grow.js:135
+msgid "Down"
+msgstr "Runter"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:138
+msgid "Your %s tracked keyword held its place this week."
+msgid_plural "Your %s tracked keywords held their places this week."
+msgstr[0] "Ihr %s beobachtetes Keyword hielt diese Woche seinen Platz."
+msgstr[1] "Ihre %s beobachteten Keywords hielten diese Woche ihren Platz."
+
+#: tmp/i18n/screens/Grow.js:138
+msgid "No tracked keywords yet."
+msgstr "Noch keine beobachteten Keywords."
+
+#: tmp/i18n/screens/Grow.js:147
+msgid "No reports yet"
+msgstr "Noch keine Berichte"
+
+#: tmp/i18n/screens/Grow.js:147
+msgid "Create a report or a weekly email in MonoRanks to share progress."
+msgstr "Erstellen Sie in MonoRanks einen Bericht oder eine wöchentliche E-Mail, um Fortschritte zu teilen."
+
+#: tmp/i18n/screens/Grow.js:151
+msgid "Reports"
+msgstr "Berichte"
+
+#: tmp/i18n/screens/Grow.js:156
+msgid "Weekly email"
+msgstr "Wöchentliche E-Mail"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:156
+msgid "Next send %s"
+msgstr "Nächster Versand %s"
+
+#, js-format
+#: tmp/i18n/screens/Grow.js:158
+msgid "%s recipient"
+msgid_plural "%s recipients"
+msgstr[0] "%s Empfänger"
+msgstr[1] "%s Empfänger"
+
+#: tmp/i18n/screens/Grow.js:159
+msgid "On"
+msgstr "An"
+
+#: tmp/i18n/screens/Grow.js:159
+msgid "Off"
+msgstr "Aus"
+
+#: tmp/i18n/screens/Grow.js:163
+msgid "Client report"
+msgstr "Kundenbericht"
+
+#: tmp/i18n/screens/Grow.js:163
+msgid "Report"
+msgstr "Bericht"
+
+#: tmp/i18n/screens/Grow.js:164
+msgid "Open"
+msgstr "Öffnen"
+
+#: tmp/i18n/screens/Overview.js:21
+msgid "Whole site"
+msgstr "Ganze Website"
+
+#: tmp/i18n/screens/Overview.js:25
+msgid "Adds one short answer at the top of the page. See it first in MonoRanks."
+msgstr "Fügt oben auf der Seite eine kurze Antwort ein. Zuerst in MonoRanks ansehen."
+
+#: tmp/i18n/screens/Overview.js:29
+msgid "Now"
+msgstr "Jetzt"
+
+#: tmp/i18n/screens/Overview.js:30
+msgid "(empty)"
+msgstr "(leer)"
+
+#: tmp/i18n/screens/Overview.js:33
+#: tmp/i18n/shell/ChangeLog.js:40
+msgid "After"
+msgstr "Nachher"
+
+#, js-format
+#: tmp/i18n/screens/Overview.js:36
+msgid "Image: %s"
+msgstr "Bild: %s"
+
+#: tmp/i18n/screens/Overview.js:67
+msgid "Could not load the overview."
+msgstr "Übersicht konnte nicht geladen werden."
+
+#: tmp/i18n/screens/Overview.js:77
+#: tmp/i18n/screens/Settings.js:66
+msgid "Something went wrong. Try again."
+msgstr "Etwas ist schiefgelaufen. Erneut versuchen."
+
+#, js-format
+#: tmp/i18n/screens/Overview.js:87
+msgid "Checked %s"
+msgstr "Geprüft %s"
+
+#: tmp/i18n/screens/Overview.js:88
+msgid "Sends your published pages to MonoRanks now. It also happens by itself."
+msgstr "Sendet Ihre veröffentlichten Seiten jetzt an MonoRanks. Das passiert auch automatisch."
+
+#: tmp/i18n/screens/Overview.js:89
+#: tmp/i18n/screens/Settings.js:107
+msgid "Send content"
+msgstr "Inhalte senden"
+
+#, js-format
+#: tmp/i18n/screens/Overview.js:102
+msgid "Old data · Updated %s"
+msgstr "Alte Daten · Aktualisiert: %s"
+
+#: tmp/i18n/screens/Overview.js:102
+msgid "Old data"
+msgstr "Alte Daten"
+
+#: tmp/i18n/screens/Overview.js:107
+msgid "Site health"
+msgstr "Website-Zustand"
+
+#, js-format
+#: tmp/i18n/screens/Overview.js:107
+msgid "Average of %1$s page out of %2$s published."
+msgid_plural "Average of %1$s pages out of %2$s published."
+msgstr[0] "Durchschnitt aus %1$s Seite von %2$s veröffentlichten."
+msgstr[1] "Durchschnitt aus %1$s Seiten von %2$s veröffentlichten."
+
+#: tmp/i18n/screens/Overview.js:114
+#: tmp/i18n/screens/Overview.js:141
+msgid "AI answers ready"
+msgstr "Bereit für KI-Antworten"
+
+#: tmp/i18n/screens/Overview.js:114
+msgid "How easily AI answers can quote your pages."
+msgstr "Wie leicht KI-Antworten Ihre Seiten zitieren können."
+
+#: tmp/i18n/screens/Overview.js:118
+msgid "Search clicks"
+msgstr "Such-Klicks"
+
+#: tmp/i18n/screens/Overview.js:118
+msgid "Clicks from Google in the last 28 days."
+msgstr "Klicks von Google in den letzten 28 Tagen."
+
+#: tmp/i18n/screens/Overview.js:118
+msgid "Connect Google Search Console in MonoRanks to see clicks here."
+msgstr "Verbinden Sie die Google Search Console in MonoRanks, um hier Klicks zu sehen."
+
+#: tmp/i18n/screens/Overview.js:125
+msgid "Fixes applied"
+msgstr "Angewendete Korrekturen"
+
+#: tmp/i18n/screens/Overview.js:125
+msgid "AI tool rules on"
+msgstr "KI-Tool-Regeln an"
+
+#: tmp/i18n/screens/Overview.js:125
+msgid "No AI tool rules"
+msgstr "Keine KI-Tool-Regeln"
+
+#: tmp/i18n/screens/Overview.js:125
+msgid "AI site summary published"
+msgstr "KI-Website-Übersicht veröffentlicht"
+
+#: tmp/i18n/screens/Overview.js:125
+msgid "No AI site summary"
+msgstr "Keine KI-Website-Übersicht"
+
+#: tmp/i18n/screens/Overview.js:126
+msgid "30 days"
+msgstr "30 Tage"
+
+#, js-format
+#: tmp/i18n/screens/Overview.js:127
+msgid "%s ready"
+msgid_plural "%s ready"
+msgstr[0] "%s bereit"
+msgstr[1] "%s bereit"
+
+#: tmp/i18n/screens/Overview.js:137
+msgid "Pages to fix"
+msgstr "Seiten zu beheben"
+
+#: tmp/i18n/screens/Overview.js:137
+msgid "All pages"
+msgstr "Alle Seiten"
+
+#: tmp/i18n/screens/Overview.js:141
+#: tmp/i18n/shell/ChangeLog.js:19
+msgid "Page"
+msgstr "Seite"
+
+#: tmp/i18n/screens/Overview.js:141
+#: tmp/i18n/screens/Overview.js:206
+msgid "Fix"
+msgstr "Beheben"
+
+#: tmp/i18n/screens/Overview.js:146
+msgid "Nothing to fix right now"
+msgstr "Gerade nichts zu beheben"
+
+#: tmp/i18n/screens/Overview.js:146
+msgid "Every checked page scores 60 or more."
+msgstr "Jede geprüfte Seite hat 60 oder mehr."
+
+#: tmp/i18n/screens/Overview.js:152
+msgid "Ready to apply"
+msgstr "Bereit zum Anwenden"
+
+#: tmp/i18n/screens/Overview.js:152
+msgid "Approved in MonoRanks. Each one can be undone for 30 days."
+msgstr "In MonoRanks freigegeben. Jede kann 30 Tage lang rückgängig gemacht werden."
+
+#: tmp/i18n/screens/Overview.js:153
+msgid "Apply all"
+msgstr "Alle anwenden"
+
+#, js-format
+#: tmp/i18n/screens/Overview.js:158
+msgid "%s fix to approve"
+msgid_plural "%s fixes to approve"
+msgstr[0] "%s Korrektur freizugeben"
+msgstr[1] "%s Korrekturen freizugeben"
+
+#, js-format
+#: tmp/i18n/screens/Overview.js:158
+msgid "%s needs a value"
+msgid_plural "%s need a value"
+msgstr[0] "%s braucht einen Wert"
+msgstr[1] "%s brauchen einen Wert"
+
+#: tmp/i18n/screens/Overview.js:159
+msgid "Type a value or draft one with AI in MonoRanks, approve it, and it is written here, with undo."
+msgstr "Geben Sie in MonoRanks einen Wert ein oder lassen Sie ihn mit KI entwerfen und geben Sie ihn frei. Dann wird er hier geschrieben, mit Rückgängig."
+
+#: tmp/i18n/screens/Overview.js:159
+msgid "Approve them in MonoRanks and they are written here, with undo."
+msgstr "Geben Sie sie in MonoRanks frei, dann werden sie hier geschrieben, mit Rückgängig."
+
+#: tmp/i18n/screens/Overview.js:164
+msgid "Review fixes"
+msgstr "Korrekturen prüfen"
+
+#: tmp/i18n/screens/Overview.js:166
+msgid "No fixes waiting"
+msgstr "Keine Korrekturen offen"
+
+#: tmp/i18n/screens/Overview.js:166
+msgid "Fixes you approve in MonoRanks appear here, ready to write into WordPress."
+msgstr "In MonoRanks freigegebene Korrekturen erscheinen hier, bereit für WordPress."
+
+#: tmp/i18n/screens/Overview.js:167
+#: tmp/i18n/screens/Overview.js:173
+msgid "Review"
+msgstr "Prüfen"
+
+#: tmp/i18n/screens/Overview.js:167
+msgid "Apply"
+msgstr "Anwenden"
+
+#: tmp/i18n/screens/Overview.js:171
+msgid "Check in MonoRanks"
+msgstr "In MonoRanks prüfen"
+
+#: tmp/i18n/screens/Overview.js:171
+msgid "Changed in WordPress after you approved them, so they are not applied from here."
+msgstr "Nach Ihrer Freigabe in WordPress geändert, daher werden sie hier nicht angewendet."
+
+#: tmp/i18n/screens/Overview.js:180
+#: tmp/i18n/screens/Settings.js:142
+msgid "Recent changes"
+msgstr "Letzte Änderungen"
+
+#: tmp/i18n/screens/Overview.js:183
+msgid "All changes"
+msgstr "Alle Änderungen"
+
+#: tmp/i18n/screens/Overview.js:211
+msgid "Biggest problem"
+msgstr "Größtes Problem"
+
+#: tmp/i18n/screens/Overview.js:224
+msgid "Connect MonoRanks again"
+msgstr "MonoRanks neu verbinden"
+
+#: tmp/i18n/screens/Overview.js:224
+#: tmp/i18n/screens/Settings.js:82
+msgid "Key revoked"
+msgstr "Schlüssel widerrufen"
+
+#: tmp/i18n/screens/Overview.js:224
+#: tmp/i18n/screens/Settings.js:82
+msgid "Not connected"
+msgstr "Nicht verbunden"
+
+#: tmp/i18n/screens/Overview.js:226
+#: tmp/i18n/screens/Settings.js:112
+msgid "Connect to MonoRanks"
+msgstr "Mit MonoRanks verbinden"
+
+#: tmp/i18n/screens/Overview.js:226
+#: tmp/i18n/screens/Settings.js:112
+msgid "Sign in and approve. Takes a minute."
+msgstr "Anmelden und freigeben. Dauert eine Minute."
+
+#: tmp/i18n/screens/Overview.js:227
+#: tmp/i18n/screens/Settings.js:113
+msgid "Or paste a connector key"
+msgstr "Oder Connector-Schlüssel einfügen"
+
+#: tmp/i18n/screens/Overview.js:227
+#: tmp/i18n/screens/Settings.js:113
+msgid "Use this when your host blocks Application Passwords."
+msgstr "Nutzen Sie das, wenn Ihr Hoster Anwendungspasswörter blockiert."
+
+#: tmp/i18n/screens/Overview.js:230
+msgid "Open settings"
+msgstr "Einstellungen öffnen"
+
+#: tmp/i18n/screens/Overview.js:231
+msgid "See scores here and in your Posts list"
+msgstr "Scores hier und in Ihrer Beitragsliste sehen"
+
+#: tmp/i18n/screens/Overview.js:240
+msgid "Not shared yet"
+msgstr "Noch nicht geteilt"
+
+#: tmp/i18n/screens/Overview.js:240
+msgid "This MonoRanks does not share results with the plugin yet. It asks again tomorrow."
+msgstr "Dieses MonoRanks teilt noch keine Ergebnisse mit dem Plugin. Morgen wird erneut gefragt."
+
+#: tmp/i18n/screens/Overview.js:240
+msgid "MonoRanks not reached"
+msgstr "MonoRanks nicht erreicht"
+
+#: tmp/i18n/screens/Overview.js:240
+msgid "Tried again within the hour, or when you reload this screen."
+msgstr "Neuer Versuch innerhalb einer Stunde oder beim Neuladen dieser Seite."
+
+#: tmp/i18n/screens/Overview.js:240
+msgid "Scores appear here and in the Posts list after the first weekly check."
+msgstr "Scores erscheinen hier und in der Beitragsliste nach der ersten wöchentlichen Prüfung."
+
+#: tmp/i18n/screens/Overview.js:242
+msgid "Waiting for the first check"
+msgstr "Warten auf die erste Prüfung"
+
+#: tmp/i18n/screens/Overview.js:242
+#: tmp/i18n/screens/Settings.js:82
+msgid "Connected"
+msgstr "Verbunden"
+
+#: tmp/i18n/screens/Overview.js:245
+msgid "Content"
+msgstr "Inhalte"
+
+#, js-format
+#: tmp/i18n/screens/Overview.js:245
+msgid "%1$s published item sent %2$s"
+msgid_plural "%1$s published items sent %2$s"
+msgstr[0] "%1$s veröffentlichter Eintrag gesendet: %2$s"
+msgstr[1] "%1$s veröffentlichte Einträge gesendet: %2$s"
+
+#: tmp/i18n/screens/Overview.js:245
+msgid "Not sent. Use \"Send content\"."
+msgstr "Nicht gesendet. Nutzen Sie „Inhalte senden“."
+
+#: tmp/i18n/screens/Overview.js:245
+msgid "Sending…"
+msgstr "Wird gesendet…"
+
+#: tmp/i18n/screens/Overview.js:246
+msgid "Results"
+msgstr "Ergebnisse"
+
+#, js-format
+#: tmp/i18n/screens/Overview.js:246
+msgid "checked %s"
+msgstr "geprüft: %s"
+
+#: tmp/i18n/screens/Settings.js:29
+msgid "Could not load the settings."
+msgstr "Einstellungen konnten nicht geladen werden."
+
+#: tmp/i18n/screens/Settings.js:81
+msgid "Connection"
+msgstr "Verbindung"
+
+#: tmp/i18n/screens/Settings.js:82
+msgid "MonoRanks no longer accepts this key. Connect again from MonoRanks or paste a new key below."
+msgstr "MonoRanks akzeptiert diesen Schlüssel nicht mehr. Verbinden Sie neu oder fügen Sie unten einen neuen Schlüssel ein."
+
+#: tmp/i18n/screens/Settings.js:82
+msgid "Sending published content to MonoRanks. Nothing else leaves this site."
+msgstr "Veröffentlichte Inhalte werden an MonoRanks gesendet. Sonst verlässt nichts diese Website."
+
+#: tmp/i18n/screens/Settings.js:88
+msgid "Last sent"
+msgstr "Zuletzt gesendet"
+
+#, js-format
+#: tmp/i18n/screens/Settings.js:88
+msgid "%s published item"
+msgid_plural "%s published items"
+msgstr[0] "%s veröffentlichter Eintrag"
+msgstr[1] "%s veröffentlichte Einträge"
+
+#, js-format
+#: tmp/i18n/screens/Settings.js:90
+msgid "sending, batch %1$s of %2$s"
+msgstr "wird gesendet, Paket %1$s von %2$s"
+
+#: tmp/i18n/screens/Settings.js:91
+msgid "Last try failed"
+msgstr "Fehlgeschlagen"
+
+#: tmp/i18n/screens/Settings.js:98
+msgid "Written with the \"MonoRanks\" Application Password. Revoke it to stop writes."
+msgstr "Geschrieben mit dem Anwendungspasswort „MonoRanks“. Widerrufen Sie es, um das Schreiben zu stoppen."
+
+#: tmp/i18n/screens/Settings.js:98
+msgid "Approve MonoRanks in WordPress so it can write the fixes you accept."
+msgstr "Geben Sie MonoRanks in WordPress frei, damit es die Korrekturen schreiben kann, die Sie annehmen."
+
+#: tmp/i18n/screens/Settings.js:99
+msgid "Allowed"
+msgstr "Erlaubt"
+
+#: tmp/i18n/screens/Settings.js:99
+msgid "Revoke"
+msgstr "Widerrufen"
+
+#: tmp/i18n/screens/Settings.js:99
+msgid "Not set up"
+msgstr "Nicht eingerichtet"
+
+#: tmp/i18n/screens/Settings.js:102
+msgid "SEO plugin"
+msgstr "SEO-Plugin"
+
+#, js-format
+#: tmp/i18n/screens/Settings.js:102
+msgid "MonoRanks cannot write titles, descriptions, main versions or hiding from Google into %s yet, so those fixes are refused"
+msgstr "MonoRanks kann Titel, Beschreibungen, Hauptversionen und das Verbergen vor Google noch nicht in %s schreiben, daher werden diese Korrekturen abgelehnt"
+
+#, js-format
+#: tmp/i18n/screens/Settings.js:102
+msgid "titles and descriptions go into the fields %s reads"
+msgstr "Titel und Beschreibungen kommen in die Felder, die %s liest"
+
+#: tmp/i18n/screens/Settings.js:102
+msgid "MonoRanks adds the approved title, description, main version and hiding from Google itself"
+msgstr "MonoRanks fügt freigegebene Titel, Beschreibungen, Hauptversionen und das Verbergen vor Google selbst hinzu"
+
+#: tmp/i18n/screens/Settings.js:103
+msgid "None"
+msgstr "Keines"
+
+#: tmp/i18n/screens/Settings.js:109
+msgid "Disconnect stops sending. Fixes already applied stay."
+msgstr "Trennen stoppt das Senden. Angewendete Korrekturen bleiben."
+
+#: tmp/i18n/screens/Settings.js:109
+msgid "Disconnect"
+msgstr "Trennen"
+
+#: tmp/i18n/screens/Settings.js:120
+msgid "Use a different key"
+msgstr "Anderen Schlüssel nutzen"
+
+#: tmp/i18n/screens/Settings.js:122
+msgid "In MonoRanks: Settings → API and MCP → New credential. Tick content:write, sites:read and pages:read, for this website."
+msgstr "In MonoRanks: Einstellungen → API und MCP → Neue Zugangsdaten. Wählen Sie content:write, sites:read und pages:read für diese Website."
+
+#: tmp/i18n/screens/Settings.js:129
+#: tmp/i18n/shell/Shell.js:71
+msgid "What is sent"
+msgstr "Was gesendet wird"
+
+#: tmp/i18n/screens/Settings.js:132
+msgid "Sent"
+msgstr "Gesendet"
+
+#: tmp/i18n/screens/Settings.js:132
+msgid "Published titles, a 40-word excerpt, dates, authors, categories, tags, SEO fields, image alt text and plugin status."
+msgstr "Veröffentlichte Titel, ein Auszug von 40 Wörtern, Datum, Autoren, Kategorien, Schlagwörter, SEO-Felder, Alt-Texte und Plugin-Status."
+
+#: tmp/i18n/screens/Settings.js:133
+msgid "Read back"
+msgstr "Zurückgelesen"
+
+#: tmp/i18n/screens/Settings.js:133
+msgid "This website's audit results: scores, issues and the fixes you approved, shown here and in the Posts list."
+msgstr "Prüfergebnisse dieser Website: Scores, Probleme und freigegebene Korrekturen, angezeigt hier und in der Beitragsliste."
+
+#: tmp/i18n/screens/Settings.js:134
+msgid "Never sent"
+msgstr "Nie gesendet"
+
+#: tmp/i18n/screens/Settings.js:134
+msgid "Drafts, private posts, comments, emails, passwords, plugin or theme settings."
+msgstr "Entwürfe, private Beiträge, Kommentare, E-Mails, Passwörter, Plugin- oder Theme-Einstellungen."
+
+#: tmp/i18n/screens/Settings.js:135
+msgid "Can change"
+msgstr "Kann ändern"
+
+#: tmp/i18n/screens/Settings.js:135
+msgid "Title, description, main version, hiding from Google, image text, redirects, one opening paragraph, AI tool rules, AI site summary. Only after you approve each one."
+msgstr "Titel, Beschreibung, Hauptversion, Verbergen vor Google, Bildtext, Weiterleitungen, ein Einleitungsabsatz, KI-Tool-Regeln, KI-Website-Übersicht. Nur nach Ihrer Freigabe, jeweils einzeln."
+
+#: tmp/i18n/screens/Settings.js:142
+msgid "Last 50 · undo for 30 days"
+msgstr "Letzte 50 · 30 Tage rückgängig"
+
+#: tmp/i18n/screens/Settings.js:150
+msgid "Danger zone"
+msgstr "Gefahrenbereich"
+
+#: tmp/i18n/screens/Settings.js:150
+msgid "Erases the connection, scores, redirects, AI files and change log. Written fixes stay."
+msgstr "Löscht Verbindung, Scores, Weiterleitungen, KI-Dateien und Änderungsprotokoll. Geschriebene Korrekturen bleiben."
+
+#: tmp/i18n/screens/Settings.js:153
+msgid "This cannot be undone. Delete everything?"
+msgstr "Das lässt sich nicht rückgängig machen. Alles löschen?"
+
+#: tmp/i18n/screens/Settings.js:157
+msgid "Yes, delete all data"
+msgstr "Ja, alles löschen"
+
+#: tmp/i18n/screens/Settings.js:158
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: tmp/i18n/screens/Settings.js:159
+msgid "Delete all data"
+msgstr "Alle Daten löschen"
+
+#: tmp/i18n/screens/Settings.js:173
+msgid "Connector key"
+msgstr "Connector-Schlüssel"
+
+#: tmp/i18n/screens/Settings.js:174
+msgid "MonoRanks address (development sites only)"
+msgstr "MonoRanks-Adresse (nur Entwicklungs-Websites)"
+
+#: tmp/i18n/screens/Settings.js:175
+msgid "Save key"
+msgstr "Schlüssel speichern"
+
+#: tmp/i18n/shell/ChangeLog.js:13
+msgid "No changes yet"
+msgstr "Noch keine Änderungen"
+
+#: tmp/i18n/shell/ChangeLog.js:13
+msgid "Fixes you approve in MonoRanks show up here, each with Undo."
+msgstr "In MonoRanks freigegebene Korrekturen erscheinen hier, jeweils mit Rückgängig."
+
+#: tmp/i18n/shell/ChangeLog.js:19
+msgid "Change"
+msgstr "Änderung"
+
+#: tmp/i18n/shell/ChangeLog.js:19
+msgid "When"
+msgstr "Wann"
+
+#: tmp/i18n/shell/ChangeLog.js:19
+#: tmp/i18n/shell/ChangeLog.js:34
+msgid "Undo"
+msgstr "Rückgängig"
+
+#: tmp/i18n/shell/ChangeLog.js:39
+msgid "Before"
+msgstr "Vorher"
+
+#: tmp/i18n/shell/ChangeLog.js:41
+msgid "By"
+msgstr "Von"
+
+#: tmp/i18n/shell/Ring.js:11
+msgid "Good"
+msgstr "Gut"
+
+#: tmp/i18n/shell/Ring.js:11
+msgid "Needs work"
+msgstr "Handlungsbedarf"
+
+#: tmp/i18n/shell/Ring.js:11
+msgid "Poor"
+msgstr "Schlecht"
+
+#, js-format
+#: tmp/i18n/shell/Ring.js:46
+msgid "%s vs last 28 days"
+msgstr "%s ggü. letzten 28 Tagen"
+
+#, js-format
+#: tmp/i18n/shell/Ring.js:46
+msgid "%1$s since %2$s"
+msgstr "%1$s seit %2$s"
+
+#: tmp/i18n/shell/Shell.js:27
+msgid "MonoRanks sections"
+msgstr "MonoRanks-Bereiche"
+
+#: tmp/i18n/shell/Shell.js:41
+#: tmp/i18n/shell/Shell.js:72
+msgid "Help"
+msgstr "Hilfe"
+
+#: tmp/i18n/shell/Shell.js:73
+msgid "A product by VeronaLabs"
+msgstr "Ein Produkt von VeronaLabs"
+
+#: tmp/i18n/shell/Shell.js:73
+msgid "A product by"
+msgstr "Ein Produkt von"
+
+#: tmp/i18n/shell/VideoButton.js:62
+msgid "Close"
+msgstr "Schließen"

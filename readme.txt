@@ -4,7 +4,7 @@ Tags: seo, ai-seo, seo-audit, aeo, geo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Find what keeps your pages out of Google and AI answers. A weekly AI SEO audit w
 == Description ==
 
 **See why your pages miss page one and AI answers. Approve a fix, and it is done.**
+
+https://www.youtube.com/watch?v=Fe4T0jIMUiw
 
 [MonoRanks](https://monoranks.com) audits every page of your site each week and tells you what to fix first, in plain words. This plugin connects your site, so the fixes you approve are **written into WordPress for you**, and every one can be undone.
 
@@ -61,7 +63,7 @@ It checks four things:
 
 The plugin is free. A free MonoRanks account covers 3 websites with weekly audits. Paid plans with more websites, pages and keywords are on [monoranks.com](https://monoranks.com/pricing/).
 
-= This plugin uses an external service =
+= External services =
 
 The plugin talks to [MonoRanks](https://monoranks.com). **Nothing is sent until you connect your site**, either by approving MonoRanks in WordPress or by pasting a connector key under **MonoRanks → Settings**.
 
@@ -83,11 +85,15 @@ The plugin talks to [MonoRanks](https://monoranks.com). **Nothing is sent until 
 
 **Legal:** [Terms of service](https://monoranks.com/legal/terms/) · [Privacy policy](https://monoranks.com/legal/privacy/)
 
+**YouTube (only when you press Video).** The **Video** button on the MonoRanks screens plays a short video hosted on YouTube, a service of Google. Nothing is requested from YouTube until you press Video. Then your browser loads the player from youtube.com, and YouTube receives your IP address, browser details and the address of the page, and may set cookies, like any embedded video. [YouTube terms of service](https://www.youtube.com/t/terms) · [Google privacy policy](https://policies.google.com/privacy)
+
 = Source code =
 
 The admin screens are built with React. `build/main.js` and `build/main.css` are compiled from `resources/admin/src`, published with the build tools in the [plugin's GitHub repository](https://github.com/monoranks/wordpress-plugin). Run `npm ci && npm run build` to rebuild them.
 
 == Installation ==
+
+https://www.youtube.com/watch?v=g6UjllC0wew
 
 = Install the plugin =
 
@@ -140,7 +146,7 @@ Step-by-step guide: [MonoRanks WordPress plugin docs](https://monoranks.com/docs
 
 = What is sent, and is my data safe? =
 
-Only published content details and plugin status, over HTTPS, and only after you connect. Never drafts, private posts, comments, user emails or passwords. See **This plugin uses an external service** above.
+Only published content details and plugin status, over HTTPS, and only after you connect. Never drafts, private posts, comments, user emails or passwords. See **External services** above.
 
 = My site is local or behind a firewall. Does it work? =
 
@@ -166,6 +172,13 @@ Please report security bugs found in the source code of the MonoRanks plugin thr
 4. Before you connect: the steps to link your site to MonoRanks.
 
 == Changelog ==
+
+= 0.2.1 - 2026-11-03 =
+* **New:** A Video button in the top bar opens a short how-to video.
+* **New:** German and Spanish translations.
+* **Enhancement:** Other plugins' notices no longer show on MonoRanks screens.
+* **Enhancement:** The Connect card and old data now say the same thing when a key stops working.
+* **Fix:** Large backlink numbers no longer get cut off on small screens.
 
 = 0.2.0 - 2026-11-01 =
 * **New:** The plugin's screens take the new MonoRanks look: a light top bar, soft cards, big numbers and score rings, and blue buttons.

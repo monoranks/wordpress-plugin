@@ -11,6 +11,8 @@ export type AdminSettings = {
   apiBase: string;
   logos: { wordmark: string; mark: string; veronalabs: string };
   notice: Notice | null;
+  /** The "Video" button in the top bar, null when no video is set (src/Video.php). */
+  video: null | { watch: string; embed: string };
 };
 
 export type Notice = { type: 'success' | 'error' | 'warning'; text: string };

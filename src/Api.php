@@ -31,9 +31,9 @@ class Api {
 		$code = (int) wp_remote_retrieve_response_code( $res );
 		$json = json_decode( (string) wp_remote_retrieve_body( $res ), true );
 		if ( 401 === $code ) {
-			Connection::update( array( 'key_state' => 'revoked', 'last_error' => 'MonoRanks did not accept the key' ) );
+			self::refused( $c['key'] );
 		} elseif ( $code >= 200 && $code < 300 ) {
-			Connection::update( array( 'key_state' => 'ok', 'last_sent_at' => gmdate( 'c' ), 'last_error' => null ) );
+			self::accepted( $c['key'], array( 'last_sent_at' => gmdate( 'c' ) ) );
 		} else {
 			Connection::update( array( 'last_error' => is_array( $json ) && isset( $json['error'] ) ? (string) $json['error'] : 'MonoRanks answered ' . $code ) );
 		}
@@ -60,9 +60,49 @@ class Api {
 		$code = (int) wp_remote_retrieve_response_code( $res );
 		$json = json_decode( (string) wp_remote_retrieve_body( $res ), true );
 		if ( 401 === $code ) {
-			Connection::update( array( 'key_state' => 'revoked', 'last_error' => 'MonoRanks did not accept the key' ) );
+			self::refused( $c['key'] );
+		} elseif ( $code >= 200 && $code < 300 ) {
+			self::accepted( $c['key'] );
 		}
 		return array( 'code' => $code, 'body' => is_array( $json ) ? $json : null, 'error' => $code >= 200 && $code < 300 ? null : ( is_array( $json ) && isset( $json['error'] ) ? (string) $json['error'] : 'http_' . $code ) );
+	}
+
+	/**
+	 * A connector route took the key: it is alive, whatever an earlier answer said. Without this a read that works never
+	 * cleared the mark, and the screen said "Key revoked" next to fresh data.
+	 */
+	private static function accepted( $key, array $patch = array() ) {
+		$now = Connection::fresh();
+		if ( empty( $now['key'] ) || $now['key'] !== $key ) {
+			return;
+		}
+		if ( $patch || ! empty( $now['last_error'] ) || ( isset( $now['key_state'] ) && 'ok' !== $now['key_state'] ) ) {
+			Connection::update( array_merge( array( 'key_state' => 'ok', 'last_error' => null ), $patch ) );
+		}
+	}
+
+	/**
+	 * A connector route answered 401. That alone does not prove the key is gone: the answer may be for an older key (the site
+	 * was connected again while this request ran), and these routes also say 401 when a key lacks that one route's scope.
+	 */
+	private static function refused( $key ) {
+		$now = Connection::fresh();
+		if ( empty( $now['key'] ) || $now['key'] !== $key ) {
+			return;
+		}
+		Connection::update( self::key_is_dead() ? array( 'key_state' => 'revoked', 'last_error' => 'MonoRanks did not accept the key' ) : array( 'last_error' => 'This key cannot do this: it lacks a permission' ) );
+	}
+
+	/**
+	 * API v1 tells the two apart: 401 for a key that is unknown or revoked, 403 for a live key without the scope. Where that
+	 * API is off or this site's id is unknown the 401 has to stand. When MonoRanks cannot be reached nothing is proven.
+	 */
+	private static function key_is_dead() {
+		if ( Connection::is_revoked() ) {
+			return true;
+		}
+		$res = self::v1_get( 'scores', 6 );
+		return 401 === $res['code'] || 'off' === self::v1_state( $res );
 	}
 
 	/**

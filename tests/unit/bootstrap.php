@@ -9,6 +9,13 @@ define( 'MINUTE_IN_SECONDS', 60 );
 define( 'HOUR_IN_SECONDS', 3600 );
 define( 'DAY_IN_SECONDS', 86400 );
 
+// The object cache is not there to clear in unit tests; get_option is stubbed per test.
+if ( ! function_exists( 'wp_cache_delete' ) ) {
+	function wp_cache_delete() {
+		return true;
+	}
+}
+
 // WordPress's Application Passwords store, faked per user for Settings::app_password().
 if ( ! class_exists( 'WP_Application_Passwords' ) ) {
 	// phpcs:ignore Generic.Files.OneObjectStructurePerFile

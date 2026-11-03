@@ -69,6 +69,7 @@ class Assets {
 			'apiBase'     => Connection::has_key() ? $conn['api_base'] : MONORANKS_API_BASE,
 			'logos'       => array( 'wordmark' => Admin::asset( 'logo.svg' ), 'mark' => Admin::asset( 'mark.svg' ), 'veronalabs' => Admin::asset( 'veronalabs.svg' ) ),
 			'notice'      => Admin::notice(),
+			'video'       => Video::links(),
 		);
 	}
 

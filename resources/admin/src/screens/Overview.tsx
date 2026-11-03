@@ -6,7 +6,7 @@ import { api, errorText, type OverviewData } from '@/lib/api';
 import { Shell, NoticeBox, KV, Empty } from '@/shell/Shell';
 import { Ring, Delta, Sparkline, scoreWord, shortDate, tone } from '@/shell/Ring';
 import { ChangeLog, th, td } from '@/shell/ChangeLog';
-import { Card, CardHeader, CardTitle, CardBody, Tile, TileLabel } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardBody, Tile, TileLabel, TileNumber } from '@/components/ui/card';
 import { out } from '@/lib/links';
 import type { Screen } from '@/lib/screen';
 import { fmt } from '@/lib/format';
@@ -114,7 +114,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
       : undefined
     : ' ';
 
-  const actions = data?.connected ? (
+  const actions = data?.connected && !data.revoked ? (
     <Tip align="end" text={__('Sends your published pages to MonoRanks now. It also happens by itself.', 'monoranks')}>
       <Button variant="primary" disabled={busy !== null} aria-busy={busy === 'sync'} onClick={() => run('sync', () => api.sync('overview'))}>{__('Send content', 'monoranks')}</Button>
     </Tip>
@@ -125,37 +125,39 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
       <NoticeBox notice={notice} />
       {error && <NoticeBox notice={{ type: 'error', text: error }} />}
       {!data && !error && <Skeleton />}
-      {data && (!data.connected || data.revoked) && <ConnectSteps revoked={data.revoked} go={go} />}
+      {data && (!data.connected || data.revoked) && <><ConnectSteps revoked={data.revoked} go={go} /></>}
       {data && data.connected && !data.revoked && !o && <><Waiting data={data} /><GrowCards /></>}
       {data && o && (
         <>
-          <Card className="@container px-7 py-7 max-[782px]:px-[18px] max-[782px]:py-5">
+          <Card className="@container flex flex-col gap-5 px-7 py-7 max-[782px]:px-[18px] max-[782px]:py-5">
+            {/* A key that no longer works: the scores are the last ones received, and the screen says so. */}
+            {data.revoked && <div><Badge variant="warn" className="h-auto whitespace-normal py-1 leading-snug">{data.updated ? sprintf(__('Old data · Updated %s', 'monoranks'), data.updated) : __('Old data', 'monoranks')}</Badge></div>}
             <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-8 @max-[1000px]:grid-cols-1 @max-[1000px]:gap-6">
               <div className="flex min-w-0 items-center gap-6">
                 <Ring score={o.health} size="xl" label={undefined} />
                 <div className="flex min-w-0 flex-col items-start gap-1">
                   <TileLabel>{__('Site health', 'monoranks')}<Tip text={sprintf(_n('Average of %1$s page out of %2$s published.', 'Average of %1$s pages out of %2$s published.', o.pages_scored, 'monoranks'), fmt(o.pages_scored), fmt(o.pages_total))} /></TileLabel>
-                  <span className={`text-[30px] font-bold leading-tight tracking-[-0.02em] ${{ good: 'text-good-ink', warn: 'text-ink', critical: 'text-critical', none: 'text-mute' }[tone(o.health)]}`}>{scoreWord(o.health)}</span>
+                  <span className={`text-[30px] font-bold leading-tight tracking-[-0.02em] [overflow-wrap:anywhere] max-[480px]:text-[24px] ${{ good: 'text-good-ink', warn: 'text-ink', critical: 'text-critical', none: 'text-mute' }[tone(o.health)]}`}>{scoreWord(o.health)}</span>
                   <Delta n={o.deltas.health} since={since} />
                 </div>
               </div>
-              <div className="grid auto-cols-fr grid-flow-col gap-3 max-[600px]:grid-flow-row">
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,190px),1fr))] gap-3">
                 <Tile className="justify-between">
                   <TileLabel>{__('AI answers ready', 'monoranks')}<Tip text={__('How easily AI answers can quote your pages.', 'monoranks')} /></TileLabel>
-                  <div className="flex items-center gap-3"><Ring score={o.aeo} size="lg" /><Delta n={o.deltas.aeo} since={since} /></div>
+                  <div className="flex flex-wrap items-center gap-3"><Ring score={o.aeo} size="lg" /><Delta n={o.deltas.aeo} since={since} /></div>
                 </Tile>
                 <Tile className="justify-between">
                   <TileLabel>{__('Search clicks', 'monoranks')}<Tip text={o.traffic ? __('Clicks from Google in the last 28 days.', 'monoranks') : __('Connect Google Search Console in MonoRanks to see clicks here.', 'monoranks')} /></TileLabel>
                   {o.traffic ? (
                     <>
-                      <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1"><span className="text-[32px] font-[750] leading-none tracking-[-0.03em] tabular-nums">{fmt(o.traffic.clicks_28d)}</span><Delta n={o.traffic.delta_pct} unit="%" period="previous28" /></div>
+                      <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1"><TileNumber n={o.traffic.clicks_28d} /><Delta n={o.traffic.delta_pct} unit="%" period="previous28" /></div>
                       <Sparkline series={o.traffic.series} />
                     </>
                   ) : <span className="text-[32px] font-[750] leading-none text-mute">—</span>}
                 </Tile>
                 <Tile className="justify-between">
                   <TileLabel>{__('Fixes applied', 'monoranks')}<Tip text={[o.ai.bots_rules ? __('AI tool rules on', 'monoranks') : __('No AI tool rules', 'monoranks'), o.ai.llms_txt ? __('AI site summary published', 'monoranks') : __('No AI site summary', 'monoranks')].join(' · ')} /></TileLabel>
-                  <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1"><span className="text-[32px] font-[750] leading-none tracking-[-0.03em] tabular-nums">{fmt(o.fixes.applied_30d)}</span><span className="text-[13px] font-semibold text-mute">{__('30 days', 'monoranks')}</span></div>
+                  <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1"><TileNumber n={o.fixes.applied_30d} /><span className="text-[13px] font-semibold text-mute">{__('30 days', 'monoranks')}</span></div>
                   {o.fixes.ready > 0 ? <span className="text-[13px] font-semibold text-brand-ink">{sprintf(_n('%s ready', '%s ready', o.fixes.ready, 'monoranks'), fmt(o.fixes.ready))}</span> : <span className="text-[13px] text-mute">{__('Nothing waiting', 'monoranks')}</span>}
                 </Tile>
               </div>
@@ -164,14 +166,14 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
 
           {!data.revoked && <GrowCards />}
 
-          <div className="grid grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-start gap-6 max-[1100px]:grid-cols-1">
+          {!data.revoked && <div className="grid grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-start gap-6 max-[1100px]:grid-cols-1">
             <Card>
               <CardHeader><CardTitle>{__('Pages to fix', 'monoranks')}{o.attention.length > 0 && <Badge>{fmt(o.attention.length)}</Badge>}</CardTitle><Button variant="ghost" size="sm" asChild><a href={out(data.app_url, 'all-pages')} target="_blank" rel="noopener">{__('All pages', 'monoranks')}<ArrowUpRight size={14} className="mr-flip" /></a></Button></CardHeader>
               {o.attention.length ? (
                 <div className="mt-3.5 overflow-x-auto rounded-b-2xl">
                   <table className="w-full table-fixed border-collapse">
-                    <colgroup><col /><col className="w-[84px]" /><col className="w-[84px]" /><col className="w-[104px]" /></colgroup>
-                    <thead><tr><th className={th}>{__('Page', 'monoranks')}</th><th className={th}>{__('Health', 'monoranks')}</th><th className={th}><span className="inline-flex items-center gap-1">{__('AI', 'monoranks')}<Tip text={__('AI answers ready', 'monoranks')} /></span></th><th className={th}><span className="sr-only">{__('Fix', 'monoranks')}</span></th></tr></thead>
+                    <colgroup><col /><col className="w-[84px] max-[600px]:w-[52px]" /><col className="w-[92px] max-[600px]:w-[52px]" /><col className="w-[124px] max-[600px]:w-[116px]" /></colgroup>
+                    <thead><tr><th className={th}>{__('Page', 'monoranks')}</th><th className={`${th} max-[600px]:px-1 max-[600px]:text-[0px]`}><span className="max-[600px]:hidden">{__('Health', 'monoranks')}</span><Tip text={__('Health', 'monoranks')} className="min-[601px]:hidden" /></th><th className={`${th} whitespace-normal max-[600px]:px-1`}><span className="inline-flex flex-wrap items-center gap-1"><span className="max-[600px]:hidden">{__('AI', 'monoranks')}</span><Tip text={__('AI answers ready', 'monoranks')} /></span></th><th className={th}><span className="sr-only">{__('Fix', 'monoranks')}</span></th></tr></thead>
                     <tbody>
                       {o.attention.map((row) => (
                         <AttentionRow key={row.post_id + row.url} row={row} />
@@ -220,7 +222,7 @@ export function Overview({ go }: { go: (next: Screen) => void }) {
                 </Card>
               )}
             </div>
-          </div>
+          </div>}
 
           <Card>
             <CardHeader><CardTitle>{__('Recent changes', 'monoranks')}</CardTitle><Button variant="ghost" size="sm" asChild><a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }}>{__('All changes', 'monoranks')}</a></Button></CardHeader>
@@ -245,11 +247,11 @@ function AttentionRow({ row }: { row: Attention }) {
           <button type="button" aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)} className="flex w-full min-w-0 cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-start" title={row.url}>
             <ChevronRight size={15} className={`mr-flip shrink-0 text-mute transition-transform ${open ? 'rotate-90' : ''}`} aria-hidden="true" />
             <span className="min-w-0 truncate text-[14px] font-semibold text-ink"><bdi>{row.title || row.url}</bdi></span>
-            <SeverityPill level={severityOf(row.health)} />
+            <span className="inline-flex shrink-0 max-[600px]:hidden"><SeverityPill level={severityOf(row.health)} /></span>
           </button>
         </td>
-        <td className={td}><Ring score={row.health} /></td>
-        <td className={td}><Ring score={row.aeo} /></td>
+        <td className={`${td} max-[600px]:px-1`}><Ring score={row.health} /></td>
+        <td className={`${td} max-[600px]:px-1`}><Ring score={row.aeo} /></td>
         <td className={`${td} text-end`}>{row.page_url && <Button size="sm" asChild><a href={out(row.page_url, 'fix-page')} target="_blank" rel="noopener">{__('Fix', 'monoranks')}<ArrowUpRight size={14} className="mr-flip" /></a></Button>}</td>
       </tr>
       {open && (
@@ -278,7 +280,7 @@ export function ConnectSteps({ revoked, go }: { revoked: boolean; go: (next: Scr
       <CardBody className="flex flex-col gap-6">
         <Step n={1}><b className="text-[15px] font-bold text-ink">{__('Connect to MonoRanks', 'monoranks')}</b><span className="text-[14px] text-mute">{__('Sign in and approve. Takes a minute.', 'monoranks')}</span><div className="pt-1.5"><Button variant="primary" asChild><a href={out(s.urls.connect, 'connect-step')} target="_self">{__('Connect', 'monoranks')}</a></Button></div></Step>
         <Step n={2} later><span className="inline-flex items-center gap-1.5"><b className="text-[15px] font-bold text-ink">{__('Or paste a connector key', 'monoranks')}</b><Tip text={__('Use this when your host blocks Application Passwords.', 'monoranks')} /></span><div className="pt-1.5"><Button asChild><a href={s.urls.settings} onClick={(e) => { e.preventDefault(); go('settings'); }}>{__('Open settings', 'monoranks')}</a></Button></div></Step>
-        <Step n={3} later><b className="text-[15px] font-bold text-ink">{__('See scores here and in your Posts list', 'monoranks')}</b></Step>
+        {!revoked && <Step n={3} later><b className="text-[15px] font-bold text-ink">{__('See scores here and in your Posts list', 'monoranks')}</b></Step>}
       </CardBody>
     </Card>
   );
@@ -300,7 +302,7 @@ function Waiting({ data }: { data: OverviewData }) {
       <CardHeader><CardTitle>{__('Waiting for the first check', 'monoranks')}</CardTitle><Badge variant="pill"><Dot tone="good" />{__('Connected', 'monoranks')}</Badge></CardHeader>
       <CardBody className="flex flex-col gap-5">
         <KV rows={[
-          [__('Content', 'monoranks'), data.last_sent ? sprintf(__('%1$s published items sent %2$s', 'monoranks'), fmt(data.items), data.last_sent) : data.send_failed && !data.sending ? __('Not sent. Use "Send content".', 'monoranks') : <span className="text-mute">{__('Sending…', 'monoranks')}</span>],
+          [__('Content', 'monoranks'), data.last_sent ? sprintf(_n('%1$s published item sent %2$s', '%1$s published items sent %2$s', data.items, 'monoranks'), fmt(data.items), data.last_sent) : data.send_failed && !data.sending ? __('Not sent. Use "Send content".', 'monoranks') : <span className="text-mute">{__('Sending…', 'monoranks')}</span>],
           [__('Results', 'monoranks'), <span className="flex flex-wrap items-center gap-2">{short}<Tip text={data.fetched ? <>{results} · {sprintf(__('checked %s', 'monoranks'), data.fetched)}</> : results} /></span>],
         ]} />
         <div><Button asChild><a href={out(data.app_url, 'open-audit')} target="_blank" rel="noopener">{__('Open MonoRanks', 'monoranks')}<ArrowUpRight size={15} className="mr-flip" /></a></Button></div>

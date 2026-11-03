@@ -78,4 +78,61 @@ class ApiTest extends TestCase {
 		$this->assertSame( 400, Api::send_status( array( 'seo_plugin' => 'yoast' ) )['code'] );
 		$this->assertSame( array( 'yoast' ), $sent );
 	}
+
+	private function connect( array $extra = array() ) {
+		$this->options['monoranks_connection'] = array_merge( array( 'api_base' => 'https://app.monoranks.com', 'key' => 'mr_site_' . str_repeat( 'a', 30 ), 'site_id' => 'site1', 'key_state' => 'ok' ), $extra );
+	}
+
+	public function test_a_read_that_works_clears_a_revoked_mark() {
+		$this->connect( array( 'key_state' => 'revoked', 'last_error' => 'MonoRanks did not accept the key' ) );
+		Functions\when( 'wp_remote_get' )->justReturn( array( 'code' => 200, 'body' => '{"health":99}' ) );
+		Api::get( '/overview' );
+		$this->assertSame( 'ok', $this->options['monoranks_connection']['key_state'] );
+		$this->assertNull( $this->options['monoranks_connection']['last_error'] );
+	}
+
+	public function test_a_refused_write_with_a_live_key_is_not_a_revoked_key() {
+		$this->connect();
+		Functions\when( 'wp_json_encode' )->alias( 'json_encode' );
+		Functions\when( 'wp_remote_post' )->justReturn( array( 'code' => 401, 'body' => '{"ok":false,"error":"key_not_accepted"}' ) );
+		// API v1: the key is known, it only lacks this scope.
+		Functions\expect( 'wp_remote_get' )->once()->andReturn( array( 'code' => 403, 'body' => '{"error":{"code":"missing_scope"}}' ) );
+		Api::post( '/content', array() );
+		$this->assertSame( 'ok', $this->options['monoranks_connection']['key_state'] );
+		$this->assertNotEmpty( $this->options['monoranks_connection']['last_error'] );
+	}
+
+	public function test_a_key_unknown_to_api_v1_is_revoked() {
+		$this->connect();
+		Functions\when( 'wp_remote_get' )->alias( static function ( $url ) {
+			return false !== strpos( $url, '/api/v1/' ) ? array( 'code' => 401, 'body' => '{"error":{"code":"invalid_key"}}' ) : array( 'code' => 401, 'body' => '{"ok":false,"error":"key_not_accepted"}' );
+		} );
+		Api::get( '/overview' );
+		$this->assertSame( 'revoked', $this->options['monoranks_connection']['key_state'] );
+	}
+
+	public function test_a_401_stands_when_api_v1_is_off() {
+		$this->connect();
+		Functions\when( 'wp_json_encode' )->alias( 'json_encode' );
+		Functions\when( 'wp_remote_post' )->justReturn( array( 'code' => 401, 'body' => '{}' ) );
+		Functions\when( 'wp_remote_get' )->justReturn( array( 'code' => 503, 'body' => '{"error":{"code":"api_disabled"}}' ) );
+		Api::post( '/status', array() );
+		$this->assertSame( 'revoked', $this->options['monoranks_connection']['key_state'] );
+	}
+
+	public function test_a_401_for_a_key_replaced_meanwhile_leaves_the_new_key_alone() {
+		$this->connect();
+		$options = &$this->options;
+		$new     = 'mr_site_' . str_repeat( 'b', 30 );
+		Functions\when( 'wp_json_encode' )->alias( 'json_encode' );
+		// The site is connected again while the old key's request is on its way.
+		Functions\when( 'wp_remote_post' )->alias( static function () use ( &$options, $new ) {
+			$options['monoranks_connection']['key'] = $new;
+			return array( 'code' => 401, 'body' => '{}' );
+		} );
+		Functions\expect( 'wp_remote_get' )->never();
+		Api::post( '/content', array() );
+		$this->assertSame( $new, $this->options['monoranks_connection']['key'] );
+		$this->assertSame( 'ok', $this->options['monoranks_connection']['key_state'] );
+	}
 }
