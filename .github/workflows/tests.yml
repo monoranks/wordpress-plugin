@@ -136,6 +136,11 @@ jobs:
       - uses: wordpress/plugin-check-action@v1
         with:
           build-dir: dist/monoranks
+          # False positive, https://github.com/WordPress/plugin-check/issues/1548: build/main.js bundles React 19, whose
+          # react-dom still names the old "react.element" symbol to reject elements from older copies, and Plugin Check
+          # reads that name as a pre-19 build. This turns the check off for react-dom: remove it once the issue is fixed,
+          # and never bundle a react-dom older than 19 while it is here.
+          ignore-codes: inlined_react_dom
 
   version:
     name: Version consistency
